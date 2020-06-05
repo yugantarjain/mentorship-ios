@@ -21,10 +21,10 @@ struct Login: View {
             
             //username and password text fields
             VStack(spacing: DesignConstants.Spacing.smallSpacing) {
-                TextField("Username/Email", text: $loginModel.loginUploadData.username)
+                TextField("Username/Email", text: $loginModel.loginData.username)
                     .textFieldStyle(RoundFilledTextFieldStyle())
                 
-                SecureField("Password", text: $loginModel.loginUploadData.password)
+                SecureField("Password", text: $loginModel.loginData.password)
                     .textFieldStyle(RoundFilledTextFieldStyle())
             }
             
@@ -35,10 +35,8 @@ struct Login: View {
             .buttonStyle(BigBoldButtonStyle(disabled: loginModel.loginDisabled))
             .disabled(loginModel.loginDisabled)
             
-            //message text
-            if loginModel.loginResponseData.message.isEmpty == false {
-                Text(loginModel.loginResponseData.message!)
-            }
+            //show user message text
+            Text(self.loginModel.loginResponseData.message ?? "")
             
             //text and sign up button
             VStack(spacing: DesignConstants.Spacing.minimalSpacing) {
@@ -48,7 +46,7 @@ struct Login: View {
                     Text("Signup")
                         .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
                 }.sheet(isPresented: $showSignUpPage) {
-                    SignUpView.init()
+                    SignUp()
                 }
             }
                         

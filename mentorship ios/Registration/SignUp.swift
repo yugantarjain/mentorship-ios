@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SignUpView: View {
+struct SignUp: View {
     @State private var name: String = ""
     @State private var username: String = ""
     @State private var email: String = ""
@@ -98,10 +98,10 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SignUpView()
+            SignUp()
                 .environment(\.locale, .init(identifier: "en"))
                 
-            SignUpView()
+            SignUp()
                 .environment(\.locale, .init(identifier: "pl"))
         }
     }

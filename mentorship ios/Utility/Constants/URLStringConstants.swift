@@ -6,6 +6,9 @@
 //  Copyright © 2020 Yugantar Jain. All rights reserved.
 //
 
+let baseURL: String = "https://mentorship-backend-temp.herokuapp.com/"
+
 struct URLStringConstants {
-    static let login: String = "https://mentorship-backend-temp.herokuapp.com/login"
+    static let login: String = baseURL + "login"
+    static let signUp: String = baseURL + "register"
 }
