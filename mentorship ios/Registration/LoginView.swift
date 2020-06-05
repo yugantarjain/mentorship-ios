@@ -10,15 +10,15 @@ import SwiftUI
 
 struct LoginView: View {
     @State private var showSignUpPage: Bool = false
-    @State private var username: String = ""
-    @State private var password: String = ""
-    
-    var loginDisabled: Bool {
-        if username.isEmpty || password.isEmpty {
-            return true
-        } else {
-            return false
+    @ObservedObject var loginModel = LoginModel()
+        
+    func login() {
+        let uploadData = LoginUploadData(username: loginModel.loginUploadData.username, password: loginModel.loginUploadData.password)
+        guard let json = try? JSONEncoder().encode(uploadData) else {
+            fatalError()
         }
+        
+        loginModel.getMessage(uploadData: json)
     }
     
     var body: some View {
@@ -30,19 +30,19 @@ struct LoginView: View {
             
             //username and password text fields
             VStack(spacing: DesignConstants.Spacing.smallSpacing) {
-                TextField("Username/Email", text: $username)
+                TextField("Username/Email", text: $loginModel.loginUploadData.username)
                     .textFieldStyle(RoundFilledTextFieldStyle())
                 
-                SecureField("Password", text: $password)
+                SecureField("Password", text: $loginModel.loginUploadData.password)
                     .textFieldStyle(RoundFilledTextFieldStyle())
             }
             
             //login button
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+            Button(action: login) {
                 Text("Login")
             }
-            .buttonStyle(BigBoldButtonStyle(disabled: loginDisabled))
-            .disabled(loginDisabled)
+            .buttonStyle(BigBoldButtonStyle(disabled: loginModel.loginDisabled))
+            .disabled(loginModel.loginDisabled)
             
             //text and sign up button
             VStack(spacing: DesignConstants.Spacing.minimalSpacing) {
@@ -55,6 +55,8 @@ struct LoginView: View {
                     SignUpView.init()
                 }
             }
+            
+            Text(loginModel.loginResponseData.message!)
             
             //spacer to push content to top
             Spacer()
