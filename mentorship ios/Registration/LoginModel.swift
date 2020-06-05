@@ -10,16 +10,7 @@ import SwiftUI
 import Combine
 
 final class LoginModel: ObservableObject {
-    struct LoginUploadData: Encodable {
-        var username: String
-        var password: String
-    }
-
-    struct LoginResponseData: Decodable {
-        let message: String?
-        let access_token: String?
-    }
-    
+    //MARK: - Variables
     @Published var loginData = LoginUploadData(username: "", password: "")
     @Published var loginResponseData = LoginResponseData(message: "", access_token: "")
     private var cancellable: AnyCancellable?
@@ -30,14 +21,26 @@ final class LoginModel: ObservableObject {
         }
         return false
     }
-        
+     
+    //MARK: - Main Function
     func login() {
         guard let uploadData = try? JSONEncoder().encode(loginData) else {
             fatalError("login data unable to be encoded")
         }
-        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.login, httpMethod: "POST", uploadData: uploadData, decodeType: loginResponseData)
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.login, httpMethod: "POST", uploadData: uploadData)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.loginResponseData) }
             .assign(to: \.loginResponseData, on: self)
+    }
+    
+    //MARK: - Structures
+    struct LoginUploadData: Encodable {
+        var username: String
+        var password: String
+    }
+
+    struct LoginResponseData: Decodable {
+        let message: String?
+        let access_token: String?
     }
 }

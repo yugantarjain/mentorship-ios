@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 struct NetworkManager {
-    static func callAPI<T: Decodable>(urlString: String, httpMethod: String, uploadData: Data, decodeType: T) -> AnyPublisher<T, Error> {
+    static func callAPI<T: Decodable>(urlString: String, httpMethod: String, uploadData: Data) -> AnyPublisher<T, Error> {
         let url = URL(string: urlString)!
         
         var request = URLRequest(url: url)

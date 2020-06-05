@@ -9,22 +9,8 @@
 import SwiftUI
 
 struct SignUp: View {
-    @State private var name: String = ""
-    @State private var username: String = ""
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
-    @State private var availabilityPickerSelection: Int = 2
-    @State private var haveAcceptedTerms: Bool = false
+    @ObservedObject var signUpModel = SignUpModel()
     @Environment(\.presentationMode) var presentationMode
-    
-    var signupDisabled: Bool {
-        if name.isEmpty || username.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty || !haveAcceptedTerms {
-            return true
-        } else {
-            return false
-        }
-    }
     
     var body: some View {
         NavigationView {
@@ -32,15 +18,15 @@ struct SignUp: View {
                 VStack(spacing: DesignConstants.Spacing.bigSpacing) {
                     //input fields for name, email, password, etc.
                     VStack(spacing: DesignConstants.Spacing.smallSpacing) {
-                        TextField("Name", text: $name)
+                        TextField("Name", text: $signUpModel.signUpData.name)
                             .textFieldStyle(RoundFilledTextFieldStyle())
-                        TextField("Username", text: $username)
+                        TextField("Username", text: $signUpModel.signUpData.username)
                             .textFieldStyle(RoundFilledTextFieldStyle())
-                        TextField("Email", text: $email)
+                        TextField("Email", text: $signUpModel.signUpData.email)
                             .textFieldStyle(RoundFilledTextFieldStyle())
-                        SecureField("Password", text: $password)
+                        SecureField("Password", text: $signUpModel.signUpData.password)
                             .textFieldStyle(RoundFilledTextFieldStyle())
-                        SecureField("Confirm Password", text: $confirmPassword)
+                        SecureField("Confirm Password", text: $signUpModel.confirmPassword)
                             .textFieldStyle(RoundFilledTextFieldStyle())
                     }
                     
@@ -48,7 +34,7 @@ struct SignUp: View {
                     VStack {
                         Text("Available to be a:").font(.headline)
                         
-                        Picker(selection: $availabilityPickerSelection, label: Text("")) {
+                        Picker(selection: $signUpModel.availabilityPickerSelection, label: Text("")) {
                             Text("Mentor").tag(1)
                             Text("Mentee").tag(2)
                             Text("Both").tag(3)
@@ -58,15 +44,22 @@ struct SignUp: View {
                     }
                     
                     //sign up button
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
-                        Text("Sign Up")
+                    Button("Sign Up") {
+                        self.signUpModel.signUp()
                     }
-                    .buttonStyle(BigBoldButtonStyle(disabled: signupDisabled))
-                    .disabled(signupDisabled)
+                    .buttonStyle(BigBoldButtonStyle(disabled: signUpModel.signupDisabled))
+                    .disabled(signUpModel.signupDisabled)
+                    
+                    //message for user
+                    if !(self.signUpModel.signUpResponseData.message?.isEmpty ?? true) {
+                        Text(self.signUpModel.signUpResponseData.message ?? "")
+                            .font(.subheadline)
+                            .foregroundColor(.red)
+                    }
                     
                     //consent view, to accept terms and conditions
                     HStack {
-                        Toggle(isOn: $haveAcceptedTerms) {
+                        Toggle(isOn: $signUpModel.signUpData.terms_and_conditions_checked) {
                             Text(LocalizableStringConstants.tncString)
                                 .font(.caption)
                                 .fixedSize(horizontal: false, vertical: true)
@@ -101,8 +94,8 @@ struct SignUpView_Previews: PreviewProvider {
             SignUp()
                 .environment(\.locale, .init(identifier: "en"))
                 
-            SignUp()
-                .environment(\.locale, .init(identifier: "pl"))
+//            SignUp()
+//                .environment(\.locale, .init(identifier: "pl"))
         }
     }
 }
