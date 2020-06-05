@@ -37,6 +37,8 @@ struct Login: View {
             
             //show user message text
             Text(self.loginModel.loginResponseData.message ?? "")
+                .font(DesignConstants.Fonts.userError)
+                .foregroundColor(DesignConstants.Colors.userError)
             
             //text and sign up button
             VStack(spacing: DesignConstants.Spacing.minimalSpacing) {

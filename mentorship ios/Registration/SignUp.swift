@@ -53,8 +53,8 @@ struct SignUp: View {
                     //message for user
                     if !(self.signUpModel.signUpResponseData.message?.isEmpty ?? true) {
                         Text(self.signUpModel.signUpResponseData.message ?? "")
-                            .font(.subheadline)
-                            .foregroundColor(.red)
+                            .font(DesignConstants.Fonts.userError)
+                            .foregroundColor(DesignConstants.Colors.userError)
                     }
                     
                     //consent view, to accept terms and conditions

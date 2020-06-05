@@ -39,7 +39,11 @@ struct DesignConstants {
     struct Colors {
         static let defaultIndigoColor = Color(.systemIndigo)
         static let secondaryBackground = Color(.secondarySystemBackground)
-        static let userErrorMessage = Color.red
+        static let userError = Color.red
+    }
+    
+    struct Fonts {
+        static let userError = Font.subheadline
     }
     
 }
