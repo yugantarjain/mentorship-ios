@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SignUp: View {
     @ObservedObject var signUpModel = SignUpModel()
-    @Environment(\.presentationMode) var presentationMode
+    @Binding var isPresented: Bool
     
     var body: some View {
         NavigationView {
@@ -50,8 +50,10 @@ struct SignUp: View {
                     .buttonStyle(BigBoldButtonStyle(disabled: signUpModel.signupDisabled))
                     .disabled(signUpModel.signupDisabled)
                     
-                    //message for user
-                    if !(self.signUpModel.signUpResponseData.message?.isEmpty ?? true) {
+                    //activity indicator or message for user if present
+                    if signUpModel.inActivity {
+                        ActivityIndicator(isAnimating: $signUpModel.inActivity, style: .medium)
+                    } else if !(self.signUpModel.signUpResponseData.message?.isEmpty ?? true) {
                         Text(self.signUpModel.signUpResponseData.message ?? "")
                             .font(DesignConstants.Fonts.userError)
                             .foregroundColor(DesignConstants.Colors.userError)
@@ -77,7 +79,7 @@ struct SignUp: View {
             .navigationBarTitle("Sign Up")
             .navigationBarItems(leading:
                 Button.init(action: {
-                    self.presentationMode.wrappedValue.dismiss()
+                    self.isPresented = false
                 }, label: {
                     Image(systemName: "x.circle.fill")
                         .font(.headline)
@@ -91,11 +93,8 @@ struct SignUp: View {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SignUp()
+            SignUp(isPresented: .constant(true))
                 .environment(\.locale, .init(identifier: "en"))
-                
-//            SignUp()
-//                .environment(\.locale, .init(identifier: "pl"))
         }
     }
 }

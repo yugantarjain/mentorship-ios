@@ -35,10 +35,14 @@ struct Login: View {
             .buttonStyle(BigBoldButtonStyle(disabled: loginModel.loginDisabled))
             .disabled(loginModel.loginDisabled)
             
-            //show user message text
-            Text(self.loginModel.loginResponseData.message ?? "")
+            //activity indicator or show user message text
+            if self.loginModel.inActivity {
+                ActivityIndicator(isAnimating: $loginModel.inActivity, style: .medium)
+            } else {
+                Text(self.loginModel.loginResponseData.message ?? "")
                 .font(DesignConstants.Fonts.userError)
                 .foregroundColor(DesignConstants.Colors.userError)
+            }
             
             //text and sign up button
             VStack(spacing: DesignConstants.Spacing.minimalSpacing) {
@@ -48,7 +52,7 @@ struct Login: View {
                     Text("Signup")
                         .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
                 }.sheet(isPresented: $showSignUpPage) {
-                    SignUp()
+                    SignUp(isPresented: self.$showSignUpPage)
                 }
             }
                         

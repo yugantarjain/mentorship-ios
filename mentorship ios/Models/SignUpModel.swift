@@ -12,9 +12,10 @@ import Combine
 final class SignUpModel: ObservableObject {
     //MARK: - Variables
     @Published var signUpData = SignUpUploadData(name: "", username: "", password: "", email: "", terms_and_conditions_checked: false, need_mentoring: true, available_to_mentor: false)
-    @Published var signUpResponseData = SignUpResponseData(message: "frifgne ierfn erionfg io")
+    @Published var signUpResponseData = SignUpResponseData(message: "")
     @Published var confirmPassword: String = ""
     @Published var availabilityPickerSelection: Int = 2
+    @Published var inActivity: Bool = false
     private var cancellable: AnyCancellable?
 
     var signupDisabled: Bool {
@@ -41,13 +42,21 @@ final class SignUpModel: ObservableObject {
             return
         }
         
+        //show activity indicator
+        self.inActivity = true
+        
         guard let uploadData = try? JSONEncoder().encode(signUpData) else {
-            fatalError("sign up data unable to be encoded")
+            self.inActivity = false
+            return
         }
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.signUp, httpMethod: "POST", uploadData: uploadData)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.signUpResponseData) }
-            .assign(to: \.signUpResponseData, on: self)
+            .sink(receiveCompletion: { completion in
+                self.inActivity = false
+            }, receiveValue: { value in
+                self.signUpResponseData = value
+            })
     }
     
     //MARK: - Structures

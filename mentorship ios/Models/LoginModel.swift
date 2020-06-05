@@ -13,6 +13,7 @@ final class LoginModel: ObservableObject {
     //MARK: - Variables
     @Published var loginData = LoginUploadData(username: "", password: "")
     @Published var loginResponseData = LoginResponseData(message: "", access_token: "")
+    @Published var inActivity: Bool = false
     private var cancellable: AnyCancellable?
     
     var loginDisabled: Bool {
@@ -24,13 +25,21 @@ final class LoginModel: ObservableObject {
      
     //MARK: - Main Function
     func login() {
+        self.inActivity = true
+        
         guard let uploadData = try? JSONEncoder().encode(loginData) else {
-            fatalError("login data unable to be encoded")
+            self.inActivity = false
+            return
         }
+        
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.login, httpMethod: "POST", uploadData: uploadData)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.loginResponseData) }
-            .assign(to: \.loginResponseData, on: self)
+            .sink(receiveCompletion: { completion in
+                self.inActivity = false
+            }, receiveValue: { value in
+                self.loginResponseData = value
+            })
     }
     
     //MARK: - Structures
