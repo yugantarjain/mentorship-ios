@@ -31,8 +31,11 @@ final class LoginModel: ObservableObject {
         return false
     }
         
-    func getMessage(uploadData: Data) {
-        cancellable = NetworkManager.network(urlString: URLStringConstants.login, httpMethod: "POST", uploadData: uploadData, decodeType: loginResponseData)
+    func login() {
+        guard let uploadData = try? JSONEncoder().encode(loginUploadData) else {
+            fatalError("login data unable to be encoded")
+        }
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.login, httpMethod: "POST", uploadData: uploadData, decodeType: loginResponseData)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.loginResponseData) }
             .assign(to: \.loginResponseData, on: self)

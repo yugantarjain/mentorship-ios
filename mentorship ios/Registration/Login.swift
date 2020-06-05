@@ -11,16 +11,7 @@ import SwiftUI
 struct Login: View {
     @State private var showSignUpPage: Bool = false
     @ObservedObject var loginModel = LoginModel()
-        
-    func login() {
-        let uploadData = LoginUploadData(username: loginModel.loginUploadData.username, password: loginModel.loginUploadData.password)
-        guard let json = try? JSONEncoder().encode(uploadData) else {
-            fatalError()
-        }
-        
-        loginModel.getMessage(uploadData: json)
-    }
-    
+            
     var body: some View {
         VStack(spacing: DesignConstants.Spacing.bigSpacing) {
             //top image of mentorship logo
@@ -38,11 +29,16 @@ struct Login: View {
             }
             
             //login button
-            Button(action: login) {
-                Text("Login")
+            Button("Login") {
+                self.loginModel.login()
             }
             .buttonStyle(BigBoldButtonStyle(disabled: loginModel.loginDisabled))
             .disabled(loginModel.loginDisabled)
+            
+            //message text
+            if loginModel.loginResponseData.message.isEmpty == false {
+                Text(loginModel.loginResponseData.message!)
+            }
             
             //text and sign up button
             VStack(spacing: DesignConstants.Spacing.minimalSpacing) {
@@ -55,9 +51,7 @@ struct Login: View {
                     SignUpView.init()
                 }
             }
-            
-            Text(loginModel.loginResponseData.message!)
-            
+                        
             //spacer to push content to top
             Spacer()
         }
