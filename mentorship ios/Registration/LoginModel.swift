@@ -22,6 +22,7 @@ struct LoginDataReceived: Decodable {
 final class LoginModel: ObservableObject {
     @Published var loginUploadData = LoginUploadData(username: "", password: "")
     @Published var loginResponseData = LoginDataReceived(message: "initial message", access_token: "")
+    private var cancellable: AnyCancellable?
     
     var loginDisabled: Bool {
         if self.loginUploadData.username.isEmpty || self.loginUploadData.password.isEmpty {
@@ -29,29 +30,11 @@ final class LoginModel: ObservableObject {
         }
         return false
     }
-    
-    private var cancellable: AnyCancellable?
-    
-    func network(uploadData: Data) -> AnyPublisher<LoginDataReceived, Error> {
-        let url = URL(string: "https://mentorship-backend-temp.herokuapp.com/login")!
         
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        request.httpBody = uploadData
-        
-        return URLSession.shared
-            .dataTaskPublisher(for: request)
-            .map { $0.data }
-            .decode(type: LoginDataReceived.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
-    }
-    
     func getMessage(uploadData: Data) {
-        cancellable = network(uploadData: uploadData)
+        cancellable = NetworkManager.network(urlString: URLStringConstants.login, httpMethod: "POST", uploadData: uploadData, decodeType: loginResponseData)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.loginResponseData) }
             .assign(to: \.loginResponseData, on: self)
     }
-    
 }
