@@ -228,6 +228,14 @@
 			path = Modifiers;
 			sourceTree = "<group>";
 		};
+		53569277248AECCA00EB9522 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				53569278248AECF400EB9522 /* AllPadding.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		536B22F62484F6BE00060CD7 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
