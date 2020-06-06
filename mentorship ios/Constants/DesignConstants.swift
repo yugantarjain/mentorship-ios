@@ -11,9 +11,9 @@ import SwiftUI
 struct DesignConstants {
     
     struct Spacing {
-        static let bigSpacing: CGFloat = 45
-        static let smallSpacing: CGFloat = 15
-        static let minimalSpacing: CGFloat = 5
+        static let bigSpacing: CGFloat = 48
+        static let smallSpacing: CGFloat = 16
+        static let minimalSpacing: CGFloat = 6
     }
     
     struct Padding {
@@ -28,7 +28,7 @@ struct DesignConstants {
     }
     
     struct CornerRadius {
-        static let preferredCornerRadius: CGFloat = 5
+        static let preferredCornerRadius: CGFloat = 6
     }
     
     struct Opacity {

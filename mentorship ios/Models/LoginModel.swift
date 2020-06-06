@@ -39,6 +39,17 @@ final class LoginModel: ObservableObject {
                 self.inActivity = false
             }, receiveValue: { value in
                 self.loginResponseData = value
+                //if login successful, store access token in keychain
+                if var token = value.access_token {
+                    token = "Bearer " + token
+                    do {
+                        try KeychainManager.addToKeychain(username: self.loginData.username, tokenString: token)
+                        print("added")
+                    } catch {
+                        print("not added")
+                        return
+                    }
+                }
             })
     }
     
