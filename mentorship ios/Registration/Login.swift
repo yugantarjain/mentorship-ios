@@ -20,7 +20,7 @@ struct Login: View {
                 .scaledToFit()
             
             //username and password text fields
-            VStack(spacing: DesignConstants.Spacing.smallSpacing) {
+            VStack(spacing: DesignConstants.Form.Spacing.smallSpacing) {
                 TextField("Username/Email", text: $loginModel.loginData.username)
                     .textFieldStyle(RoundFilledTextFieldStyle())
                 
