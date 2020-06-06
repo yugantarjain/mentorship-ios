@@ -16,6 +16,7 @@
 		530F44232482752600B1FD0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 530F44212482752600B1FD0B /* LaunchScreen.storyboard */; };
 		530F442E2482752600B1FD0B /* mentorship_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F442D2482752600B1FD0B /* mentorship_iosTests.swift */; };
 		530F44392482752600B1FD0B /* mentorship_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F44382482752600B1FD0B /* mentorship_iosUITests.swift */; };
+		5314C184248B9EC2000AA386 /* AllPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314C183248B9EC2000AA386 /* AllPadding.swift */; };
 		531B75EC248524D600CEBF62 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531B75EB248524D600CEBF62 /* SignUp.swift */; };
 		531C8065248A477700AE81EF /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531C8064248A477700AE81EF /* LoginModel.swift */; };
 		531C8067248A8F0A00AE81EF /* URLStringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531C8066248A8F0A00AE81EF /* URLStringConstants.swift */; };
@@ -66,6 +67,7 @@
 		530F44342482752600B1FD0B /* mentorship iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mentorship iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		530F44382482752600B1FD0B /* mentorship_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mentorship_iosUITests.swift; sourceTree = "<group>"; };
 		530F443A2482752600B1FD0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5314C183248B9EC2000AA386 /* AllPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPadding.swift; sourceTree = "<group>"; };
 		531B75EB248524D600CEBF62 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		531C8064248A477700AE81EF /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		531C8066248A8F0A00AE81EF /* URLStringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLStringConstants.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				531C806D248AA94400AE81EF /* Constants */,
 				531C806C248AA93700AE81EF /* CustomStyles */,
+				5314C182248B9EA8000AA386 /* Modifiers */,
 				5389125A248ACD0200E24F96 /* UtilityViews */,
 				538105AF248B300C00542E9A /* Managers */,
 				53E3BAF5248ADAD4007F91C8 /* Models */,
@@ -179,6 +182,14 @@
 			path = "mentorship iosUITests";
 			sourceTree = "<group>";
 		};
+		5314C182248B9EA8000AA386 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				5314C183248B9EC2000AA386 /* AllPadding.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		531C806C248AA93700AE81EF /* CustomStyles */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,9 +202,9 @@
 		531C806D248AA94400AE81EF /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				53EB46E92488CBBF005656B9 /* DesignConstants.swift */,
 				53EB47002488EBAF005656B9 /* LocalizableStringConstants.swift */,
 				53EB46EB2488D5AA005656B9 /* ImageNameConstants.swift */,
-				53EB46E92488CBBF005656B9 /* DesignConstants.swift */,
 				531C8066248A8F0A00AE81EF /* URLStringConstants.swift */,
 			);
 			path = Constants;
@@ -391,6 +402,7 @@
 				538105AE248B2EFB00542E9A /* KeychainManager.swift in Sources */,
 				534AC02D2486D5CB00A34A46 /* BigBoldButtonStyle.swift in Sources */,
 				530F44162482752500B1FD0B /* SceneDelegate.swift in Sources */,
+				5314C184248B9EC2000AA386 /* AllPadding.swift in Sources */,
 				534AC02F2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift in Sources */,
 				53E3BAF4248AD51A007F91C8 /* ActivityIndicator.swift in Sources */,
 			);

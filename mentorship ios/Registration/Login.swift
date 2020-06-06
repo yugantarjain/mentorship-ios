@@ -13,7 +13,7 @@ struct Login: View {
     @ObservedObject var loginModel = LoginModel()
             
     var body: some View {
-        VStack(spacing: DesignConstants.Spacing.bigSpacing) {
+        VStack(spacing: DesignConstants.Form.Spacing.bigSpacing) {
             //top image of mentorship logo
             Image(ImageNameConstants.mentorshipLogoImageName)
                 .resizable()
@@ -45,8 +45,8 @@ struct Login: View {
             }
             
             //text and sign up button
-            VStack(spacing: DesignConstants.Spacing.minimalSpacing) {
-                Text("Don't have an account?")
+            VStack(spacing: DesignConstants.Form.Spacing.minimalSpacing) {
+                Text(LocalizableStringConstants.noAccountText)
                 
                 Button.init(action: { self.showSignUpPage.toggle() }) {
                     Text("Signup")
@@ -59,14 +59,11 @@ struct Login: View {
             //spacer to push content to top
             Spacer()
         }
-        .padding(.top, DesignConstants.Padding.topPadding)
-        .padding(.bottom, DesignConstants.Padding.bottomPadding)
-        .padding(.leading, DesignConstants.Padding.leadingPadding)
-        .padding(.trailing, DesignConstants.Padding.trailingPadding)
+        .modifier(AllPadding())
     }
 }
 
-struct Login_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         Login()
     }

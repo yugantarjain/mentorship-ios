@@ -16,15 +16,27 @@ struct DesignConstants {
         static let minimalSpacing: CGFloat = 6
     }
     
+    struct Screen {
+        struct Padding {
+            // default SwiftUI padding value = 16
+            static let topPadding: CGFloat = 16
+            static let bottomPadding: CGFloat = 16
+            static let leadingPadding: CGFloat = 16
+            static let trailingPadding: CGFloat = 16
+        }
+    }
+    
+    struct Form {
+        struct Spacing {
+                static let bigSpacing: CGFloat = 46
+                static let smallSpacing: CGFloat = 16
+                static let minimalSpacing: CGFloat = 6
+        }
+    }
+    
     struct Padding {
         //used to expand frame, eg. of textfield
         static let frameExpansionPadding: CGFloat = 10
-        
-        // default SwiftUI padding value = 16. Used for screen margins
-        static let topPadding: CGFloat = 16
-        static let bottomPadding: CGFloat = 16
-        static let leadingPadding: CGFloat = 16
-        static let trailingPadding: CGFloat = 16
     }
     
     struct CornerRadius {
