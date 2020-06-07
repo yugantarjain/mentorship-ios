@@ -45,6 +45,7 @@ final class LoginModel: ObservableObject {
                     do {
                         try KeychainManager.addToKeychain(username: self.loginData.username, tokenString: token)
                         print("added")
+                        UserDefaults.standard.set(true, forKey: "Logged")
                     } catch {
                         print("not added")
                         return
