@@ -17,21 +17,12 @@ struct Members: View {
                     ActivityIndicator(isAnimating: self.$membersModel.inActivity, style: .medium)
                 }
                 ForEach(membersModel.membersResponseData) { member in
-                    VStack(alignment: .leading) {
-                        
-                        Text(member.name ?? "")
-                            .font(.headline)
-                        
-                        Text(self.membersModel.availabilityString(canBeMentee: member.need_mentoring ?? false, canBeMentor: member.available_to_mentor ?? false))
-                            .font(.subheadline)
-                        
-                        Text(self.membersModel.skillsString(skills: member.skills ?? ""))
-                            .font(.subheadline)
-                    }
+                    MembersListCell(member: member, membersModel: self.membersModel)
                 }
             }
             .navigationBarTitle("Members")
             .onAppear(perform: membersModel.fetchMembers)
+            .padding(.horizontal, DesignConstants.Screen.Padding.leadingPadding)
         }
     }
 }
