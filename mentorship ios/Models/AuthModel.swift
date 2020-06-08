@@ -10,20 +10,15 @@ import Foundation
 import Combine
 
 final class AuthModel: ObservableObject {
-//    @Published var isLogged: Bool = false
-//    var didChange: AnyPublisher<Bool, Never>
-//
-//    init() {
-//        let defaults = UserDefaults.standard
-//        didChange = defaults.publisher(for: \.isLoggedIn)
-//            .receive(on: RunLoop.main)
-//            .eraseToAnyPublisher()
-//    }
+    @Published var isLogged: Bool?
+    private var cancellable: AnyCancellable?
     
-    public var didChange = UserDefaults.standard.publisher(for: \.isLoggedIn)
-        .receive(on: RunLoop.main)
-    
-    var sub = AuthModel().didChange.sink() {
-        print($0)
+    init() {
+        cancellable = UserDefaults.standard
+            .publisher(for: \.isLoggedIn)
+            .sink {
+                print($0)
+                self.isLogged = $0
+        }
     }
 }

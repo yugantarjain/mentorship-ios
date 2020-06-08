@@ -9,24 +9,12 @@
 import SwiftUI
 import Combine
 
-extension UserDefaults {
-    @objc dynamic var isLoggedIn: Bool {
-        return bool(forKey: "isLoggedIn")
-    }
-}
-
 struct ContentView: View {
     @State private var selection = 0
-    @State private var isLogged = false
+    @ObservedObject var authModel = AuthModel()
     
     var body: some View {
-        let _: AnyCancellable? = UserDefaults.standard
-            .publisher(for: \.isLoggedIn)
-            .sink {
-                print($0)
-        }
-        
-        if true {
+        if !(authModel.isLogged ?? true) {
             return AnyView(Login())
         } else {
             return AnyView(TabView(selection: $selection) {
