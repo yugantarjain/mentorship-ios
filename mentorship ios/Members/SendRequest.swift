@@ -15,7 +15,7 @@ struct SendRequest: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("I will be a").font(.subheadline)) {
+                Section(header: Text("I will be a").font(.headline)) {
                     Picker(selection: $pickerSelection, label: Text("")) {
                         Text("Mentor").tag(1)
                         Text("Mentee").tag(2)
@@ -24,18 +24,19 @@ struct SendRequest: View {
                     .labelsHidden()
                 }
                 
-                Section(header: Text("End Date").font(.subheadline)) {
+                Section(header: Text("End Date").font(.headline)) {
                     DatePicker(selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/, label: { /*@START_MENU_TOKEN@*/Text("Date")/*@END_MENU_TOKEN@*/
                     })
                     .datePickerStyle(WheelDatePickerStyle())
                     .labelsHidden()
                 }
                 
-                Section(header: Text("Notes").font(.subheadline)) {
-                    TextView(text: $notesText)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+                Section(header: Text("Notes").font(.headline)) {
+                    TextView(text: $notesText, backgroundColor: DesignConstants.Colors.secondaryUIBackground, fontStyle: .preferredFont(forTextStyle: .body))
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: DesignConstants.Height.textViewHeight, maxHeight: .infinity)
                 }
             }
+            .padding(.vertical, DesignConstants.Screen.Padding.topPadding * 2)
             .navigationBarTitle("Send relation request", displayMode: .inline)
             .navigationBarItems(leading: Button.init("Cancel", action: {
                 

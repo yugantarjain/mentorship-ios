@@ -11,9 +11,14 @@ import UIKit
 
 struct TextView: UIViewRepresentable {
     @Binding var text: String
+    var backgroundColor: UIColor
+    var fontStyle: UIFont
 
     func makeUIView(context: Context) -> UITextView {
-        return UITextView()
+        let textView = UITextView()
+        textView.backgroundColor = backgroundColor
+        textView.font = fontStyle
+        return textView
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {

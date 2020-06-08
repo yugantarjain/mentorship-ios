@@ -44,6 +44,10 @@ struct DesignConstants {
         static let listCellTitle: CGFloat = 120
     }
     
+    struct Height {
+        static let textViewHeight: CGFloat = 100
+    }
+    
     struct CornerRadius {
         static let preferredCornerRadius: CGFloat = 6
     }
@@ -57,6 +61,7 @@ struct DesignConstants {
         static let defaultIndigoColor = Color(.systemIndigo)
         static let indigoUIColor = UIColor.systemIndigo
         static let secondaryBackground = Color(.secondarySystemBackground)
+        static let secondaryUIBackground = UIColor.secondarySystemGroupedBackground
         static let subtitleText = Color.secondary
         static let userError = Color.red
     }
