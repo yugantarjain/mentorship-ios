@@ -12,7 +12,7 @@ struct MembersListCell: View {
     var member: MembersModel.MembersResponseData
     var membersModel: MembersModel
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: DesignConstants.Spacing.minimalSpacing) {
             Text(member.name ?? "")
                 .font(.headline)
             

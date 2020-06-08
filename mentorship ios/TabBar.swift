@@ -16,16 +16,16 @@ struct TabBar: View {
             Home()
                 .tabItem {
                     VStack {
-                        Image("first")
-                        Text("First")
+                        Image(systemName: "house.fill")
+                        Text("Home")
                     }
             }.tag(0)
             
             Members()
                 .tabItem {
                     VStack {
-                        Image("second")
-                        Text("Second")
+                        Image(systemName: "person.3.fill")
+                        Text("Members")
                     }
             }.tag(1)
         }
