@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SendRequest: View {
     @State private var pickerSelection = 1
+    @State private var notesText = ""
+    
     var body: some View {
         NavigationView {
             Form {
@@ -30,6 +32,8 @@ struct SendRequest: View {
                 }
                 
                 Section(header: Text("Notes").font(.subheadline)) {
+                    TextView(text: $notesText)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                 }
             }
             .navigationBarTitle("Send relation request", displayMode: .inline)
