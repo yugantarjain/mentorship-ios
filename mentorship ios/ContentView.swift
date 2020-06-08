@@ -11,22 +11,22 @@ import Combine
 
 extension UserDefaults {
     @objc dynamic var isLoggedIn: Bool {
-        return bool(forKey: "Logged")
+        return bool(forKey: "isLoggedIn")
     }
 }
 
 struct ContentView: View {
     @State private var selection = 0
-    @State var isLogged: Bool = false
-    
-     var cancellable = UserDefaults.standard
-        .publisher(for: \.isLoggedIn)
-        .sink {
-            print($0)
-    }
+    @State private var isLogged = false
     
     var body: some View {
-        if false {
+        let _: AnyCancellable? = UserDefaults.standard
+            .publisher(for: \.isLoggedIn)
+            .sink {
+                print($0)
+        }
+        
+        if true {
             return AnyView(Login())
         } else {
             return AnyView(TabView(selection: $selection) {

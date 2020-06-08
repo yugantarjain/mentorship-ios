@@ -143,6 +143,7 @@
 		530F44122482752500B1FD0B /* mentorship ios */ = {
 			isa = PBXGroup;
 			children = (
+				53729E00248E2C7700E79C24 /* New Group */,
 				531C806D248AA94400AE81EF /* Constants */,
 				531C806C248AA93700AE81EF /* CustomStyles */,
 				5314C182248B9EA8000AA386 /* Modifiers */,
@@ -234,6 +235,13 @@
 				531B75EB248524D600CEBF62 /* SignUp.swift */,
 			);
 			path = Registration;
+			sourceTree = "<group>";
+		};
+		53729E00248E2C7700E79C24 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		538105AF248B300C00542E9A /* Managers */ = {
