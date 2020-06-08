@@ -33,6 +33,7 @@ final class MembersModel: ObservableObject {
                 }
             }, receiveValue: { value in
                 self.membersResponseData = value
+                print(value)
             })
     }
     
@@ -70,8 +71,9 @@ final class MembersModel: ObservableObject {
         let availableToMentor: Bool?
         let isAvailable: Bool?
         
-        enum CodinKeys: String, CodingKey {
+        enum CodingKeys: String, CodingKey {
             case id, username, name, bio, location, occupation, organization, skills
+            
             case slackUsername = "slack_username"
             case needMentoring = "need_mentoring"
             case availableToMentor = "available_to_mentor"
