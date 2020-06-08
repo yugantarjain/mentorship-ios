@@ -16,11 +16,11 @@ struct MemberDetailCell: View {
         if !(value?.isEmpty ?? true) {
             return AnyView(
                 HStack {
-                    Text(title).font(.headline)
+                    Text(title).font(.subheadline)
                         .frame(width: DesignConstants.Width.listCellTitle)
                         .multilineTextAlignment(.center)
                     Divider()
-                    Text(value ?? "-").font(.subheadline)
+                    Text(value ?? "-").font(.headline)
                 }
             )
         } else {

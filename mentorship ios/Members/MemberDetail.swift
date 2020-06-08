@@ -16,7 +16,7 @@ struct MemberDetail: View {
             Group {
                 MemberDetailCell(title: "Username", value: member.username)
                 MemberDetailCell(title: "Slack Username", value: member.slackUsername)
-                MemberDetailCell(title: "Available to Mentor", value: member.availableToMentor ?? false ? "Yes" : "No")
+                MemberDetailCell(title: "Can Mentor", value: member.availableToMentor ?? false ? "Yes" : "No")
                 MemberDetailCell(title: "Needs a Mentor", value: member.needMentoring ?? false ? "Yes" : "No")
                 MemberDetailCell(title: "Interests", value: member.interests)
                 MemberDetailCell(title: "Bio", value: member.bio)
@@ -31,6 +31,7 @@ struct MemberDetail: View {
                     .font(.headline)
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                     .padding(DesignConstants.Padding.listCellFrameExpansion)
+                    .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
             }
         }
         .navigationBarTitle(member.name ?? "Member Detail")

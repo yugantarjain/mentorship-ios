@@ -55,6 +55,7 @@ struct DesignConstants {
     
     struct Colors {
         static let defaultIndigoColor = Color(.systemIndigo)
+        static let indigoUIColor = UIColor.systemIndigo
         static let secondaryBackground = Color(.secondarySystemBackground)
         static let userError = Color.red
     }
