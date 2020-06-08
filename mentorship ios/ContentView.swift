@@ -14,26 +14,14 @@ struct ContentView: View {
     @ObservedObject var authModel = AuthModel()
     
     var body: some View {
-        if !(authModel.isLogged ?? true) {
-            return AnyView(Login())
+        if authModel.isLogged! {
+            return AnyView(
+                TabBar(selection: $selection)
+            )
         } else {
-            return AnyView(TabView(selection: $selection) {
-                Home()
-                    .tabItem {
-                        VStack {
-                            Image("first")
-                            Text("First")
-                        }
-                }.tag(0)
-                
-                Members()
-                    .tabItem {
-                        VStack {
-                            Image("second")
-                            Text("Second")
-                        }
-                }.tag(1)
-            })
+            return AnyView(
+                Login()
+            )
         }
     }
 }
