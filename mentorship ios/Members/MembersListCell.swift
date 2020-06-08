@@ -16,11 +16,13 @@ struct MembersListCell: View {
             Text(member.name ?? "")
                 .font(.headline)
             
-            Text(self.membersModel.availabilityString(canBeMentee: member.needMentoring ?? false, canBeMentor: member.availableToMentor ?? false))
-                .font(.subheadline)
-            
-            Text(self.membersModel.skillsString(skills: member.skills ?? ""))
-                .font(.subheadline)
+            Group {
+                Text(self.membersModel.availabilityString(canBeMentee: member.needMentoring ?? false, canBeMentor: member.availableToMentor ?? false))
+                
+                Text(self.membersModel.skillsString(skills: member.skills ?? ""))
+            }
+            .font(.subheadline)
+            .foregroundColor(DesignConstants.Colors.subtitleText)
         }
     }
 }

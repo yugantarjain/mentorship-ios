@@ -13,7 +13,7 @@ struct DesignConstants {
     struct Spacing {
         static let bigSpacing: CGFloat = 48
         static let smallSpacing: CGFloat = 16
-        static let minimalSpacing: CGFloat = 6
+        static let minimalSpacing: CGFloat = 2
     }
     
     struct Screen {
@@ -57,6 +57,7 @@ struct DesignConstants {
         static let defaultIndigoColor = Color(.systemIndigo)
         static let indigoUIColor = UIColor.systemIndigo
         static let secondaryBackground = Color(.secondarySystemBackground)
+        static let subtitleText = Color.secondary
         static let userError = Color.red
     }
     
