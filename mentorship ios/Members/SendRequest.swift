@@ -1,0 +1,47 @@
+//
+//  SendRequest.swift
+//  mentorship ios
+//
+//  Created by Yugantar Jain on 09/06/20.
+//  Copyright © 2020 Yugantar Jain. All rights reserved.
+//
+
+import SwiftUI
+
+struct SendRequest: View {
+    @State private var pickerSelection = 1
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("I will be a").font(.subheadline)) {
+                    Picker(selection: $pickerSelection, label: Text("")) {
+                        Text("Mentor").tag(1)
+                        Text("Mentee").tag(2)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .labelsHidden()
+                }
+                
+                Section(header: Text("End Date").font(.subheadline)) {
+                    DatePicker(selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/, label: { /*@START_MENU_TOKEN@*/Text("Date")/*@END_MENU_TOKEN@*/
+                    })
+                    .datePickerStyle(WheelDatePickerStyle())
+                    .labelsHidden()
+                }
+                
+                Section(header: Text("Notes").font(.subheadline)) {
+                }
+            }
+            .navigationBarTitle("Send relation request", displayMode: .inline)
+            .navigationBarItems(leading: Button.init("Cancel", action: {
+                
+            }))
+        }
+    }
+}
+
+struct SendRequest_Previews: PreviewProvider {
+    static var previews: some View {
+        SendRequest()
+    }
+}

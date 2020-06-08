@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MemberDetail: View {
     var member: MembersModel.MembersResponseData
+    @State private var showSendRequestSheet = false
     
     var body: some View {
         Form {
@@ -25,23 +26,18 @@ struct MemberDetail: View {
                 MemberDetailCell(title: "Organization", value: member.organization)
                 MemberDetailCell(title: "Skills", value: member.skills)
             }
-            
-//            Button(action: {}) {
-//                Text("Send Request")
-//                    .font(.headline)
-//                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-//                    .padding(DesignConstants.Padding.listCellFrameExpansion)
-//                    .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
-//            }
         }
         .navigationBarTitle(member.name ?? "Member Detail")
         .navigationBarItems(trailing:
-            Button(action: {}) {
+            Button(action: { self.showSendRequestSheet.toggle() }) {
                 Text("Send Request")
                     .font(.headline)
                     .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
             }
         )
+        .sheet(isPresented: $showSendRequestSheet) {
+                SendRequest()
+        }
     }
 }
 
