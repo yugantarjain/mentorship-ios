@@ -11,12 +11,12 @@ import Combine
 
 final class MembersModel: ObservableObject {
     
-    //MARK: - Variables
+    // MARK: - Variables
     @Published var membersResponseData = [MembersResponseData]()
     @Published var inActivity: Bool = false
     private var cancellable: AnyCancellable?
     
-    //MARK: - Functions
+    // MARK: - Functions
     func fetchMembers() {
         guard let token = try? KeychainManager.readKeychain() else {
             return
@@ -53,7 +53,7 @@ final class MembersModel: ObservableObject {
         return "Skills: \(skills)"
     }
     
-    //MARK: - Structures
+    // MARK: - Structures
     struct MembersResponseData: Decodable, Identifiable {
         let id: Int?
         

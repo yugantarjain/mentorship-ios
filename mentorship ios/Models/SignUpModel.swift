@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 final class SignUpModel: ObservableObject {
-    //MARK: - Variables
+    // MARK: - Variables
     @Published var signUpData = SignUpUploadData(name: "", username: "", password: "", email: "", tncChecked: false, needMentoring: true, availableToMentor: false)
     @Published var signUpResponseData = SignUpResponseData(message: "")
     @Published var confirmPassword: String = ""
@@ -26,7 +26,7 @@ final class SignUpModel: ObservableObject {
         }
     }
     
-    //MARK: - Main Function
+    // MARK: - Main Function
     func signUp() {
         //assign availability values as per picker selection
         if self.availabilityPickerSelection > 1 {
@@ -59,7 +59,7 @@ final class SignUpModel: ObservableObject {
             })
     }
     
-    //MARK: - Structures
+    // MARK: - Structures
     struct SignUpUploadData: Encodable {
         var name: String
         var username: String

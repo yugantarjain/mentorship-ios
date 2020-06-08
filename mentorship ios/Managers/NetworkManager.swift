@@ -31,7 +31,6 @@ struct NetworkManager {
                 }
                 return $0.data
             }
-//            .map { $0.data }
             .decode(type: T.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }

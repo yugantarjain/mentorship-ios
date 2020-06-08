@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 final class LoginModel: ObservableObject {
-    //MARK: - Variables
+    // MARK: - Variables
     @Published var loginData = LoginUploadData(username: "", password: "")
     @Published var loginResponseData = LoginResponseData(message: "", accessToken: "")
     @Published var inActivity: Bool = false
@@ -23,7 +23,7 @@ final class LoginModel: ObservableObject {
         return false
     }
      
-    //MARK: - Main Function
+    // MARK: - Main Function
     func login() {
         self.inActivity = true
         
@@ -54,7 +54,7 @@ final class LoginModel: ObservableObject {
             })
     }
     
-    //MARK: - Structures
+    // MARK: - Structures
     struct LoginUploadData: Encodable {
         var username: String
         var password: String
