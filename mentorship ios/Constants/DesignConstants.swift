@@ -36,7 +36,12 @@ struct DesignConstants {
     
     struct Padding {
         //used to expand frame, eg. of textfield
-        static let frameExpansionPadding: CGFloat = 10
+        static let textFieldFrameExpansion: CGFloat = 10
+        static let listCellFrameExpansion: CGFloat = 10
+    }
+    
+    struct Width {
+        static let listCellTitle: CGFloat = 120
     }
     
     struct CornerRadius {

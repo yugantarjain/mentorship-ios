@@ -18,7 +18,7 @@ struct Members: View {
                     ActivityIndicator(isAnimating: self.$membersModel.inActivity, style: .medium)
                 }
                 ForEach(membersModel.membersResponseData) { member in
-                    NavigationLink(destination: Text("member page")) {
+                    NavigationLink(destination: MemberDetail(member: member)) {
                         MembersListCell(member: member, membersModel: self.membersModel)
                     }
                 }

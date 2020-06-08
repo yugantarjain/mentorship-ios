@@ -64,6 +64,7 @@ final class MembersModel: ObservableObject {
         let location: String?
         let occupation: String?
         let organization: String?
+        let interests: String?
         let skills: String?
         
         let slackUsername: String?
@@ -72,8 +73,7 @@ final class MembersModel: ObservableObject {
         let isAvailable: Bool?
         
         enum CodingKeys: String, CodingKey {
-            case id, username, name, bio, location, occupation, organization, skills
-            
+            case id, username, name, bio, location, occupation, organization, interests, skills
             case slackUsername = "slack_username"
             case needMentoring = "need_mentoring"
             case availableToMentor = "available_to_mentor"
