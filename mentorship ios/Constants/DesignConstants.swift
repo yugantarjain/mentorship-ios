@@ -32,6 +32,10 @@ struct DesignConstants {
                 static let smallSpacing: CGFloat = 16
                 static let minimalSpacing: CGFloat = 6
         }
+        
+        struct Padding {
+            static let topPadding: CGFloat = 16 * 2
+        }
     }
     
     struct Padding {
@@ -62,6 +66,7 @@ struct DesignConstants {
         static let indigoUIColor = UIColor.systemIndigo
         static let secondaryBackground = Color(.secondarySystemBackground)
         static let secondaryUIBackground = UIColor.secondarySystemGroupedBackground
+        static let formBackgroundColor = Color(.systemGroupedBackground)
         static let subtitleText = Color.secondary
         static let userError = Color.red
     }

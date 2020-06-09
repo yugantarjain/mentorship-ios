@@ -34,7 +34,6 @@ final class MembersModel: ObservableObject {
                 }
             }, receiveValue: { value in
                 self.membersResponseData = value
-                print(value)
             })
     }
     

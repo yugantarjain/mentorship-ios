@@ -36,7 +36,9 @@ struct SendRequest: View {
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: DesignConstants.Height.textViewHeight, maxHeight: .infinity)
                 }
             }
-            .padding(.vertical, DesignConstants.Screen.Padding.topPadding * 2)
+            .padding(.vertical, DesignConstants.Form.Padding.topPadding)
+            .background(DesignConstants.Colors.formBackgroundColor)
+            .edgesIgnoringSafeArea(.bottom)
             .navigationBarTitle("Send relation request", displayMode: .inline)
             .navigationBarItems(leading: Button.init("Cancel", action: {
                 
