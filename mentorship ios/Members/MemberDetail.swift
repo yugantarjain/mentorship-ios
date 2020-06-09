@@ -36,7 +36,7 @@ struct MemberDetail: View {
             }
         )
         .sheet(isPresented: $showSendRequestSheet) {
-                SendRequest()
+            SendRequest(name: self.member.name ?? "-")
         }
     }
 }

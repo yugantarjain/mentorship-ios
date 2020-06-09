@@ -10,20 +10,21 @@ import SwiftUI
 import Combine
 
 struct SendRequest: View {
+    var name: String
     @State private var pickerSelection = 1
     @State private var endDate = Date()
     @State private var notesText = ""
     @State private var offsetValue: CGFloat = 0
     @ObservedObject private var keyboardManager = KeyboardManager()
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationView {
             Form {
-                //top empty space
-                Section {
+                Section(header: Text("To \(name)").font(.title).fontWeight(.heavy)) {
                     EmptyView()
                 }
-
+                
                 Section(header: Text("I'll Be The").font(.headline)) {
                     Picker(selection: $pickerSelection, label: Text("")) {
                         Text("Mentee").tag(1)
@@ -58,8 +59,9 @@ struct SendRequest: View {
                 self.keyboardManager.observeKeyboardHeight()
             }
             //DEBUG COMMENT: actual nav title preference is large, inline chosen temporarily due to SwiftUI bug
-            .navigationBarTitle("Relation request", displayMode: .inline)
+            .navigationBarTitle("Relation Request", displayMode: .inline)
             .navigationBarItems(leading: Button.init("Cancel", action: {
+                self.presentationMode.wrappedValue.dismiss()
             }))
         }
     }
@@ -67,6 +69,6 @@ struct SendRequest: View {
 
 struct SendRequest_Previews: PreviewProvider {
     static var previews: some View {
-        SendRequest()
+        SendRequest(name: "Name")
     }
 }
