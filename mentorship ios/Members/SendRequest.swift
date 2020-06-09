@@ -15,9 +15,8 @@ struct SendRequest: View {
     @State private var endDate = Date()
     @State private var notesText = ""
     @State private var offsetValue: CGFloat = 0
-    @ObservedObject private var keyboardManager = KeyboardManager()
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         NavigationView {
             Form {
@@ -25,41 +24,27 @@ struct SendRequest: View {
                     EmptyView()
                 }
                 
-                Section(header: Text("I'll Be The").font(.headline)) {
-                    Picker(selection: $pickerSelection, label: Text("")) {
+                Section {
+                    Picker(selection: $pickerSelection, label: Text("My Role")) {
                         Text("Mentee").tag(1)
                         Text("Mentor").tag(2)
                     }
-                    .pickerStyle(SegmentedPickerStyle())
-                    .labelsHidden()
-                }
-
-                Section(header: Text("End Date").font(.headline)) {
+                    
                     DatePicker(selection: $endDate, displayedComponents: .date) {
-                        EmptyView()
+                        Text("End Date")
                     }
-                    .datePickerStyle(WheelDatePickerStyle())
-                    .labelsHidden()
-                    .padding(.leading, DesignConstants.Padding.listCellFrameExpansion)
+                    
+                    TextField("Notes", text: $notesText)
                 }
-
-                Section(header: Text("Notes").font(.headline)) {
-                    TextField("Optional", text: $notesText)
-                        .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
-                }
-
-                Button(action: {}) {
-                    Text("Send")
+                .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
+                
+                Section {
+                    Button(action: {}) {
+                        Text("Send")
+                    }
                 }
             }
-            .offset(y: self.keyboardManager.keyboardHeight > 0 ? -self.keyboardManager.keyboardHeight : 0)
-            .background(DesignConstants.Colors.formBackgroundColor)
-            .animation(.default)
-            .onAppear {
-                self.keyboardManager.observeKeyboardHeight()
-            }
-            //DEBUG COMMENT: actual nav title preference is large, inline chosen temporarily due to SwiftUI bug
-            .navigationBarTitle("Relation Request", displayMode: .inline)
+            .navigationBarTitle("Relation Request")
             .navigationBarItems(leading: Button.init("Cancel", action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
