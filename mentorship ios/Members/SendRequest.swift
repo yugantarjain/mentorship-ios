@@ -31,15 +31,15 @@ struct SendRequest: View {
                         Text("Mentee").tag(1)
                         Text("Mentor").tag(2)
                     }
-                    
+
                     DatePicker(selection: $endDate, displayedComponents: .date) {
                         Text("End Date")
                     }
-                    
+
                     TextField("Notes", text: $notesText)
                 }
                 .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
-                
+
                 //send button
                 Section {
                     Button(action: {}) {
