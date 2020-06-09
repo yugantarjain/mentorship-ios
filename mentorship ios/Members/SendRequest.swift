@@ -11,6 +11,7 @@ import Combine
 
 struct SendRequest: View {
     @State private var pickerSelection = 1
+    @State private var endDate = Date()
     @State private var notesText = ""
     @State private var offsetValue: CGFloat = 0
     @ObservedObject private var keyboardManager = KeyboardManager()
@@ -33,10 +34,12 @@ struct SendRequest: View {
                 }
                 
                 Section(header: Text("End Date").font(.headline)) {
-                    DatePicker(selection: /*@START_MENU_TOKEN@*/.constant(Date())/*@END_MENU_TOKEN@*/, label: { /*@START_MENU_TOKEN@*/Text("Date")/*@END_MENU_TOKEN@*/
-                    })
-                        .datePickerStyle(WheelDatePickerStyle())
-                        .labelsHidden()
+                    DatePicker(selection: $endDate, displayedComponents: .date) {
+                        EmptyView()
+                    }
+                    .datePickerStyle(WheelDatePickerStyle())
+                    .labelsHidden()
+                    .padding(.leading, DesignConstants.Padding.listCellFrameExpansion)
                 }
                 
                 Section(header: Text("Notes").font(.headline)) {
