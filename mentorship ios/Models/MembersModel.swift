@@ -25,7 +25,7 @@ final class MembersModel: ObservableObject {
         self.inActivity = true
 
         // Debug comment: cache policy to be changed later to revalidateCache
-        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.members, httpMethod: "GET", uploadData: Data(), token: token, cachePolicy: .reloadRevalidatingCacheData)
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.members, httpMethod: "GET", uploadData: Data(), token: token, cachePolicy: .reloadRevalidatingCacheData)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.membersResponseData) }
             .sink(receiveCompletion: { completion in
@@ -39,7 +39,7 @@ final class MembersModel: ObservableObject {
 
     func availabilityString(canBeMentee: Bool, canBeMentor: Bool) -> String {
         if canBeMentor && canBeMentor {
-            return "Available to be a Mentor and Mentee both"
+            return "Available to be a Mentor or Mentee"
         } else if canBeMentee {
             return "Available to be a Mentee"
         } else if canBeMentor {

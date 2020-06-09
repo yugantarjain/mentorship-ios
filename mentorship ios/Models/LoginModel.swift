@@ -32,7 +32,7 @@ final class LoginModel: ObservableObject {
             return
         }
 
-        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.login, httpMethod: "POST", uploadData: uploadData)
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.login, httpMethod: "POST", uploadData: uploadData)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.loginResponseData) }
             .sink(receiveCompletion: { _ in

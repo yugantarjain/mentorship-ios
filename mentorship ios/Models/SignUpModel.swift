@@ -49,7 +49,7 @@ final class SignUpModel: ObservableObject {
             self.inActivity = false
             return
         }
-        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.signUp, httpMethod: "POST", uploadData: uploadData)
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.signUp, httpMethod: "POST", uploadData: uploadData)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.signUpResponseData) }
             .sink(receiveCompletion: { _ in
