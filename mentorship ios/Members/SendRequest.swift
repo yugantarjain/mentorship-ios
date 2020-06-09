@@ -20,10 +20,12 @@ struct SendRequest: View {
     var body: some View {
         NavigationView {
             Form {
+                //heading
                 Section(header: Text("To \(name)").font(.title).fontWeight(.heavy)) {
                     EmptyView()
                 }
                 
+                //settings
                 Section {
                     Picker(selection: $pickerSelection, label: Text("My Role")) {
                         Text("Mentee").tag(1)
@@ -38,6 +40,7 @@ struct SendRequest: View {
                 }
                 .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
                 
+                //send button
                 Section {
                     Button(action: {}) {
                         Text("Send")
