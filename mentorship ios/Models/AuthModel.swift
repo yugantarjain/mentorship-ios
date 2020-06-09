@@ -12,8 +12,7 @@ import Combine
 final class AuthModel: ObservableObject {
     @Published var isLogged: Bool?
     private var cancellable: AnyCancellable?
-    
-    
+
     init() {
         URLCache.shared = URLCache.init(memoryCapacity: 50*1024*1024, diskCapacity: 200*1024*1024, diskPath: nil)
 

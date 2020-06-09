@@ -11,7 +11,7 @@ import SwiftUI
 struct MemberDetailCell: View {
     let title: String
     let value: String?
-    
+
     var body: some View {
         if !(value?.isEmpty ?? true) {
             return AnyView(

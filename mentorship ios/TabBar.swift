@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TabBar: View {
     @Binding var selection: Int
-    
+
     var body: some View {
         TabView(selection: $selection) {
             Home()
@@ -20,7 +20,7 @@ struct TabBar: View {
                         Text("Home")
                     }
             }.tag(0)
-            
+
             Members()
                 .tabItem {
                     VStack {

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Members: View {
     @ObservedObject var membersModel = MembersModel()
-    
+
     var body: some View {
         NavigationView {
             List {

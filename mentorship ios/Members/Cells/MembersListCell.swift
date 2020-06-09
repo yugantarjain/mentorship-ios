@@ -15,10 +15,10 @@ struct MembersListCell: View {
         VStack(alignment: .leading, spacing: DesignConstants.Spacing.minimalSpacing) {
             Text(member.name ?? "")
                 .font(.headline)
-            
+
             Group {
                 Text(self.membersModel.availabilityString(canBeMentee: member.needMentoring ?? false, canBeMentor: member.availableToMentor ?? false))
-                
+
                 Text(self.membersModel.skillsString(skills: member.skills ?? ""))
             }
             .font(.subheadline)

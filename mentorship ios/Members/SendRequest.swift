@@ -15,7 +15,7 @@ struct SendRequest: View {
     @State private var notesText = ""
     @State private var offsetValue: CGFloat = 0
     @ObservedObject private var keyboardManager = KeyboardManager()
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -23,7 +23,7 @@ struct SendRequest: View {
                 Section {
                     EmptyView()
                 }
-                
+
                 Section(header: Text("I'll Be The").font(.headline)) {
                     Picker(selection: $pickerSelection, label: Text("")) {
                         Text("Mentee").tag(1)
@@ -32,7 +32,7 @@ struct SendRequest: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .labelsHidden()
                 }
-                
+
                 Section(header: Text("End Date").font(.headline)) {
                     DatePicker(selection: $endDate, displayedComponents: .date) {
                         EmptyView()
@@ -41,13 +41,13 @@ struct SendRequest: View {
                     .labelsHidden()
                     .padding(.leading, DesignConstants.Padding.listCellFrameExpansion)
                 }
-                
+
                 Section(header: Text("Notes").font(.headline)) {
                     TextField("Optional", text: $notesText)
                         .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
                 }
-                
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+
+                Button(action: {}/*@END_MENU_TOKEN@*/) {
                     Text("Send")
                 }
             }

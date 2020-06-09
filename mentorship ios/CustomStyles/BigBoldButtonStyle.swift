@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BigBoldButtonStyle: ButtonStyle {
     var disabled: Bool = false
-    
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: 200)
