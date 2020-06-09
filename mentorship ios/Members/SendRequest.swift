@@ -13,6 +13,7 @@ struct SendRequest: View {
     @State private var pickerSelection = 1
     @State private var notesText = ""
     @State private var offsetValue: CGFloat = 0
+    @ObservedObject private var keyboardManager = KeyboardManager()
     
     var body: some View {
         NavigationView {
@@ -51,22 +52,10 @@ struct SendRequest: View {
             .navigationBarTitle("Relation request", displayMode: .inline)
             .navigationBarItems(leading: Button.init("Cancel", action: {
             }))
-            .offset(y: self.offsetValue > 0 ? -self.offsetValue : 0)
+            .offset(y: self.keyboardManager.keyboardHeight > 0 ? -self.keyboardManager.keyboardHeight : 0)
             .animation(.default)
             .onAppear {
-                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
-                    let value = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-                    let height = value.height
-//                    withAnimation(.spring() ) {
-                        self.offsetValue = height
-//                    }
-                }
-                
-                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {_ in
-//                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8, blendDuration: 0)) {
-                        self.offsetValue = 0
-//                    }
-                }
+                self.keyboardManager.observeKeyboardHeight()
             }
         }
     }
