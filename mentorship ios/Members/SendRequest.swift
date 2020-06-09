@@ -47,19 +47,20 @@ struct SendRequest: View {
                         .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
                 }
 
-                Button(action: {}/*@END_MENU_TOKEN@*/) {
+                Button(action: {}) {
                     Text("Send")
                 }
+            }
+            .offset(y: self.keyboardManager.keyboardHeight > 0 ? -self.keyboardManager.keyboardHeight : 0)
+            .background(DesignConstants.Colors.formBackgroundColor)
+            .animation(.default)
+            .onAppear {
+                self.keyboardManager.observeKeyboardHeight()
             }
             //DEBUG COMMENT: actual nav title preference is large, inline chosen temporarily due to SwiftUI bug
             .navigationBarTitle("Relation request", displayMode: .inline)
             .navigationBarItems(leading: Button.init("Cancel", action: {
             }))
-            .offset(y: self.keyboardManager.keyboardHeight > 0 ? -self.keyboardManager.keyboardHeight : 0)
-            .animation(.default)
-            .onAppear {
-                self.keyboardManager.observeKeyboardHeight()
-            }
         }
     }
 }
