@@ -12,6 +12,7 @@ import Combine
 struct NetworkManager {
     static var responseCode: Int = 0
 
+    // swiftlint:disable:next all
     static func callAPI<T: Decodable>(urlString: String, httpMethod: String, uploadData: Data, token: String = "", cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy) -> AnyPublisher<T, Error> {
         let url = URL(string: urlString)!
 

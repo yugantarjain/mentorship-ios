@@ -42,6 +42,7 @@ struct MemberDetail: View {
 
 struct MemberDetail_Previews: PreviewProvider {
     static var previews: some View {
+        // swiftlint:disable:next all
         MemberDetail(member: MembersModel.MembersResponseData.init(id: 1, username: "username", name: "yugantar", bio: "student", location: "earth", occupation: "student", organization: "", interests: "astronomy", skills: "ios, swift, c++", slackUsername: "", needMentoring: true, availableToMentor: true, isAvailable: true))
     }
 }

@@ -13,13 +13,16 @@ struct Members: View {
 
     var body: some View {
         NavigationView {
-            List {
+            VStack {
                 if self.membersModel.inActivity {
                     ActivityIndicator(isAnimating: self.$membersModel.inActivity, style: .medium)
-                }
-                ForEach(membersModel.membersResponseData) { member in
-                    NavigationLink(destination: MemberDetail(member: member)) {
-                        MembersListCell(member: member, membersModel: self.membersModel)
+                } else {
+                    List {
+                        ForEach(membersModel.membersResponseData) { member in
+                            NavigationLink(destination: MemberDetail(member: member)) {
+                                MembersListCell(member: member, membersModel: self.membersModel)
+                            }
+                        }
                     }
                 }
             }
