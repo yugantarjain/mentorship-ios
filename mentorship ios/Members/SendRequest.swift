@@ -40,26 +40,32 @@ struct SendRequest: View {
                 
                 Section(header: Text("Notes").font(.headline)) {
                     TextField("Optional", text: $notesText)
+                        .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
                 }
                 
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                     Text("Send")
                 }
             }
-            .navigationBarTitle("Relation request")
+            //DEBUG COMMENT: actual nav title preference is large, inline chosen temporarily due to SwiftUI bug
+            .navigationBarTitle("Relation request", displayMode: .inline)
             .navigationBarItems(leading: Button.init("Cancel", action: {
             }))
-            .offset(y: -self.offsetValue)
-            .animation(.spring())
+            .offset(y: self.offsetValue > 0 ? -self.offsetValue : 0)
+            .animation(.default)
             .onAppear {
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
                     let value = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
                     let height = value.height
-                    self.offsetValue = height
+//                    withAnimation(.spring() ) {
+                        self.offsetValue = height
+//                    }
                 }
                 
                 NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {_ in
-                    self.offsetValue = 0
+//                    withAnimation(.spring(response: 0.4, dampingFraction: 0.8, blendDuration: 0)) {
+                        self.offsetValue = 0
+//                    }
                 }
             }
         }
