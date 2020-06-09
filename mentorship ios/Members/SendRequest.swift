@@ -12,7 +12,7 @@ import Combine
 struct SendRequest: View {
     @State private var pickerSelection = 1
     @State private var notesText = ""
-    @ObservedObject private var keyboardResponder = KeyboardResponder()
+    @State private var offsetValue: CGFloat = 0
     
     var body: some View {
         NavigationView {
@@ -45,15 +45,23 @@ struct SendRequest: View {
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                     Text("Send")
                 }
-                
-                //bottom empty space
-                Section {
-                    EmptyView()
-                }
             }
             .navigationBarTitle("Relation request")
             .navigationBarItems(leading: Button.init("Cancel", action: {
             }))
+            .offset(y: -self.offsetValue)
+            .animation(.spring())
+            .onAppear {
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { notification in
+                    let value = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+                    let height = value.height
+                    self.offsetValue = height
+                }
+                
+                NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {_ in
+                    self.offsetValue = 0
+                }
+            }
         }
     }
 }
@@ -63,31 +71,3 @@ struct SendRequest_Previews: PreviewProvider {
         SendRequest()
     }
 }
-
-final class KeyboardResponder: ObservableObject {
-    
-    @Published var keyboardHeight: CGFloat = 0
-    
-    private(set) var subscriptions = Set<AnyCancellable>()
-    
-    init() {
-        NotificationCenter.default.publisher(for: UIResponder.keyboardWillChangeFrameNotification)
-            .compactMap { notification in
-                (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
-        }
-        .receive(on: DispatchQueue.main)
-        .assign(to: \.keyboardHeight, on: self)
-        .store(in: &subscriptions)
-    }
-}
-
-//func abcd() {
-//    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { key in
-//        let value = key.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-//        self.value = value.height
-//    }
-//
-//    NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { key in
-//        self.value = 0
-//    }
-//}
