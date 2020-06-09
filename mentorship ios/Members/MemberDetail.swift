@@ -32,7 +32,6 @@ struct MemberDetail: View {
             Button(action: { self.showSendRequestSheet.toggle() }) {
                 Text("Send Request")
                     .font(.headline)
-                    .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
             }
         )
         .sheet(isPresented: $showSendRequestSheet) {
