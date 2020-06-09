@@ -17,8 +17,9 @@ struct SendRequest: View {
     var body: some View {
         NavigationView {
             Form {
+                //top empty space
                 Section {
-                    AnyView(EmptyView())
+                    EmptyView()
                 }
                 
                 Section(header: Text("I'll Be The").font(.headline)) {
@@ -43,6 +44,11 @@ struct SendRequest: View {
                 
                 Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
                     Text("Send")
+                }
+                
+                //bottom empty space
+                Section {
+                    EmptyView()
                 }
             }
             .navigationBarTitle("Relation request")
