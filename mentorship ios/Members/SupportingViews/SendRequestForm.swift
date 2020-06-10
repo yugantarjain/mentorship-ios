@@ -28,7 +28,7 @@ struct SendRequestForm: View {
             
             //settings
             Section {
-                VStack(alignment: .center) {
+                VStack(alignment: .leading) {
                     Text("My Role")
                     
                     Picker(selection: $pickerSelection, label: Text("My Role")) {
@@ -44,14 +44,28 @@ struct SendRequestForm: View {
                 }
                 
                 TextField("Notes", text: $notesText)
-                .background(GeometryReader { geo -> Color in
-                    let frame = geo.frame(in: .global)
-                    print(frame)
-                    self.notesFrame = frame
-                    return Color.clear
-                })
+                    .background(GeometryReader { geo -> Color in
+                        let frame = geo.frame(in: .global)
+                        print(frame)
+                        self.notesFrame = frame
+                        return Color.clear
+                    })
             }
             .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
+            
+            //add extra bottom spacing
+            Section {
+                EmptyView()
+            }
+            Section {
+                EmptyView()
+            }
+            Section {
+                EmptyView()
+            }
+            Section {
+                EmptyView()
+            }
         }
     }
 }

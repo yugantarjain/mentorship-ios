@@ -36,6 +36,7 @@ struct SendRequest: View {
                         )
                 }
                 .position(x: notesCellFrame.midX, y: notesCellFrame.minY)
+                .offset(y: DesignConstants.Form.Spacing.smallSpacing)
             }
             .navigationBarTitle("Relation Request")
             .navigationBarItems(leading: Button.init("Cancel", action: {
