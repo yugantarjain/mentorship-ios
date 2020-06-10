@@ -15,7 +15,7 @@ struct NetworkManager {
     static func callAPI<T: Decodable>(
         urlString: String,
         httpMethod: String,
-        uploadData: Data,
+        uploadData: Data = Data(),
         token: String = "",
         cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy
     ) -> AnyPublisher<T, Error> {

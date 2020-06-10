@@ -19,32 +19,22 @@ struct SendRequest: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                //heading
-                Section(header: Text("To \(name)").font(.title).fontWeight(.heavy)) {
-                    EmptyView()
-                }
+            ZStack {
+                //Background Color
+                DesignConstants.Colors.formBackgroundColor
                 
-                //settings
-                Section {
-                    Picker(selection: $pickerSelection, label: Text("My Role")) {
-                        Text("Mentee").tag(1)
-                        Text("Mentor").tag(2)
-                    }
-
-                    DatePicker(selection: $endDate, displayedComponents: .date) {
-                        Text("End Date")
-                    }
-
-                    TextField("Notes", text: $notesText)
-                }
-                .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
-
-                //send button
-                Section {
-                    Button(action: {}) {
+                //Actual view
+                VStack {
+                    //Form
+                    SendRequestForm(name: name, pickerSelection: $pickerSelection, endDate: $endDate, notesText: $notesText)
+                    
+                    //Send Button
+                    Button.init(action: {}) {
                         Text("Send")
                     }
+                    .buttonStyle(BigBoldButtonStyle())
+                    
+                    Spacer()
                 }
             }
             .navigationBarTitle("Relation Request")
@@ -57,6 +47,6 @@ struct SendRequest: View {
 
 struct SendRequest_Previews: PreviewProvider {
     static var previews: some View {
-        SendRequest(name: "Name")
+        SendRequest(name: "Yugantar Jain")
     }
 }
