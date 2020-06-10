@@ -15,6 +15,7 @@ struct SendRequest: View {
     @State private var endDate = Date()
     @State private var notesText = ""
     @State private var offsetValue: CGFloat = 0
+    @State private var notesCellFrame = CGRect()
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -23,25 +24,18 @@ struct SendRequest: View {
                 //Background Color
                 DesignConstants.Colors.formBackgroundColor
                 
-                //Actual view
-                VStack(spacing: DesignConstants.Form.Spacing.bigSpacing) {
-                    //Form
-                    SendRequestForm(name: name, pickerSelection: $pickerSelection, endDate: $endDate, notesText: $notesText)
-                    
-                    //Send Button
-                    Button.init(action: {}) {
-                        Text("Send")
-                            .frame(width: 200)
-                            .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: DesignConstants.CornerRadius.preferredCornerRadius, style: .circular)
-                                    .strokeBorder(lineWidth: 2)
-                            )
-                    }
-                    
-                    //push views to top
-                    Spacer()
+                SendRequestForm(name: name, pickerSelection: $pickerSelection, endDate: $endDate, notesText: $notesText, notesFrame: $notesCellFrame)
+                
+                Button.init(action: {}) {
+                    Text("Send")
+                        .frame(width: 200)
+                        .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: DesignConstants.CornerRadius.preferredCornerRadius, style: .circular)
+                                .strokeBorder(lineWidth: 2)
+                        )
                 }
+                .position(x: notesCellFrame.midX, y: notesCellFrame.minY)
             }
             .navigationBarTitle("Relation Request")
             .navigationBarItems(leading: Button.init("Cancel", action: {

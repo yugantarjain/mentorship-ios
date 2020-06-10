@@ -13,6 +13,7 @@ struct SendRequestForm: View {
     @Binding var pickerSelection: Int
     @Binding var endDate: Date
     @Binding var notesText: String
+    @Binding var notesFrame: CGRect
     
     var body: some View {
         Form {
@@ -43,6 +44,12 @@ struct SendRequestForm: View {
                 }
                 
                 TextField("Notes", text: $notesText)
+                .background(GeometryReader { geo -> Color in
+                    let frame = geo.frame(in: .global)
+                    print(frame)
+                    self.notesFrame = frame
+                    return Color.clear
+                })
             }
             .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
         }
@@ -51,6 +58,6 @@ struct SendRequestForm: View {
 
 struct SendRequestForm_Previews: PreviewProvider {
     static var previews: some View {
-        SendRequestForm(name: "Yugantar", pickerSelection: .constant(1), endDate: .constant(Date()), notesText: .constant("Need mentorship for iOS"))
+        SendRequestForm(name: "Yugantar", pickerSelection: .constant(1), endDate: .constant(Date()), notesText: .constant("Need mentorship for iOS"), notesFrame: .constant(CGRect()))
     }
 }
