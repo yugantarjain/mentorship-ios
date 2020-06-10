@@ -27,7 +27,7 @@ struct SendRequestForm: View {
             
             //settings
             Section {
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     Text("My Role")
                     
                     Picker(selection: $pickerSelection, label: Text("My Role")) {
@@ -35,6 +35,7 @@ struct SendRequestForm: View {
                         Text("Mentor").tag(2)
                     }
                     .pickerStyle(SegmentedPickerStyle())
+                    .labelsHidden()
                 }
                 
                 DatePicker(selection: $endDate, displayedComponents: .date) {
@@ -45,7 +46,6 @@ struct SendRequestForm: View {
             }
             .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 285)
     }
 }
 
