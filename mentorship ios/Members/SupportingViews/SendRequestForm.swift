@@ -45,7 +45,7 @@ struct SendRequestForm: View {
             }
             .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 320)
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 285)
     }
 }
 
