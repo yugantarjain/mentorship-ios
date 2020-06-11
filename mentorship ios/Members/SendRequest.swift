@@ -11,12 +11,10 @@ import Combine
 
 struct SendRequest: View {
     var name: String
-    @State private var pickerSelection = 1
-    @State private var endDate = Date()
-    @State private var notesText = ""
     @State private var offsetValue: CGFloat = 0
     @State private var notesCellFrame = CGRect()
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var membersModel = MembersModel()
     
     var body: some View {
         NavigationView {
@@ -24,16 +22,36 @@ struct SendRequest: View {
                 //Background Color
                 DesignConstants.Colors.formBackgroundColor
                 
-                SendRequestForm(name: name, pickerSelection: $pickerSelection, endDate: $endDate, notesText: $notesText, notesFrame: $notesCellFrame)
+                //Form
+                SendRequestForm(
+                    name: name,
+                    pickerSelection: $membersModel.pickerSelection,
+                    endDate: $membersModel.endDate,
+                    notesText: $membersModel.notesText,
+                    notesFrame: $notesCellFrame
+                )
                 
-                Button.init(action: {}) {
-                    Text("Send")
-                        .frame(width: 200)
-                        .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: DesignConstants.CornerRadius.preferredCornerRadius, style: .circular)
-                                .strokeBorder(lineWidth: 2)
-                        )
+                VStack(spacing: DesignConstants.Form.Spacing.bigSpacing) {
+                    //Send button
+                    Button.init(action: self.membersModel.sendRequest) {
+                        Text("Send")
+                            .frame(width: 200)
+                            .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: DesignConstants.CornerRadius.preferredCornerRadius, style: .circular)
+                                    .strokeBorder(lineWidth: 2)
+                            )
+                    }
+                    .disabled(membersModel.notesText.isEmpty ? true : false)
+                    
+                    //Activity Indicator or message
+                    if self.membersModel.inActivity {
+                        ActivityIndicator(isAnimating: $membersModel.inActivity, style: .medium)
+                    } else {
+                        Text(membersModel.sendRequestResponseData.message ?? "")
+                            .font(DesignConstants.Fonts.userError)
+                            .foregroundColor(DesignConstants.Colors.userError)
+                    }
                 }
                 .position(x: notesCellFrame.midX, y: notesCellFrame.minY)
                 .offset(y: DesignConstants.Form.Spacing.smallSpacing)

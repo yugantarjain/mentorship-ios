@@ -13,7 +13,12 @@ final class MembersModel: ObservableObject {
 
     // MARK: - Variables
     @Published var membersResponseData = [MembersResponseData]()
-    @Published var inActivity: Bool = false
+    @Published var sendRequestData = SendRequestUploadData(mentorID: 0, menteeID: 0, endDate: 0, notes: "")
+    @Published var sendRequestResponseData = SendRequestResponseData(message: "")
+    @Published var pickerSelection = 1
+    @Published var endDate = Date()
+    @Published var notesText = ""
+    @Published var inActivity = false
     private var cancellable: AnyCancellable?
 
     // MARK: - Functions
@@ -52,6 +57,28 @@ final class MembersModel: ObservableObject {
     func skillsString(skills: String) -> String {
         return "Skills: \(skills)"
     }
+    
+    func sendRequest() {
+        guard let token = try? KeychainManager.readKeychain() else {
+            return
+        }
+        
+        self.inActivity = true
+        
+        guard let uploadData = try? JSONEncoder().encode(sendRequestData) else {
+            self.inActivity = false
+            return
+        }
+        
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.MentorshipRelation.sendRequest, httpMethod: "POST", uploadData: uploadData, token: token)
+            .receive(on: RunLoop.main)
+            .catch { _ in Just(self.sendRequestResponseData) }
+            .sink(receiveCompletion: { _ in
+                self.inActivity = false
+            }, receiveValue: { value in
+                self.sendRequestResponseData = value
+            })
+    }
 
     // MARK: - Structures
     struct MembersResponseData: Decodable, Identifiable {
@@ -79,6 +106,17 @@ final class MembersModel: ObservableObject {
             case availableToMentor = "available_to_mentor"
             case isAvailable = "is_available"
         }
+    }
+    
+    struct SendRequestUploadData: Encodable {
+        let mentorID: Int
+        let menteeID: Int
+        let endDate: Int
+        let notes: String
+    }
+    
+    struct SendRequestResponseData: Decodable {
+        let message: String?
     }
 
 }

@@ -41,6 +41,5 @@ struct NetworkManager {
         }
         .decode(type: T.self, decoder: JSONDecoder())
         .eraseToAnyPublisher()
-        
     }
 }

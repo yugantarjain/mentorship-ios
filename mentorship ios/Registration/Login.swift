@@ -40,8 +40,8 @@ struct Login: View {
                 ActivityIndicator(isAnimating: $loginModel.inActivity, style: .medium)
             } else {
                 Text(self.loginModel.loginResponseData.message ?? "")
-                .font(DesignConstants.Fonts.userError)
-                .foregroundColor(DesignConstants.Colors.userError)
+                    .font(DesignConstants.Fonts.userError)
+                    .foregroundColor(DesignConstants.Colors.userError)
             }
 
             //text and sign up button
