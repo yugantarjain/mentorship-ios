@@ -13,6 +13,8 @@ struct URLStringConstants {
         static let login: String = baseURL + "login"
         static let signUp: String = baseURL + "register"
         static let members: String = baseURL + "users"
+        static let home: String = baseURL + "dashboard"
+        static let getProfile: String = baseURL + "user"
     }
     
     struct MentorshipRelation {

@@ -38,6 +38,8 @@
 		53891257248AB08600E24F96 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53891256248AB08600E24F96 /* SignUpModel.swift */; };
 		538E22E9248EBD7900842835 /* MemberDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E22E8248EBD7900842835 /* MemberDetailCell.swift */; };
 		53E3BAF4248AD51A007F91C8 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E3BAF3248AD51A007F91C8 /* ActivityIndicator.swift */; };
+		53EA66572492D98E007AEB04 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EA66562492D98E007AEB04 /* HomeModel.swift */; };
+		53EA66592492EA1E007AEB04 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EA66582492EA1E007AEB04 /* ProfileModel.swift */; };
 		53EB022D248D71F40061E5C4 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB022C248D71F40061E5C4 /* AuthModel.swift */; };
 		53EB46EA2488CBBF005656B9 /* DesignConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB46E92488CBBF005656B9 /* DesignConstants.swift */; };
 		53EB46EC2488D5AA005656B9 /* ImageNameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB46EB2488D5AA005656B9 /* ImageNameConstants.swift */; };
@@ -103,6 +105,8 @@
 		53891256248AB08600E24F96 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		538E22E8248EBD7900842835 /* MemberDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailCell.swift; sourceTree = "<group>"; };
 		53E3BAF3248AD51A007F91C8 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		53EA66562492D98E007AEB04 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		53EA66582492EA1E007AEB04 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		53EB022C248D71F40061E5C4 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		53EB46E92488CBBF005656B9 /* DesignConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignConstants.swift; sourceTree = "<group>"; };
 		53EB46EB2488D5AA005656B9 /* ImageNameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNameConstants.swift; sourceTree = "<group>"; };
@@ -296,6 +300,8 @@
 			children = (
 				531C8064248A477700AE81EF /* LoginModel.swift */,
 				53891256248AB08600E24F96 /* SignUpModel.swift */,
+				53EA66562492D98E007AEB04 /* HomeModel.swift */,
+				53EA66582492EA1E007AEB04 /* ProfileModel.swift */,
 				53ED6B0E248D04A80055DFF0 /* MembersModel.swift */,
 				53EB022C248D71F40061E5C4 /* AuthModel.swift */,
 			);
@@ -449,7 +455,9 @@
 				530F44192482752500B1FD0B /* mentorship_ios.xcdatamodeld in Sources */,
 				531C8065248A477700AE81EF /* LoginModel.swift in Sources */,
 				53EB47012488EBAF005656B9 /* LocalizableStringConstants.swift in Sources */,
+				53EA66592492EA1E007AEB04 /* ProfileModel.swift in Sources */,
 				53891257248AB08600E24F96 /* SignUpModel.swift in Sources */,
+				53EA66572492D98E007AEB04 /* HomeModel.swift in Sources */,
 				5310E51E2492D398001AF464 /* UserDefaultsConstants.swift in Sources */,
 				530F44142482752500B1FD0B /* AppDelegate.swift in Sources */,
 				530F441B2482752500B1FD0B /* ContentView.swift in Sources */,

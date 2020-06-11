@@ -10,4 +10,5 @@ import Foundation
 
 struct UserDefaultsConstants {
     static let isLoggedIn = "isLoggedIn"
+    static let profile = "userProfile"
 }

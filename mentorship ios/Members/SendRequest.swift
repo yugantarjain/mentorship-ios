@@ -34,7 +34,7 @@ struct SendRequest: View {
                 
                 VStack(spacing: DesignConstants.Form.Spacing.bigSpacing) {
                     //Send button
-                    Button.init(action: self.membersModel.sendRequest) {
+                    Button(action: { self.membersModel.sendRequest(memberID: 0) }) {
                         Text("Send")
                             .frame(width: 200)
                             .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
