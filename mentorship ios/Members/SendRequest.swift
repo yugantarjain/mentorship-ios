@@ -10,11 +10,12 @@ import SwiftUI
 import Combine
 
 struct SendRequest: View {
-    var name: String
+    @ObservedObject var membersModel = MembersModel()
+    var memberID: Int
+    var memberName: String
     @State private var offsetValue: CGFloat = 0
     @State private var notesCellFrame = CGRect()
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var membersModel = MembersModel()
     
     var body: some View {
         NavigationView {
@@ -24,7 +25,7 @@ struct SendRequest: View {
                 
                 //Form
                 SendRequestForm(
-                    name: name,
+                    name: memberName,
                     pickerSelection: $membersModel.pickerSelection,
                     endDate: $membersModel.endDate,
                     notesText: $membersModel.notesText,
@@ -66,6 +67,6 @@ struct SendRequest: View {
 
 struct SendRequest_Previews: PreviewProvider {
     static var previews: some View {
-        SendRequest(name: "Yugantar Jain")
+        SendRequest(memberID: 0, memberName: "ds")
     }
 }

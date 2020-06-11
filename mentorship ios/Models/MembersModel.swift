@@ -48,7 +48,7 @@ final class MembersModel: ObservableObject {
         } else if canBeMentee {
             return "Available to be a Mentee"
         } else if canBeMentor {
-            return "Availbe to be a Mentor"
+            return "Availabe to be a Mentor"
         } else {
             return "Not available"
         }
@@ -58,7 +58,7 @@ final class MembersModel: ObservableObject {
         return "Skills: \(skills)"
     }
     
-    func sendRequest() {
+    func sendRequest(memberID: Int) {
         guard let token = try? KeychainManager.readKeychain() else {
             return
         }
