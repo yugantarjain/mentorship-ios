@@ -33,22 +33,22 @@ struct SendRequest: View {
                     }
 
                     DatePicker(selection: $endDate, displayedComponents: .date) {
-                        Text("End Date")
+                        Text(LocalizableStringConstants.endDate)
                     }
 
-                    TextField("Notes", text: $notesText)
+                    TextField(LocalizableStringConstants.notes, text: $notesText)
                 }
                 .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
 
                 //send button
                 Section {
                     Button(action: {}) {
-                        Text("Send")
+                        Text(LocalizableStringConstants.send)
                     }
                 }
             }
-            .navigationBarTitle("Relation Request")
-            .navigationBarItems(leading: Button.init("Cancel", action: {
+            .navigationBarTitle(LocalizableStringConstants.relationRequest)
+            .navigationBarItems(leading: Button(LocalizableStringConstants.cancel, action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
         }

@@ -14,7 +14,7 @@ struct TabBar: View {
             Home()
                 .tabItem {
                     VStack {
-                        Image(systemName: "house.fill")
+                        Image(systemName: ImageNameConstants.SFSymbolConstants.home)
                         Text("Home")
                     }
             }.tag(0)
@@ -22,7 +22,7 @@ struct TabBar: View {
             Members()
                 .tabItem {
                     VStack {
-                        Image(systemName: "person.3.fill")
+                        Image(systemName: ImageNameConstants.SFSymbolConstants.members)
                         Text("Members")
                     }
             }.tag(1)

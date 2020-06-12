@@ -79,7 +79,7 @@ struct SignUp: View {
                 Button.init(action: {
                     self.isPresented = false
                 }, label: {
-                    Image(systemName: "x.circle.fill")
+                    Image(systemName: ImageNameConstants.SFSymbolConstants.xCircle)
                         .font(.headline)
                         .accentColor(.secondary)
                 })
