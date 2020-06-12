@@ -33,8 +33,8 @@ struct SignUp: View {
                         Text(LocalizableStringConstants.availabilityText).font(.headline)
 
                         Picker(selection: $signUpModel.availabilityPickerSelection, label: Text("")) {
-                            Text("Mentor").tag(1)
-                            Text("Mentee").tag(2)
+                            Text(LocalizableStringConstants.mentor).tag(1)
+                            Text(LocalizableStringConstants.mentee).tag(2)
                             Text("Both").tag(3)
                         }
                         .labelsHidden()

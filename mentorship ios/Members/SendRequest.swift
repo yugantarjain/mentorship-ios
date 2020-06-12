@@ -28,8 +28,8 @@ struct SendRequest: View {
                 //settings
                 Section {
                     Picker(selection: $pickerSelection, label: Text("My Role")) {
-                        Text("Mentee").tag(1)
-                        Text("Mentor").tag(2)
+                        Text(LocalizableStringConstants.mentee).tag(1)
+                        Text(LocalizableStringConstants.mentor).tag(2)
                     }
 
                     DatePicker(selection: $endDate, displayedComponents: .date) {

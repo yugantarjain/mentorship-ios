@@ -7,7 +7,9 @@
 import SwiftUI
 
 struct LocalizableStringConstants {
-    static let tncString = LocalizedStringKey("terms and conditions")
+    static let tncString = LocalizedStringKey("Terms and conditions")
     static let noAccountText = LocalizedStringKey("Don't have an account?")
     static let availabilityText = LocalizedStringKey("Available to be a:")
+    static let mentee = LocalizedStringKey("Mentee")
+    static let mentor = LocalizedStringKey("Mentor")
 }
