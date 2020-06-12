@@ -13,9 +13,24 @@ struct SendRequest: View {
     @ObservedObject var membersModel = MembersModel()
     var memberID: Int
     var memberName: String
+    @State private var pickerSelection = 1
+    @State private var endDate = Date()
+    @State private var notes = ""
     @State private var offsetValue: CGFloat = 0
     @State private var notesCellFrame = CGRect()
     @Environment(\.presentationMode) var presentationMode
+    
+    func sendRequest() {
+        let myID = ProfileModel().getProfile().id
+        let timestamp = Int(self.endDate.timeIntervalSince1970)
+        var menteeID = myID
+        var mentorID = memberID
+        if pickerSelection == 2 {
+            menteeID = memberID
+            mentorID = myID
+        }
+        membersModel.sendRequest(menteeID: menteeID, mentorID: mentorID, endDate: timestamp, notes: notes)
+    }
     
     var body: some View {
         NavigationView {
@@ -26,15 +41,16 @@ struct SendRequest: View {
                 //Form
                 SendRequestForm(
                     name: memberName,
-                    pickerSelection: $membersModel.pickerSelection,
-                    endDate: $membersModel.endDate,
-                    notesText: $membersModel.notesText,
+                    pickerSelection: $pickerSelection,
+                    endDate: $endDate,
+                    notesText: $notes,
                     notesFrame: $notesCellFrame
                 )
                 
+                //Send button and message text
                 VStack(spacing: DesignConstants.Form.Spacing.bigSpacing) {
                     //Send button
-                    Button(action: { self.membersModel.sendRequest(memberID: 0) }) {
+                    Button(action: sendRequest) {
                         Text("Send")
                             .frame(width: 200)
                             .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
@@ -43,7 +59,7 @@ struct SendRequest: View {
                                     .strokeBorder(lineWidth: 2)
                             )
                     }
-                    .disabled(membersModel.notesText.isEmpty ? true : false)
+                    .disabled(notes.isEmpty ? true : false)
                     
                     //Activity Indicator or message
                     if self.membersModel.inActivity {

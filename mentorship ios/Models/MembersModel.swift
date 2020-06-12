@@ -13,11 +13,7 @@ final class MembersModel: ObservableObject {
 
     // MARK: - Variables
     @Published var membersResponseData = [MembersResponseData]()
-    @Published var sendRequestData = SendRequestUploadData(mentorID: 0, menteeID: 0, endDate: 0, notes: "")
     @Published var sendRequestResponseData = SendRequestResponseData(message: "")
-    @Published var pickerSelection = 1
-    @Published var endDate = Date()
-    @Published var notesText = ""
     @Published var inActivity = false
     private var cancellable: AnyCancellable?
 
@@ -58,18 +54,23 @@ final class MembersModel: ObservableObject {
         return "Skills: \(skills)"
     }
     
-    func sendRequest(memberID: Int) {
+    func sendRequest(menteeID: Int, mentorID: Int, endDate: Int, notes: String) {
+        //token
         guard let token = try? KeychainManager.readKeychain() else {
             return
         }
         
-        self.inActivity = true
-        
-        guard let uploadData = try? JSONEncoder().encode(sendRequestData) else {
-            self.inActivity = false
+        //upload data
+        let requestData = SendRequestUploadData(mentorID: mentorID, menteeID: menteeID, endDate: endDate, notes: notes)
+        print(requestData)
+        guard let uploadData = try? JSONEncoder().encode(requestData) else {
             return
         }
+         
+        //activity indicator
+        self.inActivity = true
         
+        //api call
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.MentorshipRelation.sendRequest, httpMethod: "POST", uploadData: uploadData, token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.sendRequestResponseData) }
@@ -109,10 +110,17 @@ final class MembersModel: ObservableObject {
     }
     
     struct SendRequestUploadData: Encodable {
-        let mentorID: Int
-        let menteeID: Int
-        let endDate: Int
-        let notes: String
+        var mentorID: Int
+        var menteeID: Int
+        var endDate: Int
+        var notes: String
+        
+        enum CodingKeys: String, CodingKey {
+            case notes
+            case mentorID = "mentor_id"
+            case menteeID = "mentee_id"
+            case endDate = "end_date"
+        }
     }
     
     struct SendRequestResponseData: Decodable {

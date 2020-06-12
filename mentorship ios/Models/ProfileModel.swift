@@ -22,7 +22,7 @@ final class ProfileModel: ObservableObject {
         UserDefaults.standard.set(profileData, forKey: UserDefaultsConstants.profile)
     }
     
-    func returnProfile() -> ProfileData {
+    func getProfile() -> ProfileData {
         let profileData = UserDefaults.standard.data(forKey: UserDefaultsConstants.profile)
         guard let profile = try? JSONDecoder().decode(ProfileData.self, from: profileData!) else {
             return self.profileData

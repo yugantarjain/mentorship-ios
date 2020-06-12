@@ -32,7 +32,7 @@ final class HomeModel: ObservableObject {
             .sink { home, profile in
                 print(profile)
                 self.profileModel.saveProfile(profile: profile)
-                print(self.profileModel.returnProfile())
+                print(self.profileModel.getProfile())
             }
     }
     
