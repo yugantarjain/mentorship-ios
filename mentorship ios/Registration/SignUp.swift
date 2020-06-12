@@ -22,6 +22,7 @@ struct SignUp: View {
                             .textFieldStyle(RoundFilledTextFieldStyle())
                         TextField("Email", text: $signUpModel.signUpData.email)
                             .textFieldStyle(RoundFilledTextFieldStyle())
+                            .autocapitalization(.none)
                         SecureField("Password", text: $signUpModel.signUpData.password)
                             .textFieldStyle(RoundFilledTextFieldStyle())
                         SecureField("Confirm Password", text: $signUpModel.confirmPassword)

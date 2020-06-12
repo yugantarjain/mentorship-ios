@@ -21,6 +21,7 @@ struct Login: View {
             VStack(spacing: DesignConstants.Form.Spacing.smallSpacing) {
                 TextField("Username/Email", text: $loginModel.loginData.username)
                     .textFieldStyle(RoundFilledTextFieldStyle())
+                    .autocapitalization(.none)
 
                 SecureField("Password", text: $loginModel.loginData.password)
                     .textFieldStyle(RoundFilledTextFieldStyle())
