@@ -12,7 +12,21 @@ import Combine
 final class ProfileModel: ObservableObject {
     
     // MARK: - Variables
-    var profileData = ProfileData(id: 0, name: "", username: "", email: "", bio: "", location: "", occupation: "", organization: "", slack_username: "", skills: "", interests: "", need_mentoring: false, available_to_mentor: false)
+    var profileData = ProfileData(
+        id: 0,
+        name: "",
+        username: "",
+        email: "",
+        bio: "",
+        location: "",
+        occupation: "",
+        organization: "",
+        slackUsername: "",
+        skills: "",
+        interests: "",
+        needMentoring: false,
+        availableToMentor: false
+    )
 
     // MARK: - Functions
     func saveProfile(profile: ProfileData) {
@@ -40,11 +54,18 @@ final class ProfileModel: ObservableObject {
         let location: String?
         let occupation: String?
         let organization: String?
-        let slack_username: String?
+        let slackUsername: String?
         let skills: String?
         let interests: String?
-        let need_mentoring: Bool?
-        let available_to_mentor: Bool?
+        let needMentoring: Bool?
+        let availableToMentor: Bool?
+        
+        enum CodingKeys: String, CodingKey {
+            case id, name, username, email, bio, location, occupation, organization, skills, interests
+            case slackUsername = "slack_username"
+            case needMentoring = "need_mentoring"
+            case availableToMentor = "available_to_mentor"
+        }
     }
     
 }
