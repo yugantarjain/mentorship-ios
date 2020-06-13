@@ -20,6 +20,7 @@ final class HomeModel: ObservableObject {
         guard let token = try? KeychainManager.readKeychain() else {
             return
         }
+        print(token)
         
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.home)
             .receive(on: RunLoop.main)

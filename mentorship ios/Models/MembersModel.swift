@@ -37,15 +37,15 @@ final class MembersModel: ObservableObject {
             })
     }
 
-    func availabilityString(canBeMentee: Bool, canBeMentor: Bool) -> String {
+    func availabilityString(canBeMentee: Bool, canBeMentor: Bool) -> LocalizedStringKey {
         if canBeMentor && canBeMentor {
-            return "Available to be a Mentor or Mentee"
+            return LocalizableStringConstants.canBeBoth
         } else if canBeMentee {
-            return "Available to be a Mentee"
+            return LocalizableStringConstants.canBeMentee
         } else if canBeMentor {
-            return "Availabe to be a Mentor"
+            return LocalizableStringConstants.canBeMentor
         } else {
-            return "Not available"
+            return LocalizableStringConstants.notAvailable
         }
     }
 

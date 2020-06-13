@@ -81,7 +81,7 @@ struct SendRequest: View {
             .alert(isPresented: $membersModel.requestSentSuccesfully) {
                 Alert(
                     title: Text("Success"),
-                    message: Text(membersModel.sendRequestResponseData.message ?? "Mentorship relation request was sent successfully."),
+                    message: Text(membersModel.sendRequestResponseData.message ?? "Mentorship relation was sent successfully."),
                     dismissButton: .cancel(Text("Okay"), action: {
                         self.presentationMode.wrappedValue.dismiss()
                     })
@@ -93,6 +93,6 @@ struct SendRequest: View {
 
 struct SendRequest_Previews: PreviewProvider {
     static var previews: some View {
-        SendRequest(memberID: 0, memberName: "ds")
+        SendRequest(memberID: 0, memberName: "demo name")
     }
 }
