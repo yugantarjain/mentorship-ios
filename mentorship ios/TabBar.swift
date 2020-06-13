@@ -1,9 +1,7 @@
 //
 //  TabBar.swift
-//  mentorship ios
-//
-//  Created by Yugantar Jain on 08/06/20.
-//  Copyright © 2020 Yugantar Jain. All rights reserved.
+//  Created on 08/06/20.
+//  Created for AnitaB.org Mentorship-iOS 
 //
 
 import SwiftUI
@@ -16,7 +14,7 @@ struct TabBar: View {
             Home()
                 .tabItem {
                     VStack {
-                        Image(systemName: "house.fill")
+                        Image(systemName: ImageNameConstants.SFSymbolConstants.home)
                         Text("Home")
                     }
             }.tag(0)
@@ -24,7 +22,7 @@ struct TabBar: View {
             Members()
                 .tabItem {
                     VStack {
-                        Image(systemName: "person.3.fill")
+                        Image(systemName: ImageNameConstants.SFSymbolConstants.members)
                         Text("Members")
                     }
             }.tag(1)

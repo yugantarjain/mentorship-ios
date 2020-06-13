@@ -1,9 +1,7 @@
 //
 //  SignUpView.swift
-//  mentorship ios
-//
-//  Created by Yugantar Jain on 01/06/20.
-//  Copyright © 2020 Yugantar Jain. All rights reserved.
+//  Created on 01/06/20.
+//  Created for AnitaB.org Mentorship-iOS 
 //
 
 import SwiftUI
@@ -24,6 +22,7 @@ struct SignUp: View {
                             .textFieldStyle(RoundFilledTextFieldStyle())
                         TextField("Email", text: $signUpModel.signUpData.email)
                             .textFieldStyle(RoundFilledTextFieldStyle())
+                            .autocapitalization(.none)
                         SecureField("Password", text: $signUpModel.signUpData.password)
                             .textFieldStyle(RoundFilledTextFieldStyle())
                         SecureField("Confirm Password", text: $signUpModel.confirmPassword)
@@ -35,8 +34,8 @@ struct SignUp: View {
                         Text(LocalizableStringConstants.availabilityText).font(.headline)
 
                         Picker(selection: $signUpModel.availabilityPickerSelection, label: Text("")) {
-                            Text("Mentor").tag(1)
-                            Text("Mentee").tag(2)
+                            Text(LocalizableStringConstants.mentor).tag(1)
+                            Text(LocalizableStringConstants.mentee).tag(2)
                             Text("Both").tag(3)
                         }
                         .labelsHidden()
@@ -81,7 +80,7 @@ struct SignUp: View {
                 Button.init(action: {
                     self.isPresented = false
                 }, label: {
-                    Image(systemName: "x.circle.fill")
+                    Image(systemName: ImageNameConstants.SFSymbolConstants.xCircle)
                         .font(.headline)
                         .accentColor(.secondary)
                 })

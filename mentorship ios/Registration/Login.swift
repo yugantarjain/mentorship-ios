@@ -1,9 +1,7 @@
 //
 //  LoginView.swift
-//  mentorship ios
-//
-//  Created by Yugantar Jain on 01/06/20.
-//  Copyright © 2020 Yugantar Jain. All rights reserved.
+//  Created on 01/06/20.
+//  Created for AnitaB.org Mentorship-iOS 
 //
 
 import SwiftUI
@@ -23,6 +21,7 @@ struct Login: View {
             VStack(spacing: DesignConstants.Form.Spacing.smallSpacing) {
                 TextField("Username/Email", text: $loginModel.loginData.username)
                     .textFieldStyle(RoundFilledTextFieldStyle())
+                    .autocapitalization(.none)
 
                 SecureField("Password", text: $loginModel.loginData.password)
                     .textFieldStyle(RoundFilledTextFieldStyle())

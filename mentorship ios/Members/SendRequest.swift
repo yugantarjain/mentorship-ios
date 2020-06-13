@@ -17,7 +17,6 @@ struct SendRequest: View {
     @State private var endDate = Date()
     @State private var notes = ""
     @State private var offsetValue: CGFloat = 0
-    @State private var notesCellFrame = CGRect()
     @Environment(\.presentationMode) var presentationMode
     
     func sendRequest() {
@@ -34,47 +33,36 @@ struct SendRequest: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                //Background Color
-                DesignConstants.Colors.formBackgroundColor
+            Form {
+                //heading
+                Section(header: Text("To \(name)").font(.title).fontWeight(.heavy)) {
+                    EmptyView()
+                }
                 
-                //Form
-                SendRequestForm(
-                    name: memberName,
-                    pickerSelection: $pickerSelection,
-                    endDate: $endDate,
-                    notesText: $notes,
-                    notesFrame: $notesCellFrame
-                )
-                
-                //Send button and message text
-                VStack(spacing: DesignConstants.Form.Spacing.bigSpacing) {
-                    //Send button
-                    Button(action: sendRequest) {
-                        Text("Send")
-                            .frame(width: 200)
-                            .padding(.vertical, DesignConstants.Padding.textFieldFrameExpansion)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: DesignConstants.CornerRadius.preferredCornerRadius, style: .circular)
-                                    .strokeBorder(lineWidth: 2)
-                            )
+                //settings
+                Section {
+                    Picker(selection: $pickerSelection, label: Text("My Role")) {
+                        Text(LocalizableStringConstants.mentee).tag(1)
+                        Text(LocalizableStringConstants.mentor).tag(2)
                     }
-                    .disabled(notes.isEmpty ? true : false)
-                    
-                    //Activity Indicator or message
-                    if self.membersModel.inActivity {
-                        ActivityIndicator(isAnimating: $membersModel.inActivity, style: .medium)
-                    } else {
-                        Text(membersModel.sendRequestResponseData.message ?? "")
-                            .font(DesignConstants.Fonts.userError)
-                            .foregroundColor(DesignConstants.Colors.userError)
+
+                    DatePicker(selection: $endDate, displayedComponents: .date) {
+                        Text(LocalizableStringConstants.endDate)
+                    }
+
+                    TextField(LocalizableStringConstants.notes, text: $notesText)
+                }
+                .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
+
+                //send button
+                Section {
+                    Button(action: {}) {
+                        Text(LocalizableStringConstants.send)
                     }
                 }
-                .position(x: notesCellFrame.midX, y: notesCellFrame.minY)
-                .offset(y: DesignConstants.Form.Spacing.smallSpacing)
             }
-            .navigationBarTitle("Relation Request")
-            .navigationBarItems(leading: Button.init("Cancel", action: {
+            .navigationBarTitle(LocalizableStringConstants.relationRequest)
+            .navigationBarItems(leading: Button(LocalizableStringConstants.cancel, action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
         }
