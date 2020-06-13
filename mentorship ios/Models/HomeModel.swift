@@ -21,7 +21,7 @@ final class HomeModel: ObservableObject {
             return
         }
         
-        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.home, httpMethod: "GET")
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.home)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.homeResponseData) }
             .combineLatest(

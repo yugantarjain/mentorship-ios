@@ -25,7 +25,7 @@ final class MembersModel: ObservableObject {
         self.inActivity = true
 
         // Debug comment: cache policy to be changed later to revalidateCache
-        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.members, httpMethod: "GET", token: token, cachePolicy: .returnCacheDataElseLoad)
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.members, token: token, cachePolicy: .returnCacheDataElseLoad)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.membersResponseData) }
             .sink(receiveCompletion: { completion in

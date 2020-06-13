@@ -67,7 +67,6 @@ struct SendRequest: View {
                         if membersModel.inActivity {
                             ActivityIndicator(isAnimating: $membersModel.inActivity, style: .medium)
                         } else if !membersModel.requestSentSuccesfully {
-                            //spacers used to center the text
                             Text(membersModel.sendRequestResponseData.message ?? "")
                                 .modifier(ErrorText())
                         }
