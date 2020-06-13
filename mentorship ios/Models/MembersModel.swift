@@ -13,6 +13,7 @@ final class MembersModel: ObservableObject {
     @Published var membersResponseData = [MembersResponseData]()
     @Published var sendRequestResponseData = SendRequestResponseData(message: "")
     @Published var inActivity = false
+    @Published var requestSentSuccesfully = false
     private var cancellable: AnyCancellable?
 
     // MARK: - Functions
@@ -74,6 +75,9 @@ final class MembersModel: ObservableObject {
             .catch { _ in Just(self.sendRequestResponseData) }
             .sink(receiveCompletion: { _ in
                 self.inActivity = false
+                if NetworkManager.responseCode == 200 {
+                    self.requestSentSuccesfully = true
+                }
             }, receiveValue: { value in
                 self.sendRequestResponseData = value
             })

@@ -35,7 +35,7 @@ struct SendRequest: View {
         NavigationView {
             Form {
                 //heading
-                Section(header: Text("To \(name)").font(.title).fontWeight(.heavy)) {
+                Section(header: Text("To \(memberName)").font(.title).fontWeight(.heavy)) {
                     EmptyView()
                 }
                 
@@ -50,21 +50,44 @@ struct SendRequest: View {
                         Text(LocalizableStringConstants.endDate)
                     }
 
-                    TextField(LocalizableStringConstants.notes, text: $notesText)
+                    TextField(LocalizableStringConstants.notes, text: $notes)
                 }
                 .padding(.vertical, DesignConstants.Padding.listCellFrameExpansion)
 
                 //send button
                 Section {
-                    Button(action: {}) {
+                    Button(action: sendRequest) {
                         Text(LocalizableStringConstants.send)
                     }
+                }
+                
+                //Activity indicator or error text
+                if membersModel.inActivity || !(membersModel.sendRequestResponseData.message ?? "").isEmpty {
+                    Section {
+                        if membersModel.inActivity {
+                            ActivityIndicator(isAnimating: $membersModel.inActivity, style: .medium)
+                        } else if !membersModel.requestSentSuccesfully {
+                            //spacers used to center the text
+                            Text(membersModel.sendRequestResponseData.message ?? "")
+                                .modifier(ErrorText())
+                        }
+                    }
+                    .listRowBackground(DesignConstants.Colors.formBackgroundColor)
                 }
             }
             .navigationBarTitle(LocalizableStringConstants.relationRequest)
             .navigationBarItems(leading: Button(LocalizableStringConstants.cancel, action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
+            .alert(isPresented: $membersModel.requestSentSuccesfully) {
+                Alert(
+                    title: Text("Success"),
+                    message: Text(membersModel.sendRequestResponseData.message ?? "Mentorship relation request was sent successfully."),
+                    dismissButton: .cancel(Text("Okay"), action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    })
+                )
+            }
         }
     }
 }
