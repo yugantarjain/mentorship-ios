@@ -13,21 +13,18 @@ struct MemberDetailCell: View {
     let value: String?
 
     var body: some View {
-        if !(value?.isEmpty ?? true) {
-            return AnyView(
-                HStack {
-                    Text(title).font(.subheadline)
-                        .frame(width: DesignConstants.Width.listCellTitle)
-                        .multilineTextAlignment(.center)
-                    Divider()
-                    Text(value ?? "-").font(.headline)
-                }
-            )
-        } else {
-            return AnyView(
-                EmptyView()
-            )
+        guard !(value?.isEmpty ?? true) else {
+            return AnyView(EmptyView())
         }
+        return AnyView(
+            HStack {
+                Text(title).font(.subheadline)
+                    .frame(width: DesignConstants.Width.listCellTitle)
+                    .multilineTextAlignment(.center)
+                Divider()
+                Text(value ?? "-").font(.headline)
+            }
+        )
     }
 }
 

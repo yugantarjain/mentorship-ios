@@ -21,14 +21,14 @@ struct SendRequest: View {
     
     func sendRequest() {
         let myID = ProfileModel().getProfile().id
-        let timestamp = Int(self.endDate.timeIntervalSince1970)
+        let endDateTimestamp = Int(self.endDate.timeIntervalSince1970)
         var menteeID = myID
         var mentorID = memberID
         if pickerSelection == 2 {
             menteeID = memberID
             mentorID = myID
         }
-        membersModel.sendRequest(menteeID: menteeID, mentorID: mentorID, endDate: timestamp, notes: notes)
+        membersModel.sendRequest(menteeID: menteeID, mentorID: mentorID, endDate: endDateTimestamp, notes: notes)
     }
     
     var body: some View {
