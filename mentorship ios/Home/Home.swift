@@ -14,6 +14,7 @@ struct Home: View {
     private var profile: ProfileModel.ProfileData {
         return homeModel.profileData
     }
+    @State private var showProfile = false
 
     var body: some View {
         NavigationView {
@@ -74,6 +75,16 @@ struct Home: View {
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("Welcome \(profile.name?.capitalized ?? "")!")
+            .navigationBarItems(trailing:
+                Button(action: { self.showProfile.toggle() }) {
+                    Image(systemName: ImageNameConstants.SFSymbolConstants.profileIcon)
+                        .padding([.leading, .vertical])
+                        .font(.system(size: DesignConstants.Fonts.Size.navBarIcon))
+                        .imageScale(.large)
+                })
+            .sheet(isPresented: $showProfile) {
+                    Profile(profileData: self.profile)
+            }
         }
     }
 }

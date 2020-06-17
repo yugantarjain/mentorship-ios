@@ -9,20 +9,21 @@ import SwiftUI
 struct MemberDetail: View {
     var member: MembersModel.MembersResponseData
     @State private var showSendRequestSheet = false
+    let hideEmptyFields = true
 
     var body: some View {
         Form {
             Group {
-                MemberDetailCell(title: "Username", value: member.username)
-                MemberDetailCell(title: "Slack Username", value: member.slackUsername)
-                MemberDetailCell(title: "Is a Mentor", value: member.availableToMentor ?? false ? "Yes" : "No")
-                MemberDetailCell(title: "Needs a Mentor", value: member.needMentoring ?? false ? "Yes" : "No")
-                MemberDetailCell(title: "Interests", value: member.interests)
-                MemberDetailCell(title: "Bio", value: member.bio)
-                MemberDetailCell(title: "Location", value: member.location)
-                MemberDetailCell(title: "Occupation", value: member.occupation)
-                MemberDetailCell(title: "Organization", value: member.organization)
-                MemberDetailCell(title: "Skills", value: member.skills)
+                MemberDetailCell(title: "Username", value: member.username, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(title: "Slack Username", value: member.slackUsername, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(title: "Is a Mentor", value: member.availableToMentor ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(title: "Needs a Mentor", value: member.needMentoring ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(title: "Interests", value: member.interests, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(title: "Bio", value: member.bio, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(title: "Location", value: member.location, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(title: "Occupation", value: member.occupation, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(title: "Organization", value: member.organization, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(title: "Skills", value: member.skills, hideEmptyFields: hideEmptyFields)
             }
         }
         .navigationBarTitle(member.name ?? "Member Detail")

@@ -9,9 +9,10 @@ import SwiftUI
 struct MemberDetailCell: View {
     let title: String
     let value: String?
+    let hideEmptyFields: Bool
 
     var body: some View {
-        guard !(value?.isEmpty ?? true) else {
+        guard !(value?.isEmpty ?? true) || !hideEmptyFields else {
             return AnyView(EmptyView())
         }
         return AnyView(
@@ -28,6 +29,6 @@ struct MemberDetailCell: View {
 
 struct MemberDetailCell_Previews: PreviewProvider {
     static var previews: some View {
-        MemberDetailCell(title: "title", value: "value")
+        MemberDetailCell(title: "title", value: "value", hideEmptyFields: true)
     }
 }

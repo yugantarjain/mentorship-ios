@@ -13,6 +13,7 @@ struct ImageNameConstants {
         static let members = "person.3.fill"
         static let checkmark = "checkmark"
         static let circle = "circle"
+        static let profileIcon = "person.crop.circle.fill"
 
         static let pending = "arrow.2.circlepath.circle.fill"
         static let accepted = "checkmark.circle.fill"
