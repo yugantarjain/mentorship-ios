@@ -18,13 +18,16 @@ final class HomeModel: ObservableObject {
 
     // MARK: - Functions
     init() {
+        //get auth token
         guard let token = try? KeychainManager.readKeychain() else {
             return
         }
         print(token)
 
+        //used to express loading state in UI in home screen
         isLoading = true
 
+        //parallel request for profile and home
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.home, token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.homeResponseData) }
@@ -34,10 +37,8 @@ final class HomeModel: ObservableObject {
                     .catch { _ in Just(self.profileModel.profileData) }
             )
             .sink { home, profile in
-                print(home)
-                print(profile)
                 self.profileModel.saveProfile(profile: profile)
-                self.profileData = self.profileModel.getProfile()
+                self.profileData = profile
                 self.updateCount(homeData: home)
                 self.homeResponseData = home
                 self.isLoading = false
@@ -71,6 +72,54 @@ final class HomeModel: ObservableObject {
         completedCount += homeData.asMentor?.received?.completed?.count ?? 0
 
         self.relationsListData.relationCount = [pendingCount, acceptedCount, rejectedCount, cancelledCount, completedCount]
+    }
+    
+    func getSentDetailListData(userType: UserType, index: Int) -> [HomeModel.HomeResponseData.RequestStructure]? {
+        if userType == .mentee {
+            let data1 = homeResponseData.asMentee?.sent
+            switch index {
+            case 0: return data1?.pending
+            case 1: return data1?.accepted
+            case 2: return data1?.rejected
+            case 3: return data1?.cancelled
+            case 4: return data1?.completed
+            default: return []
+            }
+        } else {
+            let data1 = homeResponseData.asMentor?.sent
+            switch index {
+            case 0: return data1?.pending
+            case 1: return data1?.accepted
+            case 2: return data1?.rejected
+            case 3: return data1?.cancelled
+            case 4: return data1?.completed
+            default: return []
+            }
+        }
+    }
+    
+    func getReceivedDetailListData(userType: UserType, index: Int) -> [HomeModel.HomeResponseData.RequestStructure]? {
+        if userType == .mentee {
+            let data1 = homeResponseData.asMentee?.received
+            switch index {
+            case 0: return data1?.pending
+            case 1: return data1?.accepted
+            case 2: return data1?.rejected
+            case 3: return data1?.cancelled
+            case 4: return data1?.completed
+            default: return []
+            }
+        } else {
+            let data1 = homeResponseData.asMentor?.received
+            switch index {
+            case 0: return data1?.pending
+            case 1: return data1?.accepted
+            case 2: return data1?.rejected
+            case 3: return data1?.cancelled
+            case 4: return data1?.completed
+            default: return []
+            }
+        }
     }
 
     // MARK: - Structures
@@ -174,6 +223,10 @@ final class HomeModel: ObservableObject {
             DesignConstants.Colors.defaultIndigoColor
         ]
         var relationCount = [0, 0, 0, 0, 0]
+    }
+    
+    enum UserType {
+        case mentee, mentor
     }
 
 }

@@ -29,7 +29,7 @@ struct Home: View {
                         NavigationLink(destination: RelationDetailList(
                             index: index,
                             navigationTitle: self.relationsData.relationTitle[index],
-                            homeResponseData: self.homeModel.homeResponseData
+                            homeModel: self.homeModel
                         )) {
                             RelationListCell(
                                 systemImageName: self.relationsData.relationImageName[index],
@@ -42,11 +42,11 @@ struct Home: View {
                     }
                 }
 
-                //Tasks to-do list
-                Section(header: Text("Tasks To Do").font(.headline)) {
+                //Tasks To Do list
+                Section(header: Text(LocalizableStringConstants.tasksToDo).font(.headline)) {
                     ForEach(homeModel.homeResponseData.tasksToDo ?? []) { task in
                         HStack {
-                            Image(systemName: "circle")
+                            Image(systemName: ImageNameConstants.SFSymbolConstants.circle)
                                 .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
                                 .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
                             
@@ -56,11 +56,11 @@ struct Home: View {
                     }
                 }
                 
-                //Tasks done list
-                Section(header: Text("Tasks Done").font(.headline)) {
+                //Tasks Done list
+                Section(header: Text(LocalizableStringConstants.tasksDone).font(.headline)) {
                     ForEach(homeModel.homeResponseData.tasksDone ?? []) { task in
                         HStack {
-                            Image(systemName: "checkmark")
+                            Image(systemName: ImageNameConstants.SFSymbolConstants.checkmark)
                                 .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
                                 .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
                             
