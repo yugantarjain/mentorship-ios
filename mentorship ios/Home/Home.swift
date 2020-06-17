@@ -1,7 +1,7 @@
 //
 //  Home.swift
 //  Created on 05/06/20.
-//  Created for AnitaB.org Mentorship-iOS 
+//  Created for AnitaB.org Mentorship-iOS
 //
 
 import SwiftUI
@@ -26,7 +26,11 @@ struct Home: View {
                 //Relation dashboard list
                 Section {
                     ForEach(0 ..< relationsData.relationTitle.count) { index in
-                        NavigationLink(destination: Text("Hi")) {
+                        NavigationLink(destination: RelationDetailList(
+                            index: index,
+                            navigationTitle: self.relationsData.relationTitle[index],
+                            homeResponseData: self.homeModel.homeResponseData
+                        )) {
                             RelationListCell(
                                 systemImageName: self.relationsData.relationImageName[index],
                                 imageColor: self.relationsData.relationImageColor[index],
@@ -38,15 +42,29 @@ struct Home: View {
                     }
                 }
 
+                //Tasks to-do list
+                Section(header: Text("Tasks To Do").font(.headline)) {
+                    ForEach(homeModel.homeResponseData.tasksToDo ?? []) { task in
+                        HStack {
+                            Image(systemName: "circle")
+                                .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
+                                .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
+                            
+                            Text(task.description ?? "-")
+                                .font(.subheadline)
+                        }
+                    }
+                }
+                
                 //Tasks done list
                 Section(header: Text("Tasks Done").font(.headline)) {
-                    ForEach(1..<3) { index in
+                    ForEach(homeModel.homeResponseData.tasksDone ?? []) { task in
                         HStack {
                             Image(systemName: "checkmark")
                                 .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
-
                                 .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
-                            Text("Task \(index) description")
+                            
+                            Text(task.description ?? "-")
                                 .font(.subheadline)
                         }
                     }
