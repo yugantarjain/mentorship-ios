@@ -11,7 +11,7 @@ struct RelationDetailList: View {
     var navigationTitle: String
     var homeModel: HomeModel
     @State private var pickerSelection = 1
-    
+
     var sentData: [HomeModel.HomeResponseData.RequestStructure]? {
         if pickerSelection == 1 {
             return homeModel.getSentDetailListData(userType: .mentee, index: index)
@@ -19,7 +19,7 @@ struct RelationDetailList: View {
             return homeModel.getSentDetailListData(userType: .mentor, index: index)
         }
     }
-    
+
     var receivedData: [HomeModel.HomeResponseData.RequestStructure]? {
         if pickerSelection == 1 {
             return homeModel.getReceivedDetailListData(userType: .mentee, index: index)
@@ -27,7 +27,7 @@ struct RelationDetailList: View {
             return homeModel.getReceivedDetailListData(userType: .mentor, index: index)
         }
     }
-    
+
     var body: some View {
         VStack {
             Picker(selection: $pickerSelection, label: Text("")) {
@@ -37,7 +37,7 @@ struct RelationDetailList: View {
             .pickerStyle(SegmentedPickerStyle())
             .labelsHidden()
             .padding()
-            
+
             List {
                 //send data list
                 Section(header: Text("Sent").font(.headline)) {
@@ -45,7 +45,7 @@ struct RelationDetailList: View {
                         DetailListCell(requestData: data, index: self.index)
                     }
                 }
-                
+
                 //received data list
                 Section(header: Text("Received").font(.headline)) {
                     ForEach(receivedData ?? []) { data in

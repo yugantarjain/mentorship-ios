@@ -49,13 +49,13 @@ struct Home: View {
                             Image(systemName: ImageNameConstants.SFSymbolConstants.circle)
                                 .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
                                 .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
-                            
+
                             Text(task.description ?? "-")
                                 .font(.subheadline)
                         }
                     }
                 }
-                
+
                 //Tasks Done list
                 Section(header: Text(LocalizableStringConstants.tasksDone).font(.headline)) {
                     ForEach(homeModel.homeResponseData.tasksDone ?? []) { task in
@@ -63,7 +63,7 @@ struct Home: View {
                             Image(systemName: ImageNameConstants.SFSymbolConstants.checkmark)
                                 .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
                                 .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
-                            
+
                             Text(task.description ?? "-")
                                 .font(.subheadline)
                         }

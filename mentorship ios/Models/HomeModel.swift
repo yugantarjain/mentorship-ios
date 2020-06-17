@@ -73,7 +73,7 @@ final class HomeModel: ObservableObject {
 
         self.relationsListData.relationCount = [pendingCount, acceptedCount, rejectedCount, cancelledCount, completedCount]
     }
-    
+
     func getSentDetailListData(userType: UserType, index: Int) -> [HomeModel.HomeResponseData.RequestStructure]? {
         if userType == .mentee {
             let data1 = homeResponseData.asMentee?.sent
@@ -97,7 +97,7 @@ final class HomeModel: ObservableObject {
             }
         }
     }
-    
+
     func getReceivedDetailListData(userType: UserType, index: Int) -> [HomeModel.HomeResponseData.RequestStructure]? {
         if userType == .mentee {
             let data1 = homeResponseData.asMentee?.received
@@ -126,7 +126,7 @@ final class HomeModel: ObservableObject {
     struct HomeResponseData: Decodable {
         let asMentor: RequestsList?
         let asMentee: RequestsList?
-        
+
         let tasksToDo: [TaskStructure]?
         let tasksDone: [TaskStructure]?
 
@@ -136,9 +136,9 @@ final class HomeModel: ObservableObject {
             case tasksToDo = "tasks_todo"
             case tasksDone = "tasks_done"
         }
-        
+
         //Nested structs
-        
+
         struct RequestsList: Decodable {
             let sent: Sent?
             struct Sent: Decodable {
@@ -174,7 +174,7 @@ final class HomeModel: ObservableObject {
                 case startDate = "start_date"
                 case endDate = "end_date"
             }
-            
+
             //info struct for mentor/mentee information
             struct Info: Decodable {
                 let id: Int?
@@ -191,7 +191,7 @@ final class HomeModel: ObservableObject {
             let description: String?
             let createdAt: Double?
             let completedAt: Double?
-            
+
             enum CodingKeys: String, CodingKey {
                 case id, description
                 case createdAt = "created_at"
@@ -224,7 +224,7 @@ final class HomeModel: ObservableObject {
         ]
         var relationCount = [0, 0, 0, 0, 0]
     }
-    
+
     enum UserType {
         case mentee, mentor
     }
