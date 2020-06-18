@@ -10,6 +10,7 @@ import Combine
 final class ProfileModel: ObservableObject {
 
     // MARK: - Variables
+    @Published var updateProfileResponseData = UpdateProfileResponseData(message: "")
     var profileData = ProfileData(
         id: 0,
         name: "",
@@ -25,6 +26,7 @@ final class ProfileModel: ObservableObject {
         needMentoring: false,
         availableToMentor: false
     )
+    private var cancellable: AnyCancellable?
 
     // MARK: - Functions
     func saveProfile(profile: ProfileData) {
@@ -48,7 +50,6 @@ final class ProfileModel: ObservableObject {
         //Replace nil values with empty values.
         //Done to enable force-unwrap of binding, to be used in edit text field in profile editor.
         //Optional bindings are not allowed.
-        
         if editProfileData.name == nil { editProfileData.name = "" }
         if editProfileData.username == nil { editProfileData.username = "" }
         if editProfileData.bio == nil { editProfileData.bio = "" }
@@ -63,9 +64,30 @@ final class ProfileModel: ObservableObject {
 
         return editProfileData
     }
+    
+    func updateProfile(updatedProfileData: ProfileData) {
+        //get auth token
+        guard let token = try? KeychainManager.readKeychain() else {
+            return
+        }
+        
+        //encoded upload data
+        guard let uploadData = try? JSONEncoder().encode(updatedProfileData) else {
+            return
+        }
+        
+        //api call
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.profile, httpMethod: "PUT", uploadData: uploadData, token: token)
+            .receive(on: RunLoop.main)
+            .catch { _ in Just(self.updateProfileResponseData) }
+            .sink {
+                print($0)
+        }
+        
+    }
 
     // MARK: - Structures
-    struct ProfileData: Codable, ProfileProperties {
+    struct ProfileData: Decodable, ProfileProperties {
         let id: Int
         var name: String?
         var username: String?
@@ -79,13 +101,17 @@ final class ProfileModel: ObservableObject {
         var interests: String?
         var needMentoring: Bool?
         var availableToMentor: Bool?
-
+        
         enum CodingKeys: String, CodingKey {
             case id, name, username, email, bio, location, occupation, organization, skills, interests
             case slackUsername = "slack_username"
             case needMentoring = "need_mentoring"
             case availableToMentor = "available_to_mentor"
         }
+    }
+    
+    struct UpdateProfileResponseData: Decodable {
+        let message: String?
     }
 
 }

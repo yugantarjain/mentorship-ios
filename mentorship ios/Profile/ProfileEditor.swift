@@ -9,6 +9,7 @@ import SwiftUI
 struct ProfileEditor: View {
     @Environment(\.presentationMode) var presentation
     @State var editProfileData = ProfileModel().getEditProfileData()
+    @ObservedObject var profileModel = ProfileModel()
     
     var body: some View {
         NavigationView {
@@ -47,8 +48,8 @@ struct ProfileEditor: View {
             .navigationBarItems(leading:
                 Button(action: { self.presentation.wrappedValue.dismiss() }) {
                     Text(LocalizableStringConstants.cancel)
-                }, trailing: Button(action: {}) {
-                    Text(LocalizableStringConstants.save)
+                }, trailing: Button(LocalizableStringConstants.save) {
+                    self.profileModel.updateProfile(updatedProfileData: self.editProfileData)
                 })
         }
     }
