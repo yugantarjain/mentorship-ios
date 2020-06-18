@@ -31,8 +31,9 @@ struct DetailListCell: View {
             .font(.subheadline)
             .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
 
-            Text(!requestData.notes!.isEmpty ? requestData.notes! : "notes unavailable")
+            Text(!requestData.notes!.isEmpty ? requestData.notes! : "No Note Present")
                 .font(.headline)
+                .opacity(requestData.notes!.isEmpty ? DesignConstants.Opacity.disabledViewOpacity / 2 : 1.0)
 
             Text("End Date: \(dateFormatter.string(from: endDate))")
                 .font(.caption)
