@@ -83,7 +83,7 @@ struct Home: View {
                         .imageScale(.large)
                 })
             .sheet(isPresented: $showProfile) {
-                    Profile(profileData: self.profile)
+                    ProfileSummary()
             }
         }
     }

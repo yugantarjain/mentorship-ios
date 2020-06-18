@@ -37,6 +37,7 @@ final class HomeModel: ObservableObject {
                     .catch { _ in Just(self.profileModel.profileData) }
             )
             .sink { home, profile in
+                print(profile)
                 self.profileModel.saveProfile(profile: profile)
                 self.profileData = profile
                 self.updateCount(homeData: home)

@@ -6,14 +6,19 @@
 
 import SwiftUI
 
-struct Profile: View {
-    var profileData: ProfileModel.ProfileData
+struct ProfileSummary: View {
+    @ObservedObject var profileModel = ProfileModel()
+    var profileData: ProfileModel.ProfileData {
+        return profileModel.getProfile()
+    }
     let hideEmptyFields = false
     @Environment(\.presentationMode) var presentation
+    @State private var showProfileEditor = false
     
     var body: some View {
         NavigationView {
-            List {
+            Form {
+                //grouping done because maximum 10 views can be defined inside a closure.
                 Group {
                     MemberDetailCell(title: "Username", value: profileData.username, hideEmptyFields: hideEmptyFields)
                     MemberDetailCell(title: "Email", value: profileData.email, hideEmptyFields: hideEmptyFields)
@@ -28,7 +33,6 @@ struct Profile: View {
                     MemberDetailCell(title: "Slack Username", value: profileData.slackUsername, hideEmptyFields: hideEmptyFields)
                     MemberDetailCell(title: "Skills", value: profileData.skills, hideEmptyFields: hideEmptyFields)
                     MemberDetailCell(title: "Interests", value: profileData.interests, hideEmptyFields: hideEmptyFields)
-
                 }
             }
             .navigationBarTitle(profileData.name ?? "Profile")
@@ -36,13 +40,18 @@ struct Profile: View {
                 Button(action: { self.presentation.wrappedValue.dismiss() }) {
                     Image(systemName: ImageNameConstants.SFSymbolConstants.xCircle)
                         .accentColor(.secondary)
-            }, trailing: EditButton())
+                }, trailing: Button("Edit", action: {
+                    self.showProfileEditor.toggle()
+                }))
+            .sheet(isPresented: $showProfileEditor) {
+                ProfileEditor()
+            }
         }
     }
 }
 
 struct Profile_Previews: PreviewProvider {
     static var previews: some View {
-        Profile(profileData: ProfileModel().profileData)
+        ProfileSummary()
     }
 }
