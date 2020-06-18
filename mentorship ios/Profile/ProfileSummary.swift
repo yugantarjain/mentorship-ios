@@ -11,31 +11,31 @@ struct ProfileSummary: View {
     var profileData: ProfileModel.ProfileData {
         return profileModel.getProfile()
     }
-    let hideEmptyFields = false
-    @Environment(\.presentationMode) var presentation
     @State private var showProfileEditor = false
     
     var body: some View {
-        NavigationView {
-            Form {
+        Form {
+            //By using a parent section, the subsections join.
+            Section {
+                //Name
+                MemberDetailCell(type: .name, value: profileData.name ?? "-", hideEmptyFields: false)
+                
                 //Show common details : name, username, occupation, etc.
                 ProfileCommonDetailsSection(memberData: profileData, hideEmptyFields: false)
-                //Show email
-                Text(profileData.email ?? "")
-                    .font(.subheadline)
-                    .listRowBackground(DesignConstants.Colors.formBackgroundColor)
             }
-            .navigationBarTitle(profileData.name ?? "Profile")
-            .navigationBarItems(leading:
-                Button(action: { self.presentation.wrappedValue.dismiss() }) {
-                    Image(systemName: ImageNameConstants.SFSymbolConstants.xCircle)
-                        .accentColor(.secondary)
-                }, trailing: Button("Edit", action: {
-                    self.showProfileEditor.toggle()
-                }))
-            .sheet(isPresented: $showProfileEditor) {
-                ProfileEditor()
-            }
+            
+            //Show email
+            Text(profileData.email ?? "")
+                .font(.subheadline)
+                .listRowBackground(DesignConstants.Colors.formBackgroundColor)
+        }
+        .navigationBarTitle(LocalizableStringConstants.profile)
+        .navigationBarItems(trailing:
+            Button("Edit") {
+                self.showProfileEditor.toggle()
+        })
+        .sheet(isPresented: $showProfileEditor) {
+            ProfileEditor()
         }
     }
 }

@@ -13,12 +13,17 @@ struct ProfileEditor: View {
     var body: some View {
         NavigationView {
             Form {
+                //basic data
                 Section {
+                    //name
                     ProfileEditField(type: .name, value: Binding($editProfileData.name)!)
+                    //username
                     ProfileEditField(type: .username, value: Binding($editProfileData.username)!)
+                    //need mentoring
                     Toggle(isOn: Binding($editProfileData.needMentoring)!) {
                         Text(LocalizableStringConstants.ProfileKeys.needsMentor.rawValue).bold()
                     }
+                    //can mentor
                     Toggle(isOn: Binding($editProfileData.availableToMentor)!) {
                         Text(LocalizableStringConstants.ProfileKeys.isMentor.rawValue).bold()
                             .frame(width: DesignConstants.Width.listCellTitle)
@@ -26,6 +31,7 @@ struct ProfileEditor: View {
                     }
                 }
                 
+                //additional details
                 Section {
                     ProfileEditField(type: .bio, value: Binding($editProfileData.bio)!)
                     ProfileEditField(type: .location, value: Binding($editProfileData.location)!)
