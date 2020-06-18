@@ -34,6 +34,7 @@ struct ProfileEditor: View {
                     ProfileEditField(type: .interests, value: Binding($editProfileData.interests)!)
                 }
             }
+            .modifier(KeyboardAware())
             .navigationBarTitle("Edit Profile")
             .navigationBarItems(leading:
                 Button(action: { self.presentation.wrappedValue.dismiss() }) {
