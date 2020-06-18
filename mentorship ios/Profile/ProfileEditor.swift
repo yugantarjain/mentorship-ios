@@ -17,10 +17,12 @@ struct ProfileEditor: View {
                     ProfileEditField(type: .name, value: Binding($editProfileData.name)!)
                     ProfileEditField(type: .username, value: Binding($editProfileData.username)!)
                     Toggle(isOn: Binding($editProfileData.needMentoring)!) {
-                        Text(LocalizableStringConstants.ProfileKeys.needsMentor.rawValue)//.bold()
+                        Text(LocalizableStringConstants.ProfileKeys.needsMentor.rawValue).bold()
                     }
                     Toggle(isOn: Binding($editProfileData.availableToMentor)!) {
-                        Text(LocalizableStringConstants.ProfileKeys.isMentor.rawValue)//.bold()
+                        Text(LocalizableStringConstants.ProfileKeys.isMentor.rawValue).bold()
+                            .frame(width: DesignConstants.Width.listCellTitle)
+                            .multilineTextAlignment(.center)
                     }
                 }
                 
@@ -40,7 +42,7 @@ struct ProfileEditor: View {
                 Button(action: { self.presentation.wrappedValue.dismiss() }) {
                     Text("Cancel")
                 }, trailing: Button(action: {}) {
-                    Text("Save").bold()
+                    Text("Save")
                 })
         }
     }

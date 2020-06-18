@@ -11,8 +11,8 @@ struct ImageNameConstants {
         static let xCircle = "x.circle.fill"
         static let home = "house.fill"
         static let members = "person.3.fill"
-        static let checkmark = "checkmark"
-        static let circle = "circle"
+        static let taskDone = "checkmark"
+        static let taskToDo = "circle"
         static let profileIcon = "person.crop.circle.fill"
 
         static let pending = "arrow.2.circlepath.circle.fill"
