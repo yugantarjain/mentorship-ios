@@ -65,7 +65,7 @@ final class ProfileModel: ObservableObject {
     }
 
     // MARK: - Structures
-    struct ProfileData: Codable {
+    struct ProfileData: Codable, ProfileProperties {
         let id: Int
         var name: String?
         var username: String?
@@ -74,7 +74,7 @@ final class ProfileModel: ObservableObject {
         var location: String?
         var occupation: String?
         var organization: String?
-        var slackUsername: String? = ""
+        var slackUsername: String?
         var skills: String?
         var interests: String?
         var needMentoring: Bool?
