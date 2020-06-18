@@ -12,15 +12,17 @@ struct MemberDetail: View {
     let hideEmptyFields = true
     
     var body: some View {
-        ProfileDetailCellsList(memberData: memberData, hideEmptyFields: hideEmptyFields)
-            .navigationBarTitle(memberData.name ?? "memberData Detail")
-            .navigationBarItems(trailing:
-                Button(action: { self.showSendRequestSheet.toggle() }) {
-                    Text("Send Request")
-                        .font(.headline)
-            })
-            .sheet(isPresented: $showSendRequestSheet) {
-                SendRequest(memberID: self.memberData.id, memberName: self.memberData.name ?? "-")
+        List {
+            ProfileCommonDetailsSection(memberData: memberData, hideEmptyFields: hideEmptyFields)
+        }
+        .navigationBarTitle(memberData.name ?? "memberData Detail")
+        .navigationBarItems(trailing:
+            Button(action: { self.showSendRequestSheet.toggle() }) {
+                Text("Send Request")
+                    .font(.headline)
+        })
+        .sheet(isPresented: $showSendRequestSheet) {
+            SendRequest(memberID: self.memberData.id, memberName: self.memberData.name ?? "-")
         }
     }
 }

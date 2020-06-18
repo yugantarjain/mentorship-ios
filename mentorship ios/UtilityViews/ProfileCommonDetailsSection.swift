@@ -6,15 +6,14 @@
 
 import SwiftUI
 
-struct ProfileDetailCellsList: View {
+struct ProfileCommonDetailsSection: View {
     var memberData: MemberProperties
     var hideEmptyFields: Bool
     
     var body: some View {
-        List {
-            Group {
+//        List {
+            Section {
                 MemberDetailCell(type: .username, value: memberData.username, hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(type: .slackUsername, value: memberData.slackUsername, hideEmptyFields: hideEmptyFields)
                 MemberDetailCell(type: .isMentor, value: memberData.availableToMentor ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
                 MemberDetailCell(type: .needsMentor, value: memberData.needMentoring ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
                 MemberDetailCell(type: .interests, value: memberData.interests, hideEmptyFields: hideEmptyFields)
@@ -23,8 +22,9 @@ struct ProfileDetailCellsList: View {
                 MemberDetailCell(type: .occupation, value: memberData.occupation, hideEmptyFields: hideEmptyFields)
                 MemberDetailCell(type: .organization, value: memberData.organization, hideEmptyFields: hideEmptyFields)
                 MemberDetailCell(type: .skills, value: memberData.skills, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .slackUsername, value: memberData.slackUsername, hideEmptyFields: hideEmptyFields)
             }
-        }
+//        }
     }
 }
     
