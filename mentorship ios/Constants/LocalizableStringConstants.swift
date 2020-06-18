@@ -26,4 +26,19 @@ struct LocalizableStringConstants {
     static let cancel = LocalizedStringKey("Cancel")
     static let relationRequest = LocalizedStringKey("Relation Request")
     static let notAvailable = LocalizedStringKey("Not available")
+    
+    enum ProfileKeys: LocalizedStringKey {
+        case name = "Name"
+        case username = "Username"
+        case slackUsername = "Slack Username"
+        case isMentor = "Is a Mentor"
+        case needsMentor = "Needs a Mentor"
+        case interests = "Interests"
+        case bio = "Bio"
+        case location = "Location"
+        case occupation = "Occupation"
+        case organization = "Organization"
+        case skills = "Skills"
+        case email = "Email"
+    }
 }

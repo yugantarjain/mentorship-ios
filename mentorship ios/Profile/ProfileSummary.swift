@@ -20,19 +20,19 @@ struct ProfileSummary: View {
             Form {
                 //grouping done because maximum 10 views can be defined inside a closure.
                 Group {
-                    MemberDetailCell(title: "Username", value: profileData.username, hideEmptyFields: hideEmptyFields)
-                    MemberDetailCell(title: "Email", value: profileData.email, hideEmptyFields: hideEmptyFields)
-                    MemberDetailCell(title: "Needs Mentoring", value: profileData.needMentoring ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
-                    MemberDetailCell(title: "Can Mentor", value: profileData.availableToMentor ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .username, value: profileData.username, hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .email, value: profileData.email, hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .needsMentor, value: profileData.needMentoring ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .isMentor, value: profileData.availableToMentor ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
                 }
                 Group {
-                    MemberDetailCell(title: "Bio", value: profileData.bio, hideEmptyFields: hideEmptyFields)
-                    MemberDetailCell(title: "Location", value: profileData.location, hideEmptyFields: hideEmptyFields)
-                    MemberDetailCell(title: "Occupation", value: profileData.occupation, hideEmptyFields: hideEmptyFields)
-                    MemberDetailCell(title: "Organization", value: profileData.organization, hideEmptyFields: hideEmptyFields)
-                    MemberDetailCell(title: "Slack Username", value: profileData.slackUsername, hideEmptyFields: hideEmptyFields)
-                    MemberDetailCell(title: "Skills", value: profileData.skills, hideEmptyFields: hideEmptyFields)
-                    MemberDetailCell(title: "Interests", value: profileData.interests, hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .bio, value: profileData.bio, hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .location, value: profileData.location, hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .occupation, value: profileData.occupation, hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .organization, value: profileData.organization, hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .slackUsername, value: profileData.slackUsername, hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .skills, value: profileData.skills, hideEmptyFields: hideEmptyFields)
+                    MemberDetailCell(type: .interests, value: profileData.interests, hideEmptyFields: hideEmptyFields)
                 }
             }
             .navigationBarTitle(profileData.name ?? "Profile")

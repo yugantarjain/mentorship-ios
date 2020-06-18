@@ -316,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				53E3BAF3248AD51A007F91C8 /* ActivityIndicator.swift */,
+				538E22E8248EBD7900842835 /* MemberDetailCell.swift */,
 			);
 			path = UtilityViews;
 			sourceTree = "<group>";
@@ -324,7 +325,6 @@
 			isa = PBXGroup;
 			children = (
 				533704E0248D1B4900A314ED /* MembersListCell.swift */,
-				538E22E8248EBD7900842835 /* MemberDetailCell.swift */,
 			);
 			path = SupportingViews;
 			sourceTree = "<group>";

@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct MemberDetailCell: View {
-    let title: String
+    let type: LocalizableStringConstants.ProfileKeys
     let value: String?
     let hideEmptyFields: Bool
 
@@ -17,7 +17,7 @@ struct MemberDetailCell: View {
         }
         return AnyView(
             HStack {
-                Text(title).font(.subheadline)
+                Text(type.rawValue).font(.subheadline)
                     .frame(width: DesignConstants.Width.listCellTitle)
                     .multilineTextAlignment(.center)
                 Divider()
@@ -29,6 +29,6 @@ struct MemberDetailCell: View {
 
 struct MemberDetailCell_Previews: PreviewProvider {
     static var previews: some View {
-        MemberDetailCell(title: "title", value: "value", hideEmptyFields: true)
+        MemberDetailCell(type: .bio, value: "value", hideEmptyFields: true)
     }
 }

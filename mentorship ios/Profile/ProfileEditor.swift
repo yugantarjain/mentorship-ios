@@ -14,24 +14,24 @@ struct ProfileEditor: View {
         NavigationView {
             Form {
                 Section {
-                    ProfileEditField(title: "Name", value: Binding($editProfileData.name)!)
-                    ProfileEditField(title: "Username", value: Binding($editProfileData.username)!)
+                    ProfileEditField(type: .name, value: Binding($editProfileData.name)!)
+                    ProfileEditField(type: .username, value: Binding($editProfileData.username)!)
                     Toggle(isOn: Binding($editProfileData.needMentoring)!) {
-                        Text("Needs Mentoring").bold()
+                        Text(LocalizableStringConstants.ProfileKeys.needsMentor.rawValue)//.bold()
                     }
                     Toggle(isOn: Binding($editProfileData.availableToMentor)!) {
-                        Text("Can be a Mentor").bold()
+                        Text(LocalizableStringConstants.ProfileKeys.isMentor.rawValue)//.bold()
                     }
                 }
                 
                 Section {
-                    ProfileEditField(title: "Bio", value: Binding($editProfileData.bio)!)
-                    ProfileEditField(title: "Location", value: Binding($editProfileData.location)!)
-                    ProfileEditField(title: "Occupation", value: Binding($editProfileData.occupation)!)
-                    ProfileEditField(title: "Organization", value: Binding($editProfileData.organization)!)
-                    ProfileEditField(title: "Slack Username", value: Binding($editProfileData.slackUsername)!)
-                    ProfileEditField(title: "Skills", value: Binding($editProfileData.skills)!)
-                    ProfileEditField(title: "Interests", value: Binding($editProfileData.interests)!)
+                    ProfileEditField(type: .bio, value: Binding($editProfileData.bio)!)
+                    ProfileEditField(type: .location, value: Binding($editProfileData.location)!)
+                    ProfileEditField(type: .occupation, value: Binding($editProfileData.occupation)!)
+                    ProfileEditField(type: .organization, value: Binding($editProfileData.organization)!)
+                    ProfileEditField(type: .slackUsername, value: Binding($editProfileData.slackUsername)!)
+                    ProfileEditField(type: .skills, value: Binding($editProfileData.skills)!)
+                    ProfileEditField(type: .interests, value: Binding($editProfileData.interests)!)
                 }
             }
             .navigationBarTitle("Edit Profile")

@@ -14,16 +14,16 @@ struct MemberDetail: View {
     var body: some View {
         Form {
             Group {
-                MemberDetailCell(title: "Username", value: member.username, hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(title: "Slack Username", value: member.slackUsername, hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(title: "Is a Mentor", value: member.availableToMentor ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(title: "Needs a Mentor", value: member.needMentoring ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(title: "Interests", value: member.interests, hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(title: "Bio", value: member.bio, hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(title: "Location", value: member.location, hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(title: "Occupation", value: member.occupation, hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(title: "Organization", value: member.organization, hideEmptyFields: hideEmptyFields)
-                MemberDetailCell(title: "Skills", value: member.skills, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .username, value: member.username, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .slackUsername, value: member.slackUsername, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .isMentor, value: member.availableToMentor ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .needsMentor, value: member.needMentoring ?? false ? "Yes" : "No", hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .interests, value: member.interests, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .bio, value: member.bio, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .location, value: member.location, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .occupation, value: member.occupation, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .organization, value: member.organization, hideEmptyFields: hideEmptyFields)
+                MemberDetailCell(type: .skills, value: member.skills, hideEmptyFields: hideEmptyFields)
             }
         }
         .navigationBarTitle(member.name ?? "Member Detail")

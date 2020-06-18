@@ -7,22 +7,23 @@
 import SwiftUI
 
 struct ProfileEditField: View {
-    var title: String
+    var type: LocalizableStringConstants.ProfileKeys
     @Binding var value: String
     
     var body: some View {
         HStack {
-            Text(title).bold()
+            Text(type.rawValue)
+                .bold()
                 .frame(width: DesignConstants.Width.listCellTitle)
                 .multilineTextAlignment(.center)
             Divider()
-            TextField(title, text: $value)
+            TextField(type.rawValue, text: $value)
         }
     }
 }
 
 struct ProfileEditField_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditField(title: "title", value: .constant("value"))
+        ProfileEditField(type: .bio, value: .constant("value"))
     }
 }
