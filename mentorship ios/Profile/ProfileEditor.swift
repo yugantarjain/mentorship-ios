@@ -18,8 +18,6 @@ struct ProfileEditor: View {
                 Section {
                     //name
                     ProfileEditField(type: .name, value: Binding($editProfileData.name)!)
-                    //username
-                    ProfileEditField(type: .username, value: Binding($editProfileData.username)!)
                     //need mentoring
                     Toggle(isOn: Binding($editProfileData.needMentoring)!) {
                         Text(LocalizableStringConstants.ProfileKeys.needsMentor.rawValue).bold()

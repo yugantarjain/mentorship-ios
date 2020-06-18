@@ -51,7 +51,6 @@ final class ProfileModel: ObservableObject {
         //Done to enable force-unwrap of binding, to be used in edit text field in profile editor.
         //Optional bindings are not allowed.
         if editProfileData.name == nil { editProfileData.name = "" }
-        if editProfileData.username == nil { editProfileData.username = "" }
         if editProfileData.bio == nil { editProfileData.bio = "" }
         if editProfileData.location == nil { editProfileData.location = "" }
         if editProfileData.occupation == nil { editProfileData.occupation = "" }
@@ -61,6 +60,11 @@ final class ProfileModel: ObservableObject {
         if editProfileData.interests == nil { editProfileData.interests = "" }
         if editProfileData.needMentoring == nil { editProfileData.needMentoring = false }
         if editProfileData.availableToMentor == nil { editProfileData.availableToMentor = false }
+        
+        //Set username to nil.
+        //Reason: username can't be updated.
+        //Sending nil username to server keeps it unchanged.
+        editProfileData.username = nil
 
         return editProfileData
     }
@@ -87,7 +91,7 @@ final class ProfileModel: ObservableObject {
     }
 
     // MARK: - Structures
-    struct ProfileData: Decodable, ProfileProperties {
+    struct ProfileData: Codable, ProfileProperties {
         let id: Int
         var name: String?
         var username: String?
