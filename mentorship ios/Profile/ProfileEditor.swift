@@ -37,12 +37,12 @@ struct ProfileEditor: View {
                 }
             }
             .modifier(KeyboardAware())
-            .navigationBarTitle("Edit Profile")
+            .navigationBarTitle(LocalizableStringConstants.editProfile)
             .navigationBarItems(leading:
                 Button(action: { self.presentation.wrappedValue.dismiss() }) {
-                    Text("Cancel")
+                    Text(LocalizableStringConstants.cancel)
                 }, trailing: Button(action: {}) {
-                    Text("Save")
+                    Text(LocalizableStringConstants.save)
                 })
         }
     }
