@@ -42,6 +42,11 @@ struct ProfileEditor: View {
                         ProfileEditField(type: .interests, value: Binding($editProfileData.interests)!)
                     }
                 }
+                .disabled(profileModel.inActivity)
+                
+                if profileModel.inActivity {
+                    ActivityWithText(isAnimating: $profileModel.inActivity, textType: .updating)
+                }
                 
             }
             .modifier(KeyboardAware())

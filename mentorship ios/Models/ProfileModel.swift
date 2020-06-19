@@ -10,7 +10,6 @@ import Combine
 final class ProfileModel: ObservableObject {
 
     // MARK: - Variables
-    @Published var updateProfileResponseData = UpdateProfileResponseData(message: "")
     var profileData = ProfileData(
         id: 0,
         name: "",
@@ -26,7 +25,11 @@ final class ProfileModel: ObservableObject {
         needMentoring: false,
         availableToMentor: false
     )
+    
+    @Published var updateProfileResponseData = UpdateProfileResponseData(message: "")
+    @Published var inActivity = false
     private var cancellable: AnyCancellable?
+    
 
     // MARK: - Functions
     func saveProfile(profile: ProfileData) {
@@ -80,14 +83,16 @@ final class ProfileModel: ObservableObject {
             return
         }
         
+        self.inActivity = true
+        
         //api call
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.profile, httpMethod: "PUT", uploadData: uploadData, token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.updateProfileResponseData) }
             .sink {
-                print($0)
+                self.inActivity = false
+                self.updateProfileResponseData = $0
         }
-        
     }
 
     // MARK: - Structures
