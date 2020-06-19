@@ -33,6 +33,8 @@ final class ProfileModel: ObservableObject {
     
 
     // MARK: - Functions
+    
+    //saves profile in user defaults
     func saveProfile(profile: ProfileData) {
         guard let profileData = try? JSONEncoder().encode(profile) else {
             return
@@ -40,6 +42,7 @@ final class ProfileModel: ObservableObject {
         UserDefaults.standard.set(profileData, forKey: UserDefaultsConstants.profile)
     }
 
+    //gets profile object from user defaults
     func getProfile() -> ProfileData {
         guard let profileData = UserDefaults.standard.data(forKey: UserDefaultsConstants.profile) else {
             return self.profileData
@@ -50,6 +53,7 @@ final class ProfileModel: ObservableObject {
         return profile
     }
     
+    //returns profile data with some processing to make it suitable for use in profile editor
     func getEditProfileData() -> ProfileData {
         var editProfileData = getProfile()
         
@@ -75,6 +79,7 @@ final class ProfileModel: ObservableObject {
         return editProfileData
     }
     
+    //makes api call to update profile
     func updateProfile(updateProfileData: ProfileData) {
         //get auth token
         guard let token = try? KeychainManager.readKeychain() else {
@@ -130,7 +135,7 @@ final class ProfileModel: ObservableObject {
         var interests: String?
         var needMentoring: Bool?
         var availableToMentor: Bool?
-        
+
         enum CodingKeys: String, CodingKey {
             case id, name, username, email, bio, location, occupation, organization, skills, interests
             case slackUsername = "slack_username"
