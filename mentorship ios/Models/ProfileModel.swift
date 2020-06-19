@@ -10,7 +10,7 @@ import Combine
 final class ProfileModel: ObservableObject {
 
     // MARK: - Variables
-    var profileData = ProfileData(
+    let profileData = ProfileData(
         id: 0,
         name: "",
         username: "",
@@ -41,8 +41,10 @@ final class ProfileModel: ObservableObject {
     }
 
     func getProfile() -> ProfileData {
-        let profileData = UserDefaults.standard.data(forKey: UserDefaultsConstants.profile)
-        guard let profile = try? JSONDecoder().decode(ProfileData.self, from: profileData!) else {
+        guard let profileData = UserDefaults.standard.data(forKey: UserDefaultsConstants.profile) else {
+            return self.profileData
+        }
+        guard let profile = try? JSONDecoder().decode(ProfileData.self, from: profileData) else {
             return self.profileData
         }
         return profile
