@@ -55,7 +55,7 @@ struct ProfileEditor: View {
                 Button(action: { self.presentation.wrappedValue.dismiss() }) {
                     Text(LocalizableStringConstants.cancel)
                 }, trailing: Button(LocalizableStringConstants.save) {
-                    self.profileModel.updateProfile(updatedProfileData: self.editProfileData)
+                    self.profileModel.updateProfile(updateProfileData: self.editProfileData)
                 })
             .alert(isPresented: $profileModel.showAlert) {
                 Alert.init(

@@ -73,18 +73,26 @@ final class ProfileModel: ObservableObject {
         return editProfileData
     }
     
-    func updateProfile(updatedProfileData: ProfileData) {
+    func updateProfile(updateProfileData: ProfileData) {
         //get auth token
         guard let token = try? KeychainManager.readKeychain() else {
             return
         }
         
         //encoded upload data
-        guard let uploadData = try? JSONEncoder().encode(updatedProfileData) else {
+        guard let uploadData = try? JSONEncoder().encode(updateProfileData) else {
             return
         }
         
         self.inActivity = true
+        
+        //func to save updated profile in user defaults
+        func saveUpdatedProfile() {
+            let currentProfileData = getProfile()
+            var newProfileData = updateProfileData
+            newProfileData.username = currentProfileData.username
+            self.saveProfile(profile: newProfileData)
+        }
         
         //api call
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.profile, httpMethod: "PUT", uploadData: uploadData, token: token)
@@ -97,6 +105,8 @@ final class ProfileModel: ObservableObject {
                 self.showAlert = true
                 if NetworkManager.responseCode == 200 {
                     self.alertTitle = "Success"
+                    //update profile data in user defaults on success
+                    saveUpdatedProfile()
                 } else {
                     self.alertTitle = "Fail"
                 }
