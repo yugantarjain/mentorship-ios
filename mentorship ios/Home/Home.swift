@@ -37,8 +37,8 @@ struct Home: View {
                                 title: self.relationsData.relationTitle[index],
                                 count: self.relationsData.relationCount[index]
                             )
-                                .opacity(self.homeModel.isLoading ? 0.5 : 1.0)
                         }
+                        .disabled(self.homeModel.isLoading ? true : false)
                     }
                 }
 
