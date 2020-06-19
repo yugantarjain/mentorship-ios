@@ -27,6 +27,8 @@ final class ProfileModel: ObservableObject {
     )
 
     // MARK: - Functions
+    
+    //saves profile in user defaults
     func saveProfile(profile: ProfileData) {
         guard let profileData = try? JSONEncoder().encode(profile) else {
             return
@@ -34,6 +36,7 @@ final class ProfileModel: ObservableObject {
         UserDefaults.standard.set(profileData, forKey: UserDefaultsConstants.profile)
     }
 
+    //gets profile object from user defaults
     func getProfile() -> ProfileData {
         let profileData = UserDefaults.standard.data(forKey: UserDefaultsConstants.profile)
         guard let profile = try? JSONDecoder().decode(ProfileData.self, from: profileData!) else {
@@ -42,13 +45,13 @@ final class ProfileModel: ObservableObject {
         return profile
     }
     
+    //returns profile data with some processing to make it suitable for use in profile editor
     func getEditProfileData() -> ProfileData {
         var editProfileData = getProfile()
         
         //Replace nil values with empty values.
         //Done to enable force-unwrap of binding, to be used in edit text field in profile editor.
         //Optional bindings are not allowed.
-        
         if editProfileData.name == nil { editProfileData.name = "" }
         if editProfileData.username == nil { editProfileData.username = "" }
         if editProfileData.bio == nil { editProfileData.bio = "" }
