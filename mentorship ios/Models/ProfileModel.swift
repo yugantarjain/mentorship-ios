@@ -25,9 +25,10 @@ final class ProfileModel: ObservableObject {
         needMentoring: false,
         availableToMentor: false
     )
-    
     @Published var updateProfileResponseData = UpdateProfileResponseData(message: "")
     @Published var inActivity = false
+    @Published var showAlert = false
+    var alertTitle = ""
     private var cancellable: AnyCancellable?
     
 
@@ -90,8 +91,15 @@ final class ProfileModel: ObservableObject {
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.updateProfileResponseData) }
             .sink {
-                self.inActivity = false
                 self.updateProfileResponseData = $0
+                self.inActivity = false
+                //Show alert after call completes
+                self.showAlert = true
+                if NetworkManager.responseCode == 200 {
+                    self.alertTitle = "Success"
+                } else {
+                    self.alertTitle = "Fail"
+                }
         }
     }
 

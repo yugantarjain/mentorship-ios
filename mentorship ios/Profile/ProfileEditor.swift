@@ -57,6 +57,12 @@ struct ProfileEditor: View {
                 }, trailing: Button(LocalizableStringConstants.save) {
                     self.profileModel.updateProfile(updatedProfileData: self.editProfileData)
                 })
+            .alert(isPresented: $profileModel.showAlert) {
+                Alert.init(
+                    title: Text(profileModel.alertTitle),
+                    message: Text(profileModel.updateProfileResponseData.message ?? ""),
+                    dismissButton: .default(Text("Okay")))
+            }
         }
     }
 }
