@@ -61,8 +61,8 @@ struct ProfileEditor: View {
                 Alert.init(
                     title: Text(profileModel.alertTitle),
                     message: Text(profileModel.updateProfileResponseData.message ?? ""),
-                    dismissButton: .default(Text("Okay"), action: {
-                        if self.profileModel.alertTitle == "Success" {
+                    dismissButton: .default(Text(LocalizableStringConstants.okay), action: {
+                        if self.profileModel.alertTitle == LocalizableStringConstants.success {
                             self.presentation.wrappedValue.dismiss()
                         }
                     }))

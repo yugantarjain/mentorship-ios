@@ -28,7 +28,7 @@ final class ProfileModel: ObservableObject {
     @Published var updateProfileResponseData = UpdateProfileResponseData(message: "")
     @Published var inActivity = false
     @Published var showAlert = false
-    var alertTitle = ""
+    var alertTitle = LocalizedStringKey("")
     private var cancellable: AnyCancellable?
     
 
@@ -104,11 +104,11 @@ final class ProfileModel: ObservableObject {
                 //Show alert after call completes
                 self.showAlert = true
                 if NetworkManager.responseCode == 200 {
-                    self.alertTitle = "Success"
+                    self.alertTitle = LocalizableStringConstants.success
                     //update profile data in user defaults on success
                     saveUpdatedProfile()
                 } else {
-                    self.alertTitle = "Fail"
+                    self.alertTitle = LocalizableStringConstants.failure
                 }
         }
     }
