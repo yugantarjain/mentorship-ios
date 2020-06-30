@@ -17,8 +17,9 @@ struct Relation: View {
         NavigationView {
             ZStack {
                 Form {
-                    //Top detail view, shows mentor/mentee and end date
+                    //Top detail view
                     VStack {
+                        //mentor/mentee and end date
                         HStack {
                             Text("Vatsal").font(.title).fontWeight(.heavy)
                             Spacer()
@@ -26,6 +27,7 @@ struct Relation: View {
                         }
                         .foregroundColor(DesignConstants.Colors.subtitleText)
                         
+                        //divider
                         Divider()
                             .background(DesignConstants.Colors.defaultIndigoColor)
                     }
@@ -50,14 +52,14 @@ struct Relation: View {
             }
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("Current Relation")
-            .navigationBarItems(trailing: Button(self.addTask ? "Cancel" : "Add Task") {
+            .navigationBarItems(trailing: Button(self.addTask ? LocalizableStringConstants.cancel : "Add Task") {
                 self.addTask.toggle()
             })
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Mark as completed?"),
                     primaryButton: .cancel(),
-                    secondaryButton: .default(Text("Confirm")))
+                    secondaryButton: .default(Text(LocalizableStringConstants.confirm)))
             }
         }
     }

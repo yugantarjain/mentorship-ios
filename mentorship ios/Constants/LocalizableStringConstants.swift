@@ -27,6 +27,7 @@ struct LocalizableStringConstants {
     static let cancel = LocalizedStringKey("Cancel")
     static let save = LocalizedStringKey("Save")
     static let okay = LocalizedStringKey("Okay")
+    static let confirm = LocalizedStringKey("Confirm")
     static let success = LocalizedStringKey("Success")
     static let failure = LocalizedStringKey("Failure")
     static let profile = LocalizedStringKey("Profile")
