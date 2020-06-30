@@ -30,24 +30,14 @@ struct KeychainManager {
     }
     
     static func replaceKeychainItem(username: String, tokenString: String) throws {
-//        let server = baseURL
-//        let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
-//                                    kSecAttrServer as String: server]
-//        let account = username
-//        let token = tokenString.data(using: String.Encoding.utf8)!
-//        let attributes: [String: Any] = [kSecAttrAccount as String: account,
-//                                         kSecValueData as String: token]
-//
-//        let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
-//        guard status != errSecItemNotFound else { throw KeychainError.noPassword }
-//        guard status == errSecSuccess else { throw KeychainError.unhandledError(status: status) }
+        //delete old token
         do {
             try deleteTokenFromKeychain()
         } catch { return }
+        //add new token
         do {
             try addToKeychain(username: username, tokenString: tokenString)
         }
-
     }
     
     static func readKeychain() throws -> String {
