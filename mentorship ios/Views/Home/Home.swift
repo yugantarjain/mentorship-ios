@@ -42,19 +42,8 @@ struct Home: View {
                     }
                 }
 
-                //Tasks To Do list
-                Section(header: Text(LocalizableStringConstants.tasksToDo).font(.headline)) {
-                    ForEach(homeViewModel.homeResponseData.tasksToDo ?? []) { task in
-                        HStack {
-                            Image(systemName: ImageNameConstants.SFSymbolConstants.taskToDo)
-                                .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
-                                .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
-
-                            Text(task.description ?? "-")
-                                .font(.subheadline)
-                        }
-                    }
-                }
+                //Tasks to do list section
+                TasksToDoSection(tasksToDo: homeViewModel.homeResponseData.tasksToDo)
 
                 //Tasks done list section
                 TasksDoneSection(tasksDone: homeViewModel.homeResponseData.tasksDone ?? [])
