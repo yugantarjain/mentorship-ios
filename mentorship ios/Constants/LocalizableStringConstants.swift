@@ -36,6 +36,15 @@ struct LocalizableStringConstants {
     static let privacyPolicy = LocalizedStringKey("Privacy Policy")
     static let termsOfUse = LocalizedStringKey("Terms of Use")
     
+    // MARK: - Categorized
+    
+    //Keys to be used for Screen Names. (Direct values for English)
+    struct ScreenNames {
+        static let home = LocalizedStringKey("Home")
+        static let members = LocalizedStringKey("Members")
+        static let settings = LocalizedStringKey("Settings")
+    }
+    
     //Keys to be used for profile attributes. (Direct values for English)
     enum ProfileKeys: LocalizedStringKey {
         case name = "Name"

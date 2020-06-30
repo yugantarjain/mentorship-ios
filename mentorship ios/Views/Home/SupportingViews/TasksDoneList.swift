@@ -25,9 +25,3 @@ struct TasksDoneList<T: TaskStructureProperties>: View {
         }
     }
 }
-
-//struct TasksDoneList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TasksDoneList()
-//    }
-//}

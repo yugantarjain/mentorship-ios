@@ -17,7 +17,7 @@ struct TabBar: View {
                     VStack {
                         Image(systemName: ImageNameConstants.SFSymbolConstants.home)
                             .imageScale(.large)
-                        Text("Home")
+                        Text(LocalizableStringConstants.ScreenNames.home)
                     }
             }.tag(0)
 
@@ -27,7 +27,7 @@ struct TabBar: View {
                     VStack {
                         Image(systemName: ImageNameConstants.SFSymbolConstants.members)
                             .imageScale(.large)
-                        Text("Members")
+                        Text(LocalizableStringConstants.ScreenNames.members)
                     }
             }.tag(1)
             
@@ -37,7 +37,7 @@ struct TabBar: View {
                     VStack {
                         Image(systemName: ImageNameConstants.SFSymbolConstants.settings)
                             .imageScale(.large)
-                        Text("Settings")
+                        Text(LocalizableStringConstants.ScreenNames.settings)
                     }
             }.tag(2)
         }
