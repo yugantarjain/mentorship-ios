@@ -10,33 +10,48 @@ struct Relation: View {
     //sample data
     @ObservedObject var sampleData = HomeViewModel()
     @State var showAlert = false
+    @State var addTask  = false
+    @State var newTaskDesc = ""
     
     var body: some View {
         NavigationView {
-            Form {
-                VStack {
-                    HStack {
-                        Text("Vatsal").font(.title).fontWeight(.heavy)
-                        Spacer()
-                        Text("Ends on: Aug 24, 2020").font(.callout)
+            ZStack {
+                Form {
+                    //Top detail view, shows mentor/mentee and end date
+                    VStack {
+                        HStack {
+                            Text("Vatsal").font(.title).fontWeight(.heavy)
+                            Spacer()
+                            Text("Ends on: Aug 24, 2020").font(.callout)
+                        }
+                        .foregroundColor(DesignConstants.Colors.subtitleText)
+                        
+                        Divider()
+                            .background(DesignConstants.Colors.defaultIndigoColor)
                     }
-                    .foregroundColor(DesignConstants.Colors.subtitleText)
+                    .listRowBackground(DesignConstants.Colors.formBackgroundColor)
                     
-                    Divider()
-                        .background(DesignConstants.Colors.defaultIndigoColor)
+                    //Tasks To Do List section
+                    TasksToDoSection(tasksToDo: sampleData.homeResponseData.tasksToDo) {
+                        self.showAlert.toggle()
+                    }
+                    
+                    //Tasks Done List section
+                    TasksDoneSection(tasksDone: sampleData.homeResponseData.tasksDone)
                 }
-                .listRowBackground(DesignConstants.Colors.formBackgroundColor)
+                .blur(radius: self.addTask ? 16 : 0)
                 
-                TasksToDoSection(tasksToDo: sampleData.homeResponseData.tasksToDo) {
-                    self.showAlert.toggle()
+                if self.addTask {
+                    AddTask(text: self.$newTaskDesc)
+                        .shadow(color: DesignConstants.Colors.subtitleText, radius: 2)
+                        .padding()
+                        .padding(.top)
                 }
-                
-                TasksDoneSection(tasksDone: sampleData.homeResponseData.tasksDone)
             }
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("Current Relation")
-            .navigationBarItems(trailing: Button("Add Task") {
-                //add action code
+            .navigationBarItems(trailing: Button(self.addTask ? "Cancel" : "Add Task") {
+                self.addTask.toggle()
             })
             .alert(isPresented: $showAlert) {
                 Alert(
