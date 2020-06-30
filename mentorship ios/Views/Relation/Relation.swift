@@ -41,11 +41,11 @@ struct Relation: View {
                     //Tasks Done List section
                     TasksDoneSection(tasksDone: sampleData.homeResponseData.tasksDone)
                 }
-                .blur(radius: self.addTask ? 16 : 0)
+                .blur(radius: self.addTask ? DesignConstants.Blur.backgroundBlur : 0)
                 
+                //show add task text field and button
                 if self.addTask {
                     AddTask(text: self.$newTaskDesc)
-                        .shadow(color: DesignConstants.Colors.subtitleText, radius: 2)
                         .padding()
                         .padding(.top)
                 }
