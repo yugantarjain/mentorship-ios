@@ -56,19 +56,7 @@ struct Home: View {
                     }
                 }
 
-                //Tasks Done list
-                Section(header: Text(LocalizableStringConstants.tasksDone).font(.headline)) {
-                    ForEach(homeViewModel.homeResponseData.tasksDone ?? []) { task in
-                        HStack {
-                            Image(systemName: ImageNameConstants.SFSymbolConstants.taskDone)
-                                .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
-                                .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
-
-                            Text(task.description ?? "-")
-                                .font(.subheadline)
-                        }
-                    }
-                }
+                TasksDoneList(tasksDone: homeViewModel.homeResponseData.tasksDone ?? [])
 
             }
             .listStyle(GroupedListStyle())
