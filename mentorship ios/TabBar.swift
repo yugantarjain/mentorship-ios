@@ -20,6 +20,16 @@ struct TabBar: View {
                         Text(LocalizableStringConstants.ScreenNames.home)
                     }
             }.tag(0)
+            
+            //Relation
+            Relation()
+                .tabItem {
+                    VStack {
+                        Image(systemName: ImageNameConstants.SFSymbolConstants.relation)
+                            .imageScale(.large)
+                        Text(LocalizableStringConstants.ScreenNames.relation)
+                    }
+            }.tag(1)
 
             //Members
             Members()
@@ -29,7 +39,7 @@ struct TabBar: View {
                             .imageScale(.large)
                         Text(LocalizableStringConstants.ScreenNames.members)
                     }
-            }.tag(1)
+            }.tag(2)
             
             //Settings
             Settings()
@@ -39,7 +49,7 @@ struct TabBar: View {
                             .imageScale(.large)
                         Text(LocalizableStringConstants.ScreenNames.settings)
                     }
-            }.tag(2)
+            }.tag(3)
         }
     }
 }

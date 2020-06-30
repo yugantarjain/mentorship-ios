@@ -41,6 +41,7 @@ struct LocalizableStringConstants {
     //Keys to be used for Screen Names. (Direct values for English)
     struct ScreenNames {
         static let home = LocalizedStringKey("Home")
+        static let relation = LocalizedStringKey("Relation")
         static let members = LocalizedStringKey("Members")
         static let settings = LocalizedStringKey("Settings")
     }

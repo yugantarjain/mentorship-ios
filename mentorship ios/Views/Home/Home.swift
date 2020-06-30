@@ -56,7 +56,8 @@ struct Home: View {
                     }
                 }
 
-                TasksDoneList(tasksDone: homeViewModel.homeResponseData.tasksDone ?? [])
+                //Tasks done list section
+                TasksDoneSection(tasksDone: homeViewModel.homeResponseData.tasksDone ?? [])
 
             }
             .listStyle(GroupedListStyle())

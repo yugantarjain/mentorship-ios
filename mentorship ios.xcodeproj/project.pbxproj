@@ -18,7 +18,7 @@
 		530F44392482752600B1FD0B /* MentorshipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F44382482752600B1FD0B /* MentorshipUITests.swift */; };
 		5310E51E2492D398001AF464 /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5310E51D2492D398001AF464 /* UserDefaultsConstants.swift */; };
 		5311839524AB4D7B0006036F /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5311839424AB4D7B0006036F /* Relation.swift */; };
-		5311839724AB50280006036F /* TasksDoneList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5311839624AB50280006036F /* TasksDoneList.swift */; };
+		5311839724AB50280006036F /* TasksDoneSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5311839624AB50280006036F /* TasksDoneSection.swift */; };
 		5311839924AB58E40006036F /* TaskProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5311839824AB58E40006036F /* TaskProperties.swift */; };
 		5314C184248B9EC2000AA386 /* AllPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314C183248B9EC2000AA386 /* AllPadding.swift */; };
 		531B5C34249B9A9000CA5CCF /* KeyboardAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531B5C33249B9A9000CA5CCF /* KeyboardAware.swift */; };
@@ -109,7 +109,7 @@
 		530F443A2482752600B1FD0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5310E51D2492D398001AF464 /* UserDefaultsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsConstants.swift; sourceTree = "<group>"; };
 		5311839424AB4D7B0006036F /* Relation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relation.swift; sourceTree = "<group>"; };
-		5311839624AB50280006036F /* TasksDoneList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDoneList.swift; sourceTree = "<group>"; };
+		5311839624AB50280006036F /* TasksDoneSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDoneSection.swift; sourceTree = "<group>"; };
 		5311839824AB58E40006036F /* TaskProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProperties.swift; sourceTree = "<group>"; };
 		5314C183248B9EC2000AA386 /* AllPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPadding.swift; sourceTree = "<group>"; };
 		531B5C33249B9A9000CA5CCF /* KeyboardAware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAware.swift; sourceTree = "<group>"; };
@@ -355,7 +355,7 @@
 			children = (
 				5386012A2493775800D0E460 /* RelationListCell.swift */,
 				53D24E0B2499F4FC0043C28F /* DetailListCell.swift */,
-				5311839624AB50280006036F /* TasksDoneList.swift */,
+				5311839624AB50280006036F /* TasksDoneSection.swift */,
 			);
 			path = SupportingViews;
 			sourceTree = "<group>";
@@ -610,7 +610,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5311839724AB50280006036F /* TasksDoneList.swift in Sources */,
+				5311839724AB50280006036F /* TasksDoneSection.swift in Sources */,
 				530F44192482752500B1FD0B /* mentorship_ios.xcdatamodeld in Sources */,
 				531C8065248A477700AE81EF /* LoginModel.swift in Sources */,
 				53EB47012488EBAF005656B9 /* LocalizableStringConstants.swift in Sources */,

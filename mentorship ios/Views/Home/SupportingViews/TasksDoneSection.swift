@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct TasksDoneList<T: TaskStructureProperties>: View {
+struct TasksDoneSection<T: TaskStructureProperties>: View {
     var tasksDone: [T]?
     
     var body: some View {
