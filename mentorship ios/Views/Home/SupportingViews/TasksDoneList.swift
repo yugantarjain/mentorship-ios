@@ -6,8 +6,8 @@
 
 import SwiftUI
 
-struct TasksDoneList: View {
-    var tasksDone: [HomeModel.HomeResponseData.TaskStructure]?
+struct TasksDoneList<T: TaskStructureProperties>: View {
+    var tasksDone: [T]?
     
     var body: some View {
         //Tasks Done list
@@ -26,8 +26,8 @@ struct TasksDoneList: View {
     }
 }
 
-struct TasksDoneList_Previews: PreviewProvider {
-    static var previews: some View {
-        TasksDoneList()
-    }
-}
+//struct TasksDoneList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TasksDoneList()
+//    }
+//}
