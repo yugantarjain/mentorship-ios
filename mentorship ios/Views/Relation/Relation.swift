@@ -14,6 +14,10 @@ struct Relation: View {
     @State var addTask  = false
     @State var newTaskDesc = ""
     
+    var endDate: Date {
+        return Date(timeIntervalSince1970: relationViewModel.currentRelation.endDate ?? 0)
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -24,7 +28,8 @@ struct Relation: View {
                         HStack {
                             Text(relationViewModel.personName).font(.title).fontWeight(.heavy)
                             Spacer()
-                            Text("Ends on: Aug 24, 2020").font(.callout)
+                            Text("Ends On: \(DesignConstants.DateFormat.mediumDate.string(from: endDate))")
+                                .font(.callout)
                         }
                         .foregroundColor(DesignConstants.Colors.subtitleText)
                         
@@ -50,6 +55,11 @@ struct Relation: View {
                         .padding()
                         .padding(.top)
                 }
+                
+                //show activity spinner if in activity
+                if relationViewModel.inActivity {
+                    ActivityIndicator(isAnimating: $relationViewModel.inActivity, style: .medium)
+                }
             }
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("Current Relation")
@@ -61,9 +71,6 @@ struct Relation: View {
                     title: Text("Mark as completed?"),
                     primaryButton: .cancel(),
                     secondaryButton: .default(Text(LocalizableStringConstants.confirm)))
-            }
-            .onAppear {
-                self.relationViewModel.fetchCurrentRelation()
             }
         }
     }

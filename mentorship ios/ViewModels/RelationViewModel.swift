@@ -16,6 +16,10 @@ class RelationViewModel: ObservableObject {
     private var cancellable: AnyCancellable?
     
     // MARK: - Functions
+    init() {
+        fetchCurrentRelation()
+    }
+    
     func fetchCurrentRelation() {
         //get auth token
         guard let token = try? KeychainManager.readKeychain() else {
