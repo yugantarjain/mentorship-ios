@@ -9,6 +9,7 @@ import SwiftUI
 struct Relation: View {
     //sample data
     @ObservedObject var sampleData = HomeViewModel()
+    @ObservedObject var relationViewModel = RelationViewModel()
     @State var showAlert = false
     @State var addTask  = false
     @State var newTaskDesc = ""
@@ -60,6 +61,9 @@ struct Relation: View {
                     title: Text("Mark as completed?"),
                     primaryButton: .cancel(),
                     secondaryButton: .default(Text(LocalizableStringConstants.confirm)))
+            }
+            .onAppear {
+                self.relationViewModel.fetchCurrentRelation()
             }
         }
     }

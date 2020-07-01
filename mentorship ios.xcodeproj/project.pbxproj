@@ -52,6 +52,8 @@
 		53D24E0A2499F4C40043C28F /* RelationDetailList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D24E092499F4C40043C28F /* RelationDetailList.swift */; };
 		53D24E0C2499F4FC0043C28F /* DetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D24E0B2499F4FC0043C28F /* DetailListCell.swift */; };
 		53D7C75B2494CA6C005DD606 /* ErrorText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D7C75A2494CA6B005DD606 /* ErrorText.swift */; };
+		53D85E9F24AD2A7B00DC6605 /* RelationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D85E9E24AD2A7B00DC6605 /* RelationModel.swift */; };
+		53D85EA124AD2FD100DC6605 /* RelationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D85EA024AD2FD100DC6605 /* RelationViewModel.swift */; };
 		53E3BAF4248AD51A007F91C8 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E3BAF3248AD51A007F91C8 /* ActivityIndicator.swift */; };
 		53E6F84624A6440D009214FC /* ChangePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F84524A6440D009214FC /* ChangePassword.swift */; };
 		53E6F84824A644E3009214FC /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E6F84724A644E3009214FC /* ChangePasswordModel.swift */; };
@@ -147,6 +149,8 @@
 		53D24E092499F4C40043C28F /* RelationDetailList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationDetailList.swift; sourceTree = "<group>"; };
 		53D24E0B2499F4FC0043C28F /* DetailListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailListCell.swift; sourceTree = "<group>"; };
 		53D7C75A2494CA6B005DD606 /* ErrorText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorText.swift; sourceTree = "<group>"; };
+		53D85E9E24AD2A7B00DC6605 /* RelationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationModel.swift; sourceTree = "<group>"; };
+		53D85EA024AD2FD100DC6605 /* RelationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationViewModel.swift; sourceTree = "<group>"; };
 		53E3BAF3248AD51A007F91C8 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		53E6F84524A6440D009214FC /* ChangePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePassword.swift; sourceTree = "<group>"; };
 		53E6F84724A644E3009214FC /* ChangePasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordModel.swift; sourceTree = "<group>"; };
@@ -411,6 +415,7 @@
 				53891256248AB08600E24F96 /* SignUpModel.swift */,
 				53EA66562492D98E007AEB04 /* HomeModel.swift */,
 				53EA66582492EA1E007AEB04 /* ProfileModel.swift */,
+				53D85E9E24AD2A7B00DC6605 /* RelationModel.swift */,
 				53ED6B0E248D04A80055DFF0 /* MembersModel.swift */,
 				53EB022C248D71F40061E5C4 /* AuthModel.swift */,
 				534BE20324A74C8D004C1EB2 /* SettingsModel.swift */,
@@ -454,6 +459,7 @@
 				839761BA249F7F110020535C /* SignUpViewModel.swift */,
 				839761BC249F7FED0020535C /* HomeViewModel.swift */,
 				839761C0249F821A0020535C /* ProfileViewModel.swift */,
+				53D85EA024AD2FD100DC6605 /* RelationViewModel.swift */,
 				839761C2249F83860020535C /* MembersViewModel.swift */,
 				534BE20124A74B1A004C1EB2 /* SettingsViewModel.swift */,
 				53E6F84A24A645B1009214FC /* ChangePasswordViewModel.swift */,
@@ -629,6 +635,7 @@
 				530F441B2482752500B1FD0B /* ContentView.swift in Sources */,
 				536A4C42248E70880027E44D /* MemberDetail.swift in Sources */,
 				53E6F84824A644E3009214FC /* ChangePasswordModel.swift in Sources */,
+				53D85E9F24AD2A7B00DC6605 /* RelationModel.swift in Sources */,
 				535247EC248EED0D0091AD21 /* SendRequest.swift in Sources */,
 				53EB46EA2488CBBF005656B9 /* DesignConstants.swift in Sources */,
 				538E22E9248EBD7900842835 /* MemberDetailCell.swift in Sources */,
@@ -664,6 +671,7 @@
 				5314C184248B9EC2000AA386 /* AllPadding.swift in Sources */,
 				53F205E0249AE22500DDE52E /* ProfileEditField.swift in Sources */,
 				538CD07024ABDAE800F6A665 /* TasksToDoSection.swift in Sources */,
+				53D85EA124AD2FD100DC6605 /* RelationViewModel.swift in Sources */,
 				839761BB249F7F110020535C /* SignUpViewModel.swift in Sources */,
 				53729E04248E318900E79C24 /* TabBar.swift in Sources */,
 				531B5C34249B9A9000CA5CCF /* KeyboardAware.swift in Sources */,

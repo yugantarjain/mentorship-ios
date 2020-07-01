@@ -63,9 +63,10 @@ final class HomeModel {
             struct Info: Decodable {
                 let id: Int?
                 let userName: String?
+                let name: String?
                 
                 enum CodingKeys: String, CodingKey {
-                    case id
+                    case id, name
                     case userName = "user_name"
                 }
             }
