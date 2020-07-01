@@ -13,7 +13,12 @@ struct KeychainManager {
         case unhandledError(status: OSStatus)
     }
     
-    static func addToKeychain(username: String, tokenString: String) throws {
+    static func setToken(username: String, tokenString: String) throws {
+        //try deleting old items if present
+        do {
+            try deleteToken()
+        }
+        //add new token
         let account = username
         let token = tokenString.data(using: String.Encoding.utf8)!
         let server = baseURL
@@ -23,24 +28,11 @@ struct KeychainManager {
                                     kSecValueData as String: token]
         let status = SecItemAdd(query as CFDictionary, nil)
         guard status == errSecSuccess else {
-            //throw KeychainError.unhandledError(status: status)
-            do { try replaceKeychainItem(username: username, tokenString: tokenString) } catch { return }
-            return
+            fatalError(status.description)
         }
     }
     
-    static func replaceKeychainItem(username: String, tokenString: String) throws {
-        //delete old token
-        do {
-            try deleteTokenFromKeychain()
-        } catch { return }
-        //add new token
-        do {
-            try addToKeychain(username: username, tokenString: tokenString)
-        }
-    }
-    
-    static func readKeychain() throws -> String {
+    static func getToken() throws -> String {
         let server = baseURL
         let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
                                     kSecAttrServer as String: server,
@@ -63,7 +55,7 @@ struct KeychainManager {
         return token
     }
     
-    static func deleteTokenFromKeychain() throws {
+    static func deleteToken() throws {
         let server = baseURL
         let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
         kSecAttrServer as String: server]
