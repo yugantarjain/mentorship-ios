@@ -22,7 +22,7 @@ struct Relation: View {
                     VStack {
                         //mentor/mentee and end date
                         HStack {
-                            Text("Vatsal").font(.title).fontWeight(.heavy)
+                            Text(relationViewModel.personName).font(.title).fontWeight(.heavy)
                             Spacer()
                             Text("Ends on: Aug 24, 2020").font(.callout)
                         }
