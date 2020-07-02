@@ -10,6 +10,7 @@ struct TasksToDoSection<T: TaskStructureProperties>: View {
     var tasksToDo: [T]
     var onTapAction: () -> Void
     
+    //intialiser for view
     init(tasksToDo: [T]?, onTapAction: @escaping () -> Void = { }) {
         self.tasksToDo = tasksToDo ?? []
         self.onTapAction = onTapAction
