@@ -52,7 +52,7 @@ struct Relation: View {
                 }
             }
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle("Current Relation")
+            .navigationBarTitle(self.addTask ? "Add Task" : "Current Relation")
             .navigationBarItems(trailing: Button(self.addTask ? LocalizableStringConstants.cancel : "Add Task") {
                 self.addTask.toggle()
             })

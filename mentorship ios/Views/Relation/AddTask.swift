@@ -13,7 +13,9 @@ struct AddTask: View {
         VStack(spacing: DesignConstants.Spacing.bigSpacing) {
             TextField("Task Description", text: $text)
                 .textFieldStyle(RoundFilledTextFieldStyle())
-                .shadow(color: DesignConstants.Colors.subtitleText, radius: 2)
+                .border(Color.primary, width: 1)
+                .cornerRadius(DesignConstants.CornerRadius.preferredCornerRadius)
+                .shadow(color: .secondary, radius: DesignConstants.Spacing.bigSpacing)
             
             Button("Add") {
             }
