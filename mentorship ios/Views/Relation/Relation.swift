@@ -42,6 +42,7 @@ struct Relation: View {
                     TasksDoneSection(tasksDone: sampleData.homeResponseData.tasksDone)
                 }
                 .blur(radius: self.addTask ? DesignConstants.Blur.backgroundBlur : 0)
+                .disabled(self.addTask)
                 
                 //show add task text field and button
                 if self.addTask {
