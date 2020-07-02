@@ -11,6 +11,7 @@ class RelationViewModel: ObservableObject {
     
     // MARK: - Variables
     @Published var currentRelation = RelationModel().currentRelation
+    @Published var tasks = RelationModel().tasks
     @Published var inActivity = false
     @Published var personName = ""
     private var cancellable: AnyCancellable?
@@ -34,9 +35,15 @@ class RelationViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.currentRelation) }
             .sink { [weak self] in
+                print($0)
                 self?.currentRelation = $0
                 self?.personName = self?.getPersonName(data: $0) ?? ""
                 self?.inActivity = false
+                self?.cancellable = NetworkManager.callAPI(urlString: URLStringConstants.MentorshipRelation.getCurrentTasks(id: $0.id ?? 0), token: token)
+                    .catch { _ in Just(self?.tasks) }
+                    .sink {
+                        print($0)
+                }
         }
     }
     

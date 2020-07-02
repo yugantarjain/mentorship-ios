@@ -19,6 +19,9 @@ struct URLStringConstants {
     struct MentorshipRelation {
         static let sendRequest: String = baseURL + "mentorship_relation/send_request"
         static let currentRelation: String = baseURL + "/mentorship_relations/current"
+        static func getCurrentTasks(id: Int) -> String {
+            return baseURL + "mentorship_relation/\(id)/tasks"
+        }
     }
     
     struct WebsiteURLs {

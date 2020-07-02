@@ -24,7 +24,7 @@ struct Relation: View {
                 Form {
                     //Top detail view
                     VStack {
-                        //mentor/mentee and end date
+                        //mentor/mentee name and end date
                         HStack {
                             Text(relationViewModel.personName).font(.title).fontWeight(.heavy)
                             Spacer()
