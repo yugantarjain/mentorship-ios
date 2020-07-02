@@ -8,7 +8,6 @@ import SwiftUI
 
 struct Relation: View {
     //sample data
-    @ObservedObject var sampleData = HomeViewModel()
     @ObservedObject var relationViewModel = RelationViewModel()
     @State var showAlert = false
     @State var addTask  = false
@@ -40,12 +39,12 @@ struct Relation: View {
                     .listRowBackground(DesignConstants.Colors.formBackgroundColor)
                     
                     //Tasks To Do List section
-                    TasksToDoSection(tasksToDo: sampleData.homeResponseData.tasksToDo) {
+                    TasksToDoSection(tasksToDo: relationViewModel.toDoTasks) {
                         self.showAlert.toggle()
                     }
                     
                     //Tasks Done List section
-                    TasksDoneSection(tasksDone: sampleData.homeResponseData.tasksDone)
+                    TasksDoneSection(tasksDone: relationViewModel.doneTasks)
                 }
                 .blur(radius: self.addTask ? DesignConstants.Blur.backgroundBlur : 0)
                 
@@ -62,8 +61,8 @@ struct Relation: View {
                 }
             }
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle("Current Relation")
-            .navigationBarItems(trailing: Button(self.addTask ? LocalizableStringConstants.cancel : "Add Task") {
+            .navigationBarTitle(self.addTask ? LocalizableStringConstants.addTask : "Current Relation")
+            .navigationBarItems(trailing: Button(self.addTask ? LocalizableStringConstants.cancel : LocalizableStringConstants.addTask) {
                 self.addTask.toggle()
             })
             .alert(isPresented: $showAlert) {

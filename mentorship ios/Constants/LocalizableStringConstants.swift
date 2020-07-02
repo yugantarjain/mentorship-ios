@@ -32,6 +32,7 @@ struct LocalizableStringConstants {
     static let failure = LocalizedStringKey("Failure")
     static let profile = LocalizedStringKey("Profile")
     static let editProfile = LocalizedStringKey("Edit Profile")
+    static let addTask = LocalizedStringKey("Add Task")
     static let relationRequest = LocalizedStringKey("Relation Request")
     static let notAvailable = LocalizedStringKey("Not available")
     static let privacyPolicy = LocalizedStringKey("Privacy Policy")

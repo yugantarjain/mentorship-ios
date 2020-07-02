@@ -11,10 +11,13 @@ class RelationViewModel: ObservableObject {
     
     // MARK: - Variables
     @Published var currentRelation = RelationModel().currentRelation
-    @Published var tasks = RelationModel().tasks
+    var tasks = RelationModel().tasks
+    @Published var toDoTasks = RelationModel().tasks
+    @Published var doneTasks = RelationModel().tasks
     @Published var inActivity = false
     @Published var personName = ""
     private var cancellable: AnyCancellable?
+    private var tasksCancellable: AnyCancellable?
     
     // MARK: - Functions
     init() {
@@ -34,15 +37,28 @@ class RelationViewModel: ObservableObject {
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.MentorshipRelation.currentRelation, token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.currentRelation) }
-            .sink { [weak self] in
-                print($0)
-                self?.currentRelation = $0
-                self?.personName = self?.getPersonName(data: $0) ?? ""
+            .sink { [weak self] current in
+                //use current relation data
+                self?.currentRelation = current
+                self?.personName = self?.getPersonName(data: current) ?? ""
                 self?.inActivity = false
-                self?.cancellable = NetworkManager.callAPI(urlString: URLStringConstants.MentorshipRelation.getCurrentTasks(id: $0.id ?? 0), token: token)
-                    .catch { _ in Just(self?.tasks) }
-                    .sink {
-                        print($0)
+                //chain api call. get current tasks using id from current relation
+                self?.fetchTasks(id: current.id ?? 0, token: token)
+        }
+    }
+    
+    func fetchTasks(id: Int, token: String) {
+        self.tasksCancellable = NetworkManager.callAPI(urlString: URLStringConstants.MentorshipRelation.getCurrentTasks(id: id), token: token)
+            .receive(on: RunLoop.main)
+            .catch { _ in Just(self.tasks) }
+            .sink { tasks in
+                //assign done tasks and tasks to do
+                for task in tasks {
+                    if task.isDone ?? false {
+                        self.doneTasks.append(task)
+                    } else {
+                        self.toDoTasks.append(task)
+                    }
                 }
         }
     }
