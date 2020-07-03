@@ -48,6 +48,7 @@ struct Relation: View {
                     TasksDoneSection(tasksDone: relationViewModel.doneTasks)
                 }
                 .blur(radius: self.relationViewModel.addTask ? DesignConstants.Blur.backgroundBlur : 0)
+                .disabled(self.relationViewModel.addTask)
                 
                 //show add task text field and button
                 if relationViewModel.addTask {
@@ -61,9 +62,9 @@ struct Relation: View {
                     ActivityIndicator(isAnimating: $relationViewModel.inActivity, style: .medium)
                 }
             }
-            .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle(self.relationViewModel.addTask ? LocalizableStringConstants.addTask : "Current Relation")
             .navigationBarItems(trailing: Button(self.relationViewModel.addTask ? LocalizableStringConstants.cancel : LocalizableStringConstants.addTask) {
+                self.relationViewModel.addTask.toggle()
                 self.relationViewModel.addTask.toggle()
             })
             .alert(isPresented: $showAlert) {
