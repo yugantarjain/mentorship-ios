@@ -62,9 +62,9 @@ struct Relation: View {
                     ActivityIndicator(isAnimating: $relationViewModel.inActivity, style: .medium)
                 }
             }
+            .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle(self.relationViewModel.addTask ? LocalizableStringConstants.addTask : "Current Relation")
             .navigationBarItems(trailing: Button(self.relationViewModel.addTask ? LocalizableStringConstants.cancel : LocalizableStringConstants.addTask) {
-                self.relationViewModel.addTask.toggle()
                 self.relationViewModel.addTask.toggle()
             })
             .alert(isPresented: $showAlert) {

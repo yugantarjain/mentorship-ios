@@ -30,7 +30,7 @@ class RelationViewModel: ObservableObject {
     
     func fetchCurrentRelation() {
         //get auth token
-        guard let token = try? KeychainManager.readKeychain() else {
+        guard let token = try? KeychainManager.getToken() else {
             return
         }
         
@@ -88,7 +88,7 @@ class RelationViewModel: ObservableObject {
     //mark task as complete api call + data change
     func markAsComplete() {
         //get auth token
-        guard let token = try? KeychainManager.readKeychain() else {
+        guard let token = try? KeychainManager.getToken() else {
             return
         }
         
@@ -116,7 +116,7 @@ class RelationViewModel: ObservableObject {
     //create newtask api call
     func addNewTask() {
         //get auth token
-        guard let token = try? KeychainManager.readKeychain() else {
+        guard let token = try? KeychainManager.getToken() else {
             return
         }
         
