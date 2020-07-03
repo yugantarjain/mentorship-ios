@@ -11,5 +11,10 @@ class RelationModel {
     
     let tasks = [HomeModel.HomeResponseData.TaskStructure]()
     
+    let task = HomeModel.HomeResponseData.TaskStructure(id: 0, description: "", isDone: false, createdAt: 0, completedAt: 0)
+    
     // MARK: - Structures
+    struct MarkTaskCompleteResponse: Decodable {
+        let message: String?
+    }
 }

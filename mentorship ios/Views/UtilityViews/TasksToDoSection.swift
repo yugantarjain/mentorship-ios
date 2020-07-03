@@ -8,10 +8,10 @@ import SwiftUI
 
 struct TasksToDoSection<T: TaskStructureProperties>: View {
     var tasksToDo: [T]
-    var onTapAction: () -> Void
+    var onTapAction: (HomeModel.HomeResponseData.TaskStructure) -> Void
     
     //intialiser for view
-    init(tasksToDo: [T]?, onTapAction: @escaping () -> Void = { }) {
+    init(tasksToDo: [T]?, onTapAction: @escaping (HomeModel.HomeResponseData.TaskStructure) -> Void = { _ in }) {
         self.tasksToDo = tasksToDo ?? []
         self.onTapAction = onTapAction
     }
@@ -28,7 +28,8 @@ struct TasksToDoSection<T: TaskStructureProperties>: View {
                         .font(.subheadline)
                 }
                 .onTapGesture {
-                    self.onTapAction()
+                    //run tap action closure
+                    self.onTapAction(task as! HomeModel.HomeResponseData.TaskStructure)
                 }
             }
         }

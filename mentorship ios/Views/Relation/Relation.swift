@@ -39,7 +39,8 @@ struct Relation: View {
                     .listRowBackground(DesignConstants.Colors.formBackgroundColor)
                     
                     //Tasks To Do List section
-                    TasksToDoSection(tasksToDo: relationViewModel.toDoTasks) {
+                    TasksToDoSection(tasksToDo: relationViewModel.toDoTasks) { task in
+                        RelationViewModel.taskTapped = task
                         self.showAlert.toggle()
                     }
                     
@@ -69,7 +70,9 @@ struct Relation: View {
                 Alert(
                     title: Text("Mark as completed?"),
                     primaryButton: .cancel(),
-                    secondaryButton: .default(Text(LocalizableStringConstants.confirm)))
+                    secondaryButton: .default(Text(LocalizableStringConstants.confirm)) {
+                        self.relationViewModel.markAsComplete()
+                    })
             }
         }
     }

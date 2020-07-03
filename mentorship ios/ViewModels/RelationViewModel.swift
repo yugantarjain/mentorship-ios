@@ -11,11 +11,13 @@ class RelationViewModel: ObservableObject {
     
     // MARK: - Variables
     @Published var currentRelation = RelationModel().currentRelation
+    @Published var markAsCompleteResponse = RelationModel.MarkTaskCompleteResponse(message: "")
     var tasks = RelationModel().tasks
     @Published var toDoTasks = RelationModel().tasks
     @Published var doneTasks = RelationModel().tasks
     @Published var inActivity = false
     @Published var personName = ""
+    static var taskTapped = RelationModel().task
     private var cancellable: AnyCancellable?
     private var tasksCancellable: AnyCancellable?
     
@@ -74,6 +76,35 @@ class RelationViewModel: ObservableObject {
             return data.mentee?.name ?? ""
         } else {
             return data.mentor?.name ?? ""
+        }
+    }
+    
+    //mark task as complete api call + data change
+    func markAsComplete() {
+        //get auth token
+        guard let token = try? KeychainManager.readKeychain() else {
+            return
+        }
+        
+        let taskTapped = RelationViewModel.taskTapped
+        print(taskTapped)
+        
+        //api call
+        cancellable = NetworkManager.callAPI(
+            urlString: URLStringConstants.MentorshipRelation.markAsComplete(reqID: currentRelation.id ?? 0, taskID: RelationViewModel.taskTapped.id ?? 0),
+            httpMethod: "PUT",
+            token: token)
+            .receive(on: RunLoop.main)
+            .catch { _ in Just(self.markAsCompleteResponse) }
+            .sink {
+                self.markAsCompleteResponse = $0
+                print($0)
+                if NetworkManager.responseCode == 200 {
+                    if let i = self.toDoTasks.firstIndex(of: taskTapped) {
+                        self.toDoTasks.remove(at: i)
+                        self.doneTasks.append(taskTapped)
+                    }
+                }
         }
     }
 }
