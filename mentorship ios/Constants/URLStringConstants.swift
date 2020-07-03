@@ -25,6 +25,9 @@ struct URLStringConstants {
         static func markAsComplete(reqID: Int, taskID: Int) -> String {
             return baseURL + "mentorship_relation/\(reqID)/task/\(taskID)/complete"
         }
+        static func addNewTask(reqID: Int) -> String {
+            return baseURL + "/mentorship_relation/\(reqID)/task"
+        }
     }
     
     struct WebsiteURLs {

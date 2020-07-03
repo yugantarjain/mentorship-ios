@@ -14,7 +14,11 @@ class RelationModel {
     let task = HomeModel.HomeResponseData.TaskStructure(id: 0, description: "", isDone: false, createdAt: 0, completedAt: 0)
     
     // MARK: - Structures
-    struct MarkTaskCompleteResponse: Decodable {
+    struct ResponseData: Decodable {
         let message: String?
+    }
+    
+    struct AddTaskData: Encodable {
+        var description: String
     }
 }

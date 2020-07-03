@@ -16,6 +16,7 @@ struct AddTask: View {
                 .shadow(color: DesignConstants.Colors.subtitleText, radius: 2)
             
             Button("Add") {
+                RelationViewModel().addNewTask()
             }
             .buttonStyle(BigBoldButtonStyle())
             

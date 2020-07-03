@@ -11,8 +11,9 @@ class RelationViewModel: ObservableObject {
     
     // MARK: - Variables
     @Published var currentRelation = RelationModel().currentRelation
-    @Published var markAsCompleteResponse = RelationModel.MarkTaskCompleteResponse(message: "")
+    @Published var responseData = RelationModel.ResponseData(message: "")
     var tasks = RelationModel().tasks
+    @Published var newTask = RelationModel.AddTaskData(description: "")
     @Published var toDoTasks = RelationModel().tasks
     @Published var doneTasks = RelationModel().tasks
     @Published var inActivity = false
@@ -95,9 +96,9 @@ class RelationViewModel: ObservableObject {
             httpMethod: "PUT",
             token: token)
             .receive(on: RunLoop.main)
-            .catch { _ in Just(self.markAsCompleteResponse) }
+            .catch { _ in Just(self.responseData) }
             .sink {
-                self.markAsCompleteResponse = $0
+                self.responseData = $0
                 print($0)
                 if NetworkManager.responseCode == 200 {
                     if let i = self.toDoTasks.firstIndex(of: taskTapped) {
@@ -105,6 +106,30 @@ class RelationViewModel: ObservableObject {
                         self.doneTasks.append(taskTapped)
                     }
                 }
+        }
+    }
+    
+    //create newtask api call
+    func addNewTask() {
+        //get auth token
+        guard let token = try? KeychainManager.readKeychain() else {
+            return
+        }
+        
+        //prepare upload data
+        guard let uploadData = try? JSONEncoder().encode(newTask) else {
+            return
+        }
+        
+        cancellable = NetworkManager.callAPI(
+            urlString: URLStringConstants.MentorshipRelation.addNewTask(reqID: currentRelation.id ?? 0),
+            httpMethod: "POST",
+            uploadData: uploadData,
+            token: token)
+            .receive(on: RunLoop.main)
+            .catch { _ in Just(self.responseData) }
+            .sink {
+                self.responseData = $0
         }
     }
 }

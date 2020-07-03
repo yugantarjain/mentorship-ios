@@ -11,7 +11,6 @@ struct Relation: View {
     @ObservedObject var relationViewModel = RelationViewModel()
     @State var showAlert = false
     @State var addTask  = false
-    @State var newTaskDesc = ""
     
     var endDate: Date {
         return Date(timeIntervalSince1970: relationViewModel.currentRelation.endDate ?? 0)
@@ -32,7 +31,7 @@ struct Relation: View {
                         }
                         .foregroundColor(DesignConstants.Colors.subtitleText)
                         
-                        //divider
+                        //divider, adds a line below name and date
                         Divider()
                             .background(DesignConstants.Colors.defaultIndigoColor)
                     }
@@ -53,7 +52,7 @@ struct Relation: View {
                 
                 //show add task text field and button
                 if self.addTask {
-                    AddTask(text: self.$newTaskDesc)
+                    AddTask(text: self.$relationViewModel.newTask.description)
                         .padding()
                         .padding(.top)
                 }
