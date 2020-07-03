@@ -28,8 +28,8 @@ struct TasksToDoSection<T: TaskStructureProperties>: View {
                         .font(.subheadline)
                 }
                 .onTapGesture {
-                    // swiftlint:disable:next all
                     //run tap action closure
+                    // swiftlint:disable:next all
                     self.onTapAction(task as! HomeModel.HomeResponseData.TaskStructure)
                 }
             }
