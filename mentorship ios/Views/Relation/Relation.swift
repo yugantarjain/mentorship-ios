@@ -10,7 +10,6 @@ struct Relation: View {
     //sample data
     @ObservedObject var relationViewModel = RelationViewModel()
     @State var showAlert = false
-    @State var addTask  = false
     
     var endDate: Date {
         return Date(timeIntervalSince1970: relationViewModel.currentRelation.endDate ?? 0)
@@ -48,11 +47,11 @@ struct Relation: View {
                     //Tasks Done List section
                     TasksDoneSection(tasksDone: relationViewModel.doneTasks)
                 }
-                .blur(radius: self.addTask ? DesignConstants.Blur.backgroundBlur : 0)
+                .blur(radius: self.relationViewModel.addTask ? DesignConstants.Blur.backgroundBlur : 0)
                 
                 //show add task text field and button
-                if self.addTask {
-                    AddTask(text: self.$relationViewModel.newTask.description)
+                if relationViewModel.addTask {
+                    AddTask(text: self.$relationViewModel.newTask.description, relationViewModel: self.relationViewModel)
                         .padding()
                         .padding(.top)
                 }
@@ -63,9 +62,9 @@ struct Relation: View {
                 }
             }
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle(self.addTask ? LocalizableStringConstants.addTask : "Current Relation")
-            .navigationBarItems(trailing: Button(self.addTask ? LocalizableStringConstants.cancel : LocalizableStringConstants.addTask) {
-                self.addTask.toggle()
+            .navigationBarTitle(self.relationViewModel.addTask ? LocalizableStringConstants.addTask : "Current Relation")
+            .navigationBarItems(trailing: Button(self.relationViewModel.addTask ? LocalizableStringConstants.cancel : LocalizableStringConstants.addTask) {
+                self.relationViewModel.addTask.toggle()
             })
             .alert(isPresented: $showAlert) {
                 Alert(

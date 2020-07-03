@@ -8,6 +8,7 @@ import SwiftUI
 
 struct AddTask: View {
     @Binding var text: String
+    var relationViewModel: RelationViewModel
     
     var body: some View {
         VStack(spacing: DesignConstants.Spacing.bigSpacing) {
@@ -16,7 +17,7 @@ struct AddTask: View {
                 .shadow(color: DesignConstants.Colors.subtitleText, radius: 2)
             
             Button("Add") {
-                RelationViewModel().addNewTask()
+                self.relationViewModel.addNewTask()
             }
             .buttonStyle(BigBoldButtonStyle())
             

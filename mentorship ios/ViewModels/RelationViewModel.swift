@@ -17,6 +17,7 @@ class RelationViewModel: ObservableObject {
     @Published var toDoTasks = RelationModel().tasks
     @Published var doneTasks = RelationModel().tasks
     @Published var inActivity = false
+    @Published var addTask = false
     @Published var personName = ""
     static var taskTapped = RelationModel().task
     private var cancellable: AnyCancellable?
@@ -54,13 +55,17 @@ class RelationViewModel: ObservableObject {
         self.tasksCancellable = NetworkManager.callAPI(urlString: URLStringConstants.MentorshipRelation.getCurrentTasks(id: id), token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.tasks) }
-            .sink { tasks in
-                //assign done tasks and tasks to do
-                for task in tasks {
-                    if task.isDone ?? false {
-                        self.doneTasks.append(task)
-                    } else {
-                        self.toDoTasks.append(task)
+            .sink { [weak self] tasks in
+                if NetworkManager.responseCode == 200 {
+                    self?.doneTasks.removeAll()
+                    self?.toDoTasks.removeAll()
+                    //assign done tasks and tasks to do
+                    for task in tasks {
+                        if task.isDone ?? false {
+                            self?.doneTasks.append(task)
+                        } else {
+                            self?.toDoTasks.append(task)
+                        }
                     }
                 }
         }
@@ -97,13 +102,12 @@ class RelationViewModel: ObservableObject {
             token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.responseData) }
-            .sink {
-                self.responseData = $0
-                print($0)
+            .sink { [weak self] in
+                self?.responseData = $0
                 if NetworkManager.responseCode == 200 {
-                    if let i = self.toDoTasks.firstIndex(of: taskTapped) {
-                        self.toDoTasks.remove(at: i)
-                        self.doneTasks.append(taskTapped)
+                    if let i = self?.toDoTasks.firstIndex(of: taskTapped) {
+                        self?.toDoTasks.remove(at: i)
+                        self?.doneTasks.append(taskTapped)
                     }
                 }
         }
@@ -121,6 +125,7 @@ class RelationViewModel: ObservableObject {
             return
         }
         
+        //api call
         cancellable = NetworkManager.callAPI(
             urlString: URLStringConstants.MentorshipRelation.addNewTask(reqID: currentRelation.id ?? 0),
             httpMethod: "POST",
@@ -128,8 +133,10 @@ class RelationViewModel: ObservableObject {
             token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.responseData) }
-            .sink {
-                self.responseData = $0
+            .sink { [weak self] in
+                self?.responseData = $0
+                self?.fetchTasks(id: self?.currentRelation.id ?? 0, token: token)
+                self?.addTask.toggle()
         }
     }
 }
