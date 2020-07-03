@@ -40,7 +40,9 @@ struct Relation: View {
                     
                     //Tasks To Do List section
                     TasksToDoSection(tasksToDo: relationViewModel.toDoTasks) { task in
+                        //set tapped task
                         RelationViewModel.taskTapped = task
+                        //show alert for marking as complete confirmation
                         self.showAlert.toggle()
                     }
                     

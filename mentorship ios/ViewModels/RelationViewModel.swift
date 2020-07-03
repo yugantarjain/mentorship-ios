@@ -86,12 +86,12 @@ class RelationViewModel: ObservableObject {
             return
         }
         
+        //get tapped task
         let taskTapped = RelationViewModel.taskTapped
-        print(taskTapped)
         
         //api call
         cancellable = NetworkManager.callAPI(
-            urlString: URLStringConstants.MentorshipRelation.markAsComplete(reqID: currentRelation.id ?? 0, taskID: RelationViewModel.taskTapped.id ?? 0),
+            urlString: URLStringConstants.MentorshipRelation.markAsComplete(reqID: currentRelation.id ?? 0, taskID: taskTapped.id ?? 0),
             httpMethod: "PUT",
             token: token)
             .receive(on: RunLoop.main)
