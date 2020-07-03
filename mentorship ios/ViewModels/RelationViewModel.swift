@@ -105,8 +105,8 @@ class RelationViewModel: ObservableObject {
             .sink { [weak self] in
                 self?.responseData = $0
                 if NetworkManager.responseCode == 200 {
-                    if let i = self?.toDoTasks.firstIndex(of: taskTapped) {
-                        self?.toDoTasks.remove(at: i)
+                    if let index = self?.toDoTasks.firstIndex(of: taskTapped) {
+                        self?.toDoTasks.remove(at: index)
                         self?.doneTasks.append(taskTapped)
                     }
                 }
