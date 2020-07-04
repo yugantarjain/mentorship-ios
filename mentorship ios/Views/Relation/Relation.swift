@@ -41,21 +41,15 @@ struct Relation: View {
                     //Tasks Done List section
                     TasksDoneSection(tasksDone: sampleData.homeResponseData.tasksDone)
                 }
-                .blur(radius: self.addTask ? DesignConstants.Blur.backgroundBlur : 0)
-                .disabled(self.addTask)
-                
-                //show add task text field and button
-                if self.addTask {
-                    AddTask(text: self.$newTaskDesc)
-                        .padding()
-                        .padding(.top)
-                }
             }
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle(self.addTask ? "Add Task" : "Current Relation")
-            .navigationBarItems(trailing: Button(self.addTask ? LocalizableStringConstants.cancel : "Add Task") {
+            .navigationBarTitle("Current Relation")
+            .navigationBarItems(trailing: Button("Add Task") {
                 self.addTask.toggle()
             })
+            .sheet(isPresented: $addTask) {
+                AddTask()
+            }
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Mark as completed?"),
