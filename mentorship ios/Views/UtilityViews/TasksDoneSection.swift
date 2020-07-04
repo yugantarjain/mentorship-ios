@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct TasksDoneSection: View {
-    var tasksDone: [HomeModel.HomeResponseData.TaskStructure]?
+    var tasksDone: [TaskStructure]?
     
     var body: some View {
         //Tasks Done list

@@ -7,11 +7,11 @@
 import SwiftUI
 
 struct TasksToDoSection: View {
-    var tasksToDo: [HomeModel.HomeResponseData.TaskStructure]?
-    var onTapAction: (HomeModel.HomeResponseData.TaskStructure) -> Void
+    var tasksToDo: [TaskStructure]?
+    var onTapAction: (TaskStructure) -> Void
     
     //intialiser for view
-    init(tasksToDo: [HomeModel.HomeResponseData.TaskStructure]?, onTapAction: @escaping (HomeModel.HomeResponseData.TaskStructure) -> Void = { _ in }) {
+    init(tasksToDo: [TaskStructure]?, onTapAction: @escaping (TaskStructure) -> Void = { _ in }) {
         self.tasksToDo = tasksToDo ?? []
         self.onTapAction = onTapAction
     }
