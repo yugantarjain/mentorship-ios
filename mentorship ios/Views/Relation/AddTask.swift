@@ -7,16 +7,17 @@
 import SwiftUI
 
 struct AddTask: View {
-    @State var text = ""
+    @ObservedObject var relationViewModel = RelationViewModel()
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
             VStack(spacing: DesignConstants.Spacing.bigSpacing) {
-                TextField("Task Description", text: $text)
+                TextField("Task Description", text: $relationViewModel.newTask.description)
                     .textFieldStyle(RoundFilledTextFieldStyle())
                 
                 Button("Add") {
+                    self.relationViewModel.addNewTask()
                 }
                 .buttonStyle(BigBoldButtonStyle())
                 

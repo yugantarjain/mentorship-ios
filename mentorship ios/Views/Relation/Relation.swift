@@ -47,15 +47,6 @@ struct Relation: View {
                     //Tasks Done List section
                     TasksDoneSection(tasksDone: relationViewModel.doneTasks)
                 }
-                .blur(radius: self.relationViewModel.addTask ? DesignConstants.Blur.backgroundBlur : 0)
-                .disabled(self.relationViewModel.addTask)
-                
-                //show add task text field and button
-                if relationViewModel.addTask {
-                    AddTask(text: self.$relationViewModel.newTask.description, relationViewModel: self.relationViewModel)
-                        .padding()
-                        .padding(.top)
-                }
                 
                 //show activity spinner if in activity
                 if relationViewModel.inActivity {
@@ -65,9 +56,9 @@ struct Relation: View {
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("Current Relation")
             .navigationBarItems(trailing: Button("Add Task") {
-                self.addTask.toggle()
+                self.relationViewModel.addTask.toggle()
             })
-            .sheet(isPresented: $addTask) {
+            .sheet(isPresented: $relationViewModel.addTask) {
                 AddTask()
             }
             .alert(isPresented: $showAlert) {
