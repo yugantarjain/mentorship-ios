@@ -6,19 +6,19 @@
 
 import SwiftUI
 
-struct TasksToDoSection<T: TaskStructureProperties>: View {
-    var tasksToDo: [T]
+struct TasksToDoSection: View {
+    var tasksToDo: [HomeModel.HomeResponseData.TaskStructure]?
     var onTapAction: (HomeModel.HomeResponseData.TaskStructure) -> Void
     
     //intialiser for view
-    init(tasksToDo: [T]?, onTapAction: @escaping (HomeModel.HomeResponseData.TaskStructure) -> Void = { _ in }) {
+    init(tasksToDo: [HomeModel.HomeResponseData.TaskStructure]?, onTapAction: @escaping (HomeModel.HomeResponseData.TaskStructure) -> Void = { _ in }) {
         self.tasksToDo = tasksToDo ?? []
         self.onTapAction = onTapAction
     }
 
     var body: some View {
         Section(header: Text(LocalizableStringConstants.tasksToDo).font(.headline)) {
-            ForEach(tasksToDo) { task in
+            ForEach(tasksToDo ?? []) { task in
                 HStack {
                     Image(systemName: ImageNameConstants.SFSymbolConstants.taskToDo)
                         .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
@@ -30,7 +30,7 @@ struct TasksToDoSection<T: TaskStructureProperties>: View {
                 .onTapGesture {
                     //run tap action closure
                     // swiftlint:disable:next all
-                    self.onTapAction(task as! HomeModel.HomeResponseData.TaskStructure)
+                    self.onTapAction(task)
                 }
             }
         }

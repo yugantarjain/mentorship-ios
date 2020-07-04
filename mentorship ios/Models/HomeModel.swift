@@ -71,7 +71,7 @@ final class HomeModel {
                 }
             }
         }
-        struct TaskStructure: Decodable, TaskStructureProperties, Equatable {
+        struct TaskStructure: Decodable, Identifiable, Equatable {
             let id: Int?
             let description: String?
             let isDone: Bool?
