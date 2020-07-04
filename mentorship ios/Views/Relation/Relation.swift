@@ -63,10 +63,13 @@ struct Relation: View {
                 }
             }
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle(self.relationViewModel.addTask ? LocalizableStringConstants.addTask : "Current Relation")
-            .navigationBarItems(trailing: Button(self.relationViewModel.addTask ? LocalizableStringConstants.cancel : LocalizableStringConstants.addTask) {
-                self.relationViewModel.addTask.toggle()
+            .navigationBarTitle("Current Relation")
+            .navigationBarItems(trailing: Button("Add Task") {
+                self.addTask.toggle()
             })
+            .sheet(isPresented: $addTask) {
+                AddTask()
+            }
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Mark as completed?"),

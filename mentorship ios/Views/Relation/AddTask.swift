@@ -7,23 +7,26 @@
 import SwiftUI
 
 struct AddTask: View {
-    @Binding var text: String
-    var relationViewModel: RelationViewModel
+    @State var text = ""
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        VStack(spacing: DesignConstants.Spacing.bigSpacing) {
-            TextField("Task Description", text: $text)
-                .textFieldStyle(RoundFilledTextFieldStyle())
-                .border(Color.primary, width: 1)
-                .cornerRadius(DesignConstants.CornerRadius.preferredCornerRadius)
-                .shadow(color: .secondary, radius: DesignConstants.Spacing.bigSpacing)
-            
-            Button("Add") {
-                self.relationViewModel.addNewTask()
+        NavigationView {
+            VStack(spacing: DesignConstants.Spacing.bigSpacing) {
+                TextField("Task Description", text: $text)
+                    .textFieldStyle(RoundFilledTextFieldStyle())
+                
+                Button("Add") {
+                }
+                .buttonStyle(BigBoldButtonStyle())
+                
+                Spacer()
             }
-            .buttonStyle(BigBoldButtonStyle())
-            
-            Spacer()
+            .modifier(AllPadding())
+            .navigationBarTitle("Add Task")
+            .navigationBarItems(trailing: Button("Cancel") {
+                self.presentationMode.wrappedValue.dismiss()
+            })
         }
     }
 }
