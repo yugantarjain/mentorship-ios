@@ -135,8 +135,8 @@ class RelationViewModel: ObservableObject {
             .catch { _ in Just(self.responseData) }
             .sink { [weak self] in
                 self?.responseData = $0
-                self?.fetchTasks(id: self?.currentRelation.id ?? 0, token: token)
                 self?.addTask.toggle()
+                self?.fetchTasks(id: self?.currentRelation.id ?? 0, token: token)
         }
     }
 }

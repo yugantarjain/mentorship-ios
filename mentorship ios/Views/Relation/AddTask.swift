@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct AddTask: View {
-    @ObservedObject var relationViewModel = RelationViewModel()
+    @ObservedObject var relationViewModel: RelationViewModel
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -28,6 +28,9 @@ struct AddTask: View {
             .navigationBarItems(trailing: Button("Cancel") {
                 self.presentationMode.wrappedValue.dismiss()
             })
+            .onAppear {
+                self.relationViewModel.newTask.description = ""
+            }
         }
     }
 }
