@@ -4,7 +4,7 @@
 //  Created for AnitaB.org Mentorship-iOS 
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
 class RelationViewModel: ObservableObject {
@@ -19,6 +19,10 @@ class RelationViewModel: ObservableObject {
     @Published var inActivity = false
     @Published var addTask = false
     @Published var personName = ""
+    @Published var personType = LocalizedStringKey("")
+    @Published var showAlert = false
+    @Published var alertTitle = LocalizableStringConstants.failure
+    @Published var alertMessage = LocalizedStringKey("")
     static var taskTapped = RelationModel().task
     private var cancellable: AnyCancellable?
     private var tasksCancellable: AnyCancellable?
@@ -44,7 +48,7 @@ class RelationViewModel: ObservableObject {
             .sink { [weak self] current in
                 //use current relation data
                 self?.currentRelation = current
-                self?.personName = self?.getPersonName(data: current) ?? ""
+                self?.personName = self?.getPersonNameAndType(data: current) ?? ""
                 self?.inActivity = false
                 //chain api call. get current tasks using id from current relation
                 self?.fetchTasks(id: current.id ?? 0, token: token)
@@ -56,6 +60,7 @@ class RelationViewModel: ObservableObject {
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.tasks) }
             .sink { [weak self] tasks in
+                //if success
                 if NetworkManager.responseCode == 200 {
                     self?.doneTasks.removeAll()
                     self?.toDoTasks.removeAll()
@@ -67,20 +72,25 @@ class RelationViewModel: ObservableObject {
                             self?.toDoTasks.append(task)
                         }
                     }
+                } else {
+                    self?.showAlert = true
+                    self?.alertMessage = LocalizableStringConstants.unableToLoad
                 }
         }
     }
     
     //func to get name of other person in current relation.
-    func getPersonName(data: HomeModel.HomeResponseData.RequestStructure) -> String {
+    func getPersonNameAndType(data: HomeModel.HomeResponseData.RequestStructure) -> String {
         //get user profile
         let userProfile = ProfileViewModel().getProfile()
         //match users name with mentee name.
         //if different, return mentee's name. Else, return mentor's name
         //Logic: Person with different name is in relation with us.
         if data.mentee?.name != userProfile.name {
+            self.personType = LocalizableStringConstants.mentee
             return data.mentee?.name ?? ""
         } else {
+            self.personType = LocalizableStringConstants.mentor
             return data.mentor?.name ?? ""
         }
     }

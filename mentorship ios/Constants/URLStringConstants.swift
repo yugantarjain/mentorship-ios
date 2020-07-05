@@ -5,6 +5,8 @@
 //
 
 let baseURL: String = "https://mentorship-backend-temp.herokuapp.com/"
+///only for local backend testing
+//let baseURL: String = "http://127.0.0.1:5000/"
 
 struct URLStringConstants {
     struct Users {

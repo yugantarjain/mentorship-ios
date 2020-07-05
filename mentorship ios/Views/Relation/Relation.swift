@@ -20,15 +20,17 @@ struct Relation: View {
             ZStack {
                 Form {
                     //Top detail view
-                    VStack {
+                    VStack(alignment: .leading, spacing: DesignConstants.Form.Spacing.minimalSpacing) {
                         //mentor/mentee name and end date
                         HStack {
                             Text(relationViewModel.personName).font(.title).fontWeight(.heavy)
                             Spacer()
-                            Text("Ends On: \(DesignConstants.DateFormat.mediumDate.string(from: endDate))")
-                                .font(.callout)
+                            Text(relationViewModel.personType).font(.title)//.fontWeight(.heavy)
                         }
                         .foregroundColor(DesignConstants.Colors.subtitleText)
+                        
+                        Text("Ends On: \(DesignConstants.DateFormat.mediumDate.string(from: endDate))")
+                            .font(.callout)
                         
                         //divider, adds a line below name and date
                         Divider()
@@ -59,7 +61,7 @@ struct Relation: View {
                 self.relationViewModel.addTask.toggle()
             })
             .sheet(isPresented: $relationViewModel.addTask) {
-                AddTask()
+                AddTask(relationViewModel: self.relationViewModel)
             }
             .alert(isPresented: $showAlert) {
                 Alert(
