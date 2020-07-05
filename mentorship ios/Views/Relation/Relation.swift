@@ -59,7 +59,7 @@ struct Relation: View {
                 self.relationViewModel.addTask.toggle()
             })
             .sheet(isPresented: $relationViewModel.addTask) {
-                AddTask(relationViewModel: self.relationViewModel)
+                AddTask()
             }
             .alert(isPresented: $showAlert) {
                 Alert(
