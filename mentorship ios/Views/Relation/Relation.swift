@@ -45,6 +45,14 @@ struct Relation: View {
                         //show alert for marking as complete confirmation
                         self.showAlert.toggle()
                     }
+                    .alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text("Mark as completed?"),
+                            primaryButton: .cancel(),
+                            secondaryButton: .default(Text(LocalizableStringConstants.confirm)) {
+                                self.relationViewModel.markAsComplete()
+                            })
+                    }
                     
                     //Tasks Done List section
                     TasksDoneSection(tasksDone: relationViewModel.doneTasks)
@@ -63,13 +71,11 @@ struct Relation: View {
             .sheet(isPresented: $relationViewModel.addTask) {
                 AddTask(relationViewModel: self.relationViewModel)
             }
-            .alert(isPresented: $showAlert) {
+            .alert(isPresented: $relationViewModel.showErrorAlert) {
                 Alert(
-                    title: Text("Mark as completed?"),
-                    primaryButton: .cancel(),
-                    secondaryButton: .default(Text(LocalizableStringConstants.confirm)) {
-                        self.relationViewModel.markAsComplete()
-                    })
+                    title: Text(self.relationViewModel.alertTitle),
+                    message: Text(self.relationViewModel.alertMessage),
+                    dismissButton: .default(Text(LocalizableStringConstants.okay)))
             }
         }
     }

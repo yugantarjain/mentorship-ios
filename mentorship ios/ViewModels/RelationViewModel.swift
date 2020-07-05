@@ -21,6 +21,7 @@ class RelationViewModel: ObservableObject {
     @Published var personName = ""
     @Published var personType = LocalizedStringKey("")
     @Published var showAlert = false
+    @Published var showErrorAlert = false
     @Published var alertTitle = LocalizableStringConstants.failure
     @Published var alertMessage = LocalizedStringKey("")
     static var taskTapped = RelationModel().task
@@ -75,7 +76,7 @@ class RelationViewModel: ObservableObject {
                 }
                 //else show fail alert
                 else {
-                    self?.showAlert = true
+                    self?.showErrorAlert = true
                     self?.alertMessage = LocalizableStringConstants.operationFail
                 }
         }
@@ -122,7 +123,7 @@ class RelationViewModel: ObservableObject {
                         self?.doneTasks.append(taskTapped)
                     }
                 } else {
-                    self?.showAlert = true
+                    self?.showErrorAlert = true
                     self?.alertMessage = LocalizableStringConstants.operationFail
                 }
         }
