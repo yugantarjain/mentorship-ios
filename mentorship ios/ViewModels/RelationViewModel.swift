@@ -72,9 +72,11 @@ class RelationViewModel: ObservableObject {
                             self?.toDoTasks.append(task)
                         }
                     }
-                } else {
+                }
+                //else show fail alert
+                else {
                     self?.showAlert = true
-                    self?.alertMessage = LocalizableStringConstants.unableToLoad
+                    self?.alertMessage = LocalizableStringConstants.operationFail
                 }
         }
     }
@@ -119,6 +121,9 @@ class RelationViewModel: ObservableObject {
                         self?.toDoTasks.remove(at: index)
                         self?.doneTasks.append(taskTapped)
                     }
+                } else {
+                    self?.showAlert = true
+                    self?.alertMessage = LocalizableStringConstants.operationFail
                 }
         }
     }
@@ -145,8 +150,12 @@ class RelationViewModel: ObservableObject {
             .catch { _ in Just(self.responseData) }
             .sink { [weak self] in
                 self?.responseData = $0
-                self?.addTask.toggle()
-                self?.fetchTasks(id: self?.currentRelation.id ?? 0, token: token)
+                //if success, dismiss sheet and refresh tasks
+                //else the error message (^responseData) is shown on add task screen
+                if NetworkManager.responseCode == 201 {
+                    self?.addTask.toggle()
+                    self?.fetchTasks(id: self?.currentRelation.id ?? 0, token: token)
+                }
         }
     }
 }

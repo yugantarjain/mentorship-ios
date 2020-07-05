@@ -13,14 +13,21 @@ struct AddTask: View {
     var body: some View {
         NavigationView {
             VStack(spacing: DesignConstants.Spacing.bigSpacing) {
+                //new task descriptio0n text field
                 TextField("Task Description", text: $relationViewModel.newTask.description)
                     .textFieldStyle(RoundFilledTextFieldStyle())
                 
+                //add task button
                 Button("Add") {
                     self.relationViewModel.addNewTask()
                 }
                 .buttonStyle(BigBoldButtonStyle())
                 
+                //error message
+                Text(self.relationViewModel.responseData.message ?? "")
+                    .modifier(ErrorText())
+                
+                //spacer to shift things at top
                 Spacer()
             }
             .modifier(AllPadding())
