@@ -52,7 +52,9 @@ class RelationViewModel: ObservableObject {
                 self?.personName = self?.getPersonNameAndType(data: current) ?? ""
                 self?.inActivity = false
                 //chain api call. get current tasks using id from current relation
-                self?.fetchTasks(id: current.id ?? 0, token: token)
+                if let currentID = current.id {
+                    self?.fetchTasks(id: currentID, token: token)
+                }
         }
     }
     
@@ -105,12 +107,14 @@ class RelationViewModel: ObservableObject {
             return
         }
         
-        //get tapped task
+        //set parameters
         let taskTapped = RelationViewModel.taskTapped
+        guard let taskID = taskTapped.id else { return }
+        guard let relationID = currentRelation.id else { return }
         
         //api call
         cancellable = NetworkManager.callAPI(
-            urlString: URLStringConstants.MentorshipRelation.markAsComplete(reqID: currentRelation.id ?? 0, taskID: taskTapped.id ?? 0),
+            urlString: URLStringConstants.MentorshipRelation.markAsComplete(reqID: relationID, taskID: taskID),
             httpMethod: "PUT",
             token: token)
             .receive(on: RunLoop.main)
@@ -141,21 +145,26 @@ class RelationViewModel: ObservableObject {
             return
         }
         
+        //set parameters
+        guard let relationID = self.currentRelation.id else { return }
+        
         //api call
         cancellable = NetworkManager.callAPI(
-            urlString: URLStringConstants.MentorshipRelation.addNewTask(reqID: currentRelation.id ?? 0),
+            urlString: URLStringConstants.MentorshipRelation.addNewTask(reqID: relationID),
             httpMethod: "POST",
             uploadData: uploadData,
             token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.responseData) }
             .sink { [weak self] in
-                self?.responseData = $0
                 //if success, dismiss sheet and refresh tasks
-                //else the error message (^responseData) is shown on add task screen
                 if NetworkManager.responseCode == 201 {
                     self?.addTask.toggle()
-                    self?.fetchTasks(id: self?.currentRelation.id ?? 0, token: token)
+                    self?.fetchTasks(id: relationID, token: token)
+                }
+                //else the error message (responseData) is shown on add task screen
+                else {
+                    self?.responseData = $0
                 }
         }
     }
