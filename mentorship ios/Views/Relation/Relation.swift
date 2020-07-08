@@ -47,7 +47,7 @@ struct Relation: View {
                     }
                     .alert(isPresented: $showAlert) {
                         Alert(
-                            title: Text("Mark as completed?"),
+                            title: Text(LocalizableStringConstants.markComplete),
                             primaryButton: .cancel(),
                             secondaryButton: .default(Text(LocalizableStringConstants.confirm)) {
                                 self.relationViewModel.markAsComplete()
@@ -65,7 +65,7 @@ struct Relation: View {
             }
             .environment(\.horizontalSizeClass, .regular)
             .navigationBarTitle("Current Relation")
-            .navigationBarItems(trailing: Button("Add Task") {
+            .navigationBarItems(trailing: Button(LocalizableStringConstants.addTask) {
                 self.relationViewModel.addTask.toggle()
             })
             .sheet(isPresented: $relationViewModel.addTask) {

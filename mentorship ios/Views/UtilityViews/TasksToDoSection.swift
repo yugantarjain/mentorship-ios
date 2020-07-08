@@ -29,7 +29,6 @@ struct TasksToDoSection: View {
                 }
                 .onTapGesture {
                     //run tap action closure
-                    // swiftlint:disable:next all
                     self.onTapAction(task)
                 }
             }

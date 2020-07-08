@@ -13,7 +13,7 @@ struct AddTask: View {
     var body: some View {
         NavigationView {
             VStack(spacing: DesignConstants.Spacing.bigSpacing) {
-                //new task descriptio0n text field
+                //new task description text field
                 TextField("Task Description", text: $relationViewModel.newTask.description)
                     .textFieldStyle(RoundFilledTextFieldStyle())
                 
@@ -31,8 +31,8 @@ struct AddTask: View {
                 Spacer()
             }
             .modifier(AllPadding())
-            .navigationBarTitle("Add Task")
-            .navigationBarItems(trailing: Button("Cancel") {
+            .navigationBarTitle(LocalizableStringConstants.addTask)
+            .navigationBarItems(trailing: Button(LocalizableStringConstants.cancel) {
                 self.presentationMode.wrappedValue.dismiss()
             })
             .onAppear {

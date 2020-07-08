@@ -13,6 +13,7 @@ struct LocalizableStringConstants {
     static let canBeMentee = LocalizedStringKey("Can be mentee")
     static let canBeMentor = LocalizedStringKey("Can be mentor")
     static let aboutText = LocalizedStringKey("About text")
+    static let operationFail = LocalizedStringKey("Operation failed")
 
     //Direct values for english. To be used as keys for other languages.
     static let noAccountText = LocalizedStringKey("Don't have an account?")
@@ -33,9 +34,9 @@ struct LocalizableStringConstants {
     static let profile = LocalizedStringKey("Profile")
     static let editProfile = LocalizedStringKey("Edit Profile")
     static let addTask = LocalizedStringKey("Add Task")
+    static let markComplete = LocalizedStringKey("Mark as complete?")
     static let relationRequest = LocalizedStringKey("Relation Request")
     static let notAvailable = LocalizedStringKey("Not available")
-    static let operationFail = LocalizedStringKey("Operation failed. Please try again")
     static let privacyPolicy = LocalizedStringKey("Privacy Policy")
     static let termsOfUse = LocalizedStringKey("Terms of Use")
     
