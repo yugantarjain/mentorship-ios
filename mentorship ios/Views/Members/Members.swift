@@ -11,25 +11,19 @@ struct Members: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                if self.membersViewModel.inActivity {
-                    ActivityIndicator(isAnimating: self.$membersViewModel.inActivity, style: .medium)
-                } else {
-                    List {
-                        ForEach(membersViewModel.membersResponseData) { member in
-                            NavigationLink(destination: MemberDetail(memberData: member)) {
-                                MembersListCell(member: member, membersViewModel: self.membersViewModel)
-                            }
-                        }
+            List {
+                ForEach(membersViewModel.membersResponseData) { member in
+                    NavigationLink(destination: MemberDetail(memberData: member)) {
+                        MembersListCell(member: member, membersViewModel: self.membersViewModel)
                     }
                 }
-            }
-            .navigationBarTitle(LocalizableStringConstants.ScreenNames.members)
-            .onAppear {
-                if self.membersViewModel.membersResponseData.count == 0 {
+                
+                ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                .onAppear {
                     self.membersViewModel.fetchMembers()
                 }
             }
+            .navigationBarTitle(LocalizableStringConstants.ScreenNames.members)
         }
     }
 }

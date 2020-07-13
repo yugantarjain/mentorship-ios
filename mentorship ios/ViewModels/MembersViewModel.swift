@@ -14,6 +14,8 @@ final class MembersViewModel: ObservableObject {
     @Published var sendRequestResponseData = MembersModel.SendRequestResponseData(message: "")
     @Published var inActivity = false
     @Published var requestSentSuccesfully = false
+    //used in pagination for members list
+    var currentPage = 0
     private var cancellable: AnyCancellable?
 
     // MARK: - Functions
@@ -27,16 +29,14 @@ final class MembersViewModel: ObservableObject {
         self.inActivity = true
 
         // Debug comment: cache policy to be changed later to revalidateCache
-        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.members, token: token)
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.members(page: currentPage+1), token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.membersResponseData) }
-            .sink(receiveCompletion: { completion in
-                if completion == .finished {
-                    self.inActivity = false
-                }
-            }, receiveValue: { value in
-                self.membersResponseData = value
-            })
+            .sink {
+                self.inActivity = false
+                self.currentPage += 1
+                self.membersResponseData.append(contentsOf: $0)
+            }
     }
 
     func availabilityString(canBeMentee: Bool, canBeMentor: Bool) -> LocalizedStringKey {
