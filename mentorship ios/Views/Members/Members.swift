@@ -18,9 +18,14 @@ struct Members: View {
                     }
                 }
                 
-                ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                .onAppear {
-                    self.membersViewModel.fetchMembers()
+                //show acitivty spinner for loading if members list is not full
+                //activity spinner is the last element of list
+                //hence its onAppear method is used to load members. Pagination done.
+                if !membersViewModel.membersListFull {
+                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                    .onAppear {
+                        self.membersViewModel.fetchMembers()
+                    }
                 }
             }
             .navigationBarTitle(LocalizableStringConstants.ScreenNames.members)
