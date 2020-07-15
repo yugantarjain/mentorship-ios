@@ -44,6 +44,7 @@
 		538CD07224ABE9B800F6A665 /* AddTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538CD07124ABE9B800F6A665 /* AddTask.swift */; };
 		538E22E9248EBD7900842835 /* MemberDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538E22E8248EBD7900842835 /* MemberDetailCell.swift */; };
 		538FFE3224B11A1B00E4B6BF /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538FFE3124B11A1B00E4B6BF /* TaskModel.swift */; };
+		539B4EBC24BF535C00F29FDF /* TaskComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B4EBB24BF535C00F29FDF /* TaskComments.swift */; };
 		53A115D9249E1BD00065998C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A115D8249E1BD00065998C /* Settings.swift */; };
 		53C0206D249B88370000BEB5 /* ProfileProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C0206C249B88370000BEB5 /* ProfileProperties.swift */; };
 		53C0206F249B8D270000BEB5 /* CommonProfileSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C0206E249B8D270000BEB5 /* CommonProfileSection.swift */; };
@@ -140,6 +141,7 @@
 		538CD07124ABE9B800F6A665 /* AddTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTask.swift; sourceTree = "<group>"; };
 		538E22E8248EBD7900842835 /* MemberDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDetailCell.swift; sourceTree = "<group>"; };
 		538FFE3124B11A1B00E4B6BF /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		539B4EBB24BF535C00F29FDF /* TaskComments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskComments.swift; sourceTree = "<group>"; };
 		53A115D8249E1BD00065998C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		53C0206C249B88370000BEB5 /* ProfileProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProperties.swift; sourceTree = "<group>"; };
 		53C0206E249B8D270000BEB5 /* CommonProfileSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonProfileSection.swift; sourceTree = "<group>"; };
@@ -374,9 +376,17 @@
 				53D127B0249C956A003B4756 /* ActivityWithText.swift */,
 				538E22E8248EBD7900842835 /* MemberDetailCell.swift */,
 				53C0206E249B8D270000BEB5 /* CommonProfileSection.swift */,
-				538CD06F24ABDAE800F6A665 /* TasksSection.swift */,
 			);
 			path = UtilityViews;
+			sourceTree = "<group>";
+		};
+		539B4EBA24BF533D00F29FDF /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				538CD06F24ABDAE800F6A665 /* TasksSection.swift */,
+				539B4EBB24BF535C00F29FDF /* TaskComments.swift */,
+			);
+			path = Tasks;
 			sourceTree = "<group>";
 		};
 		53A115D7249E1B2F0065998C /* Settings */ = {
@@ -480,6 +490,7 @@
 				531C806E248AA98B00AE81EF /* Home */,
 				536BA472249AA567007ED21B /* Profile */,
 				5311839324AB4CF20006036F /* Relation */,
+				539B4EBA24BF533D00F29FDF /* Tasks */,
 				53ED6B0B248D04860055DFF0 /* Members */,
 				53A115D7249E1B2F0065998C /* Settings */,
 			);
@@ -621,6 +632,7 @@
 			files = (
 				530F44192482752500B1FD0B /* mentorship_ios.xcdatamodeld in Sources */,
 				531C8065248A477700AE81EF /* LoginModel.swift in Sources */,
+				539B4EBC24BF535C00F29FDF /* TaskComments.swift in Sources */,
 				53EB47012488EBAF005656B9 /* LocalizableStringConstants.swift in Sources */,
 				53EA66592492EA1E007AEB04 /* ProfileModel.swift in Sources */,
 				53891257248AB08600E24F96 /* SignUpModel.swift in Sources */,

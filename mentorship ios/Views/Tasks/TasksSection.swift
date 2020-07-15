@@ -31,8 +31,8 @@ struct TasksSection: View {
         Section(header: Text(LocalizableStringConstants.tasksToDo).font(.headline)) {
             ForEach(tasks ?? []) { task in
                 //Tapping leads to task comments page
-                NavigationLink(destination: Text("comments")) {
-                    //Main HStack shows icon and task
+                NavigationLink(destination: TaskComments(task: task)) {
+                    //Main HStack, shows icon and task
                     HStack {
                         Image(systemName: self.iconName)
                             .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
@@ -41,6 +41,7 @@ struct TasksSection: View {
                         Text(task.description ?? "-")
                             .font(.subheadline)
                     }
+                    .padding(DesignConstants.Padding.insetListCellFrameExpansion)
                     //context menu used to show and enable actions (eg. mark as complete)
                     .contextMenu {
                         if self.isToDoSection {
