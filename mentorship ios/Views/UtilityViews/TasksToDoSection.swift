@@ -19,17 +19,22 @@ struct TasksToDoSection: View {
     var body: some View {
         Section(header: Text(LocalizableStringConstants.tasksToDo).font(.headline)) {
             ForEach(tasksToDo ?? []) { task in
-                HStack {
-                    Image(systemName: ImageNameConstants.SFSymbolConstants.taskToDo)
-                        .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
-                        .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
+                VStack(alignment: .leading) {
+                    NavigationLink(destination: Text("comments")) {
+                        HStack {
+                            Image(systemName: ImageNameConstants.SFSymbolConstants.taskToDo)
+                                .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
+                                .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
 
-                    Text(task.description ?? "-")
-                        .font(.subheadline)
-                }
-                .onTapGesture {
-                    //run tap action closure
-                    self.onTapAction(task)
+                            Text(task.description ?? "-")
+                                .font(.subheadline)
+                        }
+                        .contextMenu {
+                            Button("Mark as Complete") {
+                                self.onTapAction(task)
+                            }
+                        }
+                    }
                 }
             }
         }
