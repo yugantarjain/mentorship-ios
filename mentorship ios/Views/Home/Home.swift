@@ -43,7 +43,7 @@ struct Home: View {
                 }
 
                 //Tasks to do list section
-                TasksSection(tasks: homeViewModel.homeResponseData.tasksToDo)
+                TasksSection(tasks: homeViewModel.homeResponseData.tasksToDo, isToDoSection: true)
 
                 //Tasks done list section
                 TasksSection(tasks: homeViewModel.homeResponseData.tasksDone)
