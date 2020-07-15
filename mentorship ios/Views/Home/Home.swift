@@ -43,10 +43,10 @@ struct Home: View {
                 }
 
                 //Tasks to do list section
-                TasksToDoSection(tasksToDo: homeViewModel.homeResponseData.tasksToDo)
+                TasksSection(tasks: homeViewModel.homeResponseData.tasksToDo)
 
                 //Tasks done list section
-                TasksDoneSection(tasksDone: homeViewModel.homeResponseData.tasksDone ?? [])
+                TasksSection(tasks: homeViewModel.homeResponseData.tasksDone)
 
             }
             .listStyle(GroupedListStyle())

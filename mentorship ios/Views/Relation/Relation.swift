@@ -39,7 +39,7 @@ struct Relation: View {
                     .listRowBackground(DesignConstants.Colors.formBackgroundColor)
                     
                     //Tasks To Do List section
-                    TasksToDoSection(tasksToDo: relationViewModel.toDoTasks) { task in
+                    TasksSection(tasks: relationViewModel.toDoTasks, isToDoSection: true) { task in
                         //set tapped task
                         RelationViewModel.taskTapped = task
                         //show alert for marking as complete confirmation
@@ -55,7 +55,7 @@ struct Relation: View {
                     }
                     
                     //Tasks Done List section
-                    TasksDoneSection(tasksDone: relationViewModel.doneTasks)
+                    TasksSection(tasks: relationViewModel.doneTasks)
                 }
                 
                 //show activity spinner if in activity
