@@ -26,6 +26,9 @@ class LoginScreenTests: XCTestCase {
     }
 
     func testLoginButtonWithEmptyFields() {
+        // Login Button should be hittable
+        XCTAssert(app.buttons["Login"].isHittable)
+        
         // Initial state. Fields empty. Login button should be disabled.
         XCTAssert(app.buttons["Login"].isEnabled == false)
     }

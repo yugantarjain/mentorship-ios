@@ -49,6 +49,7 @@
 		53C0206D249B88370000BEB5 /* ProfileProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C0206C249B88370000BEB5 /* ProfileProperties.swift */; };
 		53C0206F249B8D270000BEB5 /* ProfileCommonDetailsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C0206E249B8D270000BEB5 /* ProfileCommonDetailsSection.swift */; };
 		53CCE7BE24BF94BB00F1FC55 /* LoginScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CCE7BD24BF94BB00F1FC55 /* LoginScreenTests.swift */; };
+		53CCE7C024BF990500F1FC55 /* SignUpScreenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CCE7BF24BF990500F1FC55 /* SignUpScreenTests.swift */; };
 		53D127B1249C956A003B4756 /* ActivityWithText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D127B0249C956A003B4756 /* ActivityWithText.swift */; };
 		53D24E0A2499F4C40043C28F /* RelationDetailList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D24E092499F4C40043C28F /* RelationDetailList.swift */; };
 		53D24E0C2499F4FC0043C28F /* DetailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D24E0B2499F4FC0043C28F /* DetailListCell.swift */; };
@@ -147,6 +148,7 @@
 		53C0206C249B88370000BEB5 /* ProfileProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProperties.swift; sourceTree = "<group>"; };
 		53C0206E249B8D270000BEB5 /* ProfileCommonDetailsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCommonDetailsSection.swift; sourceTree = "<group>"; };
 		53CCE7BD24BF94BB00F1FC55 /* LoginScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenTests.swift; sourceTree = "<group>"; };
+		53CCE7BF24BF990500F1FC55 /* SignUpScreenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenTests.swift; sourceTree = "<group>"; };
 		53D127B0249C956A003B4756 /* ActivityWithText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWithText.swift; sourceTree = "<group>"; };
 		53D24E092499F4C40043C28F /* RelationDetailList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RelationDetailList.swift; sourceTree = "<group>"; };
 		53D24E0B2499F4FC0043C28F /* DetailListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailListCell.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			children = (
 				530F44382482752600B1FD0B /* MentorshipUITests.swift */,
 				53CCE7BD24BF94BB00F1FC55 /* LoginScreenTests.swift */,
+				53CCE7BF24BF990500F1FC55 /* SignUpScreenTests.swift */,
 				530F443A2482752600B1FD0B /* Info.plist */,
 			);
 			path = "mentorship iosUITests";
@@ -704,6 +707,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				530F44392482752600B1FD0B /* MentorshipUITests.swift in Sources */,
+				53CCE7C024BF990500F1FC55 /* SignUpScreenTests.swift in Sources */,
 				53CCE7BE24BF94BB00F1FC55 /* LoginScreenTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
