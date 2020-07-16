@@ -14,6 +14,7 @@
 		530F441D2482752600B1FD0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 530F441C2482752600B1FD0B /* Assets.xcassets */; };
 		530F44202482752600B1FD0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 530F441F2482752600B1FD0B /* Preview Assets.xcassets */; };
 		530F44232482752600B1FD0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 530F44212482752600B1FD0B /* LaunchScreen.storyboard */; };
+		530F442E2482752600B1FD0B /* MentorshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F442D2482752600B1FD0B /* MentorshipTests.swift */; };
 		530F44392482752600B1FD0B /* MentorshipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F44382482752600B1FD0B /* MentorshipUITests.swift */; };
 		5310E51E2492D398001AF464 /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5310E51D2492D398001AF464 /* UserDefaultsConstants.swift */; };
 		5311839524AB4D7B0006036F /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5311839424AB4D7B0006036F /* Relation.swift */; };
@@ -25,6 +26,7 @@
 		531C8067248A8F0A00AE81EF /* URLStringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531C8066248A8F0A00AE81EF /* URLStringConstants.swift */; };
 		531C8069248A918200AE81EF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531C8068248A918200AE81EF /* NetworkManager.swift */; };
 		531C8070248AA9BE00AE81EF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531C806F248AA9BE00AE81EF /* Home.swift */; };
+		532A24D024B4B6F1000C8B83 /* RelationRequestActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A24CF24B4B6F1000C8B83 /* RelationRequestActions.swift */; };
 		533704E1248D1B4900A314ED /* MembersListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533704E0248D1B4900A314ED /* MembersListCell.swift */; };
 		534AC02D2486D5CB00A34A46 /* BigBoldButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534AC02C2486D5CB00A34A46 /* BigBoldButtonStyle.swift */; };
 		534AC02F2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534AC02E2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift */; };
@@ -108,6 +110,7 @@
 		530F44222482752600B1FD0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		530F44242482752600B1FD0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		530F44292482752600B1FD0B /* mentorship iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mentorship iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		530F442D2482752600B1FD0B /* MentorshipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorshipTests.swift; sourceTree = "<group>"; };
 		530F442F2482752600B1FD0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		530F44342482752600B1FD0B /* mentorship iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mentorship iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		530F44382482752600B1FD0B /* MentorshipUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorshipUITests.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 		531C8066248A8F0A00AE81EF /* URLStringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLStringConstants.swift; sourceTree = "<group>"; };
 		531C8068248A918200AE81EF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		531C806F248AA9BE00AE81EF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		532A24CF24B4B6F1000C8B83 /* RelationRequestActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationRequestActions.swift; sourceTree = "<group>"; };
 		533704E0248D1B4900A314ED /* MembersListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListCell.swift; sourceTree = "<group>"; };
 		534AC02C2486D5CB00A34A46 /* BigBoldButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBoldButtonStyle.swift; sourceTree = "<group>"; };
 		534AC02E2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundFilledTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -237,6 +241,7 @@
 				83AA531E249F870A001D6B0B /* Views */,
 				839761B7249F7DEA0020535C /* ViewModels */,
 				53E3BAF5248ADAD4007F91C8 /* Models */,
+				532A24CE24B4B6CC000C8B83 /* Networking */,
 				530F44132482752500B1FD0B /* AppDelegate.swift */,
 				530F44152482752500B1FD0B /* SceneDelegate.swift */,
 				530F441A2482752500B1FD0B /* ContentView.swift */,
@@ -327,6 +332,14 @@
 				53D24E092499F4C40043C28F /* RelationDetailList.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		532A24CE24B4B6CC000C8B83 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				532A24CF24B4B6F1000C8B83 /* RelationRequestActions.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		536B22F62484F6BE00060CD7 /* Registration */ = {
@@ -675,6 +688,7 @@
 				534BE20424A74C8D004C1EB2 /* SettingsModel.swift in Sources */,
 				5314C184248B9EC2000AA386 /* AllPadding.swift in Sources */,
 				53F205E0249AE22500DDE52E /* ProfileEditField.swift in Sources */,
+				532A24D024B4B6F1000C8B83 /* RelationRequestActions.swift in Sources */,
 				538CD07024ABDAE800F6A665 /* TasksToDoSection.swift in Sources */,
 				538FFE3224B11A1B00E4B6BF /* TaskModel.swift in Sources */,
 				53D85EA124AD2FD100DC6605 /* RelationViewModel.swift in Sources */,
