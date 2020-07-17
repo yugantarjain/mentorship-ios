@@ -28,9 +28,15 @@ class LoginViewModelTests: XCTestCase {
         //Test
         XCTAssertEqual(loginDisabledState, true)
         
-        // MARK: - 2. When fields filled. Disabled state should be false.
+        // MARK: - 2. When one filed filled and one empty. Disabled state should be true
+        loginVM.loginData = LoginModel.LoginUploadData(username: "username", password: "")
+        
+        loginDisabledState = loginVM.loginDisabled
 
-        //set login data
+        //Test
+        XCTAssertEqual(loginDisabledState, false)
+        
+        // MARK: - 3. When all fields filled. Disabled state should be false.
         loginVM.loginData = LoginModel.LoginUploadData(username: "username", password: "password")
         
         loginDisabledState = loginVM.loginDisabled

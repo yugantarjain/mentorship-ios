@@ -51,5 +51,14 @@ class SignUpViewModelTests: XCTestCase {
         
         //Test
         XCTAssertEqual(signUpDisabledState, false)
+        
+        // MARK: - 3. When 'password' and 'confirm password' both empty (equal) and other fields filled. Disabled state should be true.
+        signupVM.signUpData = SignUpModel.SignUpUploadData(name: "testName", username: "test", password: "", email: "test", tncChecked: true, needMentoring: false, availableToMentor: false)
+        signupVM.confirmPassword = ""
+        
+        signUpDisabledState = signupVM.signupDisabled
+        
+        // empty passwords not allowed (though equal). Hence, button should be disabled.
+        XCTAssertEqual(signUpDisabledState, true)
     }
 }
