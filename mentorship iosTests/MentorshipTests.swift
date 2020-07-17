@@ -42,7 +42,7 @@ class MentorshipTests: XCTestCase {
     var urlSession: URLSession!
     
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        // Set url session for mock networking
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]
         urlSession = URLSession(configuration: configuration)
@@ -65,10 +65,9 @@ class MentorshipTests: XCTestCase {
         
         // Init API Class with mock testing session
         let requestActionAPI = RelationRequestActionAPI(urlSession: urlSession)
-        
         // Init expectation (used to test async code)
         let expectation = XCTestExpectation(description: "response")
-
+        
         // mock api call and test in handler
         requestActionAPI.actOnPendingRequest(action: .accept, reqID: 0) {
             XCTAssertEqual($0.message, mockJSON.message)
