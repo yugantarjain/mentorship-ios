@@ -24,7 +24,12 @@ struct DetailListCell: View {
     //alert action,. To accept, delete, reject, or withdraw a request
     func alertAction() {
         guard let reqID = self.requestData.id else { return }
-        self.relationRequestActionAPI.actOnPendingRequest(action: self.actionType, reqID: reqID)
+        self.relationRequestActionAPI.actOnPendingRequest(action: self.actionType, reqID: reqID) { message in
+            print(message)
+            if NetworkManager.responseCode == 200 {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
     
     var alertActionButton: Alert.Button {
@@ -119,11 +124,6 @@ struct DetailListCell: View {
                 primaryButton: .cancel(),
                 secondaryButton: alertActionButton
             )
-        }
-        .onReceive(relationRequestActionAPI.$success) { actionSuccessful in
-            if actionSuccessful {
-                self.presentationMode.wrappedValue.dismiss()
-            }
         }
     }
 }

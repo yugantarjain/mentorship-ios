@@ -7,22 +7,27 @@
 import Foundation
 import Combine
 
-class RelationRequestActionAPI: ObservableObject {
+class RelationRequestActionAPI {
     private var cancellable: AnyCancellable?
     var response = ResponseMessage(message: "")
-    @Published var success = false
+    let urlSession: URLSession
+    
+    init(urlSession: URLSession = .shared) {
+        self.urlSession = urlSession
+    }
     
     enum ActionType {
         case accept, reject, delete     //for pending requests
         case cancel                     //for accepted request
     }
     
-    func actOnPendingRequest(action: ActionType, reqID: Int) {
+    func actOnPendingRequest(
+        action: ActionType,
+        reqID: Int,
+        completion: @escaping (ResponseMessage) -> Void
+    ) {
         var urlString = ""
         var httpMethod = "PUT"
-        
-        //initialise success to false
-        success = false
         
         //set url string
         switch action {
@@ -43,11 +48,12 @@ class RelationRequestActionAPI: ObservableObject {
         cancellable = NetworkManager.callAPI(urlString: urlString, httpMethod: httpMethod, token: token)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.response) }
-            .sink { [weak self] in
-                self?.response = $0
-                if NetworkManager.responseCode == 200 {
-                    self?.success = true
-                }
+            .sink {
+                completion($0)
+///                self?.response = $0
+///                if NetworkManager.responseCode == 200 {
+///                    self?.success = true
+///                }
         }
     }
 }
