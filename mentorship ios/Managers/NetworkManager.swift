@@ -14,7 +14,8 @@ struct NetworkManager {
         urlString: String,
         httpMethod: String = "GET",
         uploadData: Data = Data(),
-        token: String = ""
+        token: String = "",
+        session: URLSession = .shared
     ) -> AnyPublisher<T, Error> {
         //set response code to 0
         responseCode = 0
@@ -32,7 +33,7 @@ struct NetworkManager {
         request.httpBody = uploadData
 
         //make the call using the url request
-        return URLSession.shared
+        return session
             .dataTaskPublisher(for: request)
             .tryMap {
                 if let response = $0.response as? HTTPURLResponse {

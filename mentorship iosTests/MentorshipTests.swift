@@ -39,18 +39,42 @@ class MockURLProtocol: URLProtocol {
 
 
 class MentorshipTests: XCTestCase {
+    var urlSession: URLSession!
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [MockURLProtocol.self]
+        urlSession = URLSession(configuration: configuration)
     }
     
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testRequestAction() throws {
+        // Set mock json for server response
+        let mockJSON = ResponseMessage(message: "response message")
+        // Create mock data from mock json
+        let mockData = try JSONEncoder().encode(mockJSON)
+        
+        // Use mock protocol, and return mock data and url response from handler
+        MockURLProtocol.requestHandler = { request in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // Init API Class with mock testing session
+        let requestActionAPI = RelationRequestActionAPI(urlSession: urlSession)
+        
+        // Init expectation (used to test async code)
+        let expectation = XCTestExpectation(description: "response")
+
+        // mock api call and test in handler
+        requestActionAPI.actOnPendingRequest(action: .accept, reqID: 0) {
+            XCTAssertEqual($0.message, mockJSON.message)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
     }
     
     func testPerformanceExample() throws {

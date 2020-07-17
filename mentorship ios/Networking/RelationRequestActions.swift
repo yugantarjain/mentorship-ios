@@ -45,19 +45,15 @@ class RelationRequestActionAPI {
         }
         
         //api call
-        cancellable = NetworkManager.callAPI(urlString: urlString, httpMethod: httpMethod, token: token)
+        cancellable = NetworkManager.callAPI(urlString: urlString, httpMethod: httpMethod, token: token, session: urlSession)
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.response) }
             .sink {
                 completion($0)
-///                self?.response = $0
-///                if NetworkManager.responseCode == 200 {
-///                    self?.success = true
-///                }
         }
     }
 }
 
-struct ResponseMessage: Decodable {
+struct ResponseMessage: Codable {
     let message: String?
 }
