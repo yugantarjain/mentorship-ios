@@ -7,18 +7,22 @@
 import Foundation
 import Combine
 
-class RelationRequestActionAPI {
+enum ActionType {
+    case accept, reject, delete     //for pending requests
+    case cancel                     //for accepted request
+}
+
+protocol RequestActionService {
+    func actOnPendingRequest(action: ActionType, reqID: Int, completion: @escaping (ResponseMessage) -> Void)
+}
+
+class RequestActionAPI: RequestActionService {
     private var cancellable: AnyCancellable?
     var response = ResponseMessage(message: "")
     let urlSession: URLSession
     
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
-    }
-    
-    enum ActionType {
-        case accept, reject, delete     //for pending requests
-        case cancel                     //for accepted request
     }
     
     func actOnPendingRequest(

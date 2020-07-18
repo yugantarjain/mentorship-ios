@@ -11,6 +11,7 @@ struct DetailListCell: View {
     var requestData: HomeModel.HomeResponseData.RequestStructure
     var index: Int
     var sent = false
+    @State private var actionType: ActionType!
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertButtonText = LocalizedStringKey("")
@@ -23,12 +24,17 @@ struct DetailListCell: View {
     //alert action,. To accept, delete, reject, or withdraw a request
     func alertAction() {
         guard let reqID = self.requestData.id else { return }
-        requestActionVM.performRequestAction(reqID: reqID)
+        requestActionVM.requestActionAPI.actOnPendingRequest(action: actionType, reqID: reqID) {_ in
+            // if call successful, pop navigation controller and go back to home screen
+            if NetworkManager.responseCode == 200 {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        }
     }
     
     var alertActionButton: Alert.Button {
         //if action is to accept. Make alert button default
-        if requestActionVM.actionType == .accept {
+        if actionType == .accept {
             return Alert.Button.default(Text(alertButtonText)) {
                 self.alertAction()
             }
@@ -65,7 +71,7 @@ struct DetailListCell: View {
                     Button(LocalizableStringConstants.RequestActions.delete) {
                         self.alertTitle = "Delete Request?"
                         self.alertButtonText = LocalizableStringConstants.RequestActions.delete
-                        self.requestActionVM.actionType = .delete
+                        self.actionType = .delete
                         self.showAlert.toggle()
                     }
                     .foregroundColor(.red)
@@ -78,7 +84,7 @@ struct DetailListCell: View {
                         Button(LocalizableStringConstants.RequestActions.accept) {
                             self.alertTitle = "Accept Request?"
                             self.alertButtonText = LocalizableStringConstants.RequestActions.accept
-                            self.requestActionVM.actionType = .accept
+                            self.actionType = .accept
                             self.showAlert.toggle()
                         }
                         .foregroundColor(DesignConstants.Colors.accepted)
@@ -91,7 +97,7 @@ struct DetailListCell: View {
                         Button(LocalizableStringConstants.RequestActions.reject) {
                             self.alertTitle = "Reject Request?"
                             self.alertButtonText = LocalizableStringConstants.RequestActions.reject
-                            self.requestActionVM.actionType = .reject
+                            self.actionType = .reject
                             self.showAlert.toggle()
                         }
                         .foregroundColor(DesignConstants.Colors.rejected)
@@ -104,7 +110,7 @@ struct DetailListCell: View {
                 Button(LocalizableStringConstants.RequestActions.cancel) {
                     self.alertTitle = "Withdraw Relation?"
                     self.alertButtonText = LocalizableStringConstants.RequestActions.cancel
-                    self.requestActionVM.actionType = .cancel
+                    self.actionType = .cancel
                     self.showAlert.toggle()
                 }
                 .foregroundColor(DesignConstants.Colors.cancelled)
@@ -118,11 +124,6 @@ struct DetailListCell: View {
                 primaryButton: .cancel(),
                 secondaryButton: alertActionButton
             )
-        }
-        .onReceive(requestActionVM.$success) { success in
-            if success {
-                self.presentationMode.wrappedValue.dismiss()
-            }
         }
     }
 }
