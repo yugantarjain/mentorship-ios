@@ -31,7 +31,7 @@ class MentorshipTests: XCTestCase {
     }
     
     //this test requires a stable internet connection
-    func testDownloadWebData() {
+    func testBackendServerURL() {
         
         // Create an expectation for a background download task.
         let expectation = XCTestExpectation(description: "Download mentorship backend base url")
