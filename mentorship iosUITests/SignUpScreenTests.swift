@@ -16,6 +16,9 @@ class SignUpScreenTests: XCTestCase {
         continueAfterFailure = false
 
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
+        // Makes sure we're on the login screen. Changes userdefault bool value for isLoggedIn.
+        app.launchArguments += ["-isLoggedIn", "NO"]
+        // Launch
         app.launch()
         // Go to sign up screen
         app.buttons["Signup"].tap()
@@ -23,6 +26,7 @@ class SignUpScreenTests: XCTestCase {
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app.terminate()
     }
 
     // Sign Up button should be disabled if even a single field is empty or tnc is unchecked.
