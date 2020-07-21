@@ -93,6 +93,7 @@ class SignUpScreenTests: XCTestCase {
         // Press 'x' button
         app.navigationBars["Sign Up"].buttons["x.circle.fill"].tap()
         // Sheet should dismiss. Hence, login view should be visible.
+        // Without this line, test fails. SwiftUI UI test inconsistency maybe.
         app.textFields["Username/Email"].tap()
         XCTAssert(app.buttons["Login"].isHittable)
     }
