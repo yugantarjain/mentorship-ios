@@ -38,7 +38,7 @@ class ProfileViewModelTests: XCTestCase {
         let sampleData = ProfileModel.ProfileData(id: 100, name: nil, username: "username", email: "test@abc.com")
         
         //save sample data to profile
-        //reason: getEditProfileData uses getProfile function to get stored data. Hence it will get this sample data now.
+        //reason: getEditProfileData uses getProfile function to get stored data. Hence it will return this sample data now.
         profileVM.saveProfile(profile: sampleData)
         
         // get edit profile data
