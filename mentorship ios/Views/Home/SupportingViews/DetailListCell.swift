@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct DetailListCell: View {
-    @ObservedObject var requestActionVM = RequestActionViewModel()
+    let requestActionAPI = RequestActionAPI()
     var requestData: HomeModel.HomeResponseData.RequestStructure
     var index: Int
     var sent = false
@@ -21,10 +21,10 @@ struct DetailListCell: View {
         return Date(timeIntervalSince1970: requestData.endDate ?? 0)
     }
     
-    //alert action,. To accept, delete, reject, or withdraw a request
+    // Alert action. To accept, delete, reject, or withdraw a request
     func alertAction() {
         guard let reqID = self.requestData.id else { return }
-        requestActionVM.requestActionAPI.actOnPendingRequest(action: actionType, reqID: reqID) {_ in
+        requestActionAPI.actOnPendingRequest(action: actionType, reqID: reqID) {_ in
             // if call successful, pop navigation controller and go back to home screen
             if NetworkManager.responseCode == 200 {
                 self.presentationMode.wrappedValue.dismiss()
