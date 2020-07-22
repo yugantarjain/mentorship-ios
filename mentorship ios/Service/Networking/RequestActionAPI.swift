@@ -12,10 +12,6 @@ enum ActionType {
     case cancel                     //for accepted request
 }
 
-protocol RequestActionService {
-    func actOnPendingRequest(action: ActionType, reqID: Int, completion: @escaping (ResponseMessage, Bool) -> Void)
-}
-
 class RequestActionAPI: RequestActionService {
     private var cancellable: AnyCancellable?
     var response = ResponseMessage(message: "")
@@ -62,6 +58,3 @@ class RequestActionAPI: RequestActionService {
     }
 }
 
-struct ResponseMessage: Codable {
-    let message: String?
-}
