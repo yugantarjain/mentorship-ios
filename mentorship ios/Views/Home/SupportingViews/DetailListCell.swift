@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct DetailListCell: View {
-    var requestActionAPI: RequestActionService = RequestActionAPI()
+    var requestActionService: RequestActionService = RequestActionAPI()
     var cellVM: DetailListCellViewModel
     var index: Int
     var sent = false
@@ -20,7 +20,7 @@ struct DetailListCell: View {
     // Alert action. To accept, delete, reject, or withdraw a request
     func alertAction() {
         guard let reqID = self.cellVM.requestData.id else { return }
-        requestActionAPI.actOnPendingRequest(action: actionType, reqID: reqID) {_, success in
+        requestActionService.actOnPendingRequest(action: actionType, reqID: reqID) {_, success in
             // if call successful, pop navigation controller and go back to home screen
             if success {
                 self.presentationMode.wrappedValue.dismiss()

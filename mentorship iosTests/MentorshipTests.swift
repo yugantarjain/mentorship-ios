@@ -64,10 +64,12 @@ class MentorshipTests: XCTestCase {
             return (HTTPURLResponse(), mockData)
         }
         
-        let detailListCell = DetailListCell(
-            requestActionAPI: RequestActionAPI(urlSession: urlSession),
-            cellVM: DetailListCellViewModel(data: <#T##HomeModel.HomeResponseData.RequestStructure#>),
-            index: 0)
+        // Declare service and test response
+        let requestActionService: RequestActionService = RequestActionAPI(urlSession: urlSession)
+        requestActionService.actOnPendingRequest(action: .accept, reqID: 0) { response, _ in
+            // Test if correct response is returned.
+            XCTAssertEqual(response.message, mockJSON.message)
+        }
     }
     
     func testPerformanceExample() throws {
