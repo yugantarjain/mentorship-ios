@@ -62,12 +62,16 @@ struct Home: View {
                             .font(.system(size: DesignConstants.Fonts.Size.navBarIcon))
             })
             .onAppear {
+                // make network request and set isLoading to true
                 self.isLoading = true
+                
+                // fetch dashboard and map to home view model
                 self.homeService.fetchDashboard { home in
                     home.mapTo(viewModel: self.homeViewModel)
                     self.isLoading = false
                 }
                 
+                // fetch profile and map to home view model.
                 self.profileService.getProfile { profile in
                     profile.mapTo(viewModel: self.homeViewModel)
                     ProfileViewModel().saveProfile(profile: profile)
