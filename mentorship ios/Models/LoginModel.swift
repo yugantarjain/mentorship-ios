@@ -22,3 +22,10 @@ final class LoginModel {
         }
     }
 }
+
+// MARK: - API
+extension LoginModel.LoginResponseData {
+    func mapTo(viewModel: LoginViewModel) {
+        viewModel.loginResponseData = self
+    }
+}

@@ -7,7 +7,9 @@
 import SwiftUI
 
 struct Login: View {
+    let loginService: LoginService = LoginAPI()
     @State private var showSignUpPage: Bool = false
+    @State private var inActivity = false
     @ObservedObject var loginViewModel = LoginViewModel()
 
     var body: some View {
@@ -30,14 +32,29 @@ struct Login: View {
 
             //login button
             Button("Login") {
-                self.loginViewModel.login()
+                // set inActivity to true (shows activity indicator)
+                self.inActivity = true
+                
+                self.loginService.login(loginData: self.loginViewModel.loginData) { response in
+                    self.inActivity = false
+                    // map response to login view model
+                    response.mapTo(viewModel: self.loginViewModel)
+                    // if login successful, store access token in keychain
+                    if var token = response.accessToken {
+                        token = "Bearer " + token
+                        do {
+                            try KeychainManager.setToken(username: self.loginViewModel.loginData.username, tokenString: token)
+                            UserDefaults.standard.set(true, forKey: UserDefaultsConstants.isLoggedIn)
+                        } catch { return }
+                    }
+                }
             }
             .buttonStyle(BigBoldButtonStyle(disabled: loginViewModel.loginDisabled))
             .disabled(loginViewModel.loginDisabled)
 
             //activity indicator or show user message text
-            if self.loginViewModel.inActivity {
-                ActivityIndicator(isAnimating: $loginViewModel.inActivity, style: .medium)
+            if inActivity {
+                ActivityIndicator(isAnimating: $inActivity)
             } else {
                 Text(self.loginViewModel.loginResponseData.message ?? "")
                     .modifier(ErrorText())

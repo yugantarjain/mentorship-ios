@@ -21,8 +21,16 @@ protocol HomeService {
     func fetchDashboard(completion: @escaping (HomeModel.HomeResponseData) -> Void)
 }
 
-//MARK: - Profile Service
+// MARK: - Profile Service
 // To fetch user profile
 protocol ProfileService {
     func getProfile(completion: @escaping (ProfileModel.ProfileData) -> Void)
+}
+
+// MARK: - Login Service
+protocol LoginService {
+    func login(
+        loginData: LoginModel.LoginUploadData,
+        completion: @escaping (LoginModel.LoginResponseData) -> Void
+    )
 }
