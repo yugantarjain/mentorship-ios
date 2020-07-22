@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct DetailListCell: View {
-    var requestActionService: RequestActionService = RequestActionAPI()
+    let requestActionService: RequestActionService = RequestActionAPI()
     var cellVM: DetailListCellViewModel
     var index: Int
     var sent = false

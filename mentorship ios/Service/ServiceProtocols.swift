@@ -16,3 +16,13 @@ protocol RequestActionService {
 }
 
 // MARK: - Home Service
+// To fetch dashboard data and populate home screen
+protocol HomeService {
+    func fetchDashboard(completion: @escaping (HomeModel.HomeResponseData) -> Void)
+}
+
+//MARK: - Profile Service
+// To fetch user profile
+protocol ProfileService {
+    func getProfile(completion: @escaping (ProfileModel.ProfileData) -> Void)
+}
