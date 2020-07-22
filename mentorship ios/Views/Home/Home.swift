@@ -10,6 +10,7 @@ struct Home: View {
     let homeService: HomeService = HomeAPI()
     let profileService: ProfileService = ProfileAPI()
     @ObservedObject var homeViewModel = HomeViewModel()
+    @State private var isLoading = false
     private var relationsData: UIHelper.HomeScreen.RelationsListData {
         return homeViewModel.relationsListData
     }
@@ -40,7 +41,7 @@ struct Home: View {
                                 count: self.relationsData.relationCount[index]
                             )
                         }
-//                        .disabled(self.homeViewModel.isLoading ? true : false)
+                        .disabled(self.isLoading ? true : false)
                     }
                 }
 
@@ -61,14 +62,14 @@ struct Home: View {
                             .font(.system(size: DesignConstants.Fonts.Size.navBarIcon))
             })
             .onAppear {
+                self.isLoading = true
                 self.homeService.fetchDashboard { home in
-//                    self.homeViewModel.updateCount(homeData: home)
-//                    self.homeViewModel.homeResponseData = home
                     home.mapTo(viewModel: self.homeViewModel)
+                    self.isLoading = false
                 }
                 
                 self.profileService.getProfile { profile in
-                    self.homeViewModel.profileData = profile
+                    profile.mapTo(viewModel: self.homeViewModel)
                     ProfileViewModel().saveProfile(profile: profile)
                 }
             }

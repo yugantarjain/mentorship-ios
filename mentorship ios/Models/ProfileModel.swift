@@ -35,3 +35,10 @@ final class ProfileModel {
     }
 
 }
+
+// MARK: - API
+extension ProfileModel.ProfileData {
+    func mapTo(viewModel: HomeViewModel) {
+        viewModel.profileData = self
+    }
+}
