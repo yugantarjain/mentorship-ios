@@ -64,17 +64,10 @@ class MentorshipTests: XCTestCase {
             return (HTTPURLResponse(), mockData)
         }
         
-        // Init API Class with mock testing session
-        let requestActionAPI = RelationRequestActionAPI(urlSession: urlSession)
-        // Init expectation (used to test async code)
-        let expectation = XCTestExpectation(description: "response")
-        
-        // mock api call and test in handler
-        requestActionAPI.actOnPendingRequest(action: .accept, reqID: 0) {
-            XCTAssertEqual($0.message, mockJSON.message)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 1)
+        let detailListCell = DetailListCell(
+            requestActionAPI: RequestActionAPI(urlSession: urlSession),
+            cellVM: DetailListCellViewModel(data: <#T##HomeModel.HomeResponseData.RequestStructure#>),
+            index: 0)
     }
     
     func testPerformanceExample() throws {

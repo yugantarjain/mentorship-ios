@@ -13,7 +13,7 @@ enum ActionType {
 }
 
 protocol RequestActionService {
-    func actOnPendingRequest(action: ActionType, reqID: Int, completion: @escaping (ResponseMessage) -> Void)
+    func actOnPendingRequest(action: ActionType, reqID: Int, completion: @escaping (ResponseMessage, Bool) -> Void)
 }
 
 class RequestActionAPI: RequestActionService {
@@ -28,7 +28,7 @@ class RequestActionAPI: RequestActionService {
     func actOnPendingRequest(
         action: ActionType,
         reqID: Int,
-        completion: @escaping (ResponseMessage) -> Void
+        completion: @escaping (ResponseMessage, Bool) -> Void
     ) {
         var urlString = ""
         var httpMethod = "PUT"
@@ -53,7 +53,11 @@ class RequestActionAPI: RequestActionService {
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.response) }
             .sink {
-                completion($0)
+                var success = false
+                if NetworkManager.responseCode == 200 {
+                    success = true
+                }
+                completion($0, success)
         }
     }
 }

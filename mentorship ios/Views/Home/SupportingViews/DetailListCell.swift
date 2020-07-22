@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct DetailListCell: View {
-    let requestActionAPI = RequestActionAPI()
-    var requestData: HomeModel.HomeResponseData.RequestStructure
+    var requestActionAPI: RequestActionService = RequestActionAPI()
+    var cellVM: DetailListCellViewModel
     var index: Int
     var sent = false
     @State private var actionType: ActionType!
@@ -16,17 +16,13 @@ struct DetailListCell: View {
     @State private var alertTitle = ""
     @State private var alertButtonText = LocalizedStringKey("")
     @Environment(\.presentationMode) var presentationMode
-
-    var endDate: Date {
-        return Date(timeIntervalSince1970: requestData.endDate ?? 0)
-    }
     
     // Alert action. To accept, delete, reject, or withdraw a request
     func alertAction() {
-        guard let reqID = self.requestData.id else { return }
-        requestActionAPI.actOnPendingRequest(action: actionType, reqID: reqID) {_ in
+        guard let reqID = self.cellVM.requestData.id else { return }
+        requestActionAPI.actOnPendingRequest(action: actionType, reqID: reqID) {_, success in
             // if call successful, pop navigation controller and go back to home screen
-            if NetworkManager.responseCode == 200 {
+            if success {
                 self.presentationMode.wrappedValue.dismiss()
             }
         }
@@ -50,18 +46,18 @@ struct DetailListCell: View {
     var body: some View {
         VStack(alignment: .leading, spacing: DesignConstants.Form.Spacing.smallSpacing) {
             HStack {
-                Text("Mentee: \(requestData.mentee?.userName ?? "-")")
+                Text("Mentee: \(cellVM.requestData.mentee?.userName ?? "-")")
                 Spacer()
-                Text("Mentor: \(requestData.mentor?.userName ?? "-")")
+                Text("Mentor: \(cellVM.requestData.mentor?.userName ?? "-")")
             }
             .font(.subheadline)
             .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
 
-            Text(!requestData.notes!.isEmpty ? requestData.notes! : "No Note Present")
+            Text(!cellVM.requestData.notes!.isEmpty ? cellVM.requestData.notes! : "No Note Present")
                 .font(.headline)
-                .opacity(requestData.notes!.isEmpty ? DesignConstants.Opacity.disabledViewOpacity/2 : 1.0)
+                .opacity(cellVM.requestData.notes!.isEmpty ? DesignConstants.Opacity.disabledViewOpacity/2 : 1.0)
 
-            Text("End Date: \(DesignConstants.DateFormat.mediumDate.string(from: endDate))")
+            Text("End Date: \(DesignConstants.DateFormat.mediumDate.string(from: cellVM.endDate))")
                 .font(.caption)
             
             //Buttons to accept, reject, delete for pending requests
