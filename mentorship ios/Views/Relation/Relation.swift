@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct Relation: View {
-    //sample data
+    var relationService = RelationAPI()
     @ObservedObject var relationViewModel = RelationViewModel()
     @State var showAlert = false
     
@@ -78,8 +78,23 @@ struct Relation: View {
                     dismissButton: .default(Text(LocalizableStringConstants.okay)))
             }
             .onAppear {
-                if !self.relationViewModel.firstTimeLoad {
-                    self.relationViewModel.fetchCurrentRelation()
+                // for first time load set inactivity.
+                if self.relationViewModel.firstTimeLoad {
+                    self.relationViewModel.inActivity = true
+                }
+                
+                // make api call to fetch current relation
+                self.relationService.fetchCurrentRelation { response in
+                    // map repsonse to view model
+                    response.mapTo(viewModel: self.relationViewModel)
+                    self.relationViewModel.inActivity = false
+                    self.relationViewModel.firstTimeLoad = false
+                    //chain api call. get current tasks using id from current relation
+                    if let currentID = response.id {
+                        self.relationService.fetchTasks(id: currentID) { tasks, success in
+                            self.relationViewModel.handleFetchedTasks(tasks: tasks, success: success)
+                        }
+                    }
                 }
             }
         }
