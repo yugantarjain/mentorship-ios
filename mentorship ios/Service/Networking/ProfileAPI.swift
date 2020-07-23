@@ -9,8 +9,6 @@ import Combine
 
 class ProfileAPI: ProfileService {
     private var cancellable: AnyCancellable?
-    let updateProfileResponseData = ProfileModel.UpdateProfileResponseData(message: "")
-    let currentProfile = ProfileViewModel().getProfile()
     
     // get user profile from backend
     func getProfile(completion: @escaping (ProfileModel.ProfileData) -> Void) {
@@ -23,7 +21,7 @@ class ProfileAPI: ProfileService {
         //parallel request for profile and home
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.user, token: token)
             .receive(on: RunLoop.main)
-            .catch { _ in Just(self.currentProfile) }
+            .catch { _ in Just(ProfileViewModel().getProfile()) }
             .sink { profile in
                 completion(profile)
             }
@@ -44,10 +42,13 @@ class ProfileAPI: ProfileService {
             return
         }
         
+        // set default update profile response data
+        let updateProfileResponseData = ProfileModel.UpdateProfileResponseData(message: "")
+        
         //api call
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.user, httpMethod: "PUT", uploadData: uploadData, token: token)
             .receive(on: RunLoop.main)
-            .catch { _ in Just(self.updateProfileResponseData) }
+            .catch { _ in Just(updateProfileResponseData) }
             .sink {
                 var success = false
                 if NetworkManager.responseCode == 200 {
