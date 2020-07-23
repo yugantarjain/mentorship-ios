@@ -9,7 +9,6 @@ import Combine
 
 class LoginAPI: LoginService {
     private var cancellable: AnyCancellable?
-    var loginResponseData = LoginModel.LoginResponseData(message: "", accessToken: "")
     
     func login(
         loginData: LoginModel.LoginUploadData,
@@ -23,9 +22,35 @@ class LoginAPI: LoginService {
         // make network request
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.login, httpMethod: "POST", uploadData: uploadData)
             .receive(on: RunLoop.main)
-            .catch { _ in Just(self.loginResponseData) }
-            .sink {
-                completion($0)
+            .catch { _ in Just(LoginNetworkModel(message: "", accessToken: "")) }
+            .sink { response in
+                var loginResponseData = LoginModel.LoginResponseData(message: response.message)
+                // if login successful, store access token in keychain
+                if var token = response.accessToken {
+                    token = "Bearer " + token
+                    do {
+                        try KeychainManager.setToken(username: loginData.username, tokenString: token)
+                        UserDefaults.standard.set(true, forKey: UserDefaultsConstants.isLoggedIn)
+                    } catch {
+                        loginResponseData.message = "Failed to save access token"
+                    }
+                }
+                // completion handler
+                completion(loginResponseData)
+        }
+    }
+}
+
+// MARK: - Network Model
+
+extension LoginAPI {
+    struct LoginNetworkModel: Decodable {
+        let message: String?
+        let accessToken: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case message
+            case accessToken = "access_token"
         }
     }
 }

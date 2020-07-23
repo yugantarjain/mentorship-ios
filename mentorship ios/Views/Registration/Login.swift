@@ -39,14 +39,6 @@ struct Login: View {
                     self.inActivity = false
                     // map response to login view model
                     response.mapTo(viewModel: self.loginViewModel)
-                    // if login successful, store access token in keychain
-                    if var token = response.accessToken {
-                        token = "Bearer " + token
-                        do {
-                            try KeychainManager.setToken(username: self.loginViewModel.loginData.username, tokenString: token)
-                            UserDefaults.standard.set(true, forKey: UserDefaultsConstants.isLoggedIn)
-                        } catch { return }
-                    }
                 }
             }
             .buttonStyle(BigBoldButtonStyle(disabled: loginViewModel.loginDisabled))

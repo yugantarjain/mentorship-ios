@@ -11,7 +11,7 @@ class LoginViewModel: ObservableObject {
     
     // MARK: - Variables
     @Published var loginData = LoginModel.LoginUploadData(username: "", password: "")
-    @Published var loginResponseData = LoginModel.LoginResponseData(message: "", accessToken: "")
+    @Published var loginResponseData = LoginModel.LoginResponseData(message: "")
     
     var loginDisabled: Bool {
         if self.loginData.username.isEmpty || self.loginData.password.isEmpty {
