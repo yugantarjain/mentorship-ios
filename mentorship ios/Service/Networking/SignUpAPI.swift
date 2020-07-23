@@ -43,9 +43,17 @@ class SignUpAPI: SignUpService {
         //api call
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.signUp, httpMethod: "POST", uploadData: uploadData)
             .receive(on: RunLoop.main)
-            .catch { _ in Just(self.signUpResponseData) }
+            .catch { _ in Just(SignUpNetworkModel(message: LocalizableStringConstants.networkErrorString)) }
             .sink {
-                completion($0)
+                let signUpResponseData = SignUpModel.SignUpResponseData(message: $0.message)
+                completion(signUpResponseData)
         }
+    }
+}
+
+// MARK: Network Model
+extension SignUpAPI {
+    struct SignUpNetworkModel: Decodable {
+        var message: String?
     }
 }

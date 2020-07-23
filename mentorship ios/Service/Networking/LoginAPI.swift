@@ -22,7 +22,7 @@ class LoginAPI: LoginService {
         // make network request
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.login, httpMethod: "POST", uploadData: uploadData)
             .receive(on: RunLoop.main)
-            .catch { _ in Just(LoginNetworkModel(message: "", accessToken: "")) }
+            .catch { _ in Just(LoginNetworkModel(message: LocalizableStringConstants.networkErrorString)) }
             .sink { response in
                 var loginResponseData = LoginModel.LoginResponseData(message: response.message)
                 // if login successful, store access token in keychain
@@ -46,7 +46,7 @@ class LoginAPI: LoginService {
 extension LoginAPI {
     struct LoginNetworkModel: Decodable {
         let message: String?
-        let accessToken: String?
+        var accessToken: String?
         
         enum CodingKeys: String, CodingKey {
             case message
