@@ -13,6 +13,7 @@ class HomeViewModel: ObservableObject {
     @Published var homeResponseData = HomeModel.HomeResponseData(asMentor: nil, asMentee: nil, tasksToDo: nil, tasksDone: nil)
     @Published var relationsListData = UIHelper.HomeScreen.RelationsListData()
     @Published var profileData = ProfileViewModel().profileData
+    var firstTimeLoad = true
     
     // MARK: - Functions
     func getSentDetailListData(userType: HomeModel.UserType, index: Int) -> [HomeModel.HomeResponseData.RequestStructure]? {
