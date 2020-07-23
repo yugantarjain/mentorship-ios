@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct ProfileEditor: View {
+    var profileService: ProfileService = ProfileAPI()
     @Environment(\.presentationMode) var presentation
     @State var editProfileData = ProfileViewModel().getEditProfileData()
     @ObservedObject var profileViewModel = ProfileViewModel()
@@ -55,7 +56,24 @@ struct ProfileEditor: View {
                 Button(action: { self.presentation.wrappedValue.dismiss() }) {
                     Text(LocalizableStringConstants.cancel)
                 }, trailing: Button(LocalizableStringConstants.save) {
-                    self.profileViewModel.updateProfile(updateProfileData: self.editProfileData)
+                    self.profileViewModel.inActivity = true
+                    // make api call to update profile
+                    self.profileService.updateProfile(updateProfileData: self.editProfileData) { response, success in
+                        // map model to view model
+                        response.mapTo(viewModel: self.profileViewModel)
+                        // set inActivity to false
+                        self.profileViewModel.inActivity = false
+                        // show completion alert to user
+                        self.profileViewModel.showAlert = true
+                        // success/fail conditions
+                        if success {
+                            self.profileViewModel.alertTitle = LocalizableStringConstants.success
+                            // update profile data in user defaults on success
+                            self.profileViewModel.saveUpdatedProfile(updatedProfileData: self.editProfileData)
+                        } else {
+                            self.profileViewModel.alertTitle = LocalizableStringConstants.failure
+                        }
+                    }
                 })
             .alert(isPresented: $profileViewModel.showAlert) {
                 Alert.init(

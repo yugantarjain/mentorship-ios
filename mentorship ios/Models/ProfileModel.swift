@@ -42,3 +42,9 @@ extension ProfileModel.ProfileData {
         viewModel.profileData = self
     }
 }
+
+extension ProfileModel.UpdateProfileResponseData {
+    func mapTo(viewModel: ProfileViewModel) {
+        viewModel.updateProfileResponseData = self
+    }
+}
