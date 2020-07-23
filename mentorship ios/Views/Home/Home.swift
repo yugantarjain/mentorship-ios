@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct Home: View {
-    let homeService: HomeService = HomeAPI()
-    let profileService: ProfileService = ProfileAPI()
+    var homeService: HomeService = HomeAPI()
+    var profileService: ProfileService = ProfileAPI()
     @ObservedObject var homeViewModel = HomeViewModel()
     @State private var isLoading = false
     private var relationsData: UIHelper.HomeScreen.RelationsListData {

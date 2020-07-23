@@ -34,3 +34,13 @@ protocol LoginService {
         completion: @escaping (LoginModel.LoginResponseData) -> Void
     )
 }
+
+// MARK: - SignUp Service
+protocol SignUpService {
+    func signUp(
+        availabilityPickerSelection: Int,
+        signUpData: SignUpModel.SignUpUploadData,
+        confirmPassword: String,
+        completion: @escaping (SignUpModel.SignUpResponseData) -> Void
+    )
+}

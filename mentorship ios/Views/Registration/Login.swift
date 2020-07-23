@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct Login: View {
-    let loginService: LoginService = LoginAPI()
+    var loginService: LoginService = LoginAPI()
     @State private var showSignUpPage: Bool = false
     @State private var inActivity = false
     @ObservedObject var loginViewModel = LoginViewModel()

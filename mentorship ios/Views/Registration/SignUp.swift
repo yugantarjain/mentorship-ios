@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct SignUp: View {
+    var signUpService: SignUpService = SignUpAPI()
     @ObservedObject var signUpViewModel = SignUpViewModel()
     @Binding var isPresented: Bool
 
@@ -45,7 +46,17 @@ struct SignUp: View {
 
                     //sign up button
                     Button("Sign Up") {
-                        self.signUpViewModel.signUp()
+                        // set inAcitivty to true
+                        self.signUpViewModel.inActivity = true
+                        
+                        // make sign up api call
+                        self.signUpService.signUp(
+                            availabilityPickerSelection: self.signUpViewModel.availabilityPickerSelection,
+                            signUpData: self.signUpViewModel.signUpData,
+                            confirmPassword: self.signUpViewModel.confirmPassword) { response in
+                                response.mapTo(viewModel: self.signUpViewModel)
+                                self.signUpViewModel.inActivity = false
+                        }
                     }
                     .buttonStyle(BigBoldButtonStyle(disabled: signUpViewModel.signupDisabled))
                     .disabled(signUpViewModel.signupDisabled)

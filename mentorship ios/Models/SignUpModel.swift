@@ -29,3 +29,10 @@ final class SignUpModel {
         var message: String?
     }
 }
+
+// MARK: - API
+extension SignUpModel.SignUpResponseData {
+    func mapTo(viewModel: SignUpViewModel) {
+        viewModel.signUpResponseData = self
+    }
+}
