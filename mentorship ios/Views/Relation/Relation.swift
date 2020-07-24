@@ -15,6 +15,31 @@ struct Relation: View {
         return Date(timeIntervalSince1970: relationViewModel.currentRelation.endDate ?? 0)
     }
     
+    // use relation service and mark task as complete
+    func markAsComplete() {
+        // get ids and make network request
+        let taskTapped = RelationViewModel.taskTapped
+        guard let taskID = taskTapped.id else { return }
+        guard let reqID = self.relationViewModel.currentRelation.id else { return }
+        // network request
+        self.relationService.markAsComplete(taskID: taskID, relationID: reqID) { response in
+            // map response
+            response.mapTo(viewModel: self.relationViewModel)
+            // if success, update data
+            if response.success {
+                if let index = self.relationViewModel.toDoTasks.firstIndex(of: taskTapped) {
+                    self.relationViewModel.toDoTasks.remove(at: index)
+                    self.relationViewModel.doneTasks.append(taskTapped)
+                }
+            }
+            // else, show error message
+            else {
+                self.relationViewModel.showAlert = true
+                self.relationViewModel.alertMessage = LocalizableStringConstants.operationFail
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -25,7 +50,7 @@ struct Relation: View {
                         HStack {
                             Text(relationViewModel.personName).font(.title).fontWeight(.heavy)
                             Spacer()
-                            Text(relationViewModel.personType).font(.title)//.fontWeight(.heavy)
+                            Text(relationViewModel.personType).font(.title)
                         }
                         .foregroundColor(DesignConstants.Colors.subtitleText)
                         
@@ -50,7 +75,7 @@ struct Relation: View {
                             title: Text(LocalizableStringConstants.markComplete),
                             primaryButton: .cancel(),
                             secondaryButton: .default(Text(LocalizableStringConstants.confirm)) {
-                                self.relationViewModel.markAsComplete()
+                                self.markAsComplete()
                             })
                     }
                     

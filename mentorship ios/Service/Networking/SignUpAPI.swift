@@ -9,7 +9,6 @@ import Combine
 
 class SignUpAPI: SignUpService {
     private var cancellable: AnyCancellable?
-    var signUpResponseData = SignUpModel.SignUpResponseData(message: "")
     
     func signUp(
         availabilityPickerSelection: Int,
@@ -30,7 +29,7 @@ class SignUpAPI: SignUpService {
 
         //check password fields
         if signUpData.password != confirmPassword {
-            signUpResponseData.message = "Passwords do not match"
+            let signUpResponseData = SignUpModel.SignUpResponseData(message: "Passwords do not match")
             completion(signUpResponseData)
             return
         }

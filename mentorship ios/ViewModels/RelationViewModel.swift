@@ -11,7 +11,7 @@ class RelationViewModel: ObservableObject {
     
     // MARK: - Variables
     @Published var currentRelation = RelationModel().currentRelation
-    @Published var responseData = RelationModel.ResponseData(message: "")
+    @Published var responseData = RelationModel.ResponseData(message: "", success: false)
     var tasks = RelationModel().tasks
     var firstTimeLoad = true
     @Published var newTask = RelationModel.AddTaskData(description: "")
@@ -55,75 +55,6 @@ class RelationViewModel: ObservableObject {
         } else {
             self.personType = LocalizableStringConstants.mentor
             return data.mentor?.name ?? ""
-        }
-    }
-    
-    //mark task as complete api call + data change
-    func markAsComplete() {
-        //get auth token
-        guard let token = try? KeychainManager.getToken() else {
-            return
-        }
-        
-        //set parameters
-        let taskTapped = RelationViewModel.taskTapped
-        guard let taskID = taskTapped.id else { return }
-        guard let relationID = currentRelation.id else { return }
-        
-        //api call
-        cancellable = NetworkManager.callAPI(
-            urlString: URLStringConstants.MentorshipRelation.markAsComplete(reqID: relationID, taskID: taskID),
-            httpMethod: "PUT",
-            token: token)
-            .receive(on: RunLoop.main)
-            .catch { _ in Just(self.responseData) }
-            .sink { [weak self] in
-                self?.responseData = $0
-                if NetworkManager.responseCode == 200 {
-                    if let index = self?.toDoTasks.firstIndex(of: taskTapped) {
-                        self?.toDoTasks.remove(at: index)
-                        self?.doneTasks.append(taskTapped)
-                    }
-                } else {
-                    self?.showErrorAlert = true
-                    self?.alertMessage = LocalizableStringConstants.operationFail
-                }
-        }
-    }
-    
-    //create newtask api call
-    func addNewTask() {
-        //get auth token
-        guard let token = try? KeychainManager.getToken() else {
-            return
-        }
-        
-        //prepare upload data
-        guard let uploadData = try? JSONEncoder().encode(newTask) else {
-            return
-        }
-        
-        //set parameters
-        guard let relationID = self.currentRelation.id else { return }
-        
-        //api call
-        cancellable = NetworkManager.callAPI(
-            urlString: URLStringConstants.MentorshipRelation.addNewTask(reqID: relationID),
-            httpMethod: "POST",
-            uploadData: uploadData,
-            token: token)
-            .receive(on: RunLoop.main)
-            .catch { _ in Just(self.responseData) }
-            .sink { [weak self] in
-                //if success, dismiss sheet and refresh tasks
-                if NetworkManager.responseCode == 201 {
-                    self?.addTask.toggle()
-//                    self?.fetchTasks(id: relationID, token: token)
-                }
-                //else the error message (responseData) is shown on add task screen
-                else {
-                    self?.responseData = $0
-                }
         }
     }
 }

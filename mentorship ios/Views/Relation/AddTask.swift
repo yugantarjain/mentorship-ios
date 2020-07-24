@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct AddTask: View {
+    let relationService = RelationAPI()
     @ObservedObject var relationViewModel: RelationViewModel
     @Environment(\.presentationMode) var presentationMode
     
@@ -19,7 +20,20 @@ struct AddTask: View {
                 
                 //add task button
                 Button("Add") {
-                    self.relationViewModel.addNewTask()
+                    guard let relationID = self.relationViewModel.currentRelation.id else { return }
+                    self.relationService.addNewTask(newTask: self.relationViewModel.newTask, relationID: relationID) { response in
+                        // if task added successfully, dismiss sheet and refresh tasks
+                        if response.success {
+                            self.relationViewModel.addTask.toggle()
+                            self.relationService.fetchTasks(id: relationID) { (tasks, success) in
+                                self.relationViewModel.handleFetchedTasks(tasks: tasks, success: success)
+                            }
+                        }
+                        // else show error message
+                        else {
+                            response.mapTo(viewModel: self.relationViewModel)
+                        }
+                    }
                 }
                 .buttonStyle(BigBoldButtonStyle())
                 

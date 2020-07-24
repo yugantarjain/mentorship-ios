@@ -14,8 +14,9 @@ class RelationModel {
     let task = TaskStructure(id: 0, description: "", isDone: false, createdAt: 0, completedAt: 0)
     
     // MARK: - Structures
-    struct ResponseData: Decodable {
+    struct ResponseData {
         let message: String?
+        let success: Bool
     }
     
     struct AddTaskData: Encodable {
@@ -34,6 +35,12 @@ extension RequestStructure {
             viewModel.toDoTasks.removeAll()
             viewModel.doneTasks.removeAll()
         }
+    }
+}
+
+extension RelationModel.ResponseData {
+    func mapTo(viewModel: RelationViewModel) {
+        viewModel.responseData = self
     }
 }
 
