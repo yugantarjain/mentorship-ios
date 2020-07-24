@@ -8,10 +8,10 @@ import Foundation
 import Combine
 
 class DetailListCellViewModel: ObservableObject {
-    var requestData: HomeModel.HomeResponseData.RequestStructure
+    var requestData: RequestStructure
     var endDate: Date
     
-    init(data: HomeModel.HomeResponseData.RequestStructure) {
+    init(data: RequestStructure) {
         requestData = data
         endDate = Date(timeIntervalSince1970: requestData.endDate ?? 0)
     }

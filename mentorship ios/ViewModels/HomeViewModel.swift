@@ -16,7 +16,7 @@ class HomeViewModel: ObservableObject {
     var firstTimeLoad = true
     
     // MARK: - Functions
-    func getSentDetailListData(userType: HomeModel.UserType, index: Int) -> [HomeModel.HomeResponseData.RequestStructure]? {
+    func getSentDetailListData(userType: HomeModel.UserType, index: Int) -> [RequestStructure]? {
         if userType == .mentee {
             let data1 = homeResponseData.asMentee?.sent
             switch index {
@@ -40,7 +40,7 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    func getReceivedDetailListData(userType: HomeModel.UserType, index: Int) -> [HomeModel.HomeResponseData.RequestStructure]? {
+    func getReceivedDetailListData(userType: HomeModel.UserType, index: Int) -> [RequestStructure]? {
         if userType == .mentee {
             let data1 = homeResponseData.asMentee?.received
             switch index {

@@ -11,7 +11,7 @@ class RelationAPI {
     private var cancellable: AnyCancellable?
     private var tasksCancellable: AnyCancellable?
 
-    func fetchCurrentRelation(completion: @escaping (HomeModel.HomeResponseData.RequestStructure) -> Void) {
+    func fetchCurrentRelation(completion: @escaping (RequestStructure) -> Void) {
         //get auth token
         guard let token = try? KeychainManager.getToken() else {
             return

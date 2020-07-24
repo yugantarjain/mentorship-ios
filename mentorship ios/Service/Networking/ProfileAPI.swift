@@ -23,6 +23,7 @@ class ProfileAPI: ProfileService {
             .receive(on: RunLoop.main)
             .catch { _ in Just(ProfileViewModel().getProfile()) }
             .sink { profile in
+                ProfileViewModel().saveProfile(profile: profile)
                 completion(profile)
             }
     }

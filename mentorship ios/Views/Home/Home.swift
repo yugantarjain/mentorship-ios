@@ -68,7 +68,7 @@ struct Home: View {
                     self.isLoading = false
                 }
                 
-                // if first time load, load profile too
+                // if first time load, load profile too and use isLoading state (used to express in UI).
                 if self.homeViewModel.firstTimeLoad {
                     // set isLoading to true (expressed in UI)
                     self.isLoading = true
@@ -76,7 +76,6 @@ struct Home: View {
                     // fetch profile and map to home view model.
                     self.profileService.getProfile { profile in
                         profile.mapTo(viewModel: self.homeViewModel)
-                        ProfileViewModel().saveProfile(profile: profile)
                         // set first time load to false
                         self.homeViewModel.firstTimeLoad = false
                     }

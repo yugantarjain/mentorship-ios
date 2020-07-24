@@ -12,7 +12,7 @@ struct RelationDetailList: View {
     var homeViewModel: HomeViewModel
     @State private var pickerSelection = 1
 
-    var sentData: [HomeModel.HomeResponseData.RequestStructure]? {
+    var sentData: [RequestStructure]? {
         if pickerSelection == 1 {
             return homeViewModel.getSentDetailListData(userType: .mentee, index: index)
         } else {
@@ -20,7 +20,7 @@ struct RelationDetailList: View {
         }
     }
 
-    var receivedData: [HomeModel.HomeResponseData.RequestStructure]? {
+    var receivedData: [RequestStructure]? {
         if pickerSelection == 1 {
             return homeViewModel.getReceivedDetailListData(userType: .mentee, index: index)
         } else {

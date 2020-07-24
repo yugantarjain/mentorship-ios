@@ -43,7 +43,7 @@ class RelationViewModel: ObservableObject {
     }
     
     //func to get name of other person in current relation.
-    func getPersonNameAndType(data: HomeModel.HomeResponseData.RequestStructure) -> String {
+    func getPersonNameAndType(data: RequestStructure) -> String {
         //get user profile
         let userProfile = ProfileViewModel().getProfile()
         //match users name with mentee name.
