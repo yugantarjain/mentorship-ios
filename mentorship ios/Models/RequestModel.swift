@@ -42,6 +42,6 @@ struct RequestStructure: Decodable, Identifiable {
     }
 }
 
-struct RequestActionResponse: Decodable {
+struct RequestActionResponse: Codable {
     let message: String?
 }

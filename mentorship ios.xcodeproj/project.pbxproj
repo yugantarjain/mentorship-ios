@@ -29,6 +29,7 @@
 		533704E1248D1B4900A314ED /* MembersListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533704E0248D1B4900A314ED /* MembersListCell.swift */; };
 		534AC02D2486D5CB00A34A46 /* BigBoldButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534AC02C2486D5CB00A34A46 /* BigBoldButtonStyle.swift */; };
 		534AC02F2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534AC02E2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift */; };
+		534B69DA24CB6DAE007646E6 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534B69D924CB6DAE007646E6 /* MockURLProtocol.swift */; };
 		534BE20224A74B1A004C1EB2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534BE20124A74B1A004C1EB2 /* SettingsViewModel.swift */; };
 		534BE20424A74C8D004C1EB2 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534BE20324A74C8D004C1EB2 /* SettingsModel.swift */; };
 		535247EC248EED0D0091AD21 /* SendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535247EB248EED0D0091AD21 /* SendRequest.swift */; };
@@ -54,7 +55,7 @@
 		5396AA0824C799CF0012F396 /* DetailListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5396AA0724C799CF0012F396 /* DetailListCellViewModel.swift */; };
 		53A115D9249E1BD00065998C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A115D8249E1BD00065998C /* Settings.swift */; };
 		53A6DDEC24BE512D00D5DFCE /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6DDE924BE512D00D5DFCE /* LoginViewModelTests.swift */; };
-		53A6DDEE24BE512D00D5DFCE /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6DDEB24BE512D00D5DFCE /* SignUpViewModelTests.swift */; };
+		53A6DDEE24BE512D00D5DFCE /* SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6DDEB24BE512D00D5DFCE /* SignUpTests.swift */; };
 		53A6DDF024BE52A100D5DFCE /* ProfileViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6DDEF24BE52A100D5DFCE /* ProfileViewModelTests.swift */; };
 		53BDEE1A24C9767F0017C307 /* SignUpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BDEE1924C9767F0017C307 /* SignUpAPI.swift */; };
 		53BDEE1C24C98B120017C307 /* RelationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BDEE1B24C98B120017C307 /* RelationAPI.swift */; };
@@ -138,6 +139,7 @@
 		533704E0248D1B4900A314ED /* MembersListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListCell.swift; sourceTree = "<group>"; };
 		534AC02C2486D5CB00A34A46 /* BigBoldButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBoldButtonStyle.swift; sourceTree = "<group>"; };
 		534AC02E2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundFilledTextFieldStyle.swift; sourceTree = "<group>"; };
+		534B69D924CB6DAE007646E6 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		534BE20124A74B1A004C1EB2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		534BE20324A74C8D004C1EB2 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		535247EB248EED0D0091AD21 /* SendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRequest.swift; sourceTree = "<group>"; };
@@ -165,7 +167,7 @@
 		5396AA0724C799CF0012F396 /* DetailListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailListCellViewModel.swift; sourceTree = "<group>"; };
 		53A115D8249E1BD00065998C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		53A6DDE924BE512D00D5DFCE /* LoginViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
-		53A6DDEB24BE512D00D5DFCE /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
+		53A6DDEB24BE512D00D5DFCE /* SignUpTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
 		53A6DDEF24BE52A100D5DFCE /* ProfileViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModelTests.swift; sourceTree = "<group>"; };
 		53BDEE1924C9767F0017C307 /* SignUpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAPI.swift; sourceTree = "<group>"; };
 		53BDEE1B24C98B120017C307 /* RelationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationAPI.swift; sourceTree = "<group>"; };
@@ -289,9 +291,10 @@
 			children = (
 				53ECF22F24C3954C00FF8D24 /* MentorshipTests.swift */,
 				53A6DDE924BE512D00D5DFCE /* LoginViewModelTests.swift */,
-				53A6DDEB24BE512D00D5DFCE /* SignUpViewModelTests.swift */,
+				53A6DDEB24BE512D00D5DFCE /* SignUpTests.swift */,
 				53A6DDEF24BE52A100D5DFCE /* ProfileViewModelTests.swift */,
 				530F442F2482752600B1FD0B /* Info.plist */,
+				534B69D924CB6DAE007646E6 /* MockURLProtocol.swift */,
 			);
 			path = "mentorship iosTests";
 			sourceTree = "<group>";
@@ -762,7 +765,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				53A6DDEC24BE512D00D5DFCE /* LoginViewModelTests.swift in Sources */,
-				53A6DDEE24BE512D00D5DFCE /* SignUpViewModelTests.swift in Sources */,
+				53A6DDEE24BE512D00D5DFCE /* SignUpTests.swift in Sources */,
+				534B69DA24CB6DAE007646E6 /* MockURLProtocol.swift in Sources */,
 				53ECF23024C3954C00FF8D24 /* MentorshipTests.swift in Sources */,
 				53A6DDF024BE52A100D5DFCE /* ProfileViewModelTests.swift in Sources */,
 			);

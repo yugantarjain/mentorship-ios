@@ -9,6 +9,11 @@ import Combine
 
 class SignUpAPI: SignUpService {
     private var cancellable: AnyCancellable?
+    let urlSession: URLSession
+    
+    init(urlSession: URLSession = .shared) {
+        self.urlSession = urlSession
+    }
     
     func signUp(
         availabilityPickerSelection: Int,
@@ -36,7 +41,7 @@ class SignUpAPI: SignUpService {
         }
         
         //api call
-        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.signUp, httpMethod: "POST", uploadData: uploadData)
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.signUp, httpMethod: "POST", uploadData: uploadData, session: urlSession)
             .receive(on: RunLoop.main)
             .catch { _ in Just(SignUpNetworkModel(message: LocalizableStringConstants.networkErrorString)) }
             .sink {
