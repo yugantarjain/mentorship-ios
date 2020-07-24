@@ -25,7 +25,7 @@ class SignUpAPI: SignUpService {
 
         //check password fields
         if signUpData.password != confirmPassword {
-            let signUpResponseData = SignUpModel.SignUpResponseData(message: "Passwords do not match")
+            let signUpResponseData = SignUpModel.SignUpResponseData(message: LocalizableStringConstants.passwordsDoNotMatch)
             completion(signUpResponseData)
             return
         }

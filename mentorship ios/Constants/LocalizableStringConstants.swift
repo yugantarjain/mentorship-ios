@@ -17,6 +17,7 @@ struct LocalizableStringConstants {
     
     // Not localizable. Reason: used in network requests, backend returns string.
     static let networkErrorString = "Network error. Please check your device network and try again."
+    static let passwordsDoNotMatch = "Passwords do not match"
 
     //Direct values for english. To be used as keys for other languages.
     static let noAccountText = LocalizedStringKey("Don't have an account?")
