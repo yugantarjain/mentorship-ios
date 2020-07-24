@@ -51,4 +51,15 @@ protocol ProfileService {
     )
 }
 
+// MARK: - Relation Service
+protocol RelationService {
+    func fetchCurrentRelation(completion: @escaping (RequestStructure) -> Void)
+    
+    func fetchTasks(id: Int, completion: @escaping ([TaskStructure], Bool) -> Void)
+    
+    func addNewTask(newTask: RelationModel.AddTaskData, relationID: Int, completion: @escaping (RelationModel.ResponseData) -> Void)
+    
+    func markAsComplete(taskID: Int, relationID: Int, completion: @escaping (RelationModel.ResponseData) -> Void)
+}
+
 

@@ -7,7 +7,7 @@
 import Foundation
 import Combine
 
-class RelationAPI {
+class RelationAPI: RelationService {
     private var cancellable: AnyCancellable?
     private var tasksCancellable: AnyCancellable?
     

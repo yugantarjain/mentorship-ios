@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct Relation: View {
-    var relationService = RelationAPI()
+    var relationService: RelationService = RelationAPI()
     @ObservedObject var relationViewModel = RelationViewModel()
     @State var showAlert = false
     

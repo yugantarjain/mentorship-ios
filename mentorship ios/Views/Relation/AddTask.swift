@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct AddTask: View {
-    let relationService = RelationAPI()
+    let relationService: RelationService = RelationAPI()
     @ObservedObject var relationViewModel: RelationViewModel
     @Environment(\.presentationMode) var presentationMode
     
