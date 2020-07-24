@@ -289,7 +289,6 @@
 				53A6DDE924BE512D00D5DFCE /* LoginViewModelTests.swift */,
 				53A6DDEB24BE512D00D5DFCE /* SignUpViewModelTests.swift */,
 				53A6DDEF24BE52A100D5DFCE /* ProfileViewModelTests.swift */,
-				530F442D2482752600B1FD0B /* MentorshipTests.swift */,
 				530F442F2482752600B1FD0B /* Info.plist */,
 			);
 			path = "mentorship iosTests";
@@ -762,7 +761,6 @@
 				53A6DDEE24BE512D00D5DFCE /* SignUpViewModelTests.swift in Sources */,
 				53ECF23024C3954C00FF8D24 /* MentorshipTests.swift in Sources */,
 				53A6DDF024BE52A100D5DFCE /* ProfileViewModelTests.swift in Sources */,
-				530F442E2482752600B1FD0B /* MentorshipTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -940,7 +938,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "yugantarjain.mentorship-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = org.anitab.mentorship;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -960,7 +958,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "yugantarjain.mentorship-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = org.anitab.mentorship;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
