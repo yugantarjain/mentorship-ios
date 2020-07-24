@@ -36,7 +36,7 @@ protocol RequestActionService {
     func actOnPendingRequest(
         action: ActionType,
         reqID: Int,
-        completion: @escaping (ResponseMessage, Bool) -> Void
+        completion: @escaping (RequestActionResponse, Bool) -> Void
     )
 }
 
@@ -69,4 +69,13 @@ protocol MembersService {
     func sendRequest(menteeID: Int, mentorID: Int, endDate: Double, notes: String, completion: @escaping (MembersModel.SendRequestResponseData) -> Void)
 }
 
-
+// MARK: - Settings Service
+protocol SettingsService {
+    func deleteAccount(completion: @escaping (SettingsModel.DeleteAccountResponseData) -> Void)
+    
+    func changePassword(
+        changePasswordData: ChangePasswordModel.ChangePasswordUploadData,
+        confirmPassword: String,
+        completion: @escaping (ChangePasswordModel.ChangePasswordResponseData) -> Void
+    )
+}

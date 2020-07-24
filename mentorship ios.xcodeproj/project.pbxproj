@@ -34,7 +34,6 @@
 		535247EC248EED0D0091AD21 /* SendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535247EB248EED0D0091AD21 /* SendRequest.swift */; };
 		53627FCA24C8B4C400D2720E /* ServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53627FC924C8B4C400D2720E /* ServiceProtocols.swift */; };
 		53627FCC24C8B54B00D2720E /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53627FCB24C8B54B00D2720E /* HomeAPI.swift */; };
-		53627FCE24C8B56F00D2720E /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53627FCD24C8B56F00D2720E /* ResponseMessage.swift */; };
 		5366ED712488EDA9006A3543 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5366ED732488EDA9006A3543 /* Localizable.strings */; };
 		53671C5824CB34A90015B8FF /* MembersAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53671C5724CB34A90015B8FF /* MembersAPI.swift */; };
 		53671C5A24CB578A0015B8FF /* SettingsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53671C5924CB578A0015B8FF /* SettingsAPI.swift */; };
@@ -144,7 +143,6 @@
 		535247EB248EED0D0091AD21 /* SendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRequest.swift; sourceTree = "<group>"; };
 		53627FC924C8B4C400D2720E /* ServiceProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocols.swift; sourceTree = "<group>"; };
 		53627FCB24C8B54B00D2720E /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
-		53627FCD24C8B56F00D2720E /* ResponseMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMessage.swift; sourceTree = "<group>"; };
 		5366ED6E2488ED8F006A3543 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		5366ED722488EDA9006A3543 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5366ED742488EDAF006A3543 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -479,7 +477,6 @@
 				53EB022C248D71F40061E5C4 /* AuthModel.swift */,
 				534BE20324A74C8D004C1EB2 /* SettingsModel.swift */,
 				53E6F84724A644E3009214FC /* ChangePasswordModel.swift */,
-				53627FCD24C8B56F00D2720E /* ResponseMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -692,7 +689,6 @@
 				531C8065248A477700AE81EF /* LoginModel.swift in Sources */,
 				53EB47012488EBAF005656B9 /* LocalizableStringConstants.swift in Sources */,
 				53EA66592492EA1E007AEB04 /* ProfileModel.swift in Sources */,
-				53627FCE24C8B56F00D2720E /* ResponseMessage.swift in Sources */,
 				53671C5824CB34A90015B8FF /* MembersAPI.swift in Sources */,
 				53891257248AB08600E24F96 /* SignUpModel.swift in Sources */,
 				53EA66572492D98E007AEB04 /* HomeModel.swift in Sources */,

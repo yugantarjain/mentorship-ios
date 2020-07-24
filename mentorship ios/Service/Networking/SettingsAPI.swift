@@ -7,9 +7,10 @@
 import Foundation
 import Combine
 
-class SettingsAPI {
+class SettingsAPI: SettingsService {
     private var cancellable: AnyCancellable?
 
+    // Delete Account
     func deleteAccount(completion: @escaping (SettingsModel.DeleteAccountResponseData) -> Void) {
         //get token
         guard let token = try? KeychainManager.getToken() else {
@@ -27,6 +28,7 @@ class SettingsAPI {
             }
     }
     
+    // Change Password
     func changePassword(
         changePasswordData: ChangePasswordModel.ChangePasswordUploadData,
         confirmPassword: String,

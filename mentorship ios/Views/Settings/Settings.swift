@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct Settings: View {
-    let settingsService = SettingsAPI()
+    let settingsService: SettingsService = SettingsAPI()
     @ObservedObject var settingsViewModel = SettingsViewModel()
     //Alert used for logout and delete action, to confirm user's action before proceeding.
     @State var showAlert = false

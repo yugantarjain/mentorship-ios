@@ -14,7 +14,6 @@ enum ActionType {
 
 class RequestActionAPI: RequestActionService {
     private var cancellable: AnyCancellable?
-    var response = ResponseMessage(message: "")
     let urlSession: URLSession
     
     init(urlSession: URLSession = .shared) {
@@ -24,7 +23,7 @@ class RequestActionAPI: RequestActionService {
     func actOnPendingRequest(
         action: ActionType,
         reqID: Int,
-        completion: @escaping (ResponseMessage, Bool) -> Void
+        completion: @escaping (RequestActionResponse, Bool) -> Void
     ) {
         var urlString = ""
         var httpMethod = "PUT"
@@ -47,7 +46,7 @@ class RequestActionAPI: RequestActionService {
         //api call
         cancellable = NetworkManager.callAPI(urlString: urlString, httpMethod: httpMethod, token: token, session: urlSession)
             .receive(on: RunLoop.main)
-            .catch { _ in Just(self.response) }
+            .catch { _ in Just(RequestActionResponse(message: LocalizableStringConstants.networkErrorString)) }
             .sink {
                 let success = NetworkManager.responseCode == 200
                 completion($0, success)
