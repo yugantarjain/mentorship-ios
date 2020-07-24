@@ -49,10 +49,7 @@ class RequestActionAPI: RequestActionService {
             .receive(on: RunLoop.main)
             .catch { _ in Just(self.response) }
             .sink {
-                var success = false
-                if NetworkManager.responseCode == 200 {
-                    success = true
-                }
+                let success = NetworkManager.responseCode == 200
                 completion($0, success)
         }
     }

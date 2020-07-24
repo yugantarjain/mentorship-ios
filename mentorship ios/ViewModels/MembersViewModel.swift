@@ -20,37 +20,8 @@ final class MembersViewModel: ObservableObject {
     var membersListFull = false
     
     private var cancellable: AnyCancellable?
-
+    
     // MARK: - Functions
-
-    //Fetch Members
-    func fetchMembers() {
-        //get auth token
-        guard let token = try? KeychainManager.getToken() else {
-            return
-        }
-
-        //set inActivity. Used to show spinner
-        self.inActivity = true
-        
-        //set perPage value
-        let perPage = 20
-
-        // Debug comment: cache policy to be changed later to revalidateCache
-        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.members(page: currentPage+1, perPage: perPage), token: token)
-            .receive(on: RunLoop.main)
-            .catch { _ in Just(self.membersResponseData) }
-            .sink { [weak self] in
-                self?.inActivity = false
-                self?.currentPage += 1
-                self?.membersResponseData.append(contentsOf: $0)
-                //if number of members received are less than perPage value
-                //then it is last page. Used to disable loading in view.
-                if $0.count < perPage {
-                    self?.membersListFull = true
-                }
-            }
-    }
 
     func availabilityString(canBeMentee: Bool, canBeMentor: Bool) -> LocalizedStringKey {
         if canBeMentor && canBeMentor {

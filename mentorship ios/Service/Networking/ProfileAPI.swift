@@ -48,10 +48,7 @@ class ProfileAPI: ProfileService {
             .receive(on: RunLoop.main)
             .catch { _ in Just(UpdateProfileNetworkModel(message: LocalizableStringConstants.networkErrorString)) }
             .sink {
-                var success = false
-                if NetworkManager.responseCode == 200 {
-                    success = true
-                }
+                let success = NetworkManager.responseCode == 200
                 let profileResponse = ProfileModel.UpdateProfileResponseData(success: success, message: $0.message)
                 completion(profileResponse)
         }

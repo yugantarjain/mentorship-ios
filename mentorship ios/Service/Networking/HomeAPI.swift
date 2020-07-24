@@ -30,6 +30,7 @@ class HomeAPI: HomeService {
                     asMentee: home.asMentee,
                     tasksToDo: home.tasksToDo,
                     tasksDone: home.tasksDone)
+                // completion handler
                 completion(homeResponse)
         }
     }

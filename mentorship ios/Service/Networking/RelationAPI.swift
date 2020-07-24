@@ -37,10 +37,7 @@ class RelationAPI: RelationService {
             .receive(on: RunLoop.main)
             .catch { _ in Just(RelationModel().tasks) }
             .sink {
-                var success = false
-                if NetworkManager.responseCode == 200 {
-                    success = true
-                }
+                let success = NetworkManager.responseCode == 200
                 completion($0, success)
         }
     }
@@ -66,10 +63,7 @@ class RelationAPI: RelationService {
             .receive(on: RunLoop.main)
             .catch { _ in Just(NetworkResponse(message: LocalizableStringConstants.networkErrorString)) }
             .sink {
-                var success = false
-                if NetworkManager.responseCode == 201 {
-                    success = true
-                }
+                let success = NetworkManager.responseCode == 201
                 let response = RelationModel.ResponseData(message: $0.message, success: success)
                 completion(response)
         }
@@ -90,10 +84,7 @@ class RelationAPI: RelationService {
             .receive(on: RunLoop.main)
             .catch { _ in Just(NetworkResponse(message: LocalizableStringConstants.networkErrorString)) }
             .sink {
-                var success = false
-                if NetworkManager.responseCode == 200 {
-                    success = true
-                }
+                let success = NetworkManager.responseCode == 200
                 let response = RelationModel.ResponseData(message: $0.message, success: success)
                 completion(response)
         }
