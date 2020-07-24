@@ -13,7 +13,6 @@ final class MembersViewModel: ObservableObject {
     @Published var membersResponseData = [MembersModel.MembersResponseData]()
     @Published var sendRequestResponseData = MembersModel.SendRequestResponseData(message: "", success: false)
     @Published var inActivity = false
-    @Published var requestSentSuccesfully = false
     
     //used in pagination for members list
     var currentPage = 0

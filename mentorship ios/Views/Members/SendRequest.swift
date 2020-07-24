@@ -35,7 +35,6 @@ struct SendRequest: View {
         // make request
         membersService.sendRequest(menteeID: menteeID, mentorID: mentorID, endDate: endDateTimestamp, notes: notes) { response in
             self.membersViewModel.inActivity = false
-            self.membersViewModel.requestSentSuccesfully = response.success
             self.membersViewModel.sendRequestResponseData = response
         }
     }
@@ -75,7 +74,7 @@ struct SendRequest: View {
                     Section {
                         if membersViewModel.inActivity {
                             ActivityIndicator(isAnimating: $membersViewModel.inActivity, style: .medium)
-                        } else if !membersViewModel.requestSentSuccesfully {
+                        } else if !membersViewModel.sendRequestResponseData.success {
                             Text(membersViewModel.sendRequestResponseData.message ?? "")
                                 .modifier(ErrorText())
                         }
@@ -88,7 +87,7 @@ struct SendRequest: View {
             .navigationBarItems(leading: Button(LocalizableStringConstants.cancel, action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
-            .alert(isPresented: $membersViewModel.requestSentSuccesfully) {
+                .alert(isPresented: $membersViewModel.sendRequestResponseData.success) {
                 Alert(
                     title: Text(LocalizableStringConstants.success),
                     message: Text(membersViewModel.sendRequestResponseData.message ?? "Mentorship relation was sent successfully."),
