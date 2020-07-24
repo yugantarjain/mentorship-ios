@@ -19,14 +19,36 @@ class RelationViewModel: ObservableObject {
     @Published var doneTasks = RelationModel().tasks
     @Published var inActivity = false
     @Published var addTask = false
-    @Published var personName = ""
-    @Published var personType = LocalizedStringKey("")
     @Published var showAlert = false
     @Published var showErrorAlert = false
     @Published var alertTitle = LocalizableStringConstants.failure
     @Published var alertMessage = LocalizedStringKey("")
     static var taskTapped = RelationModel().task
     private var cancellable: AnyCancellable?
+    
+    var personName: String {
+        // User profile
+        let userProfile = ProfileViewModel().getProfile()
+        //match users name with mentee name.
+        //if different, return mentee's name. Else, return mentor's name
+        //Logic: Person with different name is in relation with us.
+        if currentRelation.mentee?.name != userProfile.name {
+            return currentRelation.mentee?.name ?? ""
+        } else {
+            return currentRelation.mentor?.name ?? ""
+        }
+    }
+    
+    var personType: LocalizedStringKey {
+        // User profile
+        let userProfile = ProfileViewModel().getProfile()
+        // Person with different name is in relation with us. Hence deduce person type.
+        if currentRelation.mentee?.name != userProfile.name {
+            return LocalizableStringConstants.mentee
+        } else {
+            return LocalizableStringConstants.mentor
+        }
+    }
     
     // MARK: - Functions
     func handleFetchedTasks(tasks: [TaskStructure], success: Bool) {
@@ -39,22 +61,6 @@ class RelationViewModel: ObservableObject {
         } else {
             showErrorAlert = true
             alertMessage = LocalizableStringConstants.operationFail
-        }
-    }
-    
-    //func to get name of other person in current relation.
-    func getPersonNameAndType(data: RequestStructure) -> String {
-        //get user profile
-        let userProfile = ProfileViewModel().getProfile()
-        //match users name with mentee name.
-        //if different, return mentee's name. Else, return mentor's name
-        //Logic: Person with different name is in relation with us.
-        if data.mentee?.name != userProfile.name {
-            self.personType = LocalizableStringConstants.mentee
-            return data.mentee?.name ?? ""
-        } else {
-            self.personType = LocalizableStringConstants.mentor
-            return data.mentor?.name ?? ""
         }
     }
 }

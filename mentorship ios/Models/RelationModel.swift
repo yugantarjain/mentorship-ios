@@ -7,7 +7,7 @@
 class RelationModel {
     
     // MARK: - Variables
-    let currentRelation = RequestStructure(id: 0, actionUserID: 0, mentor: nil, mentee: nil, acceptDate: 0, startDate: 0, endDate: 0, notes: "")
+    let currentRelation = RequestStructure(id: 0, mentor: nil, mentee: nil, endDate: 0, notes: "")
     
     let tasks = [TaskStructure]()
     
@@ -29,7 +29,6 @@ class RelationModel {
 extension RequestStructure {
     func update(viewModel: RelationViewModel) {
         viewModel.currentRelation = self
-        viewModel.personName = viewModel.getPersonNameAndType(data: self)
         //if current relation invalid, delete all tasks and return
         if self.id == nil {
             viewModel.toDoTasks.removeAll()

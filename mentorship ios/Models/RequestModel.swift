@@ -19,19 +19,13 @@ struct RequestsList: Decodable {
 
 struct RequestStructure: Decodable, Identifiable {
     let id: Int?
-    let actionUserID: Int?
     let mentor: Info?
     let mentee: Info?
-    let acceptDate: Double?
-    let startDate: Double?
     let endDate: Double?
     let notes: String?
     
     enum CodingKeys: String, CodingKey {
         case id, mentor, mentee, notes
-        case actionUserID = "action_user_id"
-        case acceptDate = "accept_date"
-        case startDate = "start_date"
         case endDate = "end_date"
     }
     

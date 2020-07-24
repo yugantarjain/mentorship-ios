@@ -57,9 +57,10 @@ struct DetailListCell: View {
                 .font(.headline)
                 .opacity(cellVM.requestData.notes!.isEmpty ? DesignConstants.Opacity.disabledViewOpacity/2 : 1.0)
 
-            Text("End Date: \(DesignConstants.DateFormat.mediumDate.string(from: cellVM.endDate))")
+            Text("End Date: \(self.cellVM.endDate)")
                 .font(.caption)
             
+            // MARK: - Action Buttons. For pending and accepted requests.
             //Buttons to accept, reject, delete for pending requests
             if index == 0 {
                 //show cancel button for sent requests

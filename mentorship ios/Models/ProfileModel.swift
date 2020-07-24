@@ -40,7 +40,7 @@ final class ProfileModel {
 // MARK: - API
 extension ProfileModel.ProfileData {
     func update(viewModel: HomeViewModel) {
-        viewModel.profileData = self
+        viewModel.userName = self.name
     }
 }
 

@@ -13,10 +13,7 @@ struct Home: View {
     private var relationsData: UIHelper.HomeScreen.RelationsListData {
         return homeViewModel.relationsListData
     }
-    private var profile: ProfileModel.ProfileData {
-        return homeViewModel.profileData
-    }
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -53,7 +50,7 @@ struct Home: View {
             }
             .listStyle(GroupedListStyle())
             .environment(\.horizontalSizeClass, .regular)
-            .navigationBarTitle("Welcome \(profile.name?.capitalized ?? "")!")
+            .navigationBarTitle("Welcome \(self.homeViewModel.userName?.capitalized ?? "")!")
             .navigationBarItems(trailing:
                 NavigationLink(destination: ProfileSummary()) {
                         Image(systemName: ImageNameConstants.SFSymbolConstants.profileIcon)
