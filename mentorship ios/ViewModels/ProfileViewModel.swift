@@ -25,7 +25,7 @@ class ProfileViewModel: ObservableObject {
         needMentoring: false,
         availableToMentor: false
     )
-    @Published var updateProfileResponseData = ProfileModel.UpdateProfileResponseData(message: "")
+    @Published var updateProfileResponseData = ProfileModel.UpdateProfileResponseData(success: false, message: "")
     @Published var inActivity = false
     @Published var showAlert = false
     var alertTitle = LocalizedStringKey("")

@@ -47,7 +47,7 @@ protocol ProfileService {
     
     func updateProfile(
         updateProfileData: ProfileModel.ProfileData,
-        completion: @escaping (ProfileModel.UpdateProfileResponseData, Bool) -> Void
+        completion: @escaping (ProfileModel.UpdateProfileResponseData) -> Void
     )
 }
 

@@ -30,7 +30,8 @@ final class ProfileModel {
         }
     }
     
-    struct UpdateProfileResponseData: Decodable {
+    struct UpdateProfileResponseData {
+        let success: Bool?
         let message: String?
     }
 

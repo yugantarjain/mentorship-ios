@@ -31,7 +31,7 @@ class ProfileAPI: ProfileService {
     // makes api call to update profile
     func updateProfile(
         updateProfileData: ProfileModel.ProfileData,
-        completion: @escaping (ProfileModel.UpdateProfileResponseData, Bool) -> Void
+        completion: @escaping (ProfileModel.UpdateProfileResponseData) -> Void
     ) {
         //get auth token
         guard let token = try? KeychainManager.getToken() else {
@@ -43,20 +43,24 @@ class ProfileAPI: ProfileService {
             return
         }
         
-        // set default update profile response data
-        let updateProfileResponseData = ProfileModel.UpdateProfileResponseData(message: "")
-        
         //api call
         cancellable = NetworkManager.callAPI(urlString: URLStringConstants.Users.user, httpMethod: "PUT", uploadData: uploadData, token: token)
             .receive(on: RunLoop.main)
-            .catch { _ in Just(updateProfileResponseData) }
+            .catch { _ in Just(UpdateProfileNetworkModel(message: LocalizableStringConstants.networkErrorString)) }
             .sink {
                 var success = false
                 if NetworkManager.responseCode == 200 {
                     success = true
                 }
-                completion($0, success)
+                let profileResponse = ProfileModel.UpdateProfileResponseData(success: success, message: $0.message)
+                completion(profileResponse)
         }
     }
-    
+}
+
+// MARK: - Network Model
+extension ProfileAPI {
+    struct UpdateProfileNetworkModel: Decodable {
+        let message: String?
+    }
 }

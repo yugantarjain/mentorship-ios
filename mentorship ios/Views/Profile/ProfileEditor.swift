@@ -58,7 +58,7 @@ struct ProfileEditor: View {
                 }, trailing: Button(LocalizableStringConstants.save) {
                     self.profileViewModel.inActivity = true
                     // make api call to update profile
-                    self.profileService.updateProfile(updateProfileData: self.editProfileData) { response, success in
+                    self.profileService.updateProfile(updateProfileData: self.editProfileData) { response in
                         // map model to view model
                         response.mapTo(viewModel: self.profileViewModel)
                         // set inActivity to false
@@ -66,7 +66,7 @@ struct ProfileEditor: View {
                         // show completion alert to user
                         self.profileViewModel.showAlert = true
                         // success/fail conditions
-                        if success {
+                        if self.profileViewModel.updateProfileResponseData.success ?? false {
                             self.profileViewModel.alertTitle = LocalizableStringConstants.success
                             // update profile data in user defaults on success
                             self.profileViewModel.saveUpdatedProfile(updatedProfileData: self.editProfileData)
