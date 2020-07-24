@@ -42,7 +42,7 @@ final class MembersModel {
 
     struct SendRequestResponseData {
         let message: String?
-        let success: Bool
+        var success: Bool
     }
 
 }
