@@ -20,12 +20,8 @@ class SignUpAPI: SignUpService {
         var signUpData = signUpData
         
         //assign availability values as per picker selection
-        if availabilityPickerSelection > 1 {
-            signUpData.needMentoring = true
-        }
-        if availabilityPickerSelection != 2 {
-            signUpData.availableToMentor = true
-        }
+        signUpData.needMentoring = availabilityPickerSelection > 1
+        signUpData.availableToMentor = availabilityPickerSelection != 2
 
         //check password fields
         if signUpData.password != confirmPassword {
@@ -48,10 +44,7 @@ class SignUpAPI: SignUpService {
                 completion(signUpResponseData)
         }
     }
-}
-
-// MARK: Network Model
-extension SignUpAPI {
+    
     struct SignUpNetworkModel: Decodable {
         var message: String?
     }

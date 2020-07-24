@@ -13,6 +13,7 @@ class HomeViewModel: ObservableObject {
     @Published var homeResponseData = HomeModel.HomeResponseData(asMentor: nil, asMentee: nil, tasksToDo: nil, tasksDone: nil)
     @Published var relationsListData = UIHelper.HomeScreen.RelationsListData()
     @Published var profileData = ProfileViewModel().profileData
+    @Published var isLoading = false
     var firstTimeLoad = true
     
     // MARK: - Functions

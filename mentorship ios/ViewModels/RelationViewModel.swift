@@ -34,7 +34,7 @@ class RelationViewModel: ObservableObject {
             doneTasks.removeAll()
             toDoTasks.removeAll()
             for task in tasks {
-                task.mapTo(viewModel: self)
+                task.update(viewModel: self)
             }
         } else {
             showErrorAlert = true

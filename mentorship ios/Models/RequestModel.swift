@@ -5,16 +5,10 @@
 //
 
 struct RequestsList: Decodable {
-    let sent: Sent?
-    struct Sent: Decodable {
-        let accepted: [RequestStructure]?
-        let rejected: [RequestStructure]?
-        let completed: [RequestStructure]?
-        let cancelled: [RequestStructure]?
-        let pending: [RequestStructure]?
-    }
-    let received: Received?
-    struct Received: Decodable {
+    let sent: RequestStructures?
+    let received: RequestStructures?
+    
+    struct RequestStructures: Decodable {
         let accepted: [RequestStructure]?
         let rejected: [RequestStructure]?
         let completed: [RequestStructure]?

@@ -16,10 +16,3 @@ final class LoginModel {
         var message: String?
     }
 }
-
-// MARK: - API
-extension LoginModel.LoginResponseData {
-    func mapTo(viewModel: LoginViewModel) {
-        viewModel.loginResponseData = self
-    }
-}

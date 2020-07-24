@@ -53,9 +53,10 @@ struct SignUp: View {
                         self.signUpService.signUp(
                             availabilityPickerSelection: self.signUpViewModel.availabilityPickerSelection,
                             signUpData: self.signUpViewModel.signUpData,
-                            confirmPassword: self.signUpViewModel.confirmPassword) { response in
-                                response.mapTo(viewModel: self.signUpViewModel)
-                                self.signUpViewModel.inActivity = false
+                            confirmPassword: self.signUpViewModel.confirmPassword
+                        ) { response in
+                            self.signUpViewModel.update(using: response)
+                            self.signUpViewModel.inActivity = false
                         }
                     }
                     .buttonStyle(BigBoldButtonStyle(disabled: signUpViewModel.signupDisabled))

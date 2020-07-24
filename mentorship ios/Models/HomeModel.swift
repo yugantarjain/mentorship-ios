@@ -28,7 +28,7 @@ class HomeModel {
 
 // MARK: - API
 extension HomeModel.HomeResponseData {
-    func mapTo(viewModel: HomeViewModel) {
+    func update(viewModel: HomeViewModel) {
         viewModel.relationsListData.relationCount = updateCount(homeData: self)
         viewModel.homeResponseData = self
     }

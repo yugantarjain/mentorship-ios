@@ -39,13 +39,13 @@ final class ProfileModel {
 
 // MARK: - API
 extension ProfileModel.ProfileData {
-    func mapTo(viewModel: HomeViewModel) {
+    func update(viewModel: HomeViewModel) {
         viewModel.profileData = self
     }
 }
 
 extension ProfileModel.UpdateProfileResponseData {
-    func mapTo(viewModel: ProfileViewModel) {
+    func update(viewModel: ProfileViewModel) {
         viewModel.updateProfileResponseData = self
     }
 }

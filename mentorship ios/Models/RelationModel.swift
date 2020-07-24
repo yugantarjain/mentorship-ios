@@ -27,7 +27,7 @@ class RelationModel {
 // MARK: API
 
 extension RequestStructure {
-    func mapTo(viewModel: RelationViewModel) {
+    func update(viewModel: RelationViewModel) {
         viewModel.currentRelation = self
         viewModel.personName = viewModel.getPersonNameAndType(data: self)
         //if current relation invalid, delete all tasks and return
@@ -39,13 +39,13 @@ extension RequestStructure {
 }
 
 extension RelationModel.ResponseData {
-    func mapTo(viewModel: RelationViewModel) {
+    func update(viewModel: RelationViewModel) {
         viewModel.responseData = self
     }
 }
 
 extension TaskStructure {
-    func mapTo(viewModel: RelationViewModel) {
+    func update(viewModel: RelationViewModel) {
         if self.isDone ?? false {
             viewModel.doneTasks.append(self)
         } else {

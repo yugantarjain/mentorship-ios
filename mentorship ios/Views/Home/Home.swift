@@ -10,7 +10,6 @@ struct Home: View {
     var homeService: HomeService = HomeAPI()
     var profileService: ProfileService = ProfileAPI()
     @ObservedObject var homeViewModel = HomeViewModel()
-    @State private var isLoading = false
     private var relationsData: UIHelper.HomeScreen.RelationsListData {
         return homeViewModel.relationsListData
     }
@@ -41,7 +40,7 @@ struct Home: View {
                                 count: self.relationsData.relationCount[index]
                             )
                         }
-                        .disabled(self.isLoading ? true : false)
+                        .disabled(self.homeViewModel.isLoading)
                     }
                 }
 
@@ -64,18 +63,18 @@ struct Home: View {
             .onAppear {
                 // fetch dashboard and map to home view model
                 self.homeService.fetchDashboard { home in
-                    home.mapTo(viewModel: self.homeViewModel)
-                    self.isLoading = false
+                    home.update(viewModel: self.homeViewModel)
+                    self.homeViewModel.isLoading = false
                 }
                 
                 // if first time load, load profile too and use isLoading state (used to express in UI).
                 if self.homeViewModel.firstTimeLoad {
                     // set isLoading to true (expressed in UI)
-                    self.isLoading = true
+                    self.homeViewModel.isLoading = true
                     
                     // fetch profile and map to home view model.
                     self.profileService.getProfile { profile in
-                        profile.mapTo(viewModel: self.homeViewModel)
+                        profile.update(viewModel: self.homeViewModel)
                         // set first time load to false
                         self.homeViewModel.firstTimeLoad = false
                     }

@@ -20,4 +20,9 @@ class LoginViewModel: ObservableObject {
         return false
     }
     
+    // MARK: Functions
+    func update(using data: LoginModel.LoginResponseData) {
+        loginResponseData = data
+    }
+    
 }

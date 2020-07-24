@@ -98,10 +98,7 @@ class RelationAPI {
                 completion(response)
         }
     }
-}
-
-// MARK: Network Model
-extension RelationAPI {
+    
     struct NetworkResponse: Decodable {
         let message: String?
     }

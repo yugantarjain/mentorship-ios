@@ -36,9 +36,9 @@ struct Login: View {
                 self.inActivity = true
                 
                 self.loginService.login(loginData: self.loginViewModel.loginData) { response in
+                    // update login view model
+                    self.loginViewModel.update(using: response)
                     self.inActivity = false
-                    // map response to login view model
-                    response.mapTo(viewModel: self.loginViewModel)
                 }
             }
             .buttonStyle(BigBoldButtonStyle(disabled: loginViewModel.loginDisabled))

@@ -33,10 +33,7 @@ class HomeAPI: HomeService {
                 completion(homeResponse)
         }
     }
-}
-
-// MARK: Network Model
-extension HomeAPI {
+    
     struct HomeNetworkModel: Decodable {
         let asMentor: RequestsList?
         let asMentee: RequestsList?

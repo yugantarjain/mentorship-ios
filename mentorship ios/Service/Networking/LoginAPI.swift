@@ -39,11 +39,7 @@ class LoginAPI: LoginService {
                 completion(loginResponseData)
         }
     }
-}
-
-// MARK: - Network Model
-
-extension LoginAPI {
+    
     struct LoginNetworkModel: Decodable {
         let message: String?
         var accessToken: String?

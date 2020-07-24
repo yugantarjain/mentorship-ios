@@ -56,10 +56,7 @@ class ProfileAPI: ProfileService {
                 completion(profileResponse)
         }
     }
-}
-
-// MARK: - Network Model
-extension ProfileAPI {
+    
     struct UpdateProfileNetworkModel: Decodable {
         let message: String?
     }

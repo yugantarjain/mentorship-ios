@@ -60,7 +60,7 @@ struct ProfileEditor: View {
                     // make api call to update profile
                     self.profileService.updateProfile(updateProfileData: self.editProfileData) { response in
                         // map model to view model
-                        response.mapTo(viewModel: self.profileViewModel)
+                        response.update(viewModel: self.profileViewModel)
                         // set inActivity to false
                         self.profileViewModel.inActivity = false
                         // show completion alert to user

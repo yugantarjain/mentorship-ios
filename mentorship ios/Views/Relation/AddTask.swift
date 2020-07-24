@@ -31,7 +31,7 @@ struct AddTask: View {
                         }
                         // else show error message
                         else {
-                            response.mapTo(viewModel: self.relationViewModel)
+                            response.update(viewModel: self.relationViewModel)
                         }
                     }
                 }

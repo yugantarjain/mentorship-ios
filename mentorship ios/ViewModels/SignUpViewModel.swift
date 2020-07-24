@@ -23,5 +23,10 @@ class SignUpViewModel: ObservableObject {
             return false
         }
     }
+    
+    // MARK: - Functions
+    func update(using data: SignUpModel.SignUpResponseData) {
+        signUpResponseData = data
+    }
 
 }

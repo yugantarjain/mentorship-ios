@@ -24,7 +24,7 @@ struct Relation: View {
         // network request
         self.relationService.markAsComplete(taskID: taskID, relationID: reqID) { response in
             // map response
-            response.mapTo(viewModel: self.relationViewModel)
+            response.update(viewModel: self.relationViewModel)
             // if success, update data
             if response.success {
                 if let index = self.relationViewModel.toDoTasks.firstIndex(of: taskTapped) {
@@ -103,15 +103,13 @@ struct Relation: View {
                     dismissButton: .default(Text(LocalizableStringConstants.okay)))
             }
             .onAppear {
-                // for first time load set inactivity.
-                if self.relationViewModel.firstTimeLoad {
-                    self.relationViewModel.inActivity = true
-                }
+                // For first time load set inactivity to true
+                self.relationViewModel.inActivity = self.relationViewModel.firstTimeLoad
                 
                 // make api call to fetch current relation
                 self.relationService.fetchCurrentRelation { response in
                     // map repsonse to view model
-                    response.mapTo(viewModel: self.relationViewModel)
+                    response.update(viewModel: self.relationViewModel)
                     self.relationViewModel.inActivity = false
                     self.relationViewModel.firstTimeLoad = false
                     //chain api call. get current tasks using id from current relation
