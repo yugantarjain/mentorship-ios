@@ -7,12 +7,12 @@
 import SwiftUI
 
 struct Members: View {
-    var membersService = MembersAPI()
+    var membersService: MembersService = MembersAPI()
     @ObservedObject var membersViewModel = MembersViewModel()
     
     // use service and fetch members
     func fetchMembers() {
-        membersService.fetchMembers(pageToLoad: membersViewModel.currentPage + 1) { members, listFull in
+        membersService.fetchMembers(pageToLoad: membersViewModel.currentPage + 1, perPage: membersViewModel.perPage) { members, listFull in
             self.membersViewModel.inActivity = false
             // to go in update func
             self.membersViewModel.currentPage += 1

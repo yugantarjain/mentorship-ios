@@ -7,11 +7,11 @@
 import Foundation
 import Combine
 
-class MembersAPI {
+class MembersAPI: MembersService {
     private var cancellable: AnyCancellable?
 
     //Fetch Members
-    func fetchMembers(pageToLoad: Int, perPage: Int = 20, completion: @escaping ([MembersModel.MembersResponseData], Bool) -> Void) {
+    func fetchMembers(pageToLoad: Int, perPage: Int, completion: @escaping ([MembersModel.MembersResponseData], Bool) -> Void) {
         //get auth token
         guard let token = try? KeychainManager.getToken() else {
             return
@@ -48,6 +48,31 @@ class MembersAPI {
         }
     }
     
+    //Send Request
+    func sendRequest(menteeID: Int, mentorID: Int, endDate: Double, notes: String, completion: @escaping (MembersModel.SendRequestResponseData) -> Void) {
+        //token
+        guard let token = try? KeychainManager.getToken() else {
+            return
+        }
+
+        //upload data
+        let requestData = MembersModel.SendRequestUploadData(mentorID: mentorID, menteeID: menteeID, endDate: endDate, notes: notes)
+        NSLog("A relation request was made to the server.")
+        guard let uploadData = try? JSONEncoder().encode(requestData) else {
+            return
+        }
+
+        //api call
+        cancellable = NetworkManager.callAPI(urlString: URLStringConstants.MentorshipRelation.sendRequest, httpMethod: "POST", uploadData: uploadData, token: token)
+            .receive(on: RunLoop.main)
+            .catch { _ in Just(SendRequestNetworkModel(message: LocalizableStringConstants.networkErrorString)) }
+            .sink {
+                let success = NetworkManager.responseCode == 200
+                let responseData = MembersModel.SendRequestResponseData(message: $0.message, success: success)
+                completion(responseData)
+        }
+    }
+    
     struct MembersNetworkModel: Decodable {
         let id: Int
 
@@ -73,5 +98,9 @@ class MembersAPI {
             case availableToMentor = "available_to_mentor"
             case isAvailable = "is_available"
         }
+    }
+    
+    struct SendRequestNetworkModel: Decodable {
+        let message: String?
     }
 }

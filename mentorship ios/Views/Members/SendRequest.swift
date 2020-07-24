@@ -8,6 +8,7 @@ import SwiftUI
 import Combine
 
 struct SendRequest: View {
+    var membersService: MembersService = MembersAPI()
     @ObservedObject var membersViewModel = MembersViewModel()
     var memberID: Int
     var memberName: String
@@ -17,7 +18,12 @@ struct SendRequest: View {
     @State private var offsetValue: CGFloat = 0
     @Environment(\.presentationMode) var presentationMode
 
+    // use service to send request
     func sendRequest() {
+        // set inactivity to true
+        self.membersViewModel.inActivity = true
+        
+        // set parameters
         let myID = ProfileViewModel().getProfile().id
         let endDateTimestamp = self.endDate.timeIntervalSince1970
         var menteeID = myID
@@ -26,7 +32,12 @@ struct SendRequest: View {
             menteeID = memberID
             mentorID = myID
         }
-        membersViewModel.sendRequest(menteeID: menteeID, mentorID: mentorID, endDate: endDateTimestamp, notes: notes)
+        // make request
+        membersService.sendRequest(menteeID: menteeID, mentorID: mentorID, endDate: endDateTimestamp, notes: notes) { response in
+            self.membersViewModel.inActivity = false
+            self.membersViewModel.requestSentSuccesfully = response.success
+            self.membersViewModel.sendRequestResponseData = response
+        }
     }
 
     var body: some View {

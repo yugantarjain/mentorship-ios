@@ -40,8 +40,9 @@ final class MembersModel {
         }
     }
 
-    struct SendRequestResponseData: Decodable {
+    struct SendRequestResponseData {
         let message: String?
+        let success: Bool
     }
 
 }
