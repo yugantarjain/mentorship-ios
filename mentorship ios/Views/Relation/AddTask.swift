@@ -11,6 +11,24 @@ struct AddTask: View {
     @ObservedObject var relationViewModel: RelationViewModel
     @Environment(\.presentationMode) var presentationMode
     
+    // use service to add task
+    func addTask() {
+        guard let relationID = self.relationViewModel.currentRelation.id else { return }
+        self.relationService.addNewTask(newTask: self.relationViewModel.newTask, relationID: relationID) { response in
+            // if task added successfully, dismiss sheet and refresh tasks
+            if response.success {
+                self.relationViewModel.addTask.toggle()
+                self.relationService.fetchTasks(id: relationID) { (tasks, success) in
+                    self.relationViewModel.handleFetchedTasks(tasks: tasks, success: success)
+                }
+            }
+            // else show error message
+            else {
+                response.update(viewModel: self.relationViewModel)
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             VStack(spacing: DesignConstants.Spacing.bigSpacing) {
@@ -20,20 +38,7 @@ struct AddTask: View {
                 
                 //add task button
                 Button("Add") {
-                    guard let relationID = self.relationViewModel.currentRelation.id else { return }
-                    self.relationService.addNewTask(newTask: self.relationViewModel.newTask, relationID: relationID) { response in
-                        // if task added successfully, dismiss sheet and refresh tasks
-                        if response.success {
-                            self.relationViewModel.addTask.toggle()
-                            self.relationService.fetchTasks(id: relationID) { (tasks, success) in
-                                self.relationViewModel.handleFetchedTasks(tasks: tasks, success: success)
-                            }
-                        }
-                        // else show error message
-                        else {
-                            response.update(viewModel: self.relationViewModel)
-                        }
-                    }
+                    self.addTask()
                 }
                 .buttonStyle(BigBoldButtonStyle())
                 

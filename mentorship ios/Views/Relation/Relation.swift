@@ -15,6 +15,26 @@ struct Relation: View {
         return Date(timeIntervalSince1970: relationViewModel.currentRelation.endDate ?? 0)
     }
     
+    // use service to fetch relation and tasks
+    func fetchRelationAndTasks() {
+        // For first time load set inactivity to true
+        self.relationViewModel.inActivity = self.relationViewModel.firstTimeLoad
+        
+        // make api call to fetch current relation
+        self.relationService.fetchCurrentRelation { response in
+            // map repsonse to view model
+            response.update(viewModel: self.relationViewModel)
+            self.relationViewModel.inActivity = false
+            self.relationViewModel.firstTimeLoad = false
+            //chain api call. get current tasks using id from current relation
+            if let currentID = response.id {
+                self.relationService.fetchTasks(id: currentID) { tasks, success in
+                    self.relationViewModel.handleFetchedTasks(tasks: tasks, success: success)
+                }
+            }
+        }
+    }
+    
     // use relation service and mark task as complete
     func markAsComplete() {
         // get ids and make network request
@@ -103,22 +123,7 @@ struct Relation: View {
                     dismissButton: .default(Text(LocalizableStringConstants.okay)))
             }
             .onAppear {
-                // For first time load set inactivity to true
-                self.relationViewModel.inActivity = self.relationViewModel.firstTimeLoad
-                
-                // make api call to fetch current relation
-                self.relationService.fetchCurrentRelation { response in
-                    // map repsonse to view model
-                    response.update(viewModel: self.relationViewModel)
-                    self.relationViewModel.inActivity = false
-                    self.relationViewModel.firstTimeLoad = false
-                    //chain api call. get current tasks using id from current relation
-                    if let currentID = response.id {
-                        self.relationService.fetchTasks(id: currentID) { tasks, success in
-                            self.relationViewModel.handleFetchedTasks(tasks: tasks, success: success)
-                        }
-                    }
-                }
+                self.fetchRelationAndTasks()
             }
         }
     }

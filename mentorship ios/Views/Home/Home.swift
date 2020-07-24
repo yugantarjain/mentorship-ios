@@ -14,6 +14,27 @@ struct Home: View {
         return homeViewModel.relationsListData
     }
     
+    func useHomeService() {
+        // fetch dashboard and map to home view model
+        self.homeService.fetchDashboard { home in
+            home.update(viewModel: self.homeViewModel)
+            self.homeViewModel.isLoading = false
+        }
+        
+        // if first time load, load profile too and use isLoading state (used to express in UI).
+        if self.homeViewModel.firstTimeLoad {
+            // set isLoading to true (expressed in UI)
+            self.homeViewModel.isLoading = true
+            
+            // fetch profile and map to home view model.
+            self.profileService.getProfile { profile in
+                profile.update(viewModel: self.homeViewModel)
+                // set first time load to false
+                self.homeViewModel.firstTimeLoad = false
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -58,24 +79,7 @@ struct Home: View {
                             .font(.system(size: DesignConstants.Fonts.Size.navBarIcon))
             })
             .onAppear {
-                // fetch dashboard and map to home view model
-                self.homeService.fetchDashboard { home in
-                    home.update(viewModel: self.homeViewModel)
-                    self.homeViewModel.isLoading = false
-                }
-                
-                // if first time load, load profile too and use isLoading state (used to express in UI).
-                if self.homeViewModel.firstTimeLoad {
-                    // set isLoading to true (expressed in UI)
-                    self.homeViewModel.isLoading = true
-                    
-                    // fetch profile and map to home view model.
-                    self.profileService.getProfile { profile in
-                        profile.update(viewModel: self.homeViewModel)
-                        // set first time load to false
-                        self.homeViewModel.firstTimeLoad = false
-                    }
-                }
+                self.useHomeService()
             }
         }
     }

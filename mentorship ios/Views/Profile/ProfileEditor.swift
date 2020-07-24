@@ -12,6 +12,26 @@ struct ProfileEditor: View {
     @State var editProfileData = ProfileViewModel().getEditProfileData()
     @ObservedObject var profileViewModel = ProfileViewModel()
     
+    // make api call to update profile
+    func updateProfile() {
+        self.profileService.updateProfile(updateProfileData: self.editProfileData) { response in
+            // map model to view model
+            response.update(viewModel: self.profileViewModel)
+            // set inActivity to false
+            self.profileViewModel.inActivity = false
+            // show completion alert to user
+            self.profileViewModel.showAlert = true
+            // success/fail conditions
+            if self.profileViewModel.updateProfileResponseData.success ?? false {
+                self.profileViewModel.alertTitle = LocalizableStringConstants.success
+                // update profile data in user defaults on success
+                self.profileViewModel.saveUpdatedProfile(updatedProfileData: self.editProfileData)
+            } else {
+                self.profileViewModel.alertTitle = LocalizableStringConstants.failure
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -57,23 +77,8 @@ struct ProfileEditor: View {
                     Text(LocalizableStringConstants.cancel)
                 }, trailing: Button(LocalizableStringConstants.save) {
                     self.profileViewModel.inActivity = true
-                    // make api call to update profile
-                    self.profileService.updateProfile(updateProfileData: self.editProfileData) { response in
-                        // map model to view model
-                        response.update(viewModel: self.profileViewModel)
-                        // set inActivity to false
-                        self.profileViewModel.inActivity = false
-                        // show completion alert to user
-                        self.profileViewModel.showAlert = true
-                        // success/fail conditions
-                        if self.profileViewModel.updateProfileResponseData.success ?? false {
-                            self.profileViewModel.alertTitle = LocalizableStringConstants.success
-                            // update profile data in user defaults on success
-                            self.profileViewModel.saveUpdatedProfile(updatedProfileData: self.editProfileData)
-                        } else {
-                            self.profileViewModel.alertTitle = LocalizableStringConstants.failure
-                        }
-                    }
+                    // make network call to update profile
+                    self.updateProfile()
                 })
             .alert(isPresented: $profileViewModel.showAlert) {
                 Alert.init(
