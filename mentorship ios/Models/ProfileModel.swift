@@ -7,7 +7,7 @@
 final class ProfileModel {
 
     // MARK: - Structures
-    struct ProfileData: Codable, ProfileProperties {
+    struct ProfileData: Codable, Equatable, ProfileProperties {
         let id: Int
         var name: String?
         var username: String?
@@ -30,8 +30,22 @@ final class ProfileModel {
         }
     }
     
-    struct UpdateProfileResponseData: Decodable {
+    struct UpdateProfileResponseData {
+        let success: Bool?
         let message: String?
     }
 
+}
+
+// MARK: - API
+extension ProfileModel.ProfileData {
+    func update(viewModel: HomeViewModel) {
+        viewModel.userName = self.name
+    }
+}
+
+extension ProfileModel.UpdateProfileResponseData {
+    func update(viewModel: ProfileViewModel) {
+        viewModel.updateProfileResponseData = self
+    }
 }
