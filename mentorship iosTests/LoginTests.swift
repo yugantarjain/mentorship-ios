@@ -45,7 +45,6 @@ class LoginViewModelTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
-        
     }
 
     func testLoginButtonDisabledState() {

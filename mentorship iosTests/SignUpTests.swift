@@ -23,6 +23,33 @@ class SignUpTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testSignUpService() throws {
+        // Login Service
+        let signUpService: SignUpService = SignUpAPI(urlSession: urlSession)
+        
+        // Set mock json and data
+        let mockJSON = SignUpModel.SignUpResponseData(message: "test data")
+        let mockData = try JSONEncoder().encode(mockJSON)
+
+        // Return data in mock request handler
+        MockURLProtocol.requestHandler = { request in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // Set expectation. Used to test async code.
+        let expectation = XCTestExpectation(description: "response")
+        
+        // Set sign up data
+        let signUpData = SignUpModel.SignUpUploadData(name: "testName", username: "test", password: "password", email: "test", tncChecked: true, needMentoring: false, availableToMentor: false)
+        
+        // Make login request and test response data. Confirm password same as password.
+        signUpService.signUp(availabilityPickerSelection: 0, signUpData: signUpData, confirmPassword: "password") { resp in
+            XCTAssertEqual(resp.message, mockJSON.message)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
 
     func testNonMatchingPasswordSignUp() {
         //set sign up data
