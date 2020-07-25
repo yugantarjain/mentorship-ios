@@ -10,13 +10,42 @@ import XCTest
 class LoginViewModelTests: XCTestCase {
     //init sign up view model
     let loginVM = LoginViewModel()
+    // custom urlsession for mock network calls
+    var urlSession: URLSession!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        // Set url session for mock networking
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [MockURLProtocol.self]
+        urlSession = URLSession(configuration: configuration)
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+    
+    func testLoginService() throws {
+        // Login Service
+        let loginService: LoginService = LoginAPI(urlSession: urlSession)
+        
+        // Set mock json and data
+        let mockJSON = LoginModel.LoginResponseData(message: "test message")
+        let mockData = try JSONEncoder().encode(mockJSON)
+
+        // Return data in mock request handler
+        MockURLProtocol.requestHandler = { request in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // Set expectation. Used to test async code.
+        let expectation = XCTestExpectation(description: "response")
+        // Make login request and test response data.
+        loginService.login(loginData: LoginModel.LoginUploadData(username: "abcd", password: "abcd")) { resp in
+            XCTAssertEqual(resp.message, mockJSON.message)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+        
     }
 
     func testLoginButtonDisabledState() {
