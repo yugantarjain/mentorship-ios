@@ -28,7 +28,12 @@ class HomeTests: XCTestCase {
         let homeService: HomeService = HomeAPI(urlSession: urlSession)
 
         // Set mock json and data
-        let mockJSON = HomeModel.HomeResponseData(asMentor: nil, asMentee: RequestsList(sent: nil, received: nil), tasksToDo: [TaskStructure(id: 0, description: "", isDone: true, createdAt: 0, completedAt: 0)], tasksDone: [TaskStructure]())
+        let mockJSON = HomeModel.HomeResponseData(
+            asMentor: nil,
+            asMentee: RequestsList(sent: nil, received: nil),
+            tasksToDo: [TaskStructure(id: 0, description: "", isDone: true, createdAt: 0, completedAt: 0)],
+            tasksDone: [TaskStructure]()
+        )
         let mockData = try JSONEncoder().encode(mockJSON)
         
         // Return data in mock request handler
