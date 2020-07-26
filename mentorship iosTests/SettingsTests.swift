@@ -85,16 +85,4 @@ class SettingsTests: XCTestCase {
         }
         wait(for: [expectation2], timeout: 1)
     }
-    
-    // MARK: - SettingsViewModelTests
-    
-    func testLogout() {
-        let settingsVM = SettingsViewModel()
-        
-        // Log out
-        settingsVM.logout()
-        
-        // Test. Assert user is not logged in
-        XCTAssertEqual(UserDefaults.standard.bool(forKey: UserDefaultsConstants.isLoggedIn), false)
-    }
 }
