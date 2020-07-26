@@ -22,7 +22,7 @@ class HomeTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    // BUG - response always nil (line 44 - print(resp))
+    // BUG - response always nil (print(resp))
     func testHomeService() throws {
         // Home Service
         let homeService: HomeService = HomeAPI(urlSession: urlSession)
