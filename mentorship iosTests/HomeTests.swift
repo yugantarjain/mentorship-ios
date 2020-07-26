@@ -37,7 +37,7 @@ class HomeTests: XCTestCase {
         }
         
         // Set expectation. Used to test async code.
-        let expectation = XCTestExpectation(description: "home")
+        let expectation = XCTestExpectation(description: "response")
         
         // Make fetch dashboard request and test response data.
         homeService.fetchDashboard { resp in

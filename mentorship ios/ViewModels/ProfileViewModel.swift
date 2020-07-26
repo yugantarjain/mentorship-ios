@@ -29,8 +29,6 @@ class ProfileViewModel: ObservableObject {
     @Published var inActivity = false
     @Published var showAlert = false
     var alertTitle = LocalizedStringKey("")
-    private var cancellable: AnyCancellable?
-    
 
     // MARK: - Functions
     

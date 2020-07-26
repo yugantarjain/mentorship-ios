@@ -7,7 +7,7 @@
 import XCTest
 @testable import mentorship_ios
 
-class LoginViewModelTests: XCTestCase {
+class LoginTests: XCTestCase {
     //init sign up view model
     let loginVM = LoginViewModel()
     // custom urlsession for mock network calls

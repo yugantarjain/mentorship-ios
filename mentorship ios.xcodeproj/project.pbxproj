@@ -56,7 +56,7 @@
 		53A115D9249E1BD00065998C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A115D8249E1BD00065998C /* Settings.swift */; };
 		53A6DDEC24BE512D00D5DFCE /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6DDE924BE512D00D5DFCE /* LoginTests.swift */; };
 		53A6DDEE24BE512D00D5DFCE /* SignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6DDEB24BE512D00D5DFCE /* SignUpTests.swift */; };
-		53A6DDF024BE52A100D5DFCE /* ProfileViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6DDEF24BE52A100D5DFCE /* ProfileViewModelTests.swift */; };
+		53A6DDF024BE52A100D5DFCE /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A6DDEF24BE52A100D5DFCE /* ProfileTests.swift */; };
 		53BDEE1A24C9767F0017C307 /* SignUpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BDEE1924C9767F0017C307 /* SignUpAPI.swift */; };
 		53BDEE1C24C98B120017C307 /* RelationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BDEE1B24C98B120017C307 /* RelationAPI.swift */; };
 		53C0206D249B88370000BEB5 /* ProfileProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C0206C249B88370000BEB5 /* ProfileProperties.swift */; };
@@ -169,7 +169,7 @@
 		53A115D8249E1BD00065998C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		53A6DDE924BE512D00D5DFCE /* LoginTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 		53A6DDEB24BE512D00D5DFCE /* SignUpTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTests.swift; sourceTree = "<group>"; };
-		53A6DDEF24BE52A100D5DFCE /* ProfileViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModelTests.swift; sourceTree = "<group>"; };
+		53A6DDEF24BE52A100D5DFCE /* ProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		53BDEE1924C9767F0017C307 /* SignUpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAPI.swift; sourceTree = "<group>"; };
 		53BDEE1B24C98B120017C307 /* RelationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationAPI.swift; sourceTree = "<group>"; };
 		53C0206C249B88370000BEB5 /* ProfileProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProperties.swift; sourceTree = "<group>"; };
@@ -295,7 +295,7 @@
 				53A6DDE924BE512D00D5DFCE /* LoginTests.swift */,
 				53A6DDEB24BE512D00D5DFCE /* SignUpTests.swift */,
 				53D4545324CD50F500083215 /* HomeTests.swift */,
-				53A6DDEF24BE52A100D5DFCE /* ProfileViewModelTests.swift */,
+				53A6DDEF24BE52A100D5DFCE /* ProfileTests.swift */,
 				530F442F2482752600B1FD0B /* Info.plist */,
 				534B69D924CB6DAE007646E6 /* MockURLProtocol.swift */,
 			);
@@ -772,7 +772,7 @@
 				534B69DA24CB6DAE007646E6 /* MockURLProtocol.swift in Sources */,
 				53ECF23024C3954C00FF8D24 /* MentorshipTests.swift in Sources */,
 				53D4545424CD50F500083215 /* HomeTests.swift in Sources */,
-				53A6DDF024BE52A100D5DFCE /* ProfileViewModelTests.swift in Sources */,
+				53A6DDF024BE52A100D5DFCE /* ProfileTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
