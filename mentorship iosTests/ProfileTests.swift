@@ -7,8 +7,7 @@
 import XCTest
 @testable import mentorship_ios
 
-class ProfileViewModelTests: XCTestCase {
-    let profileVM = ProfileViewModel()
+class ProfileTests: XCTestCase {
     // sample profile data
     let sampleProfileData = ProfileModel.ProfileData(id: 100, email: "sampleTestEmail")
     // custom urlsession for mock network calls
@@ -80,6 +79,8 @@ class ProfileViewModelTests: XCTestCase {
     // MARK: - Method Tests
     
     func testSaveAndGetProfile() {
+        let profileVM = ProfileViewModel()
+
         //save sample data
         profileVM.saveProfile(profile: sampleProfileData)
         
@@ -92,6 +93,8 @@ class ProfileViewModelTests: XCTestCase {
     }
     
     func testEditProfileDataReceived() {
+        let profileVM = ProfileViewModel()
+
         //prepare sample data
         let sampleData = ProfileModel.ProfileData(id: 100, name: nil, username: "username", email: "test@abc.com")
         
