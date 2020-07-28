@@ -8,8 +8,6 @@ import XCTest
 @testable import mentorship_ios
 
 class SignUpTests: XCTestCase {
-    //init sign up view model
-    let signupVM = SignUpViewModel()
     // custom urlsession for mock network calls
     var urlSession: URLSession!
 
@@ -64,6 +62,8 @@ class SignUpTests: XCTestCase {
     }
     
     func testSignUpButtonDisabledState() {
+        let signupVM = SignUpViewModel()
+
         // MARK: - 1. When fields empty. Disabled state should be true.
         
         //set disabled state. Currently, data is empty.

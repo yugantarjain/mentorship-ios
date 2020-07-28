@@ -8,8 +8,6 @@ import XCTest
 @testable import mentorship_ios
 
 class LoginTests: XCTestCase {
-    //init sign up view model
-    let loginVM = LoginViewModel()
     // custom urlsession for mock network calls
     var urlSession: URLSession!
 
@@ -49,6 +47,8 @@ class LoginTests: XCTestCase {
     }
 
     func testLoginButtonDisabledState() {
+        let loginVM = LoginViewModel()
+
         // MARK: - 1. When fields empty. Disabled state should be true.
         
         //set disabled state. Currently, data is empty.
