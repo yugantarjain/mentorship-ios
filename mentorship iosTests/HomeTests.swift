@@ -47,7 +47,8 @@ class HomeTests: XCTestCase {
         
         // Make fetch dashboard request and test response data.
         homeService.fetchDashboard { resp in
-            print(resp)
+            XCTAssertEqual(resp.tasksToDo?.count, mockJSON.tasksToDo?.count)
+            XCTAssertEqual(resp.tasksDone?.count, mockJSON.tasksDone?.count)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
