@@ -95,5 +95,13 @@ struct DesignConstants {
             formatter.timeStyle = .none
             return formatter
         }
+        
+        static var taskTime: DateFormatter {
+            let formatter = DateFormatter()
+            formatter.doesRelativeDateFormatting = true
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            return formatter
+        }
     }
 }

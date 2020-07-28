@@ -14,7 +14,6 @@
 		530F441D2482752600B1FD0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 530F441C2482752600B1FD0B /* Assets.xcassets */; };
 		530F44202482752600B1FD0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 530F441F2482752600B1FD0B /* Preview Assets.xcassets */; };
 		530F44232482752600B1FD0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 530F44212482752600B1FD0B /* LaunchScreen.storyboard */; };
-		530F442E2482752600B1FD0B /* MentorshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F442D2482752600B1FD0B /* MentorshipTests.swift */; };
 		530F44392482752600B1FD0B /* MentorshipUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530F44382482752600B1FD0B /* MentorshipUITests.swift */; };
 		5310E51E2492D398001AF464 /* UserDefaultsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5310E51D2492D398001AF464 /* UserDefaultsConstants.swift */; };
 		5311839524AB4D7B0006036F /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5311839424AB4D7B0006036F /* Relation.swift */; };
@@ -83,6 +82,9 @@
 		53ED6B0F248D04A80055DFF0 /* MembersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ED6B0E248D04A80055DFF0 /* MembersModel.swift */; };
 		53F205DD249ADF9200DDE52E /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F205DC249ADF9200DDE52E /* ProfileEditor.swift */; };
 		53F205E0249AE22500DDE52E /* ProfileEditField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F205DF249AE22500DDE52E /* ProfileEditField.swift */; };
+		53F414D624D0155F00E5407F /* TaskCommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F414D524D0155F00E5407F /* TaskCommentsAPI.swift */; };
+		53F414D824D016C200E5407F /* TaskCommentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F414D724D016C200E5407F /* TaskCommentsModel.swift */; };
+		53F414DA24D06CEE00E5407F /* TaskCommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F414D924D06CEE00E5407F /* TaskCommentsViewModel.swift */; };
 		53F5F3AB24CACC280058ACA3 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F5F3AA24CACC280058ACA3 /* RequestModel.swift */; };
 		53FB664E24A411B900B02208 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FB664D24A411B900B02208 /* About.swift */; };
 		53FB665024A41E1A00B02208 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FB664F24A41E1A00B02208 /* WebView.swift */; };
@@ -122,7 +124,6 @@
 		530F44222482752600B1FD0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		530F44242482752600B1FD0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		530F44292482752600B1FD0B /* mentorship iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mentorship iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		530F442D2482752600B1FD0B /* MentorshipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorshipTests.swift; sourceTree = "<group>"; };
 		530F442F2482752600B1FD0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		530F44342482752600B1FD0B /* mentorship iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mentorship iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		530F44382482752600B1FD0B /* MentorshipUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentorshipUITests.swift; sourceTree = "<group>"; };
@@ -196,6 +197,9 @@
 		53ED6B0E248D04A80055DFF0 /* MembersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersModel.swift; sourceTree = "<group>"; };
 		53F205DC249ADF9200DDE52E /* ProfileEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
 		53F205DF249AE22500DDE52E /* ProfileEditField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditField.swift; sourceTree = "<group>"; };
+		53F414D524D0155F00E5407F /* TaskCommentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCommentsAPI.swift; sourceTree = "<group>"; };
+		53F414D724D016C200E5407F /* TaskCommentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCommentsModel.swift; sourceTree = "<group>"; };
+		53F414D924D06CEE00E5407F /* TaskCommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCommentsViewModel.swift; sourceTree = "<group>"; };
 		53F5F3AA24CACC280058ACA3 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		53FB664D24A411B900B02208 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		53FB664F24A41E1A00B02208 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -380,6 +384,7 @@
 				53BDEE1B24C98B120017C307 /* RelationAPI.swift */,
 				53671C5724CB34A90015B8FF /* MembersAPI.swift */,
 				53671C5924CB578A0015B8FF /* SettingsAPI.swift */,
+				53F414D524D0155F00E5407F /* TaskCommentsAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -485,6 +490,7 @@
 				53F5F3AA24CACC280058ACA3 /* RequestModel.swift */,
 				53EA66582492EA1E007AEB04 /* ProfileModel.swift */,
 				53D85E9E24AD2A7B00DC6605 /* RelationModel.swift */,
+				53F414D724D016C200E5407F /* TaskCommentsModel.swift */,
 				53ED6B0E248D04A80055DFF0 /* MembersModel.swift */,
 				53EB022C248D71F40061E5C4 /* AuthModel.swift */,
 				534BE20324A74C8D004C1EB2 /* SettingsModel.swift */,
@@ -530,6 +536,7 @@
 				5396AA0724C799CF0012F396 /* DetailListCellViewModel.swift */,
 				839761C0249F821A0020535C /* ProfileViewModel.swift */,
 				53D85EA024AD2FD100DC6605 /* RelationViewModel.swift */,
+				53F414D924D06CEE00E5407F /* TaskCommentsViewModel.swift */,
 				839761C2249F83860020535C /* MembersViewModel.swift */,
 				534BE20124A74B1A004C1EB2 /* SettingsViewModel.swift */,
 				53E6F84A24A645B1009214FC /* ChangePasswordViewModel.swift */,
@@ -693,11 +700,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5311839724AB50280006036F /* TasksDoneSection.swift in Sources */,
 				53BDEE1A24C9767F0017C307 /* SignUpAPI.swift in Sources */,
 				530F44192482752500B1FD0B /* mentorship_ios.xcdatamodeld in Sources */,
 				536A7CC424C8CCFC00D8A171 /* LoginAPI.swift in Sources */,
 				53BDEE1C24C98B120017C307 /* RelationAPI.swift in Sources */,
+				53F414D824D016C200E5407F /* TaskCommentsModel.swift in Sources */,
 				5396AA0824C799CF0012F396 /* DetailListCellViewModel.swift in Sources */,
 				531C8065248A477700AE81EF /* LoginModel.swift in Sources */,
 				539B4EBC24BF535C00F29FDF /* TaskComments.swift in Sources */,
@@ -749,8 +756,9 @@
 				5314C184248B9EC2000AA386 /* AllPadding.swift in Sources */,
 				53F205E0249AE22500DDE52E /* ProfileEditField.swift in Sources */,
 				538CD07024ABDAE800F6A665 /* TasksSection.swift in Sources */,
-                532A24D024B4B6F1000C8B83 /* RequestActionAPI.swift in Sources */,
+				532A24D024B4B6F1000C8B83 /* RequestActionAPI.swift in Sources */,
 				538FFE3224B11A1B00E4B6BF /* TaskModel.swift in Sources */,
+				53F414DA24D06CEE00E5407F /* TaskCommentsViewModel.swift in Sources */,
 				53627FCA24C8B4C400D2720E /* ServiceProtocols.swift in Sources */,
 				53D85EA124AD2FD100DC6605 /* RelationViewModel.swift in Sources */,
 				839761BB249F7F110020535C /* SignUpViewModel.swift in Sources */,
@@ -761,6 +769,7 @@
 				534AC02F2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift in Sources */,
 				53D7C75B2494CA6C005DD606 /* ErrorText.swift in Sources */,
 				53FB665024A41E1A00B02208 /* WebView.swift in Sources */,
+				53F414D624D0155F00E5407F /* TaskCommentsAPI.swift in Sources */,
 				53671C5A24CB578A0015B8FF /* SettingsAPI.swift in Sources */,
 				839761BD249F7FED0020535C /* HomeViewModel.swift in Sources */,
 				53729E02248E2F6700E79C24 /* UserDefaults.swift in Sources */,

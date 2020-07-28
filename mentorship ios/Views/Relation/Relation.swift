@@ -15,6 +15,10 @@ struct Relation: View {
         return Date(timeIntervalSince1970: relationViewModel.currentRelation.endDate ?? 0)
     }
     
+    var reqID: Int {
+        return relationViewModel.currentRelation.id ?? -1
+    }
+    
     // use service to fetch relation and tasks
     func fetchRelationAndTasks() {
         // For first time load set inactivity to true
@@ -83,24 +87,27 @@ struct Relation: View {
                     }
                     .listRowBackground(DesignConstants.Colors.formBackgroundColor)
                     
-                    //Tasks To Do List section
-                    TasksSection(tasks: relationViewModel.toDoTasks, isToDoSection: true) { task in
-                        //set tapped task
-                        RelationViewModel.taskTapped = task
-                        //show alert for marking as complete confirmation
-                        self.showAlert.toggle()
+                    // Tasks section. Only show if valid current relation exists
+                    if reqID > -1 {
+                        //Tasks To Do List section
+                        TasksSection(tasks: relationViewModel.toDoTasks, isToDoSection: true, reqID: reqID, reqName: self.relationViewModel.personName) { task in
+                            //set tapped task
+                            RelationViewModel.taskTapped = task
+                            //show alert for marking as complete confirmation
+                            self.showAlert.toggle()
+                        }
+                        .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text(LocalizableStringConstants.markComplete),
+                                primaryButton: .cancel(),
+                                secondaryButton: .default(Text(LocalizableStringConstants.confirm)) {
+                                    self.markAsComplete()
+                                })
+                        }
+                        
+                        //Tasks Done List section
+                        TasksSection(tasks: relationViewModel.doneTasks, reqID: reqID, reqName: self.relationViewModel.personName)
                     }
-                    .alert(isPresented: $showAlert) {
-                        Alert(
-                            title: Text(LocalizableStringConstants.markComplete),
-                            primaryButton: .cancel(),
-                            secondaryButton: .default(Text(LocalizableStringConstants.confirm)) {
-                                self.markAsComplete()
-                            })
-                    }
-                    
-                    //Tasks Done List section
-                    TasksSection(tasks: relationViewModel.doneTasks)
                 }
                 
                 //show activity spinner if in activity

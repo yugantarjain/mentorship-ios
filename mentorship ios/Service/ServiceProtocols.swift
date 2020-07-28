@@ -62,6 +62,14 @@ protocol RelationService {
     func markAsComplete(taskID: Int, relationID: Int, completion: @escaping (RelationModel.ResponseData) -> Void)
 }
 
+protocol TaskCommentsService {
+    func fetchTaskComments(
+        reqID: Int,
+        taskID: Int,
+        completion: @escaping ([TaskCommentsModel.TaskCommentsResponse]) -> Void
+    )
+}
+
 // MARK: - Members Service
 protocol MembersService {
     func fetchMembers(pageToLoad: Int, perPage: Int, completion: @escaping ([MembersModel.MembersResponseData], Bool) -> Void)

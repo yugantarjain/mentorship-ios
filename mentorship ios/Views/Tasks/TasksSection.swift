@@ -7,10 +7,12 @@
 import SwiftUI
 
 struct TasksSection: View {
-    var tasks: [TaskStructure]?
-    var markAsCompleteAction: (TaskStructure) -> Void
+    let tasks: [TaskStructure]?
     //used to enable mark as complete for to do tasks only.
-    var isToDoSection: Bool
+    var isToDoSection: Bool = false
+    var reqID: Int = -1
+    var reqName: String = ""
+    var markAsCompleteAction: (TaskStructure) -> Void = { _ in }
     
     var iconName: String {
         if isToDoSection {
@@ -20,18 +22,11 @@ struct TasksSection: View {
         }
     }
     
-    //intialiser for view
-    init(tasks: [TaskStructure]?, markAsCompleteAction: @escaping (TaskStructure) -> Void = { _ in }, isToDoSection: Bool = false) {
-        self.tasks = tasks ?? []
-        self.markAsCompleteAction = markAsCompleteAction
-        self.isToDoSection = isToDoSection
-    }
-    
     var body: some View {
         Section(header: Text(LocalizableStringConstants.tasksToDo).font(.headline)) {
             ForEach(tasks ?? []) { task in
                 //Tapping leads to task comments page
-                NavigationLink(destination: TaskComments(task: task)) {
+                NavigationLink(destination: TaskComments(taskID: task.id ?? -1, reqID: self.reqID, reqName: self.reqName)) {
                     //Main HStack, shows icon and task
                     HStack {
                         Image(systemName: self.iconName)
