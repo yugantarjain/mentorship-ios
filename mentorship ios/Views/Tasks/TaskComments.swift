@@ -10,6 +10,7 @@ struct TaskComments: View {
     let taskCommentsService: TaskCommentsService = TaskCommentsAPI()
     @EnvironmentObject var taskCommentsVM: TaskCommentsViewModel
     let taskID: Int
+    let taskName: String
     
     func fetchComments() {
         taskCommentsService.fetchTaskComments(reqID: taskCommentsVM.reqID, taskID: taskID) { comments in
@@ -18,27 +19,45 @@ struct TaskComments: View {
         }
     }
     
+    func postComment() {
+        self.taskCommentsService.postTaskComment(
+            reqID: self.taskCommentsVM.reqID,
+            taskID: self.taskID,
+            commentData: self.taskCommentsVM.newComment
+        ) { resp in
+            self.fetchComments()
+            self.taskCommentsVM.newComment.comment = ""
+        }
+    }
+    
+    func commentCell(comment: TaskCommentsModel.TaskCommentsResponse) -> some View {
+        // Comment cell
+        VStack(alignment: .leading, spacing: DesignConstants.Form.Spacing.minimalSpacing) {
+            // Sender name and time
+            HStack {
+                Text(self.taskCommentsVM.getCommentAuthorName(authorID: comment.userID!))
+                    .font(.headline)
+                
+                Text(DesignConstants.DateFormat.taskTime.string(from: Date(timeIntervalSince1970: comment.creationDate ?? 0)))
+                    .font(.footnote)
+            }
+            // Comment
+            Text(comment.comment ?? "")
+        }
+    }
+    
     var body: some View {
         VStack {
             // List showing comments
-            List {
+            Form {
+                // activity indicator, show when comments screen first accessed
                 if self.taskCommentsVM.isLoading {
                     ActivityIndicator(isAnimating: .constant(true))
-                } else {
+                }
+                    // task comments
+                else {
                     ForEach(taskCommentsVM.taskCommentsResponse) { comment in
-                        // Comment cell
-                        VStack(alignment: .leading, spacing: DesignConstants.Form.Spacing.minimalSpacing) {
-                            // Sender name and time
-                            HStack {
-                                Text(self.taskCommentsVM.getCommentAuthorName(authorID: comment.userID!))
-                                    .font(.headline)
-                                
-                                Text(DesignConstants.DateFormat.taskTime.string(from: Date(timeIntervalSince1970: comment.creationDate ?? 0)))
-                                    .font(.footnote)
-                            }
-                            // Comment
-                            Text(comment.comment ?? "")
-                        }
+                        self.commentCell(comment: comment)
                     }
                 }
             }
@@ -48,16 +67,10 @@ struct TaskComments: View {
                 // Text Field
                 TextField("Type here", text: $taskCommentsVM.newComment.comment)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                
                 // Send Button
-                Button("Send") {
-                    self.taskCommentsService.postTaskComment(
-                        reqID: self.taskCommentsVM.reqID,
-                        taskID: self.taskID,
-                        commentData: self.taskCommentsVM.newComment
-                    ) { resp in
-                        self.fetchComments()
-                        self.taskCommentsVM.newComment.comment = ""
-                    }
+                Button(LocalizableStringConstants.send) {
+                    self.postComment()
                 }
                 .disabled(self.taskCommentsVM.sendButtonDisabled)
             }
@@ -77,6 +90,6 @@ struct TaskComments: View {
 
 struct TaskComments_Previews: PreviewProvider {
     static var previews: some View {
-        TaskComments(taskID: 0)
+        TaskComments(taskID: 0, taskName: "Test task")
     }
 }

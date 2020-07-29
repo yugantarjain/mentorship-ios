@@ -32,11 +32,11 @@ struct TasksSection: View {
                 .font(.subheadline)
         }
         .padding(DesignConstants.Padding.insetListCellFrameExpansion)
-        //context menu used to show and enable actions (eg. mark as complete)
-        .contextMenu {
-            if self.isToDoSection && navToTaskComments {
-                Button("Mark as Complete") { self.markAsCompleteAction(task) }
-            }
+            //context menu used to show and enable actions (eg. mark as complete)
+            .contextMenu {
+                if self.isToDoSection && navToTaskComments {
+                    Button("Mark as Complete") { self.markAsCompleteAction(task) }
+                }
         }
     }
     
@@ -45,7 +45,9 @@ struct TasksSection: View {
             ForEach(tasks ?? []) { task in
                 if self.navToTaskComments {
                     //Tapping leads to task comments page
-                    NavigationLink(destination: TaskComments(taskID: task.id ?? -1)) {
+                    NavigationLink(
+                        destination: TaskComments(taskID: task.id ?? -1, taskName: task.description ?? "")
+                    ) {
                         self.taskCell(task: task)
                     }
                 } else {
