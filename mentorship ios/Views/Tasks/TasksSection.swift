@@ -10,8 +10,7 @@ struct TasksSection: View {
     let tasks: [TaskStructure]?
     //used to enable mark as complete for to do tasks only.
     var isToDoSection: Bool = false
-    var reqID: Int = -1
-    var reqName: String = ""
+    var navToTaskComments = false
     var markAsCompleteAction: (TaskStructure) -> Void = { _ in }
     
     var iconName: String {
@@ -22,27 +21,35 @@ struct TasksSection: View {
         }
     }
     
+    func taskCell(task: TaskStructure) -> some View {
+        //Main HStack, shows icon and task
+        HStack {
+            Image(systemName: self.iconName)
+                .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
+                .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
+            
+            Text(task.description ?? "-")
+                .font(.subheadline)
+        }
+        .padding(DesignConstants.Padding.insetListCellFrameExpansion)
+        //context menu used to show and enable actions (eg. mark as complete)
+        .contextMenu {
+            if self.isToDoSection && navToTaskComments {
+                Button("Mark as Complete") { self.markAsCompleteAction(task) }
+            }
+        }
+    }
+    
     var body: some View {
         Section(header: Text(LocalizableStringConstants.tasksToDo).font(.headline)) {
             ForEach(tasks ?? []) { task in
-                //Tapping leads to task comments page
-                NavigationLink(destination: TaskComments(taskID: task.id ?? -1, reqID: self.reqID, reqName: self.reqName)) {
-                    //Main HStack, shows icon and task
-                    HStack {
-                        Image(systemName: self.iconName)
-                            .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
-                            .padding(.trailing, DesignConstants.Padding.insetListCellFrameExpansion)
-                        
-                        Text(task.description ?? "-")
-                            .font(.subheadline)
+                if self.navToTaskComments {
+                    //Tapping leads to task comments page
+                    NavigationLink(destination: TaskComments(taskID: task.id ?? -1)) {
+                        self.taskCell(task: task)
                     }
-                    .padding(DesignConstants.Padding.insetListCellFrameExpansion)
-                    //context menu used to show and enable actions (eg. mark as complete)
-                    .contextMenu {
-                        if self.isToDoSection {
-                            Button("Mark as Complete") { self.markAsCompleteAction(task) }
-                        }
-                    }
+                } else {
+                    self.taskCell(task: task)
                 }
             }
         }
