@@ -9,6 +9,7 @@ import SwiftUI
 struct Relation: View {
     var relationService: RelationService = RelationAPI()
     @ObservedObject var relationViewModel = RelationViewModel()
+    @ObservedObject var taskCommentsViewModel = TaskCommentsViewModel()
     @State var showAlert = false
     
     var endDate: Date {
@@ -132,6 +133,7 @@ struct Relation: View {
             .onAppear {
                 self.fetchRelationAndTasks()
             }
+            .environmentObject(self.taskCommentsViewModel)
         }
     }
 }

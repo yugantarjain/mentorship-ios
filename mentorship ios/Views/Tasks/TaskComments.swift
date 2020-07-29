@@ -8,7 +8,7 @@ import SwiftUI
 
 struct TaskComments: View {
     let taskCommentsService: TaskCommentsService = TaskCommentsAPI()
-    @ObservedObject var taskCommentsViewModel = TaskCommentsViewModel()
+    @EnvironmentObject var taskCommentsViewModel: TaskCommentsViewModel
     let taskID: Int
     let reqID: Int
     let reqName: String
@@ -51,6 +51,10 @@ struct TaskComments: View {
                 }
             }
             .padding(.horizontal)
+            .modifier(KeyboardAware())
+            
+            // Spacer for bottom
+            Spacer()
         }
         .navigationBarTitle("Task Comments")
         .onAppear {
