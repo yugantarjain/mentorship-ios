@@ -28,9 +28,10 @@ class TaskCommentsAPI: TaskCommentsService {
         //api call
         cancellable = NetworkManager.callAPI(
             urlString: URLStringConstants.MentorshipRelation.getTaskComments(reqID: reqID, taskID: taskID),
-            token: token)
+            token: token,
+            session: urlSession)
             .receive(on: RunLoop.main)
-            .catch { _ in Just([NetworkResponseModel]()) }
+            .catch { _ in Just([CommentsNetworkResponse]()) }
             .sink { comments in
                 print(comments)
                 var response = [TaskCommentsModel.TaskCommentsResponse]()
@@ -41,7 +42,39 @@ class TaskCommentsAPI: TaskCommentsService {
         }
     }
     
-    struct NetworkResponseModel: Decodable {
+    func postTaskComment(
+        reqID: Int,
+        taskID: Int,
+        commentData: TaskCommentsModel.PostCommentUploadData,
+        completion: @escaping (TaskCommentsModel.PostCommentResponse) -> Void
+    ) {
+        //get auth token
+        guard let token = try? KeychainManager.getToken() else {
+            return
+        }
+        
+        // encode upload data
+        guard let uploadData = try? JSONEncoder().encode(commentData) else {
+            return
+        }
+        
+        //api call
+        cancellable = NetworkManager.callAPI(
+            urlString: URLStringConstants.MentorshipRelation.postTaskComment(reqID: reqID, taskID: taskID),
+            httpMethod: "POST",
+            uploadData: uploadData,
+            token: token,
+            session: urlSession)
+            .receive(on: RunLoop.main)
+            .catch { _ in Just(PostCommentResponse(message: LocalizableStringConstants.networkErrorString)) }
+            .sink {
+                let success = NetworkManager.responseCode == 201
+                let response = TaskCommentsModel.PostCommentResponse(message: $0.message, success: success)
+                completion(response)
+        }
+    }
+    
+    struct CommentsNetworkResponse: Decodable {
         let id: Int?
         let userID: Int?
         let creationDate: Double?
@@ -52,5 +85,9 @@ class TaskCommentsAPI: TaskCommentsService {
             case userID = "user_id"
             case creationDate = "creation_date"
         }
+    }
+    
+    struct PostCommentResponse: Decodable {
+        let message: String?
     }
 }

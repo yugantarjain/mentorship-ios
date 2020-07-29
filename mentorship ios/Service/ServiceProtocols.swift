@@ -62,11 +62,19 @@ protocol RelationService {
     func markAsComplete(taskID: Int, relationID: Int, completion: @escaping (RelationModel.ResponseData) -> Void)
 }
 
+// MARK: - Task Comments Service
 protocol TaskCommentsService {
     func fetchTaskComments(
         reqID: Int,
         taskID: Int,
         completion: @escaping ([TaskCommentsModel.TaskCommentsResponse]) -> Void
+    )
+    
+    func postTaskComment(
+        reqID: Int,
+        taskID: Int,
+        commentData: TaskCommentsModel.PostCommentUploadData,
+        completion: @escaping (TaskCommentsModel.PostCommentResponse) -> Void
     )
 }
 

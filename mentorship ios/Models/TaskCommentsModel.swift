@@ -11,4 +11,13 @@ class TaskCommentsModel {
         let creationDate: Double?
         let comment: String?
     }
+    
+    struct PostCommentUploadData: Encodable {
+        var comment: String
+    }
+    
+    struct PostCommentResponse {
+        let message: String?
+        let success: Bool
+    }
 }

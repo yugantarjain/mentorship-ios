@@ -11,6 +11,13 @@ struct TaskComments: View {
     @EnvironmentObject var taskCommentsVM: TaskCommentsViewModel
     let taskID: Int
     
+    func fetchComments() {
+        taskCommentsService.fetchTaskComments(reqID: taskCommentsVM.reqID, taskID: taskID) { comments in
+            self.taskCommentsVM.isLoading = false
+            self.taskCommentsVM.taskCommentsResponse = comments
+        }
+    }
+    
     var body: some View {
         VStack {
             // List showing comments
@@ -20,14 +27,14 @@ struct TaskComments: View {
                 } else {
                     ForEach(taskCommentsVM.taskCommentsResponse) { comment in
                         // Comment cell
-                        VStack(alignment: .leading, spacing: DesignConstants.Spacing.smallSpacing) {
+                        VStack(alignment: .leading, spacing: DesignConstants.Form.Spacing.minimalSpacing) {
                             // Sender name and time
                             HStack {
-                                Text(self.taskCommentsVM.getCommentAuthorName(authorID: comment.id ?? -1))
+                                Text(self.taskCommentsVM.getCommentAuthorName(authorID: comment.userID!))
                                     .font(.headline)
                                 
                                 Text(DesignConstants.DateFormat.taskTime.string(from: Date(timeIntervalSince1970: comment.creationDate ?? 0)))
-                                    .font(.subheadline)
+                                    .font(.footnote)
                             }
                             // Comment
                             Text(comment.comment ?? "")
@@ -39,11 +46,20 @@ struct TaskComments: View {
             // Text field at bottom with send button
             HStack {
                 // Text Field
-                TextField("Type here", text: $taskCommentsVM.newComment)
+                TextField("Type here", text: $taskCommentsVM.newComment.comment)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 // Send Button
                 Button("Send") {
+                    self.taskCommentsService.postTaskComment(
+                        reqID: self.taskCommentsVM.reqID,
+                        taskID: self.taskID,
+                        commentData: self.taskCommentsVM.newComment
+                    ) { resp in
+                        self.fetchComments()
+                        self.taskCommentsVM.newComment.comment = ""
+                    }
                 }
+                .disabled(self.taskCommentsVM.sendButtonDisabled)
             }
             .padding(.horizontal)
             .modifier(KeyboardAware())
@@ -54,10 +70,7 @@ struct TaskComments: View {
         .navigationBarTitle("Task Comments")
         .onAppear {
             self.taskCommentsVM.isLoading = true
-            self.taskCommentsService.fetchTaskComments(reqID: self.taskCommentsVM.reqID, taskID: self.taskID) { comments in
-                self.taskCommentsVM.isLoading = false
-                self.taskCommentsVM.taskCommentsResponse = comments
-            }
+            self.fetchComments()
         }
     }
 }
