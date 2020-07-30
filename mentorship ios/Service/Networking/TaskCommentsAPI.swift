@@ -33,7 +33,6 @@ class TaskCommentsAPI: TaskCommentsService {
             .receive(on: RunLoop.main)
             .catch { _ in Just([CommentsNetworkResponse]()) }
             .sink { comments in
-                print(comments)
                 var response = [TaskCommentsModel.TaskCommentsResponse]()
                 for comment in comments {
                     response.append(.init(id: comment.id, userID: comment.userID, creationDate: comment.creationDate, comment: comment.comment))

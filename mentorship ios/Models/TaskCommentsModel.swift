@@ -5,7 +5,7 @@
 //
 
 class TaskCommentsModel {
-    struct TaskCommentsResponse: Identifiable {
+    struct TaskCommentsResponse: Identifiable, Encodable {
         let id: Int?
         let userID: Int?
         let creationDate: Double?
@@ -16,7 +16,7 @@ class TaskCommentsModel {
         var comment: String
     }
     
-    struct PostCommentResponse {
+    struct PostCommentResponse: Encodable {
         let message: String?
         let success: Bool
     }
