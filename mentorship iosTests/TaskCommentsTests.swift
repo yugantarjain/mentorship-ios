@@ -75,6 +75,48 @@ class TaskCommentsTests: XCTestCase {
     
     // MARK: - View Model Tests
     
+    func testCommentsMoreThanLimit() {
+        let taskCommentsVM = TaskCommentsViewModel()
+
+        // MARK: - 1. Comment is empty right now. Limit should not be crossed.
+        XCTAssertEqual(taskCommentsVM.commentsMoreThanLimit, false)
+        
+        // MARK: - 2. Number of comments equal to limit. Limit should not be crossed.
+        for _ in 1 ... taskCommentsVM.latestCommentsLimit {
+            taskCommentsVM.taskCommentsResponse.append(.init(id: 0, userID: 0, creationDate: 0, comment: ""))
+        }
+        XCTAssertEqual(taskCommentsVM.commentsMoreThanLimit, false)
+        
+        // MARK: - 3. Add one more comment. Limit should get crossed. State should become true
+        taskCommentsVM.taskCommentsResponse.append(.init(id: 0, userID: 0, creationDate: 0, comment: ""))
+        XCTAssertEqual(taskCommentsVM.commentsMoreThanLimit, true)
+    }
+    
+    func testCommentsToShow() {
+        let taskCommentsVM = TaskCommentsViewModel()
+        
+        // MARK: - 1. Number of comments less than set limit. All comments should be shown.
+        for i in 1 ... taskCommentsVM.latestCommentsLimit - 1 {
+            taskCommentsVM.taskCommentsResponse.append(.init(id: i, userID: 0, creationDate: 0, comment: ""))
+        }
+        XCTAssertEqual(taskCommentsVM.commentsToShow.count, taskCommentsVM.taskCommentsResponse.count)
+        XCTAssertEqual(taskCommentsVM.commentsToShow.first?.id, 1)
+        XCTAssertEqual(taskCommentsVM.commentsToShow.last?.id, taskCommentsVM.commentsToShow.count)
+        
+        // MARK: - 2. Number of comments equal to set limit. All comments should be shown.
+        taskCommentsVM.taskCommentsResponse.append(.init(id: 0, userID: 0, creationDate: 0, comment: ""))
+        XCTAssertEqual(taskCommentsVM.commentsToShow.count, taskCommentsVM.taskCommentsResponse.count)
+        
+        // MARK: - 3. Number of comment more than set limit. Limit number of comments should be shown.
+        taskCommentsVM.taskCommentsResponse.append(.init(id: 0, userID: 0, creationDate: 0, comment: ""))
+        XCTAssertNotEqual(taskCommentsVM.commentsToShow.count, taskCommentsVM.taskCommentsResponse.count)
+        XCTAssertEqual(taskCommentsVM.commentsToShow.count, taskCommentsVM.latestCommentsLimit)
+        
+        // MARK: - 4. Number of comments more than set limit for latest comments. However, show earlier is true. All should be shown.
+        taskCommentsVM.showingEarlier = true
+        XCTAssertEqual(taskCommentsVM.commentsToShow.count, taskCommentsVM.taskCommentsResponse.count)
+    }
+    
     func testSendButtonDisabledState() {
         let taskCommentsVM = TaskCommentsViewModel()
         

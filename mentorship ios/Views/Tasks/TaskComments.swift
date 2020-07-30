@@ -68,7 +68,7 @@ struct TaskComments: View {
                 }
                     // task comments
                 else {
-                    if !taskCommentsVM.showingEarlier && taskCommentsVM.tasksMoreThanLimit {
+                    if !taskCommentsVM.showingEarlier && taskCommentsVM.commentsMoreThanLimit {
                         Button(LocalizableStringConstants.showEarlier) {
                             self.taskCommentsVM.showingEarlier = true
                         }

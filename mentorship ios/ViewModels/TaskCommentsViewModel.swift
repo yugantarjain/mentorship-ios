@@ -16,7 +16,7 @@ class TaskCommentsViewModel: ObservableObject {
     var reqName: String = ""
     var reqID: Int = -1
     
-    var tasksMoreThanLimit: Bool {
+    var commentsMoreThanLimit: Bool {
         return taskCommentsResponse.count > latestCommentsLimit
     }
     
