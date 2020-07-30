@@ -38,11 +38,18 @@ struct TaskComments: View {
                 Text(self.taskCommentsVM.getCommentAuthorName(authorID: comment.userID!))
                     .font(.headline)
                 
+                Spacer()
+                
                 Text(DesignConstants.DateFormat.taskTime.string(from: Date(timeIntervalSince1970: comment.creationDate ?? 0)))
                     .font(.footnote)
+                    .foregroundColor(DesignConstants.Colors.subtitleText)
             }
+            .padding(.vertical, DesignConstants.Padding.textInListCell)
+            
             // Comment
             Text(comment.comment ?? "")
+                .font(.subheadline)
+                .padding(.bottom, DesignConstants.Padding.textInListCell)
         }
     }
     
