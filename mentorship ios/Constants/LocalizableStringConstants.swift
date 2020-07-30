@@ -18,6 +18,7 @@ struct LocalizableStringConstants {
     // Not localizable. Reason: used in network requests, backend returns string.
     static let networkErrorString = "Network error. Please check your device network and try again."
     static let passwordsDoNotMatch = "Passwords do not match"
+    static let you = "You"
 
     //Direct values for english. To be used as keys for other languages.
     static let noAccountText = LocalizedStringKey("Don't have an account?")
@@ -26,6 +27,7 @@ struct LocalizableStringConstants {
     static let mentor = LocalizedStringKey("Mentor")
     static let tasksDone = LocalizedStringKey("Tasks Done")
     static let tasksToDo = LocalizedStringKey("Tasks To Do")
+    static let showEarlier = LocalizedStringKey("Show Earlier")
     static let endDate = LocalizedStringKey("End Date")
     static let notes = LocalizedStringKey("Notes")
     static let send = LocalizedStringKey("Send")
@@ -52,6 +54,7 @@ struct LocalizableStringConstants {
         static let relation = LocalizedStringKey("Relation")
         static let members = LocalizedStringKey("Members")
         static let settings = LocalizedStringKey("Settings")
+        static let comments = LocalizedStringKey("Comments")
     }
     
     //Key to be used for relation request actions. (Direct values for English)

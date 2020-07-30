@@ -34,7 +34,7 @@ class TaskCommentsViewModel: ObservableObject {
     
     func getCommentAuthorName(authorID: Int) -> String {
         if authorID == userID {
-            return "You"
+            return LocalizableStringConstants.you
         } else {
             return reqName
         }

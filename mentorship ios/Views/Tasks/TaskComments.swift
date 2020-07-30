@@ -69,7 +69,7 @@ struct TaskComments: View {
                     // task comments
                 else {
                     if !taskCommentsVM.showingEarlier && taskCommentsVM.tasksMoreThanLimit {
-                        Button("Show Earlier") {
+                        Button(LocalizableStringConstants.showEarlier) {
                             self.taskCommentsVM.showingEarlier = true
                         }
                     }
@@ -97,7 +97,7 @@ struct TaskComments: View {
             // Spacer for bottom
             Spacer()
         }
-        .navigationBarTitle("Comments")
+        .navigationBarTitle(LocalizableStringConstants.ScreenNames.comments)
         .onAppear {
             self.taskCommentsVM.isLoading = true
             self.taskCommentsVM.showingEarlier = false
