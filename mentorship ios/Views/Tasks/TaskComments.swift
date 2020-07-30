@@ -56,14 +56,24 @@ struct TaskComments: View {
     var body: some View {
         VStack {
             // List showing comments
-            Form {
+            List {
+                //heading
+                Section(header: Text(self.taskName).font(.title).bold()) {
+                    EmptyView()
+                }
+                
                 // activity indicator, show when comments screen first accessed
                 if self.taskCommentsVM.isLoading {
                     ActivityIndicator(isAnimating: .constant(true))
                 }
                     // task comments
                 else {
-                    ForEach(taskCommentsVM.taskCommentsResponse) { comment in
+                    if !taskCommentsVM.showingEarlier && taskCommentsVM.tasksMoreThanLimit {
+                        Button("Show Earlier") {
+                            self.taskCommentsVM.showingEarlier = true
+                        }
+                    }
+                    ForEach(taskCommentsVM.commentsToShow) { comment in
                         self.commentCell(comment: comment)
                     }
                 }
@@ -87,9 +97,10 @@ struct TaskComments: View {
             // Spacer for bottom
             Spacer()
         }
-        .navigationBarTitle("Task Comments")
+        .navigationBarTitle("Comments")
         .onAppear {
             self.taskCommentsVM.isLoading = true
+            self.taskCommentsVM.showingEarlier = false
             self.fetchComments()
         }
     }
