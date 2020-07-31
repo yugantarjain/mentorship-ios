@@ -96,8 +96,8 @@ class TaskCommentsTests: XCTestCase {
         let taskCommentsVM = TaskCommentsViewModel()
         
         // MARK: - 1. Number of comments less than set limit. All comments should be shown.
-        for i in 1 ... taskCommentsVM.latestCommentsLimit - 1 {
-            taskCommentsVM.taskCommentsResponse.append(.init(id: i, userID: 0, creationDate: 0, comment: ""))
+        for index in 1 ... taskCommentsVM.latestCommentsLimit - 1 {
+            taskCommentsVM.taskCommentsResponse.append(.init(id: index, userID: 0, creationDate: 0, comment: ""))
         }
         XCTAssertEqual(taskCommentsVM.commentsToShow.count, taskCommentsVM.taskCommentsResponse.count)
         XCTAssertEqual(taskCommentsVM.commentsToShow.first?.id, 1)
