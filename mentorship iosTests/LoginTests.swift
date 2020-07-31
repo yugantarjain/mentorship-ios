@@ -102,14 +102,12 @@ class LoginTests: XCTestCase {
         }
         
         // loginVM should be in initial state
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertEqual(loginVM.loginResponseData.message, "")
-        }
+        XCTAssertEqual(loginVM.loginResponseData.message, "")
         
         // Perform login action
         loginView.login()
         
-        // View model should be updated
+        // View model should be updated. DispatchQueue used to wait for login action to complete and then test.
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             XCTAssertEqual(loginVM.loginResponseData.message, mockJSON.message)
         }

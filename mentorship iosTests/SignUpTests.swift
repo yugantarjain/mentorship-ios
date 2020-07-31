@@ -10,6 +10,8 @@ import XCTest
 class SignUpTests: XCTestCase {
     // custom urlsession for mock network calls
     var urlSession: URLSession!
+    
+    // MARK: - Setup and Tear Down
 
     override func setUpWithError() throws {
         // Set url session for mock networking
@@ -22,6 +24,8 @@ class SignUpTests: XCTestCase {
         urlSession = nil
         super.tearDown()
     }
+    
+    // MARK: - Service Tests
     
     func testSignUpService() throws {
         // Login Service
@@ -61,6 +65,8 @@ class SignUpTests: XCTestCase {
         }
     }
     
+    // MARK: - ViewModel Tests
+    
     func testSignUpButtonDisabledState() {
         let signupVM = SignUpViewModel()
 
@@ -92,5 +98,38 @@ class SignUpTests: XCTestCase {
         
         // empty passwords not allowed (though equal). Hence, button should be disabled.
         XCTAssertEqual(signUpDisabledState, true)
+    }
+    
+    // MARK: - View Tests (Integration Tests)
+    
+    func testSignUpAction() throws {
+        // Sign up service to inject in view for mock network calls
+        let signUpService: SignUpService = SignUpAPI(urlSession: urlSession)
+
+        // View model
+        let signUpVM = SignUpViewModel()
+        
+        // Sign up View
+        let signUpView = SignUp(signUpService: signUpService, signUpViewModel: signUpVM, isPresented: .constant(true))
+        
+        // Set mock json and data
+        let mockJSON = SignUpModel.SignUpResponseData(message: "test data")
+        let mockData = try JSONEncoder().encode(mockJSON)
+
+        // Return data in mock request handler
+        MockURLProtocol.requestHandler = { request in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // View Model should be in initial stage. Test
+        XCTAssertEqual(signUpVM.signUpResponseData.message, "")
+        
+        // Perform sign up action
+        signUpView.signUp()
+        
+        // View model should be updated. DispatchQueue used to wait for action to complete and then test.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertEqual(signUpVM.signUpResponseData.message, mockJSON.message)
+        }
     }
 }
