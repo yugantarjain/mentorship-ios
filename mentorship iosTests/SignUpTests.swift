@@ -127,9 +127,13 @@ class SignUpTests: XCTestCase {
         // Perform sign up action
         signUpView.signUp()
         
+        // expectation. used to test async code.
+        let expectation = XCTestExpectation(description: "sign up")
         // View model should be updated. DispatchQueue used to wait for action to complete and then test.
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             XCTAssertEqual(signUpVM.signUpResponseData.message, mockJSON.message)
+            expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 1)
     }
 }

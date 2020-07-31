@@ -181,4 +181,8 @@ class RelationTests: XCTestCase {
         XCTAssertEqual(relationVM.showErrorAlert, true)
         XCTAssertEqual(relationVM.alertMessage, LocalizableStringConstants.operationFail)
     }
+    
+    // MARK: - View Tests (Integration Tests)
+    
+    
 }

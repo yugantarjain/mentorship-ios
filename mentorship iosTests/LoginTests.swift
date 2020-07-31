@@ -107,10 +107,14 @@ class LoginTests: XCTestCase {
         // Perform login action
         loginView.login()
         
+        // expectation. used to test async code.
+        let expectation = XCTestExpectation(description: "login")
         // View model should be updated. DispatchQueue used to wait for login action to complete and then test.
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             XCTAssertEqual(loginVM.loginResponseData.message, mockJSON.message)
+            expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 1)
     }
 
 }

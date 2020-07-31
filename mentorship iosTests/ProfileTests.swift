@@ -77,7 +77,7 @@ class ProfileTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
-    // MARK: - Method Tests
+    // MARK: - ViewModel Tests
     
     func testSaveAndGetProfile() {
         let profileVM = ProfileViewModel()
@@ -115,5 +115,48 @@ class ProfileTests: XCTestCase {
         
         //username should be nil. Username is made nil since it can't be updated. Otherwise, the backend call fails.
         XCTAssertEqual(editProfileData.username, nil)
+    }
+    
+    // MARK: View Tests (Integration Tests)
+    
+    func testUpdateProfileAction() throws {
+        // Profile Service
+        let profileService: ProfileService = ProfileAPI(urlSession: urlSession)
+        
+        // View Model
+        let profileVM = ProfileViewModel()
+        
+        // Profile Editor View
+        let profileEditor = ProfileEditor(profileService: profileService, profileViewModel: profileVM)
+        
+        // Set mock json and data
+        let mockJSON = ProfileModel.UpdateProfileResponseData(success: true, message: "response")
+        let mockData = try JSONEncoder().encode(mockJSON)
+        
+        // Return data in mock request handler
+        MockURLProtocol.requestHandler = { _ in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // Call Update Profile
+        profileEditor.updateProfile()
+        
+        // expectation. used to test async code.
+        let expectation = XCTestExpectation(description: "login")
+        // Wait and then test
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // Profile view model should be updated with response values.
+            XCTAssertEqual(profileVM.updateProfileResponseData.message, mockJSON.message)
+            // inActivity should be false
+            XCTAssertEqual(profileVM.inActivity, false)
+            // Alert should be shown
+            XCTAssertEqual(profileVM.showAlert, true)
+            // Test for success.
+            XCTAssertEqual(profileVM.updateProfileResponseData.success, true)
+            // Alert title should be success
+            XCTAssertEqual(profileVM.alertTitle, LocalizableStringConstants.success)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
     }
 }
