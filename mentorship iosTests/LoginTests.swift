@@ -10,6 +10,8 @@ import XCTest
 class LoginTests: XCTestCase {
     // custom urlsession for mock network calls
     var urlSession: URLSession!
+    
+    // MARK: - Setup and Tear Down
 
     override func setUpWithError() throws {
         // Set url session for mock networking
@@ -22,6 +24,8 @@ class LoginTests: XCTestCase {
         urlSession = nil
         super.tearDown()
     }
+    
+    // MARK: - Service Tests
     
     func testLoginService() throws {
         // Login Service
@@ -45,6 +49,8 @@ class LoginTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
     }
+    
+    // MARK: - ViewModel Tests
 
     func testLoginButtonDisabledState() {
         let loginVM = LoginViewModel()
@@ -72,6 +78,35 @@ class LoginTests: XCTestCase {
         
         //Test
         XCTAssertEqual(loginDisabledState, false)
+    }
+    
+    // MARK: - View Tests (Integration Tests)
+    
+    func testLoginActionInView() throws {
+        // Login Service to inject in view for mock network calls
+        let loginService: LoginService = LoginAPI(urlSession: urlSession)
+
+        // View model for login view
+        let loginVM = LoginViewModel()
+        
+        // Login View
+        let loginView = Login(loginService: loginService, loginViewModel: loginVM)
+        
+        // Set mock json and data
+        let mockJSON = LoginModel.LoginResponseData(message: "test message")
+        let mockData = try JSONEncoder().encode(mockJSON)
+        
+        // Return data in mock request handler
+        MockURLProtocol.requestHandler = { request in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        let expectation = XCTestExpectation(description: "response")
+        loginView.login()
+        expectation.fulfill()
+        wait(for: [expectation], timeout: 2)
+        
+        XCTAssertEqual(loginVM.loginResponseData.message, mockJSON.message)
     }
 
 }
