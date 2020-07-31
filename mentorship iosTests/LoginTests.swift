@@ -101,12 +101,15 @@ class LoginTests: XCTestCase {
             return (HTTPURLResponse(), mockData)
         }
         
-        let expectation = XCTestExpectation(description: "response")
-        loginView.login()
-        expectation.fulfill()
-        wait(for: [expectation], timeout: 2)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertNotEqual(loginVM.loginResponseData.message, mockJSON.message)
+        }
         
-        XCTAssertEqual(loginVM.loginResponseData.message, mockJSON.message)
+        loginView.login()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertEqual(loginVM.loginResponseData.message, mockJSON.message)
+        }
     }
 
 }
