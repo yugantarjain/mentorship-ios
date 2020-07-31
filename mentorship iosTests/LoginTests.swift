@@ -101,12 +101,15 @@ class LoginTests: XCTestCase {
             return (HTTPURLResponse(), mockData)
         }
         
+        // loginVM should be in initial state
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertNotEqual(loginVM.loginResponseData.message, mockJSON.message)
+            XCTAssertEqual(loginVM.loginResponseData.message, "")
         }
         
+        // Perform login action
         loginView.login()
         
+        // View model should be updated
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             XCTAssertEqual(loginVM.loginResponseData.message, mockJSON.message)
         }
