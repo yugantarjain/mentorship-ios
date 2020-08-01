@@ -25,8 +25,17 @@ struct TaskComments: View {
             taskID: self.taskID,
             commentData: self.taskCommentsVM.newComment
         ) { resp in
-            self.fetchComments()
-            self.taskCommentsVM.newComment.comment = ""
+            // update view model with responses
+            self.taskCommentsVM.postCommentResponse = resp
+            // if post comment successful, update comments and clear text field
+            if resp.success {
+                self.fetchComments()
+                self.taskCommentsVM.newComment.comment = ""
+            }
+            // else, show error alert
+            else {
+                self.taskCommentsVM.showErrorAlert = true
+            }
         }
     }
     
@@ -102,6 +111,13 @@ struct TaskComments: View {
             self.taskCommentsVM.isLoading = true
             self.taskCommentsVM.showingEarlier = false
             self.fetchComments()
+        }
+        .alert(isPresented: self.$taskCommentsVM.showErrorAlert) {
+            return Alert(
+                title: Text(LocalizableStringConstants.failure),
+                message: Text(self.taskCommentsVM.postCommentResponse.message ?? LocalizableStringConstants.networkErrorString),
+                dismissButton: .default(Text(LocalizableStringConstants.okay))
+            )
         }
     }
 }

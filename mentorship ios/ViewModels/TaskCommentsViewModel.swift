@@ -9,8 +9,10 @@ import Combine
 class TaskCommentsViewModel: ObservableObject {
     @Published var taskCommentsResponse = [TaskCommentsModel.TaskCommentsResponse]()
     @Published var newComment = TaskCommentsModel.PostCommentUploadData(comment: "")
+    @Published var postCommentResponse = TaskCommentsModel.PostCommentResponse(message: "", success: false)
     @Published var isLoading = false
     @Published var showingEarlier = false
+    @Published var showErrorAlert = false
     let userID = ProfileViewModel().getProfile().id
     let latestCommentsLimit = 4
     var reqName: String = ""
