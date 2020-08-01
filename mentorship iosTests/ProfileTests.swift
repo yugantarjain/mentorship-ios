@@ -117,6 +117,32 @@ class ProfileTests: XCTestCase {
         XCTAssertEqual(editProfileData.username, nil)
     }
     
+    func testSaveUpdatedProfile() {
+        let profileVM = ProfileViewModel()
+        
+        //prepare sample data
+        let sampleData = ProfileModel.ProfileData(id: 0, name: "name", username: "", email: "")
+        
+        //save sample data to profile
+        //reason: getEditProfileData uses getProfile function to get stored data. Hence it will return this sample data now.
+        profileVM.saveProfile(profile: sampleData)
+        
+        // Get this current profile data and test
+        XCTAssertEqual(profileVM.getProfile().name, "name")
+        
+        // get edit profile data
+        var editProfileData = profileVM.getEditProfileData()
+        
+        // configure edit profile data
+        editProfileData.name = "newName"
+        
+        // Save updated profile
+        profileVM.saveUpdatedProfile(updatedProfileData: editProfileData)
+        
+        // Test the profile has been updated
+        XCTAssertEqual(profileVM.getProfile().name, "newName")
+    }
+    
     // MARK: View Tests (Integration Tests)
     
     func testUpdateProfileAction() throws {
