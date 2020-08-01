@@ -266,4 +266,37 @@ class RelationTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
     }
+    
+    func testAddTask() throws {
+        // Service
+        let relationService: RelationService = RelationAPI(urlSession: urlSession)
+        // View Model
+        let relationVM = RelationViewModel()
+        // View
+        let addTaskView = AddTask(relationService: relationService, relationViewModel: relationVM)
+        
+        // set current relation
+        relationVM.currentRelation = RequestStructure(id: 1, mentor: nil, mentee: nil, endDate: 100, notes: "notes")
+        
+        // Set mock json and data
+        let mockJSON = RelationModel.ResponseData(message: "test", success: true)
+        let mockData = try JSONEncoder().encode(mockJSON)
+        
+        // Return data form mock request handler
+        MockURLProtocol.requestHandler = { _ in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // Call add task action
+        addTaskView.addTask()
+        
+        // Expectation. Used to test async code
+        let expectation = XCTestExpectation(description: "response")
+        // Wait using GCD and then test in its completion handler
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertEqual(relationVM.responseData.message, mockJSON.message)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
 }
