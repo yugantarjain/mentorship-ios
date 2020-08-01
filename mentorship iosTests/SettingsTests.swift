@@ -62,21 +62,16 @@ class SettingsTests: XCTestCase {
         }
         
         // MARK: Confirm password not equal to new password.
-        
-        // Expectation. Used to test async code.
-        let expectation = XCTestExpectation(description: "response1")
+        let expectation1 = XCTestExpectation(description: "response1")
         settingsService.changePassword(
             changePasswordData: ChangePasswordModel.ChangePasswordUploadData(currentPassword: "test", newPassword: "abcd"),
             confirmPassword: "ab") { resp in
                 XCTAssertEqual(resp.message, LocalizableStringConstants.passwordsDoNotMatch)
                 XCTAssertEqual(resp.success, false)
-                expectation.fulfill()
+                expectation1.fulfill()
         }
-        wait(for: [expectation], timeout: 1)
         
         // MARK: Confirm password not equal to new password.
-        
-        // Expectation. Used to test async code.
         let expectation2 = XCTestExpectation(description: "response2")
         settingsService.changePassword(
             changePasswordData: ChangePasswordModel.ChangePasswordUploadData(currentPassword: "test", newPassword: "abcd"),
@@ -84,6 +79,47 @@ class SettingsTests: XCTestCase {
                 XCTAssertEqual(resp.message, mockJSON.message)
                 expectation2.fulfill()
         }
-        wait(for: [expectation2], timeout: 1)
+        
+        wait(for: [expectation1, expectation2], timeout: 1)
+    }
+     
+    // MARK: - View Tests (Integration Tests)
+    
+    func testChangePasswordAction() throws {
+        // Service
+        let settingsService: SettingsService = SettingsAPI(urlSession: urlSession)
+        // View Model
+        let changePasswordVM = ChangePasswordViewModel()
+        // View
+        let changePasswordView = ChangePassword(settingsService: settingsService, changePasswordViewModel: changePasswordVM)
+        
+        // Set mock json and data
+        let mockJSON = ChangePasswordModel.ChangePasswordResponseData(message: "test", success: true)
+        let mockData = try JSONEncoder().encode(mockJSON)
+        
+        // Return data form mock request handler
+        MockURLProtocol.requestHandler = { _ in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // Configure view model
+        changePasswordVM.changePasswordData = ChangePasswordModel.ChangePasswordUploadData(currentPassword: "old", newPassword: "new")
+        changePasswordVM.confirmPassword = "new"
+        
+        // Call change password action
+        changePasswordView.changePassword()
+        
+        // Expectation. Used to test async code.
+        let expectation = XCTestExpectation(description: "change password")
+        
+        // Wait using GCD and then test
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // View model should be updated
+            XCTAssertEqual(changePasswordVM.changePasswordResponseData.message, mockJSON.message)
+            XCTAssertEqual(changePasswordVM.inActivity, false)
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1)
     }
 }
