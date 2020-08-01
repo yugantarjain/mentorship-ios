@@ -110,4 +110,74 @@ class MembersTests: XCTestCase {
         // Empty skill
         XCTAssertEqual(membersVM.skillsString(skills: ""), "Skills: ")
     }
+    
+    // MARK: - View Tests (Integration Tests)
+
+    func testFetchMembersAction() throws {
+        // Service
+        let membersService: MembersService = MembersAPI(urlSession: urlSession)
+        // View Model
+        let membersVM = MembersViewModel()
+        // View
+        let membersView = Members(membersService: membersService, membersViewModel: membersVM)
+        
+        // Set mock json and data
+        let mockJSON = [MembersModel.MembersResponseData]()
+        let mockData = try JSONEncoder().encode(mockJSON)
+        
+        // Return data form mock request handler
+        MockURLProtocol.requestHandler = { _ in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // make current page = 0
+        membersVM.currentPage = 0
+        
+        // Call fetch members action
+        membersView.fetchMembers()
+        
+        // Expectation. Test async code
+        let expectation = XCTestExpectation(description: "members")
+        // Wait using GCD and then test
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // View model should be updated
+            XCTAssertEqual(membersVM.inActivity, false)
+            XCTAssertEqual(membersVM.currentPage, 1)
+            XCTAssertEqual(membersVM.membersResponseData.count, 0)
+            // fulfill expectation
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testSendRequestAction() throws {
+        // Service
+        let membersService: MembersService = MembersAPI(urlSession: urlSession)
+        // View Model
+        let membersVM = MembersViewModel()
+        // View
+        let sendRequestView = SendRequest(membersService: membersService, membersViewModel: membersVM, memberID: 0, memberName: "")
+        
+        // Set mock json and data
+        let mockJSON = MembersModel.SendRequestResponseData(message: "test", success: true)
+        let mockData = try JSONEncoder().encode(mockJSON)
+        
+        // Return data form mock request handler
+        MockURLProtocol.requestHandler = { _ in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // call send request action
+        sendRequestView.sendRequest()
+        
+        // Expectation. Used to test async code.
+        let expectation = XCTestExpectation(description: "response")
+        // Wait using GCD and then test
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // view model should be updated with response. Test
+            XCTAssertEqual(membersVM.sendRequestResponseData.message, mockJSON.message)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
 }
