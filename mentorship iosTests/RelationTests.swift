@@ -184,5 +184,86 @@ class RelationTests: XCTestCase {
     
     // MARK: - View Tests (Integration Tests)
     
+    func testFetchRelationAndTasks() throws {
+        // Service
+        let relationService: RelationService = RelationAPI(urlSession: urlSession)
+        // View Model
+        let relationVM = RelationViewModel()
+        // View
+        let relationView = Relation(relationService: relationService, relationViewModel: relationVM)
+        
+        // Set mock json and data for current relation
+        let mockRelation = RequestStructure(id: 1, mentor: nil, mentee: nil, endDate: 100, notes: "notes")
+        let relationData = try JSONEncoder().encode(mockRelation)
+        
+        // Set mock json and data for tasks
+        let mockTasks = [
+            TaskStructure(id: 0, description: "", isDone: true, createdAt: 0, completedAt: 0),
+            TaskStructure(id: 1, description: "", isDone: false, createdAt: 0, completedAt: 0),
+            TaskStructure(id: 2, description: "", isDone: true, createdAt: 0, completedAt: 0)
+        ]
+        let tasksData = try JSONEncoder().encode(mockTasks)
+        
+        // Return data from mock completion handler
+        MockURLProtocol.requestHandler = { request in
+            if request.description.hasSuffix("current") {
+                return (HTTPURLResponse(), relationData)
+            } else {
+                return (HTTPURLResponse(), tasksData)
+            }
+        }
+        
+        // Fetch relation and tasks in view
+        relationView.fetchRelationAndTasks()
+        
+        // Expectation. Used to test async code
+        let expectation = XCTestExpectation(description: "fetch")
+        // Wait using GCD and then test
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            // first time load should be assigned to inActivity
+            XCTAssertEqual(relationVM.firstTimeLoad, relationVM.inActivity)
+            // View model should be updated with current relation
+            XCTAssertEqual(relationVM.currentRelation.id, mockRelation.id)
+            XCTAssertEqual(relationVM.currentRelation.endDate, mockRelation.endDate)
+            // View model should be updated with tasks for relation
+            XCTAssertEqual(relationVM.toDoTasks.count, 1)
+            XCTAssertEqual(relationVM.doneTasks.count, 2)
+            // Fulfill expecation
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 2)
+    }
     
+    func testMarkAsComplete() throws {
+        // Service
+        let relationService: RelationService = RelationAPI(urlSession: urlSession)
+        // View Model
+        let relationVM = RelationViewModel()
+        // View
+        let relationView = Relation(relationService: relationService, relationViewModel: relationVM)
+        
+        // Set task tapped
+        RelationViewModel.taskTapped = TaskStructure(id: 1, description: "", isDone: false, createdAt: 0, completedAt: 0)
+        
+        // Set mock json and data
+        let mockJSON = RelationModel.ResponseData(message: "test", success: true)
+        let mockData = try JSONEncoder().encode(mockJSON)
+        
+        // Return data form mock request handler
+        MockURLProtocol.requestHandler = { _ in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // Call Mark task as complete
+        relationView.markAsComplete()
+        
+        // Expectation. Used to test async code
+        let expectation = XCTestExpectation(description: "response")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            // View model should be updated
+            XCTAssertEqual(relationVM.responseData.message, mockJSON.message)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
 }
