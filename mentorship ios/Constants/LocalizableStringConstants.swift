@@ -28,6 +28,7 @@ struct LocalizableStringConstants {
     static let tasksDone = LocalizedStringKey("Tasks Done")
     static let tasksToDo = LocalizedStringKey("Tasks To Do")
     static let showEarlier = LocalizedStringKey("Show Earlier")
+    static let enterComment = LocalizedStringKey("Enter comment")
     static let endDate = LocalizedStringKey("End Date")
     static let notes = LocalizedStringKey("Notes")
     static let send = LocalizedStringKey("Send")

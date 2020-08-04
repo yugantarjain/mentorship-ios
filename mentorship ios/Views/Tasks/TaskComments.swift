@@ -91,7 +91,7 @@ struct TaskComments: View {
             // Text field at bottom with send button
             HStack {
                 // Text Field
-                TextField("Type here", text: $taskCommentsVM.newComment.comment)
+                TextField(LocalizableStringConstants.enterComment, text: $taskCommentsVM.newComment.comment)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
                 // Send Button
