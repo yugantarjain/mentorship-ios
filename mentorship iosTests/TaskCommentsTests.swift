@@ -132,11 +132,11 @@ class TaskCommentsTests: XCTestCase {
         let taskCommentsVM = TaskCommentsViewModel()
 
         // ID same as user. Should return "You"
-        XCTAssertEqual(taskCommentsVM.getCommentAuthorName(authorID: taskCommentsVM.userID), "You")
+        XCTAssertEqual(taskCommentsVM.getCommentAuthorName(authorID: 5, userID: 5), "You")
         
         // ID different that user. Should return name of member
         taskCommentsVM.reqName = "testName"
-        XCTAssertEqual(taskCommentsVM.getCommentAuthorName(authorID: taskCommentsVM.userID + 1), "testName")
+        XCTAssertEqual(taskCommentsVM.getCommentAuthorName(authorID: 5, userID: 6), "testName")
     }
 
 }
