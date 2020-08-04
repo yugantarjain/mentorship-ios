@@ -43,7 +43,7 @@ struct TasksSection: View {
             //context menu used to show and enable actions (eg. mark as complete)
             .contextMenu {
                 if self.isToDoSection && navToTaskComments {
-                    Button("Mark as Complete") { self.markAsCompleteAction(task) }
+                    Button(LocalizableStringConstants.markComplete) { self.markAsCompleteAction(task) }
                 }
         }
     }
