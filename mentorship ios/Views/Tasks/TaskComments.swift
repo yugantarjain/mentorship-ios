@@ -11,6 +11,7 @@ struct TaskComments: View {
     @EnvironmentObject var taskCommentsVM: TaskCommentsViewModel
     let taskID: Int
     let taskName: String
+    let userID = ProfileViewModel().getProfile().id
     
     func fetchComments() {
         taskCommentsService.fetchTaskComments(reqID: taskCommentsVM.reqID, taskID: taskID) { comments in
@@ -44,7 +45,7 @@ struct TaskComments: View {
         VStack(alignment: .leading, spacing: DesignConstants.Form.Spacing.minimalSpacing) {
             // Sender name and time
             HStack {
-                Text(self.taskCommentsVM.getCommentAuthorName(authorID: comment.userID!))
+                Text(self.taskCommentsVM.getCommentAuthorName(authorID: comment.userID!, userID: userID))
                     .font(.headline)
                 
                 Spacer()

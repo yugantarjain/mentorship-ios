@@ -37,6 +37,7 @@ class TaskCommentsAPI: TaskCommentsService {
                 for comment in comments {
                     response.append(.init(id: comment.id, userID: comment.userID, creationDate: comment.creationDate, comment: comment.comment))
                 }
+                response = response.sorted()
                 completion(response)
         }
     }

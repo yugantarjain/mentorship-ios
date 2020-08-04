@@ -13,7 +13,6 @@ class TaskCommentsViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var showingEarlier = false
     @Published var showErrorAlert = false
-    let userID = ProfileViewModel().getProfile().id
     let latestCommentsLimit = 4
     var reqName: String = ""
     var reqID: Int = -1
@@ -34,7 +33,7 @@ class TaskCommentsViewModel: ObservableObject {
         return newComment.comment.isEmpty
     }
     
-    func getCommentAuthorName(authorID: Int) -> String {
+    func getCommentAuthorName(authorID: Int, userID: Int) -> String {
         if authorID == userID {
             return LocalizableStringConstants.you
         } else {
