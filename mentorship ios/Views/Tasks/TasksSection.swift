@@ -21,6 +21,14 @@ struct TasksSection: View {
         }
     }
     
+    var taskText: LocalizedStringKey {
+        if isToDoSection {
+            return LocalizableStringConstants.tasksToDo
+        } else {
+            return LocalizableStringConstants.tasksDone
+        }
+    }
+    
     func taskCell(task: TaskStructure) -> some View {
         //Main HStack, shows icon and task
         HStack {
@@ -41,7 +49,7 @@ struct TasksSection: View {
     }
     
     var body: some View {
-        Section(header: Text(LocalizableStringConstants.tasksToDo).font(.headline)) {
+        Section(header: Text(taskText).font(.headline)) {
             ForEach(tasks ?? []) { task in
                 if self.navToTaskComments {
                     //Tapping leads to task comments page
