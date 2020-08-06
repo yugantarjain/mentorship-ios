@@ -36,5 +36,8 @@ struct ImageNameConstants {
         //dismiss sheet button icon
         static let xCircle = "x.circle.fill"
         
+        // report violation icon
+        static let reportComment = "exclamationmark.bubble"
+        
     }
 }

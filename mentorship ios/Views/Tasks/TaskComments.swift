@@ -12,6 +12,7 @@ struct TaskComments: View {
     let taskID: Int
     let taskName: String
     let userID = ProfileViewModel().getProfile().id
+    @State var showReportViolationAlert = false
     
     func fetchComments() {
         taskCommentsService.fetchTaskComments(reqID: taskCommentsVM.reqID, taskID: taskID) { comments in
@@ -60,6 +61,27 @@ struct TaskComments: View {
             Text(comment.comment ?? "")
                 .font(.subheadline)
                 .padding(.bottom, DesignConstants.Padding.textInListCell)
+        }
+        .contextMenu {
+            // if comment by other person, show report violation button
+            if comment.userID != self.userID {
+                Button(action: { self.showReportViolationAlert.toggle() }) {
+                    HStack {
+                        Text(LocalizableStringConstants.reportComment)
+                        Image(systemName: ImageNameConstants.SFSymbolConstants.reportComment)
+                    }
+                }
+            }
+        }
+        .alert(isPresented: $showReportViolationAlert) {
+            Alert.init(
+                title: Text(LocalizableStringConstants.reportComment),
+                message: Text(LocalizableStringConstants.reportCommentMessage),
+                primaryButton: .cancel(),
+                secondaryButton: .destructive(Text(LocalizableStringConstants.report), action: {
+                    // code to report violation
+                })
+            )
         }
     }
     
