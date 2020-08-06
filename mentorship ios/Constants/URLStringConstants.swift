@@ -4,9 +4,9 @@
 //  Created for AnitaB.org Mentorship-iOS 
 //
 
-let baseURL: String = "https://mentorship-backend-temp.herokuapp.com/"
+//let baseURL: String = "https://mentorship-backend-temp.herokuapp.com/"
 ///only for local backend testing
-//let baseURL: String = "http://127.0.0.1:5000/"
+let baseURL: String = "http://127.0.0.1:5000/"
 
 struct URLStringConstants {
     struct Users {
@@ -37,6 +37,9 @@ struct URLStringConstants {
         }
         static func postTaskComment(reqID: Int, taskID: Int) -> String {
             return baseURL + "mentorship_relation/\(reqID)/task/\(taskID)/comment"
+        }
+        static func reportTaskComment(reqID: Int, taskID: Int, commentID: Int) -> String {
+            return baseURL + "mentorship_relation/\(reqID)/task/\(taskID)/comment/\(commentID)/report"
         }
         static func accept(reqID: Int) -> String {
             return baseURL + "mentorship_relation/\(reqID)/accept"

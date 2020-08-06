@@ -89,5 +89,6 @@ struct LocalizableStringConstants {
     //Value string convention: All capitalized
     enum ActivityTextKeys: LocalizedStringKey {
         case updating = "UPDATING"
+        case reporting = "REPORTING"
     }
 }
