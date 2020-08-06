@@ -47,7 +47,6 @@ struct TaskComments: View {
     // Use service to report a comment for violation of code of conduct
     func reportComment() {
         taskCommentsVM.reportCommentInActivity = true
-        print(taskCommentsVM.reqID, taskID, taskCommentsVM.taskCommentIDToReport)
         taskCommentsService.reportComment(reqID: taskCommentsVM.reqID, taskID: taskID, commentID: taskCommentsVM.taskCommentIDToReport) { resp in
             // set in activity to false
             self.taskCommentsVM.reportCommentInActivity = false
