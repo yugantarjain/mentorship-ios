@@ -32,7 +32,7 @@ struct TaskCommentCell: View {
                 .padding(.bottom, DesignConstants.Padding.textInListCell)
         }
         .contextMenu {
-            // if comment by other person, show report violation button
+            // If comment is by other person, show report violation button
             if comment.userID != self.userID {
                 Button(action: {
                     self.taskCommentsVM.taskCommentIDToReport = self.comment.id

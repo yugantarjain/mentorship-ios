@@ -73,6 +73,28 @@ class TaskCommentsTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
+    func testReportTaskComment() throws {
+        let taskCommentsService: TaskCommentsService = TaskCommentsAPI(urlSession: urlSession)
+        
+        // Set mock json and data
+        let mockJSON = TaskCommentsModel.MessageResponse(message: "test", success: true)
+        let mockData = try JSONEncoder().encode(mockJSON)
+        
+        // Return data from mock handler
+        MockURLProtocol.requestHandler = { request in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // Expectation
+        let expectation = XCTestExpectation(description: "response")
+        taskCommentsService.reportComment(reqID: 0, taskID: 0, commentID: 0) { resp in
+            XCTAssertEqual(resp.message, mockJSON.message)
+            XCTAssertEqual(resp.success, true)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+    
     // MARK: - View Model Tests
     
     func testCommentsMoreThanLimit() {
