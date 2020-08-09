@@ -10,7 +10,7 @@
 
 "Operation failed" = "Unable to complete request. Please try again.";
 
-"Report comment message" = "Reporting the comment would send an email to the AnitaB.org admins with details of the comment, commentor, and your contact. Kindly confirm this action.";
+"Report comment message" = "Reporting this comment will send an email to the AnitaB.org admins which will include the comment and identification of the commenter and you.";
 
 "Can be both" = "Available to be a Mentor or Mentee";
 "Can be mentee" = "Availabe to be a Mentee";
