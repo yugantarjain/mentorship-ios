@@ -67,6 +67,11 @@ struct Login: View {
                 .sheet(isPresented: $showSignUpPage) {
                     SignUp(isPresented: self.$showSignUpPage)
                 }
+                
+                GoogleSignInButton()
+                    .onTapGesture {
+                        SocialLogin().attemptLoginGoogle()
+                }
             }
 
             //spacer to push content to top
