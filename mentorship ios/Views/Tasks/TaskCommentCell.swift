@@ -65,8 +65,8 @@ struct TaskCommentCell: View {
             }
         }
         .actionSheet(isPresented: self.$showActionSheet) {
-            ActionSheet.init(
-                title: Text("Actions for comment"),
+            ActionSheet(
+                title: Text(LocalizableStringConstants.actionsforComment),
                 message: Text(comment.comment ?? ""),
                 buttons: [
                     .destructive(Text(LocalizableStringConstants.reportComment), action: {

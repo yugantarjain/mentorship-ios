@@ -31,6 +31,7 @@ struct LocalizableStringConstants {
     static let enterComment = LocalizedStringKey("Enter comment")
     static let reportComment = LocalizedStringKey("Report This Comment")
     static let reportCommentMessage = LocalizedStringKey("Report comment message")
+    static let actionsforComment = LocalizedStringKey("Actions for Comment")
     static let report = LocalizedStringKey("Report")
     static let endDate = LocalizedStringKey("End Date")
     static let notes = LocalizedStringKey("Notes")
