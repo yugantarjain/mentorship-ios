@@ -214,6 +214,7 @@
 		53ECF22F24C3954C00FF8D24 /* MentorshipTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentorshipTests.swift; sourceTree = "<group>"; };
 		53ED6B0C248D04970055DFF0 /* Members.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Members.swift; sourceTree = "<group>"; };
 		53ED6B0E248D04A80055DFF0 /* MembersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersModel.swift; sourceTree = "<group>"; };
+		53F0CC7024E341E800B46F19 /* mentorship ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "mentorship ios.entitlements"; sourceTree = "<group>"; };
 		53F205DC249ADF9200DDE52E /* ProfileEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
 		53F205DF249AE22500DDE52E /* ProfileEditField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditField.swift; sourceTree = "<group>"; };
 		53F414D524D0155F00E5407F /* TaskCommentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCommentsAPI.swift; sourceTree = "<group>"; };
@@ -313,6 +314,7 @@
 		530F44122482752500B1FD0B /* mentorship ios */ = {
 			isa = PBXGroup;
 			children = (
+				53F0CC7024E341E800B46F19 /* mentorship ios.entitlements */,
 				83AA531B249F85E7001D6B0B /* Utilities */,
 				53C0206B249B87ED0000BEB5 /* Protocols */,
 				53729E00248E2C7700E79C24 /* Extensions */,
@@ -1170,6 +1172,7 @@
 			baseConfigurationReference = B8251B7BB63EBD5A6466B87F /* Pods-mentorship ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "mentorship ios/mentorship ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"mentorship ios/Preview Content\"";
 				DEVELOPMENT_TEAM = ZCF7ZR4CVF;
@@ -1191,6 +1194,7 @@
 			baseConfigurationReference = 5FFF9FD79E2E7B6E9FB95190 /* Pods-mentorship ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "mentorship ios/mentorship ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"mentorship ios/Preview Content\"";
 				DEVELOPMENT_TEAM = ZCF7ZR4CVF;
