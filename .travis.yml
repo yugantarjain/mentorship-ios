@@ -1,5 +1,5 @@
 install:
- - brew update && brew install swiftlint
+ - brew update && brew update swiftlint
 language: swift
 osx_image: xcode11.6
 xcode_project: mentorship ios.xcodeproj # path to your xcodeproj folder
