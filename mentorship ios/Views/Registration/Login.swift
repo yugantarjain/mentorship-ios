@@ -67,15 +67,22 @@ struct Login: View {
                 .sheet(isPresented: $showSignUpPage) {
                     SignUp(isPresented: self.$showSignUpPage)
                 }
-                
+            }
+
+            //spacer to push content to top
+//            Spacer()
+            
+            VStack {
                 GoogleSignInButton()
                     .onTapGesture {
                         SocialLogin().attemptLoginGoogle()
                 }
+                
+                AppleSignInButton()
+                    .onTapGesture {
+                        self.loginViewModel.attemptAppleLogin()
+                }
             }
-
-            //spacer to push content to top
-            Spacer()
         }
         .modifier(AllPadding())
     }

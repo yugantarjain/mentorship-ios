@@ -12,6 +12,7 @@ class LoginViewModel: ObservableObject {
     // MARK: - Variables
     @Published var loginData = LoginModel.LoginUploadData(username: "", password: "")
     @Published var loginResponseData = LoginModel.LoginResponseData(message: "")
+    private lazy var appleLoginCoordinator = AppleLoginCoordinator()
     
     var loginDisabled: Bool {
         if self.loginData.username.isEmpty || self.loginData.password.isEmpty {
@@ -23,6 +24,10 @@ class LoginViewModel: ObservableObject {
     // MARK: Functions
     func update(using data: LoginModel.LoginResponseData) {
         loginResponseData = data
+    }
+    
+    func attemptAppleLogin() {
+        appleLoginCoordinator.handleAuthorizationAppleIDButtonPress()
     }
     
 }
