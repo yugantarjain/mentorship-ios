@@ -22,69 +22,75 @@ struct Login: View {
     }
 
     var body: some View {
-        VStack(spacing: DesignConstants.Form.Spacing.bigSpacing) {
-            //top image of mentorship logo
-            Image(ImageNameConstants.mentorshipLogoImageName)
-                .resizable()
-                .scaledToFit()
+        ScrollView {
+            VStack(spacing: DesignConstants.Form.Spacing.bigSpacing) {
+                //top image of mentorship logo
+                Image(ImageNameConstants.mentorshipLogoImageName)
+                    .resizable()
+                    .scaledToFit()
 
-            //username and password text fields
-            VStack(spacing: DesignConstants.Form.Spacing.smallSpacing) {
-                TextField("Username/Email", text: $loginViewModel.loginData.username)
-                    .textFieldStyle(RoundFilledTextFieldStyle())
-                    .autocapitalization(.none)
-                    .keyboardType(.emailAddress)
+                //username and password text fields
+                VStack(spacing: DesignConstants.Form.Spacing.smallSpacing) {
+                    TextField("Username/Email", text: $loginViewModel.loginData.username)
+                        .textFieldStyle(RoundFilledTextFieldStyle())
+                        .autocapitalization(.none)
+                        .keyboardType(.emailAddress)
 
-                SecureField("Password", text: $loginViewModel.loginData.password)
-                    .textFieldStyle(RoundFilledTextFieldStyle())
-            }
-
-            //login button
-            Button("Login") {
-                // set inActivity to true (shows activity indicator)
-                self.inActivity = true
-                self.login()
-            }
-            .buttonStyle(BigBoldButtonStyle(disabled: loginViewModel.loginDisabled))
-            .disabled(loginViewModel.loginDisabled)
-
-            //activity indicator or show user message text
-            if inActivity {
-                ActivityIndicator(isAnimating: $inActivity)
-            } else {
-                Text(self.loginViewModel.loginResponseData.message ?? "")
-                    .modifier(ErrorText())
-            }
-
-            //text and sign up button
-            VStack(spacing: DesignConstants.Form.Spacing.minimalSpacing) {
-                Text(LocalizableStringConstants.noAccountText)
-
-                Button.init(action: { self.showSignUpPage.toggle() }) {
-                    Text("Signup")
-                        .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
+                    SecureField("Password", text: $loginViewModel.loginData.password)
+                        .textFieldStyle(RoundFilledTextFieldStyle())
                 }
-                .sheet(isPresented: $showSignUpPage) {
-                    SignUp(isPresented: self.$showSignUpPage)
-                }
-            }
 
-            //spacer to push content to top
-//            Spacer()
-            
-            VStack {
-                GoogleSignInButton()
-                    .onTapGesture {
-                        SocialLogin().attemptLoginGoogle()
+                //login button
+                Button("Login") {
+                    // set inActivity to true (shows activity indicator)
+                    self.inActivity = true
+                    self.login()
+                }
+                .buttonStyle(BigBoldButtonStyle(disabled: loginViewModel.loginDisabled))
+                .disabled(loginViewModel.loginDisabled)
+
+                //activity indicator or show user message text
+                if inActivity {
+                    ActivityIndicator(isAnimating: $inActivity)
+                } else if !(self.loginViewModel.loginResponseData.message?.isEmpty ?? false) {
+                    Text(self.loginViewModel.loginResponseData.message ?? "")
+                        .modifier(ErrorText())
+                }
+
+                //text and sign up button
+                VStack(spacing: DesignConstants.Form.Spacing.minimalSpacing) {
+                    Text(LocalizableStringConstants.noAccountText)
+
+                    Button.init(action: { self.showSignUpPage.toggle() }) {
+                        Text("Signup")
+                            .foregroundColor(DesignConstants.Colors.defaultIndigoColor)
+                    }
+                    .sheet(isPresented: $showSignUpPage) {
+                        SignUp(isPresented: self.$showSignUpPage)
+                    }
                 }
                 
-                AppleSignInButton()
-                    .onTapGesture {
-                        self.loginViewModel.attemptAppleLogin()
+                ZStack {
+                    Divider()
+                    Text("OR")
                 }
+                
+                // Social sign in buttons
+                VStack {
+                    AppleSignInButton()
+                        .onTapGesture {
+                            self.loginViewModel.attemptAppleLogin()
+                    }
+                    
+                    GoogleSignInButton()
+                        .onTapGesture {
+                            SocialLogin().attemptLoginGoogle()
+                    }
+                }
+                .frame(height: DesignConstants.Height.textViewHeight)
             }
+            .modifier(AllPadding())
         }
-        .modifier(AllPadding())
     }
 }
 
