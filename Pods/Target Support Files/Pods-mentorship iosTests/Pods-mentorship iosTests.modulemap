@@ -1,0 +1,6 @@
+framework module Pods_mentorship_iosTests {
+  umbrella header "Pods-mentorship iosTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

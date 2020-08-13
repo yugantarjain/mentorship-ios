@@ -28,6 +28,7 @@
 		531C8070248AA9BE00AE81EF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531C806F248AA9BE00AE81EF /* Home.swift */; };
 		532A24D024B4B6F1000C8B83 /* RequestActionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A24CF24B4B6F1000C8B83 /* RequestActionAPI.swift */; };
 		533704E1248D1B4900A314ED /* MembersListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533704E0248D1B4900A314ED /* MembersListCell.swift */; };
+		5345234324DCA7FA000CCD09 /* TaskCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5345234224DCA7FA000CCD09 /* TaskCommentCell.swift */; };
 		534AC02D2486D5CB00A34A46 /* BigBoldButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534AC02C2486D5CB00A34A46 /* BigBoldButtonStyle.swift */; };
 		534AC02F2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534AC02E2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift */; };
 		534B69DA24CB6DAE007646E6 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534B69D924CB6DAE007646E6 /* MockURLProtocol.swift */; };
@@ -152,6 +153,7 @@
 		531C806F248AA9BE00AE81EF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		532A24CF24B4B6F1000C8B83 /* RequestActionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestActionAPI.swift; sourceTree = "<group>"; };
 		533704E0248D1B4900A314ED /* MembersListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListCell.swift; sourceTree = "<group>"; };
+		5345234224DCA7FA000CCD09 /* TaskCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCommentCell.swift; sourceTree = "<group>"; };
 		534AC02C2486D5CB00A34A46 /* BigBoldButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBoldButtonStyle.swift; sourceTree = "<group>"; };
 		534AC02E2486DF3A00A34A46 /* RoundFilledTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundFilledTextFieldStyle.swift; sourceTree = "<group>"; };
 		534B69D924CB6DAE007646E6 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 			children = (
 				538CD06F24ABDAE800F6A665 /* TasksSection.swift */,
 				539B4EBB24BF535C00F29FDF /* TaskComments.swift */,
+				5345234224DCA7FA000CCD09 /* TaskCommentCell.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -916,6 +919,7 @@
 				531C8065248A477700AE81EF /* LoginModel.swift in Sources */,
 				539B4EBC24BF535C00F29FDF /* TaskComments.swift in Sources */,
 				53EB47012488EBAF005656B9 /* LocalizableStringConstants.swift in Sources */,
+				5345234324DCA7FA000CCD09 /* TaskCommentCell.swift in Sources */,
 				53EA66592492EA1E007AEB04 /* ProfileModel.swift in Sources */,
 				53671C5824CB34A90015B8FF /* MembersAPI.swift in Sources */,
 				53891257248AB08600E24F96 /* SignUpModel.swift in Sources */,
