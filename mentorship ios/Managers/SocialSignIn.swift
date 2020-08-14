@@ -8,24 +8,6 @@ import SwiftUI
 import GoogleSignIn
 import AuthenticationServices
 
-struct GoogleSignInButton: UIViewRepresentable {
-    func makeUIView(context: Context) -> GIDSignInButton {
-        return GIDSignInButton()
-    }
-    
-    func updateUIView(_ uiView: GIDSignInButton, context: Context) {
-    }
-}
-
-struct AppleSignInButton: UIViewRepresentable {
-    func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
-        return ASAuthorizationAppleIDButton()
-    }
-    
-    func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {
-    }
-}
-
 struct SocialLogin: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<SocialLogin>) -> UIView {
         return UIView()
@@ -34,6 +16,7 @@ struct SocialLogin: UIViewRepresentable {
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<SocialLogin>) {
     }
     
+    // show google sign in flow
     func attemptLoginGoogle() {
         GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
         GIDSignIn.sharedInstance()?.signIn()
@@ -59,6 +42,19 @@ class AppleLoginCoordinator: NSObject, ASAuthorizationControllerDelegate {
         authorizationController.performRequests()
     }
     
+    func signInWithAppleNetworkRequest(idToken: String, name: String, email: String) {
+        loginViewModel.inActivity = true
+        loginService.socialSignInCallback(
+            socialSignInData: .init(idToken: idToken, name: name, email: email),
+            socialSignInType: .apple) { response in
+                print(response)
+                self.loginViewModel.update(using: response)
+                self.loginViewModel.inActivity = false
+        }
+    }
+    
+    // Delegate methods
+    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
 
         switch authorization.credential {
@@ -71,13 +67,8 @@ class AppleLoginCoordinator: NSObject, ASAuthorizationControllerDelegate {
             let name = (fullName?.givenName ?? "") + (" ") + (fullName?.familyName ?? "")
             
             // Make network request to backend
-            self.loginViewModel.inActivity = true
-            loginService.socialSignInCallback(
-                socialSignInData: .init(idToken: userIdentifier, name: name, email: email),
-                socialSignInType: .apple) { response in
-                    self.loginViewModel.update(using: response)
-                    self.loginViewModel.inActivity = false
-            }
+            signInWithAppleNetworkRequest(idToken: userIdentifier, name: name, email: email)
+            
             
         default:
             break

@@ -50,6 +50,38 @@ class LoginTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
     
+    func testSocialSignIn() throws {
+        // Login Service
+        let loginService: LoginService = LoginAPI(urlSession: urlSession)
+        
+        // Set mock json and data
+        let mockJSON = LoginModel.LoginResponseData(message: "test message")
+        let mockData = try JSONEncoder().encode(mockJSON)
+
+        // Return data in mock request handler
+        MockURLProtocol.requestHandler = { request in
+            return (HTTPURLResponse(), mockData)
+        }
+        
+        // MARK: - 1. Apple Sign In
+        let expectation = XCTestExpectation(description: "apple")
+        // Make social sign in request and test response data.
+        loginService.socialSignInCallback(socialSignInData: .init(idToken: "", name: "", email: ""), socialSignInType: .apple) { resp in
+            XCTAssertEqual(resp.message, mockJSON.message)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+        
+        // MARK: - 2. Google Sign In
+        let expectation2 = XCTestExpectation(description: "google")
+        // Make social sign in request and test response data.
+        loginService.socialSignInCallback(socialSignInData: .init(idToken: "", name: "", email: ""), socialSignInType: .google) { resp in
+            XCTAssertEqual(resp.message, mockJSON.message)
+            expectation2.fulfill()
+        }
+        wait(for: [expectation2], timeout: 1)
+    }
+    
     // MARK: - ViewModel Tests
 
     func testLoginButtonDisabledState() {
@@ -81,7 +113,8 @@ class LoginTests: XCTestCase {
     }
     
     // MARK: - View Tests (Integration Tests)
-    
+    /*
+    // View test can't be done. Reason: @EnvironmentObject used, memory managed by SwiftUI.
     func testLoginActionInView() throws {
         // Login Service to inject in view for mock network calls
         let loginService: LoginService = LoginAPI(urlSession: urlSession)
@@ -116,5 +149,6 @@ class LoginTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 1)
     }
+    */
 
 }
