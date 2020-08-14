@@ -8,28 +8,41 @@ import SwiftUI
 import GoogleSignIn
 import AuthenticationServices
 
-struct SocialLogin: UIViewRepresentable {
-    func makeUIView(context: UIViewRepresentableContext<SocialLogin>) -> UIView {
+struct SocialSignIn: UIViewRepresentable {
+    
+    func makeUIView(context: UIViewRepresentableContext<SocialSignIn>) -> UIView {
         return UIView()
     }
     
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<SocialLogin>) {
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<SocialSignIn>) {
     }
     
     // show google sign in flow
-    func attemptLoginGoogle() {
+    func attemptSignInGoogle() {
         GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
         GIDSignIn.sharedInstance()?.signIn()
+    }
+    
+    // make network request to callback url after recieivng user's data from provider
+    static func makeNetworkRequest(loginService: LoginService, loginViewModel: LoginViewModel, idToken: String, name: String, email: String, signInType: LoginModel.SocialSignInType) {
+        loginViewModel.inActivity = true
+        loginService.socialSignInCallback(
+            socialSignInData: .init(idToken: idToken, name: name, email: email),
+            socialSignInType: signInType) { response in
+                loginViewModel.update(using: response)
+                loginViewModel.inActivity = false
+        }
     }
 }
 
 // Used in login view model
-class AppleLoginCoordinator: NSObject, ASAuthorizationControllerDelegate {
-    let loginService: LoginService = LoginAPI()
+class AppleSignInCoordinator: NSObject, ASAuthorizationControllerDelegate {
+    var loginService: LoginService
     var loginViewModel: LoginViewModel
     
-    init(loginVM: LoginViewModel) {
+    init(loginService: LoginService = LoginAPI(), loginVM: LoginViewModel) {
         self.loginViewModel = loginVM
+        self.loginService = loginService
     }
     
     func handleAuthorizationAppleIDButtonPress() {
@@ -40,17 +53,6 @@ class AppleLoginCoordinator: NSObject, ASAuthorizationControllerDelegate {
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.performRequests()
-    }
-    
-    func signInWithAppleNetworkRequest(idToken: String, name: String, email: String) {
-        loginViewModel.inActivity = true
-        loginService.socialSignInCallback(
-            socialSignInData: .init(idToken: idToken, name: name, email: email),
-            socialSignInType: .apple) { response in
-                print(response)
-                self.loginViewModel.update(using: response)
-                self.loginViewModel.inActivity = false
-        }
     }
     
     // Delegate methods
@@ -67,7 +69,7 @@ class AppleLoginCoordinator: NSObject, ASAuthorizationControllerDelegate {
             let name = (fullName?.givenName ?? "") + (" ") + (fullName?.familyName ?? "")
             
             // Make network request to backend
-            signInWithAppleNetworkRequest(idToken: userIdentifier, name: name, email: email)
+            SocialSignIn.makeNetworkRequest(loginService: loginService, loginViewModel: loginViewModel, idToken: userIdentifier, name: name, email: email, signInType: .apple)
             
             
         default:

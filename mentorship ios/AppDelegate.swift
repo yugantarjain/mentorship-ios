@@ -24,14 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         return GIDSignIn.sharedInstance().handle(url)
     }
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
-              withError error: Error!) {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
-            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
-                print("The user has not signed in before or they have since signed out.")
-            } else {
-                print("\(error.localizedDescription)")
-            }
+            print("\(error.localizedDescription)")
             return
         }
         
@@ -41,17 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let email = user.profile.email ?? ""
         
         // Make network request to authenticate user on backend and sign-in
-        self.loginViewModel.inActivity = true
-        loginService.socialSignInCallback(
-            socialSignInData: .init(idToken: idToken, name: fullName, email: email),
-            socialSignInType: .google) { response in
-                self.loginViewModel.inActivity = false
-                self.loginViewModel.update(using: response)
-        }
+        SocialSignIn.makeNetworkRequest(loginService: loginService, loginViewModel: loginViewModel, idToken: idToken, name: fullName, email: email, signInType: .google)
     }
     
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
-              withError error: Error!) {
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
     }
     

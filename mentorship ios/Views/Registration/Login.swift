@@ -84,7 +84,7 @@ struct Login: View {
                     
                     GoogleSignInButton()
                         .onTapGesture {
-                            SocialLogin().attemptLoginGoogle()
+                            SocialSignIn().attemptSignInGoogle()
                     }
                 }
                 .frame(height: DesignConstants.Height.textViewHeight)

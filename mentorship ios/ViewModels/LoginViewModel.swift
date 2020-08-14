@@ -13,7 +13,7 @@ class LoginViewModel: ObservableObject {
     @Published var loginData = LoginModel.LoginUploadData(username: "", password: "")
     @Published var loginResponseData = LoginModel.LoginResponseData(message: "")
     @Published var inActivity = false
-    private lazy var appleLoginCoordinator = AppleLoginCoordinator(loginVM: self)
+    private lazy var appleSignInCoordinator = AppleSignInCoordinator(loginVM: self)
     
     var loginDisabled: Bool {
         if self.loginData.username.isEmpty || self.loginData.password.isEmpty {
@@ -28,7 +28,7 @@ class LoginViewModel: ObservableObject {
     }
     
     func attemptAppleLogin() {
-        appleLoginCoordinator.handleAuthorizationAppleIDButtonPress()
+        appleSignInCoordinator.handleAuthorizationAppleIDButtonPress()
     }
     
 }
