@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
-            let loginViewModel = (UIApplication.shared.delegate as! AppDelegate).loginViewModel
+            let loginViewModel = (UIApplication.shared.delegate as? AppDelegate)!.loginViewModel
             let window = UIWindow(windowScene: windowScene)
             window.rootViewController = UIHostingController(rootView: contentView.environmentObject(loginViewModel))
             self.window = window
