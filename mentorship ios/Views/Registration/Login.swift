@@ -9,15 +9,14 @@ import SwiftUI
 struct Login: View {
     var loginService: LoginService = LoginAPI()
     @State private var showSignUpPage: Bool = false
-    @State private var inActivity = false
-    @ObservedObject var loginViewModel = LoginViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
     
     // Use service to login
     func login() {
         self.loginService.login(loginData: self.loginViewModel.loginData) { response in
             // update login view model
             self.loginViewModel.update(using: response)
-            self.inActivity = false
+            self.loginViewModel.inActivity = false
         }
     }
 
@@ -43,19 +42,11 @@ struct Login: View {
                 //login button
                 Button("Login") {
                     // set inActivity to true (shows activity indicator)
-                    self.inActivity = true
+                    self.loginViewModel.inActivity = true
                     self.login()
                 }
                 .buttonStyle(BigBoldButtonStyle(disabled: loginViewModel.loginDisabled))
                 .disabled(loginViewModel.loginDisabled)
-
-                //activity indicator or show user message text
-                if inActivity {
-                    ActivityIndicator(isAnimating: $inActivity)
-                } else if !(self.loginViewModel.loginResponseData.message?.isEmpty ?? false) {
-                    Text(self.loginViewModel.loginResponseData.message ?? "")
-                        .modifier(ErrorText())
-                }
 
                 //text and sign up button
                 VStack(spacing: DesignConstants.Form.Spacing.minimalSpacing) {
@@ -70,6 +61,15 @@ struct Login: View {
                     }
                 }
                 
+                //activity indicator or show user message text
+                if self.loginViewModel.inActivity {
+                    ActivityIndicator(isAnimating: $loginViewModel.inActivity)
+                } else if !(self.loginViewModel.loginResponseData.message?.isEmpty ?? true) {
+                    Text(self.loginViewModel.loginResponseData.message ?? "")
+                        .modifier(ErrorText())
+                }
+                
+                // Divider for social sign in options
                 ZStack {
                     Divider()
                     Text("OR")

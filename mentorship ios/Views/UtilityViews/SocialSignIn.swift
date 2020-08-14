@@ -42,6 +42,13 @@ struct SocialLogin: UIViewRepresentable {
 
 // Used in login view model
 class AppleLoginCoordinator: NSObject, ASAuthorizationControllerDelegate {
+    let loginService: LoginService = LoginAPI()
+    var loginViewModel: LoginViewModel
+    
+    init(loginVM: LoginViewModel) {
+        self.loginViewModel = loginVM
+    }
+    
     func handleAuthorizationAppleIDButtonPress() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -57,12 +64,20 @@ class AppleLoginCoordinator: NSObject, ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             
-            // Create an account in your system.
+            // Get user details
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
+            let email = appleIDCredential.email ?? ""
+            let name = (fullName?.givenName ?? "") + (" ") + (fullName?.familyName ?? "")
             
-            print(userIdentifier, fullName, email)
+            // Make network request to backend
+            self.loginViewModel.inActivity = true
+            loginService.socialSignInCallback(
+                socialSignInData: .init(idToken: userIdentifier, name: name, email: email),
+                socialSignInType: .apple) { response in
+                    self.loginViewModel.update(using: response)
+                    self.loginViewModel.inActivity = false
+            }
             
         default:
             break

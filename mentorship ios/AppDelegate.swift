@@ -4,12 +4,14 @@
 //  Created for AnitaB.org Mentorship-iOS 
 //
 
-import UIKit
 import CoreData
 import GoogleSignIn
+import SwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+    let loginService: LoginService = LoginAPI()
+    var loginViewModel = LoginViewModel()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Initialize sign-in
@@ -32,21 +34,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             return
         }
-        print(user.authentication.idToken)
-        // Perform any operations on signed in user here.
-        let userId = user.userID                  // For client-side use only!
-        let idToken = user.authentication.idToken // Safe to send to the server
-        let fullName = user.profile.name
-        let givenName = user.profile.givenName
-        let familyName = user.profile.familyName
-        let email = user.profile.email
-        // ...
+        
+        // Get user information
+        let idToken = user.authentication.idToken ?? "" // Safe to send to the server
+        let fullName = user.profile.name ?? ""
+        let email = user.profile.email ?? ""
+        
+        // Make network request to authenticate user on backend and sign-in
+        self.loginViewModel.inActivity = true
+        loginService.socialSignInCallback(
+            socialSignInData: .init(idToken: idToken, name: fullName, email: email),
+            socialSignInType: .google) { response in
+                self.loginViewModel.inActivity = false
+                self.loginViewModel.update(using: response)
+        }
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
               withError error: Error!) {
         // Perform any operations when the user disconnects from app here.
-        // ...
     }
     
     // MARK: UISceneSession Lifecycle

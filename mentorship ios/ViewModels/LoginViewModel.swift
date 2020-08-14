@@ -12,7 +12,8 @@ class LoginViewModel: ObservableObject {
     // MARK: - Variables
     @Published var loginData = LoginModel.LoginUploadData(username: "", password: "")
     @Published var loginResponseData = LoginModel.LoginResponseData(message: "")
-    private lazy var appleLoginCoordinator = AppleLoginCoordinator()
+    @Published var inActivity = false
+    private lazy var appleLoginCoordinator = AppleLoginCoordinator(loginVM: self)
     
     var loginDisabled: Bool {
         if self.loginData.username.isEmpty || self.loginData.password.isEmpty {
