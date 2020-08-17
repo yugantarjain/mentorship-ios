@@ -9,7 +9,8 @@ This is the iOS client for the Mentorship System.
 1. Make sure you have Xcode IDE downloaded on your machine for development.<br />
 2. Fork the project. Go to [mentorship-ios](https://github.com/anitab-org/mentorship-ios) and click on Fork in the top right corner to fork the repository to your Github account.<br />
 3. Clone the project. Open the forked mentorship-ios repository from your GitHub account and click on the "Clone or Download" button. You should be able to see the option "Open in Xcode"; this is the recommended option and should be used to get a local copy of the project on your machine.<br />
-4. You're all set now! Locate the local copy of the project on your machine and open the *.xcodeproject* file.<br />
+4. Open your terminal and go to the project folder on your machine. Run the command `pod install` (note: you may first need to install cocoapods using `sudo gem install cocoapods`). A new .xcworkspace file shall be created.
+4. You're all set now! Use the .xcworkspace file for development.<br />
 
 ## Contributing 
 
