@@ -20,8 +20,10 @@ struct GoogleSignInButton: UIViewRepresentable {
 
 // Apple
 struct AppleSignInButton: UIViewRepresentable {
+    let dark: Bool
+    
     func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
-        return ASAuthorizationAppleIDButton()
+        return ASAuthorizationAppleIDButton(type: .default, style: dark ? .black : .white)
     }
     
     func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {

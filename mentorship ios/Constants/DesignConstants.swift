@@ -67,6 +67,7 @@ struct DesignConstants {
 
     struct Colors {
         static let defaultIndigoColor = Color(.systemIndigo)
+        static let primaryBackground = Color(.systemBackground)
         static let secondaryBackground = Color(.secondarySystemBackground)
         static let formBackgroundColor = Color(.systemGroupedBackground)
         static let subtitleText = Color.secondary

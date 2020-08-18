@@ -10,6 +10,7 @@ struct Login: View {
     var loginService: LoginService = LoginAPI()
     @State private var showSignUpPage: Bool = false
     @EnvironmentObject var loginViewModel: LoginViewModel
+    @Environment(\.colorScheme) var colorScheme
     
     // Use service to login
     func login() {
@@ -48,7 +49,7 @@ struct Login: View {
             .disabled(loginViewModel.loginDisabled)
             
             //text and sign up button
-            VStack(spacing: DesignConstants.Form.Spacing.minimalSpacing) {
+            HStack(spacing: DesignConstants.Form.Spacing.minimalSpacing) {
                 Text(LocalizableStringConstants.noAccountText)
                 
                 Button.init(action: { self.showSignUpPage.toggle() }) {
@@ -66,21 +67,29 @@ struct Login: View {
             } else if !(self.loginViewModel.loginResponseData.message?.isEmpty ?? true) {
                 Text(self.loginViewModel.loginResponseData.message ?? "")
                     .modifier(ErrorText())
+                    .fixedSize(horizontal: false, vertical: true)
             }
             
             // Divider for social sign in options
             ZStack {
                 Divider()
-                Text("OR")
+                Text("OR").background(DesignConstants.Colors.primaryBackground)
             }
             
             // Social sign in buttons
             VStack {
-                AppleSignInButton()
-                    .onTapGesture {
+                // Apple sign in Button. Adaptive to light/dark mode
+                if colorScheme == .light {
+                    AppleSignInButton(dark: true).onTapGesture {
                         self.loginViewModel.attemptAppleLogin()
+                    }
+                } else {
+                    AppleSignInButton(dark: false).onTapGesture {
+                        self.loginViewModel.attemptAppleLogin()
+                    }
                 }
                 
+                // Google sign in button
                 GoogleSignInButton()
                     .onTapGesture {
                         SocialSignIn().attemptSignInGoogle()
