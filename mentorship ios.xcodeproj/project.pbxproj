@@ -27,6 +27,8 @@
 		531C8069248A918200AE81EF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531C8068248A918200AE81EF /* NetworkManager.swift */; };
 		531C8070248AA9BE00AE81EF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531C806F248AA9BE00AE81EF /* Home.swift */; };
 		532A24D024B4B6F1000C8B83 /* RequestActionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A24CF24B4B6F1000C8B83 /* RequestActionAPI.swift */; };
+		532A652B24ECF2B0000E4A6A /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 532A652A24ECF2B0000E4A6A /* Config.plist */; };
+		532A652D24ECF333000E4A6A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A652C24ECF333000E4A6A /* Config.swift */; };
 		533704E1248D1B4900A314ED /* MembersListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533704E0248D1B4900A314ED /* MembersListCell.swift */; };
 		5345234324DCA7FA000CCD09 /* TaskCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5345234224DCA7FA000CCD09 /* TaskCommentCell.swift */; };
 		534AC02D2486D5CB00A34A46 /* BigBoldButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534AC02C2486D5CB00A34A46 /* BigBoldButtonStyle.swift */; };
@@ -153,6 +155,8 @@
 		531C8068248A918200AE81EF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		531C806F248AA9BE00AE81EF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		532A24CF24B4B6F1000C8B83 /* RequestActionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestActionAPI.swift; sourceTree = "<group>"; };
+		532A652A24ECF2B0000E4A6A /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		532A652C24ECF333000E4A6A /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		533704E0248D1B4900A314ED /* MembersListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListCell.swift; sourceTree = "<group>"; };
 		5345234224DCA7FA000CCD09 /* TaskCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCommentCell.swift; sourceTree = "<group>"; };
 		534AC02C2486D5CB00A34A46 /* BigBoldButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBoldButtonStyle.swift; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				53F0CC7024E341E800B46F19 /* mentorship ios.entitlements */,
+				532A652924ECF292000E4A6A /* Config */,
 				83AA531B249F85E7001D6B0B /* Utilities */,
 				53C0206B249B87ED0000BEB5 /* Protocols */,
 				53729E00248E2C7700E79C24 /* Extensions */,
@@ -436,6 +441,15 @@
 				53627FC824C8B49200D2720E /* Networking */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		532A652924ECF292000E4A6A /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				532A652A24ECF2B0000E4A6A /* Config.plist */,
+				532A652C24ECF333000E4A6A /* Config.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		53627FC824C8B49200D2720E /* Networking */ = {
@@ -751,6 +765,7 @@
 				530F44232482752600B1FD0B /* LaunchScreen.storyboard in Resources */,
 				5366ED712488EDA9006A3543 /* Localizable.strings in Resources */,
 				530F44202482752600B1FD0B /* Preview Assets.xcassets in Resources */,
+				532A652B24ECF2B0000E4A6A /* Config.plist in Resources */,
 				530F441D2482752600B1FD0B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -918,6 +933,7 @@
 				536A7CC424C8CCFC00D8A171 /* LoginAPI.swift in Sources */,
 				53BDEE1C24C98B120017C307 /* RelationAPI.swift in Sources */,
 				53F414D824D016C200E5407F /* TaskCommentsModel.swift in Sources */,
+				532A652D24ECF333000E4A6A /* Config.swift in Sources */,
 				5396AA0824C799CF0012F396 /* DetailListCellViewModel.swift in Sources */,
 				531C8065248A477700AE81EF /* LoginModel.swift in Sources */,
 				539B4EBC24BF535C00F29FDF /* TaskComments.swift in Sources */,
