@@ -70,32 +70,34 @@ struct Login: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             
-            // Divider for social sign in options
-            ZStack {
-                Divider()
-                Text("OR").background(DesignConstants.Colors.primaryBackground)
-            }
-            
-            // Social sign in buttons
-            VStack {
-                // Apple sign in Button. Adaptive to light/dark mode
-                if colorScheme == .light {
-                    AppleSignInButton(dark: true).onTapGesture {
-                        self.loginViewModel.attemptAppleLogin()
-                    }
-                } else {
-                    AppleSignInButton(dark: false).onTapGesture {
-                        self.loginViewModel.attemptAppleLogin()
-                    }
+            VStack(spacing: DesignConstants.Spacing.smallSpacing) {
+                // Divider for social sign in options
+                ZStack {
+                    Divider()
+                    Text("OR").background(DesignConstants.Colors.primaryBackground)
                 }
                 
-                // Google sign in button
-                GoogleSignInButton()
-                    .onTapGesture {
-                        SocialSignIn().attemptSignInGoogle()
+                // Social sign in buttons
+                HStack {
+                    // Apple sign in Button. Adaptive to light/dark mode
+                    if colorScheme == .light {
+                        AppleSignInButton(dark: true).onTapGesture {
+                            self.loginViewModel.attemptAppleLogin()
+                        }
+                    } else {
+                        AppleSignInButton(dark: false).onTapGesture {
+                            self.loginViewModel.attemptAppleLogin()
+                        }
+                    }
+                    
+                    // Google sign in button
+                    GoogleSignInButton()
+                        .onTapGesture {
+                            SocialSignIn().attemptSignInGoogle()
+                    }
                 }
+                .frame(height: DesignConstants.Height.socialSignInButton)
             }
-            .frame(height: DesignConstants.Height.textViewHeight)
         }
         .modifier(AllPadding())
     }

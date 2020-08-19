@@ -50,6 +50,7 @@ struct DesignConstants {
 
     struct Height {
         static let textViewHeight: CGFloat = 100
+        static let socialSignInButton: CGFloat = 47
     }
 
     struct CornerRadius {
