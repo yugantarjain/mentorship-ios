@@ -1199,7 +1199,7 @@
 				CODE_SIGN_ENTITLEMENTS = "mentorship ios/mentorship ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"mentorship ios/Preview Content\"";
-				DEVELOPMENT_TEAM = ZCF7ZR4CVF;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "mentorship ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1221,7 +1221,7 @@
 				CODE_SIGN_ENTITLEMENTS = "mentorship ios/mentorship ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"mentorship ios/Preview Content\"";
-				DEVELOPMENT_TEAM = ZCF7ZR4CVF;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "mentorship ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
