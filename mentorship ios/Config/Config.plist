@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>googleAuthClientId</key>
-	<string>992237180107-lsibe891591qcubpbd8qom4fts74i5in.apps.googleusercontent.com</string>
+	<string>&lt;google-auth-client-id&gt;</string>
 </dict>
 </plist>
