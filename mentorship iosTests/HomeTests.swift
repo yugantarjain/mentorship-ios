@@ -29,7 +29,7 @@ class HomeTests: XCTestCase {
         let homeService: HomeService = HomeAPI(urlSession: urlSession)
 
         // Set mock json and data
-        let mockJSON = HomeTestJSONStrings.homeResponse
+        let mockJSON = homeResponseJSONString
         let mockData = mockJSON.data(using: .utf8)!
         
         // Return data in mock request handler
@@ -43,7 +43,7 @@ class HomeTests: XCTestCase {
         // Make fetch dashboard request and test response data.
         homeService.fetchDashboard { resp in
             XCTAssertEqual(resp.tasksToDo?.count, 1)
-            XCTAssertEqual(resp.tasksDone?.count, 1)
+            XCTAssertEqual(resp.tasksDone?.count, 2)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)

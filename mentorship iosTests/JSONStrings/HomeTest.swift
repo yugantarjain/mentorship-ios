@@ -4,11 +4,7 @@
 //  Created for AnitaB.org Mentorship-iOS 
 //
 
-import Foundation
-
-struct HomeTestJSONStrings {
-    static let homeResponse =
-    """
+let homeResponseJSONString: String = """
     {
       "as_mentor": {
         "sent": {
@@ -478,8 +474,14 @@ struct HomeTestJSONStrings {
           "is_done": true,
           "created_at": 0,
           "completed_at": 0
+        },
+        {
+          "id": 0,
+          "description": "string",
+          "is_done": true,
+          "created_at": 0,
+          "completed_at": 0
         }
       ]
     }
     """
-}
