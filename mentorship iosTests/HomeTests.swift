@@ -23,7 +23,6 @@ class HomeTests: XCTestCase {
         super.tearDown()
     }
     
-    // BUG - response always nil (print(resp))
     func testHomeService() throws {
         // Home Service
         let homeService: HomeService = HomeAPI(urlSession: urlSession)
