@@ -3,9 +3,7 @@ install:
 language: swift
 osx_image: xcode11.6
 xcode_project: mentorship ios.xcodeproj # path to your xcodeproj folder
-xcode_scheme:
- - mentorship iosTests
- - mentorship iosUITests
+xcode_scheme: mentorship ios
 xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 8
 script:
  - swiftlint
