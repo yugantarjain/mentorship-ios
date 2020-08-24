@@ -2,6 +2,7 @@ before_install:
  - gem install cocoapods
 install:
  - brew update && brew upgrade swiftlint
+ - pod install
 language: swift
 osx_image: xcode11.6
 xcode_workspace: mentorship ios.xcworkspace # path to your xcodeproj folder
