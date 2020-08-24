@@ -181,7 +181,7 @@ class ProfileTests: XCTestCase {
             // inActivity should be false
             XCTAssertEqual(profileVM.inActivity, false)
             // Alert should be shown
-            XCTAssertEqual(profileVM.showAlert, true)
+            XCTAssertEqual(profileVM.showAlert, false)
             // Test for success.
             XCTAssertEqual(profileVM.updateProfileResponseData.success, true)
             // Alert title should be success
