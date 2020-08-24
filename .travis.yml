@@ -7,4 +7,4 @@ xcode_scheme: mentorship ios
 xcode_destination: platform=iOS Simulator,OS=13.6,name=iPhone 8
 script:
  - swiftlint
- - xcodebuild test -project 'mentorship ios.xcodeproj' -scheme 'mentorship iosTests' -destination 'platform=iOS Simulator,OS=13.6,name=iPhone 8'
+ - xcodebuild test -workspace 'mentorship ios.xcworkspace' -scheme 'mentorship iosTests' -destination 'platform=iOS Simulator,OS=13.6,name=iPhone 8'
