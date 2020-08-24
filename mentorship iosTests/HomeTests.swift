@@ -23,6 +23,8 @@ class HomeTests: XCTestCase {
         super.tearDown()
     }
     
+    // MARK: - Serivce Tests
+    
     func testHomeService() throws {
         // Home Service
         let homeService: HomeService = HomeAPI(urlSession: urlSession)
