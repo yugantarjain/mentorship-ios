@@ -12,6 +12,8 @@ This is the iOS client for the Mentorship System.
 4. Open your terminal and go to the project folder on your machine. Run the command `pod install` (note: you may first need to install cocoapods using `sudo gem install cocoapods`). A new .xcworkspace file shall be created.
 4. You're all set now! Use the .xcworkspace file for development.<br />
 
+### Showcase
+
 ## Setting up social sign-in (Optional)
 The Mentorship iOS app currently supports two different social sign in providers - Apple and Google. 
 The set-up for both of these is a little different and are explained below-
