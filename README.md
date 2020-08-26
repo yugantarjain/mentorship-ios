@@ -5,6 +5,7 @@
 This is the iOS client for the Mentorship System.
 
 ![](https://github.com/anitab-org/mentorship-ios/blob/yugantarjain-patch-1/Screenshots/Showcase/HOME.001.jpeg)
+Visit [here](https://github.com/yugantarjain/mentorship-ios/blob/screenshots/Docs/Screenshots.md) to have a look at all the screenshots.
 
 ## Setting up the project
 
