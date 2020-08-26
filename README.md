@@ -4,6 +4,8 @@
 
 This is the iOS client for the Mentorship System.
 
+![](https://github.com/anitab-org/mentorship-ios/blob/yugantarjain-patch-1/Screenshots/Showcase/HOME.001.jpeg)
+
 ## Setting up the project
 
 1. Make sure you have Xcode IDE downloaded on your machine for development.<br />
@@ -11,8 +13,6 @@ This is the iOS client for the Mentorship System.
 3. Clone the project. Open the forked mentorship-ios repository from your GitHub account and click on the "Clone or Download" button. You should be able to see the option "Open in Xcode"; this is the recommended option and should be used to get a local copy of the project on your machine.<br />
 4. Open your terminal and go to the project folder on your machine. Run the command `pod install` (note: you may first need to install cocoapods using `sudo gem install cocoapods`). A new .xcworkspace file shall be created.
 4. You're all set now! Use the .xcworkspace file for development.<br />
-
-### Showcase
 
 ## Setting up social sign-in (Optional)
 The Mentorship iOS app currently supports two different social sign in providers - Apple and Google. 
